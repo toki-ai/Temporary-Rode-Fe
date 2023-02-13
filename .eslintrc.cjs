@@ -9,6 +9,10 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
   ],
   overrides: [],
   parserOptions: {
@@ -34,5 +38,6 @@ module.exports = {
     'import/namespace': 0,
     'import/no-cycle': 'error',
     'import/no-duplicates': 'error',
+    'no-shadow': 0,
   },
 };
