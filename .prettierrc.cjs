@@ -1,6 +1,14 @@
 module.exports = {
-  trailingComma: 'es5',
-  tabWidth: 2,
-  semi: true,
-  singleQuote: true,
+    printWidth: 100,
+    tabWidth: 4,
+    bracketSpacing: true,
+    trailingComma: 'es5',
+    jsxBracketSameLine: false,
+    singleQuote: true,
+    arrowParens: 'always',
+    // semi: true,
+    // endOfLine: 'auto',
+    importOrder: ['^react$', '^[a-z\\-/]*$', '(^components)', '(^[src/]*$|^[./]|^[../])', ''],
+    importOrderSeparation: true,
+    experimentalBabelParserPluginsList: ['js', 'jsx'],
 };
