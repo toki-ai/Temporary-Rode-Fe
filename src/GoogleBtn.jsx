@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { useState, useEffect, useRef } from 'react';
 // import google from 'https://accounts.google.com/gsi/client';
+import authApi from './utils/api/authApi';
 
 function GoogleSignInButton() {
     const [gapiLoaded, setGapiLoaded] = useState(false);
@@ -9,6 +10,7 @@ function GoogleSignInButton() {
 
     function handleCredentialResponse(response) {
         console.log(`Encoded JWT ID token: ${response.credential}`);
+        authApi.login(response.credential).then((res) => console.log(res));
     }
     //   const handleSignIn = () => {
     //     console.log(google);
