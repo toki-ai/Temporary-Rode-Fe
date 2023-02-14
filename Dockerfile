@@ -1,6 +1,8 @@
-FROM httpd:latest
 FROM node:16
+WORKDIR /app
 COPY . .
-RUN npm i
+RUN npm install
 RUN npm run build
-RUN cp -r dist /usr/local/apache2/htdocs/
+
+FROM httpd:latest
+COPY /app/dist /usr/local/apache2/htdocs/
