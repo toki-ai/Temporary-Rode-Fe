@@ -44,6 +44,13 @@ module.exports = {
                 experimentalBabelParserPluginsList: ['js', 'jsx'],
             },
         ],
+
+        'react/function-component-definition': [
+            {
+                namedComponents: 'function-declaration' | 'function-expression' | 'arrow-function',
+                unnamedComponents: 'function-expression' | 'arrow-function',
+            },
+        ],
         'no-console': 'warn',
         'no-eval': 'warn',
         'no-proto': 2,
