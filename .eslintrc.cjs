@@ -70,5 +70,6 @@ module.exports = {
         'import/no-duplicates': 'error',
         'no-shadow': 0,
         'no-return-await': 0,
+        'react-hooks/rules-of-hooks': 'error',
     },
 };

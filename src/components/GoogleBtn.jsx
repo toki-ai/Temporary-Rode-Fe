@@ -1,16 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
-
+import { useState, useEffect, useRef, useContext } from 'react';
+import Localstorage from '../utils/Localstorage';
 import authApi from '../utils/api/authApi';
 
+import { useNavigate } from 'react-router-dom';
 function GoogleSignInButton() {
     const [gapiLoaded, setGapiLoaded] = useState(false);
-
     const refBtn = useRef();
-
+    const navigate = useNavigate();
     const handleCredentialResponse = (response) => {
         console.log(`Encoded JWT ID token: ${response.credential}`);
         authApi.login(response.credential).then((response) => {
-            console.log(response);
+            Localstorage.setItem('token', response.data.data);
+            navigate('/');
         });
     };
 
@@ -31,6 +32,7 @@ function GoogleSignInButton() {
                 { theme: 'outline', size: 'large' } // customization attributes
             );
             google.accounts.id.prompt();
+            // google.accounts.id.disableAutoSelect();
         };
 
         document.body.appendChild(script);

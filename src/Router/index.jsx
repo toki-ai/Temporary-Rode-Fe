@@ -5,21 +5,36 @@ import HomeChild from '../Pages/HomeChild/HomeChild';
 import PublicRoute from './PublicRoute';
 import ErrorPage from '../Pages/404Page';
 import Login from '../Pages/Login';
+import { Navigate } from 'react-router-dom';
+import AdminRoute from './AdminRoute';
+import Admin from '../Pages/Admin';
 const RouterComponent = () => {
     const router = createBrowserRouter([
+        { exact: true, path: '/', element: <Navigate to="home" /> },
+        { exact: true, path: '/login', loader: Loading, element: <Login /> },
         {
+            path: '/',
+            exact: true,
             element: <PublicRoute />,
             children: [
                 {
-                    path: '/',
+                    exact: true,
+                    path: 'home',
                     loader: Loading,
                     element: <Home />,
                     children: [{ path: 'team', loader: Loading, element: <HomeChild /> }],
                 },
+            ],
+        },
+        {
+            exact: true,
+            element: <AdminRoute />,
+            children: [
                 {
-                    path: '/login',
+                    exact: true,
+                    path: 'admin',
                     loader: Loading,
-                    element: <Login />,
+                    element: <Admin />,
                 },
             ],
         },
