@@ -6,9 +6,7 @@ const authApi = {
         const endpoint = `/auth/login/${credential}`;
         // eslint-disable-next-line no-return-await
 
-        return await post(endpoint, {
-            'Access-Control-Allow-Origin': '*',
-        })
+        return await get(endpoint, authHeader(), {})
             .then((res) => {
                 // if (res.data.code !== 200) console.log(res.response);
                 return res;

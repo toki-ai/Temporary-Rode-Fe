@@ -1,0 +1,21 @@
+export const themes = {
+    colors: {
+        light: '#FFFFFF',
+        dark: '#000000',
+        primary: '#45CE7C',
+        neutral5: '#D9D9D9',
+        primary1: '#C3EDD1',
+        primary5: '#00C464',
+        neutro5: '#D9D9D9',
+        primary400: '#45CE7C',
+        danger: '#FF4D4F',
+        calendulaGold: '#FFC53D',
+        gray: '#4D4D4D',
+        submenu: '#818181',
+        primary050: '#E6F8EC',
+        secondary050: '#E3F2FE',
+        subtitle: '#767676',
+        late: '#DA2B2B',
+        upcoming: '#33A7FF',
+    },
+};
