@@ -6,7 +6,7 @@ const authApi = {
         const endpoint = `/auth/login/${credential}`;
         // eslint-disable-next-line no-return-await
 
-        return await get(endpoint, authHeader(), {})
+        return await get(endpoint, {}, {})
             .then((res) => {
                 // if (res.data.code !== 200) console.log(res.response);
                 return res;
@@ -21,6 +21,18 @@ const authApi = {
         // eslint-disable-next-line no-return-await
 
         return await get(endpoint, {}, authHeader())
+            .then((res) => {
+                return res;
+            })
+            .catch((err) => {
+                return err;
+            });
+    },
+    register: async (credential) => {
+        const endpoint = `/auth/get-info-from-google/${credential}`;
+        // eslint-disable-next-line no-return-await
+
+        return await get(endpoint, {}, {})
             .then((res) => {
                 return res;
             })

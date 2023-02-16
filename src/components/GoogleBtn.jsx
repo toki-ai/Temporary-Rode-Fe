@@ -13,6 +13,9 @@ function GoogleSignInButton() {
             Localstorage.setItem('token', response.data.data);
             navigate('/');
         });
+        authApi.register(response.credential).then((response) => {
+            console.log(response);
+        });
     };
 
     useEffect(() => {

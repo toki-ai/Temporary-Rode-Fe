@@ -35,6 +35,7 @@ const useAuth = () => {
         }
 
         try {
+            console.log('checking token');
             setIsLoading(true);
             authApi.getUser().then((user) => {
                 const formatUser = {

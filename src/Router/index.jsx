@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from '../Pages/Home';
 import Loading from '../components/Loading';
 import HomeChild from '../Pages/HomeChild/HomeChild';
+import Register from '../Pages/Register';
 import PublicRoute from './PublicRoute';
 import ErrorPage from '../Pages/404Page';
 import Login from '../Pages/Login';
@@ -12,6 +13,8 @@ const RouterComponent = () => {
     const router = createBrowserRouter([
         { exact: true, path: '/', element: <Navigate to="home" /> },
         { exact: true, path: '/login', loader: Loading, element: <Login /> },
+        { exact: true, path: '/register', loader: Loading, element: <Register /> },
+
         {
             path: '/',
             exact: true,
@@ -22,7 +25,7 @@ const RouterComponent = () => {
                     path: 'home',
                     loader: Loading,
                     element: <Home />,
-                    children: [{ path: 'team', loader: Loading, element: <HomeChild /> }],
+                    children: [{ path: 'homeChild', loader: Loading, element: <HomeChild /> }],
                 },
             ],
         },
@@ -41,7 +44,7 @@ const RouterComponent = () => {
         { path: '*', element: <ErrorPage /> },
     ]);
 
-    return <RouterProvider router={router} />;
+    return <RouterProvider fallbackElement={<Loading />} router={router} />;
 };
 
 export default RouterComponent;
