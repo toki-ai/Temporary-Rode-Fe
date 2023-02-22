@@ -10,6 +10,7 @@ function GoogleSignInButton() {
     const handleCredentialResponse = (response) => {
         console.log(`Encoded JWT ID token: ${response.credential}`);
         authApi.login(response.credential).then((response) => {
+            console.log(response);
             Localstorage.setItem('token', response.data.data);
             navigate('/');
         });
