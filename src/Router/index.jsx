@@ -9,12 +9,13 @@ import Login from '../Pages/Login';
 import { Navigate } from 'react-router-dom';
 import AdminRoute from './AdminRoute';
 import Admin from '../Pages/Admin';
+import TestCodeMirror from '../Pages/CssBattle';
 const RouterComponent = () => {
     const router = createBrowserRouter([
         { exact: true, path: '/', element: <Navigate to="home" /> },
         { exact: true, path: '/login', loader: Loading, element: <Login /> },
         { exact: true, path: '/register', loader: Loading, element: <Register /> },
-
+        { exact: true, path: '/testMirror', loader: Loading, element: <TestCodeMirror /> },
         {
             path: '/',
             exact: true,
