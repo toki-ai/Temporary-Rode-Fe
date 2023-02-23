@@ -1,11 +1,14 @@
-const ModalContent = { id: 1, title: "Example", body: "This is some text" }
-import ModalComponent from "./Modal"
-export default function TestModal({ }) {
+import ModalComponent from './Modal';
+
+const ModalContent = {
+    id: 1,
+    title: 'Example Example Example Example Example Example Example Example',
+    body: 'This is some textThis is some textThis is some textThis is some textThis is some textThis is some textThis is some textThis is some textThis is some textThis is some textThis is some textThis is some textThis is some textThis is some textThis is some text',
+};
+export default function TestModal({}) {
     return (
         <>
-            <ModalComponent
-                {...ModalContent}
-            ></ModalComponent>
+            <ModalComponent {...ModalContent}></ModalComponent>
         </>
-    )
+    );
 }
