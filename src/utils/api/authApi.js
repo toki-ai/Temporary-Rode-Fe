@@ -1,6 +1,7 @@
 import { post, get } from '../ApiCaller';
 import Localstorage from '../Localstorage';
 import authHeader from './HeaderAuthorization';
+
 const authApi = {
     login: async (credential) => {
         const endpoint = `/auth/login/${credential}`;
@@ -28,7 +29,7 @@ const authApi = {
                 return err;
             });
     },
-    register: async (credential) => {
+    getInfoFromGG: async (credential) => {
         const endpoint = `/auth/get-info-from-google/${credential}`;
         // eslint-disable-next-line no-return-await
 
