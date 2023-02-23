@@ -1,9 +1,13 @@
-// import reactLogo from './assets/react.svg';
-// import './App.css';
-
 import RouterComponent from './Router';
+
+import Stack from 'react-bootstrap/Stack';
+
 function App() {
-    return <RouterComponent />;
+    return (
+        <Stack className="container-fluid ">
+            <RouterComponent />
+        </Stack>
+    );
 }
 
 export default App;
