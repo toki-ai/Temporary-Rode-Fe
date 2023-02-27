@@ -13,15 +13,11 @@ function GoogleSignInButton() {
     const navigate = useNavigate();
     const handleCredentialResponse = (response) => {
         console.log(`Encoded JWT ID token: ${response.credential}`);
+        Localstorage.setItem('credential', response.credential);
         authApi.login(response.credential).then((response) => {
+            console.log(response);
             Localstorage.setItem('token', response.data.data);
             navigate('/register');
-        });
-        authApi.getInfoFromGG(response.credential).then((response) => {
-            if (response.data.status === 200) {
-                console.log(response.data.data);
-                setCredential(response.data.data);
-            }
         });
     };
 

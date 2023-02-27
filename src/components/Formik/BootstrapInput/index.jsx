@@ -7,7 +7,13 @@ export const BootstrapInput = ({ label, type, placeholder, controlId, message, n
         <>
             <Form.Group className="mb-3" controlId={controlId}>
                 {label && <Form.Label>{label}</Form.Label>}
-                <Form.Control type={type} placeholder={placeholder} name={name} {...rest} />
+                <Form.Control
+                    as={Field}
+                    type={type}
+                    placeholder={placeholder}
+                    name={name}
+                    {...rest}
+                />
                 <Form.Control.Feedback type="invalid">{message}</Form.Control.Feedback>
             </Form.Group>
         </>
