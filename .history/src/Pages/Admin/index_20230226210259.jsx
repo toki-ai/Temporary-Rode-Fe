@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Field, Formik } from 'formik';
 import * as yup from 'yup';
 
@@ -89,11 +87,12 @@ const Admin = () => {
                                 <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                             </Form.Group>
                         ))}
-                        <Field label="Room Type" name="roomType" as="select" md="4">
-                            <option value="">Select a room type</option>
-                            {roomType.map((item) => (
-                                <option value="">{item}</option>
-                            ))}
+                        <Field label="Job Type" name="jobType" as="select" md="4">
+                            <option value="">Select a job type</option>
+                            <option value="designer">Designer</option>
+                            <option value="development">Developer</option>
+                            <option value="product">Product Manager</option>
+                            <option value="other">Other</option>
                         </Field>
                     </Row>
                     <Button type="submit">Submit form</Button>

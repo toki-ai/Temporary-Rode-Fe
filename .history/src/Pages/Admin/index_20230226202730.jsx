@@ -1,11 +1,10 @@
-import { useState } from 'react';
-
-import { Field, Formik } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 
 const schema = yup.object().shape({
@@ -20,9 +19,6 @@ const schema = yup.object().shape({
 });
 
 const Admin = () => {
-    const ROOM_TYPE_ENUM = ['Easy', 'Normar', 'Hard'];
-    const [roomType, setRoomType] = useState(ROOM_TYPE_ENUM);
-
     const FORM_LIST = [
         {
             label: 'Code',
@@ -47,6 +43,10 @@ const Admin = () => {
         {
             label: 'Colors',
             name: 'colors',
+        },
+        {
+            label: 'Type',
+            name: 'type',
         },
         {
             label: 'Max Submit Times',
@@ -89,12 +89,6 @@ const Admin = () => {
                                 <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                             </Form.Group>
                         ))}
-                        <Field label="Room Type" name="roomType" as="select" md="4">
-                            <option value="">Select a room type</option>
-                            {roomType.map((item) => (
-                                <option value="">{item}</option>
-                            ))}
-                        </Field>
                     </Row>
                     <Button type="submit">Submit form</Button>
                 </Form>

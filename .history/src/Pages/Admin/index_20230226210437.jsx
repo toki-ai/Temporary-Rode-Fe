@@ -89,7 +89,7 @@ const Admin = () => {
                                 <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                             </Form.Group>
                         ))}
-                        <Field label="Room Type" name="roomType" as="select" md="4">
+                        <Field label="Job Type" name="jobType" as="select" md="4">
                             <option value="">Select a room type</option>
                             {roomType.map((item) => (
                                 <option value="">{item}</option>
