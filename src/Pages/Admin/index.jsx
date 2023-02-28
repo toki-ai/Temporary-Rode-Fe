@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Field, Formik } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import Button from 'react-bootstrap/Button';
@@ -11,12 +11,12 @@ import Row from 'react-bootstrap/Row';
 const schema = yup.object().shape({
     code: yup.string().required(),
     question: yup.string().required(),
-    openTime: yup.string().required(),
-    closeTime: yup.string().required(),
-    duration: yup.string().required(),
-    colors: yup.string().required(),
-    type: yup.mixed().required(),
-    maxSubmitTimes: yup.bool().required().oneOf([true], 'terms must be accepted'),
+    openTime: yup.date().required(),
+    closeTime: yup.date().required(),
+    duration: yup.number().required(),
+    colors: yup.array().required(),
+    roomType: yup.string().required(),
+    maxSubmitTimes: yup.number().max(100).required(),
 });
 
 const Admin = () => {
@@ -27,45 +27,62 @@ const Admin = () => {
         {
             label: 'Code',
             name: 'code',
+            type: Form.Control,
         },
         {
             label: 'Question',
             name: 'question',
+            type: Form.Control,
         },
         {
             label: 'Open Time',
             name: 'openTime',
+            type: Form.Control,
         },
         {
             label: 'Close time',
             name: 'closeTime',
+            type: Form.Control,
         },
         {
             label: 'Duration',
             name: 'duration',
+            type: Form.Control,
         },
         {
             label: 'Colors',
             name: 'colors',
+            type: Form.Control,
+        },
+        {
+            label: 'Room Type',
+            name: 'roomType',
+            type: Form.Select,
+            children: roomType.map((item) => (
+                <option value={item} key={item}>
+                    {item}
+                </option>
+            )),
         },
         {
             label: 'Max Submit Times',
             name: 'maxSubmitTimes',
+            type: Form.Control,
         },
     ];
     return (
         <Formik
             validationSchema={schema}
-            onSubmit={console.log}
+            onSubmit={(e) => console.log(e)}
             initialValues={{
                 code: 'Mark',
                 question: 'Otto',
-                username: '',
-                city: '',
-                state: '',
-                zip: '',
-                file: null,
-                terms: false,
+                openTime: '',
+                closeTime: '',
+                duration: '',
+                colors: '',
+                roomType: '',
+                maxSubmitTimes: '',
             }}
         >
             {({ handleSubmit, handleChange, handleBlur, values, touched, isValid, errors }) => (
@@ -77,24 +94,21 @@ const Admin = () => {
                                 md="4"
                                 controlId="validationFormik101"
                                 className="position-relative"
+                                key={item.name}
                             >
                                 <Form.Label>{item.label}</Form.Label>
-                                <Form.Control
+                                <item.type
                                     type="text"
                                     name={item.name}
                                     value={values[item.name]}
                                     onChange={handleChange}
                                     isValid={touched[item.name] && !errors[item.name]}
-                                />
-                                <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                >
+                                    {item.children}
+                                </item.type>
+                                <Form.Control.Feedback tooltip>Looks good</Form.Control.Feedback>
                             </Form.Group>
                         ))}
-                        <Field label="Room Type" name="roomType" as="select" md="4">
-                            <option value="">Select a room type</option>
-                            {roomType.map((item) => (
-                                <option value="">{item}</option>
-                            ))}
-                        </Field>
                     </Row>
                     <Button type="submit">Submit form</Button>
                 </Form>
