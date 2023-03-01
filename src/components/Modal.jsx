@@ -1,21 +1,21 @@
 import { useState } from 'react';
 
-import { Button, Modal, CloseButton } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
-import { BtnStyle, Container } from './styled';
+import { BtnStyle } from './styled';
 
 export default function ModalComponent(props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
-        <Container>
-            <BtnStyle>
+        <>
+            <BtnStyle className="text-break">
                 <Button className="btn-flat-1" size="xxl" onClick={handleShow}>
                     Example
                 </Button>
             </BtnStyle>
-            <Modal show={show} onHide={handleClose}>
+            <Modal className="modal-dialog-centered" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{props.title}</Modal.Title>
                 </Modal.Header>
@@ -31,6 +31,6 @@ export default function ModalComponent(props) {
                     </BtnStyle>
                 </Modal.Footer>
             </Modal>
-        </Container>
+        </>
     );
 }

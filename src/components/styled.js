@@ -55,13 +55,7 @@ export const BtnStyle = styled.div`
     }
 `;
 
-export const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    text-overflow: clip;
-    word-break: break-word;
-`;
-
 export const AlertWidth = styled.div`
-    width: 50%;
+    margin: 2em;
+    width: 40em;
 `;
