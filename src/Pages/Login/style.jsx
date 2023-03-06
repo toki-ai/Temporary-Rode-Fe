@@ -2,19 +2,38 @@ import styled from 'styled-components';
 
 export const LoginStyle = styled.div`
     * {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Quicksand', sans-serif;
     }
     .bg-dark-secondary {
-        background: rgba(50, 50, 50, 0.71);
+        background: #01091d;
     }
     .bc-primary {
         border: 0.3em solid #00e7aa;
     }
-    .login-btn {
+    #login-btn {
         border: 1px solid #00e7aa;
         filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.08))
             drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
         border-radius: 2px;
+        background: #01091d;
+        color: white;
+        width: 12em;
+        height: 2em;
+    }
+    .signUp-btn {
+        background: linear-gradient(
+            90deg,
+            #00513c 0%,
+            #00e7aa 22.08%,
+            #00e7aa 72.07%,
+            #00513c 100%
+        );
+        border: 2px solid #05d09a;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.25);
+        border-radius: 2px;
+        color: white;
+        width: 12em;
+        height: 2em;
     }
     .box-shadow-primary {
         box-shadow: 10px 29px 184px -14px #01e2a6;

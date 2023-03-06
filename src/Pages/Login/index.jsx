@@ -1,6 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 
 import grid_img from '../../assets/Login/Gird.svg';
+import logo from '../../assets/Login/Logo.svg';
 import arrow_login from '../../assets/Login/arrow.svg';
 import circle from '../../assets/Login/circle.svg';
 import footer_left from '../../assets/Login/footer_left.svg';
@@ -11,6 +12,8 @@ import signal from '../../assets/Login/signal.svg';
 import x_blue from '../../assets/Login/x-blue.svg';
 import x_green from '../../assets/Login/x-green.svg';
 import GoogleSignInButton from '../../components/GoogleBtn';
+// import GoogleLoginCustom from './GoogleLogin';
+import GoogleSignUpCustom from './SignUpGoogle';
 import { LoginBtn, LoginStyle } from './style';
 
 const Login = () => {
@@ -23,30 +26,35 @@ const Login = () => {
                         className="w-80 bg-dark-secondary rounded-3 box-shadow-primary border border-2 border-dark"
                     >
                         <Col
-                            xs={6}
+                            sm={12}
+                            md={12}
                             lg={6}
-                            className="text-light d-flex flex-column justify-content-center align-items-center rounded-3 bc-primary"
+                            className="text-light d-flex flex-column justify-content-start align-items-center rounded-3 bc-primary"
                         >
-                            <Row className="text-center fs-1 m-3 fw-bold ls-2">
+                            <Row className="m-5">
+                                <img className="img-fluid" src={logo} alt="logo" />
+                            </Row>
+                            <Row className="text-center fs-1 mb-4 fw-bold ls-2">
                                 WELCOME
                                 <br />
                                 BACK
                             </Row>
-                            <div className="mb-3">
+                            <div className="mb-4">
                                 <GoogleSignInButton />
                             </div>
-                            <div className="mb-3">
-                                <GoogleSignInButton />
+                            <div className="mb-5">
+                                <GoogleSignUpCustom />
                             </div>
                         </Col>
                         <Col
-                            xs={6}
+                            sm={0}
+                            md={0}
                             lg={6}
-                            className="text-light d-flex flex-column justify-content-center align-items-center position-relative"
+                            className="text-light d-flex flex-column justify-content-center align-items-center position-relative d-none d-lg-flex "
                         >
-                            <Container className="container-fluid">
+                            <div>
                                 <img className="img-fluid" src={grid_img} alt="grid" />
-                            </Container>
+                            </div>
                             <Row className=" position-absolute top-0 end-0">
                                 <img className="img-fluid" src={header} alt="header" />
                             </Row>
@@ -101,6 +109,13 @@ const Login = () => {
                                         />
                                     </div>
                                     <Row className="ls-2 fw-bolder fs-1 text-stroke-1">BATTLE</Row>
+                                    {/* <Row>
+                                        <img
+                                            className="img-fluid"
+                                            src={rode_battle}
+                                            alt="rode_battle"
+                                        />
+                                    </Row> */}
                                 </Col>
                             </Row>
                             <Row className="position-absolute left-5 bottom-23 rotate-1">
