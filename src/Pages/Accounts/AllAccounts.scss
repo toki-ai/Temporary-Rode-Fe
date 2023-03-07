@@ -1,0 +1,25 @@
+.accounts {
+    &-header {
+        &-wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    &-filter {
+        // width: 90%;
+        display: flex;
+        align-items: center;
+        select {
+            width: 130px;
+            margin: 0 10px;
+        }
+    }
+    &-status {
+        display: flex;
+        align-items: center;
+        select {
+            width: 130px;
+            margin: 0 10px;
+        }
+    }
+}
