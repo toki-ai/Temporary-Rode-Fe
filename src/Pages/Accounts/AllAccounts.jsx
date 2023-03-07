@@ -14,11 +14,13 @@ const AllAccounts = () => {
             setAccounts(response.data.data);
         });
     }, []);
+
+    const handleFilter = () => {};
     return (
-        <div>
+        <div className="accounts">
             <div className="accounts-header">
                 <div>
-                    <h2 style={{ color: '#00E7AA' }}>User Management</h2>
+                    <h2 className="accounts-title">User Management</h2>
                 </div>
 
                 <div className="accounts-header-wrapper">
@@ -28,6 +30,7 @@ const AllAccounts = () => {
                             name=""
                             id=""
                             placeholder="Search member..."
+                            onChange={handleFilter}
                             style={{ colorScheme: 'normal', borderRadius: '10px' }}
                         />
                         <label htmlFor="">Join at</label>
@@ -77,7 +80,7 @@ const AllAccounts = () => {
                             <td>{account.fname + ' ' + account.lname}</td>
                             <td>{account.email}</td>
                             <td>{account.phone}</td>
-                            <td>{account.dob}</td>
+                            <td>{JSON.stringify(account.dob).substring(1, 11)} </td>
                             <td></td>
                             <td></td>
                         </tr>

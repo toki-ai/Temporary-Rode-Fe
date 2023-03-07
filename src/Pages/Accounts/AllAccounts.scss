@@ -1,9 +1,16 @@
 .accounts {
+    background-color: #fff;
+    padding: 40px;
     &-header {
+        margin-bottom: 30px;
         &-wrapper {
             display: flex;
             justify-content: space-between;
         }
+    }
+    &-title {
+        color: '#00E7AA';
+        margin-bottom: 20px;
     }
     &-filter {
         // width: 90%;
