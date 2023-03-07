@@ -22,9 +22,9 @@ const handleCredentialResponse = (response) => {
     });
 };
 const GoogleLogin = () => {
-    const [gapiLoaded, setGapiLoaded] = useState(false);
-    const refBtn = useRef();
-    const navigate = useNavigate();
+    // const [gapiLoaded, setGapiLoaded] = useState(false);
+    // const refBtn = useRef();
+    // const navigate = useNavigate();
 
     // const handleCredentialResponse = (response) => {
     //     console.log(`Encoded JWT ID token: ${response.credential}`);
@@ -39,15 +39,7 @@ const GoogleLogin = () => {
     // };
     const Login = useGoogleLogin({
         onSuccess: async (response) => {
-            try {
-                const res = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
-                    headers: { Authorization: `${response.access_token}` },
-                    // callback: handleCredentialResponse,
-                });
-                console.log(res.data);
-            } catch (error) {
-                console.log(error);
-            }
+            console.log(response);
         },
     });
 
@@ -68,7 +60,7 @@ const GoogleLoginCustom = () => {
     return (
         <GoogleOAuthProvider
             clientId="970833900937-v2ssoqdoticb9em0hl48fdpe2ebg2n81.apps.googleusercontent.com"
-            callback={handleCredentialResponse}
+            // callback={handleCredentialResponse}
         >
             <GoogleLogin />
         </GoogleOAuthProvider>
