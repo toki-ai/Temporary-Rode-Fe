@@ -30,7 +30,7 @@ const Login = () => {
                             lg={6}
                             className="text-light d-flex flex-column justify-content-start align-items-center rounded-3 bc-primary"
                         >
-                            <Row className="m-5">
+                            <Row className="m-3 mt-5">
                                 <img className="img-fluid" src={logo} alt="logo" />
                             </Row>
                             <Row className="text-center fs-1 mb-4 fw-bold ls-2">
@@ -90,8 +90,8 @@ const Login = () => {
                                 <img className="img-fluid si-4" src={x_green} alt="x" />
                             </Row>
                             <Row className=" d-flex align-items-center justify-content-between position-absolute">
-                                <Col xs={2} lg={1} className="d-flex justify-content-center ">
-                                    <img src={arrow_login} alt="arrow" className="si-4" />
+                                <Col xs={2} lg={1} className="d-flex justify-content-center">
+                                    <img src={arrow_login} alt="arrow" className="si-1 mt-3" />
                                 </Col>
 
                                 <Col
@@ -100,32 +100,32 @@ const Login = () => {
                                     className="d-flex flex-column justify-content-center align-items-center"
                                 >
                                     <div className="w-100 d-flex align-items-center justify-content-around">
-                                        <Row className="fw-bold fs-1 color-primary ls-1">R.ODE</Row>
+                                        <Row className="fw-bold fs-0 color-primary ls-1">R.ODE</Row>
                                         <img
                                             className="img-fluid si-3"
                                             src={x_blue}
                                             alt="hexagonal"
                                         />
                                     </div>
-                                    <Row className="ls-2 fw-bolder fs-1 text-stroke-1">BATTLE</Row>
+                                    <Row className="ls-2 fw-bolder fs-0 text-stroke-1">BATTLE</Row>
                                 </Col>
                             </Row>
-                            <Row className="position-absolute left-5 bottom-23 rotate-1">
-                                <div className="color-primary fs-2 fw-bold">2</div>
+                            <Row className="position-absolute left-2 bottom-23 rotate-1">
+                                <div className="color-primary fs-1 fw-bold">2</div>
                             </Row>
-                            <Row className="position-absolute left-4 bottom-15 rotate-3">
-                                <div className="color-secondary fs-2 fw-bold">0</div>
+                            <Row className="position-absolute left-4 bottom-13 rotate-3">
+                                <div className="color-secondary fs-1 fw-bold">0</div>
                             </Row>
-                            <Row className="position-absolute bottom-27 rotate-2">
-                                <div className="color-secondary fs-2 fw-bold">2</div>
+                            <Row className="position-absolute bottom-25 rotate-2">
+                                <div className="color-secondary fs-1 fw-bold">2</div>
                             </Row>
-                            <Row className="position-absolute end-5 bottom-18 rotate-4">
-                                <div className="color-third fs-2 fw-bold">3</div>
+                            <Row className="position-absolute end-5 bottom-15 rotate-4">
+                                <div className="color-third fs-1 fw-bold">3</div>
                             </Row>
                             <Row className="position-absolute bottom-0 start-0">
                                 <img className="img-fluid" src={footer_left} alt="footer-left" />
                             </Row>
-                            <Row className="position-absolute bottom-27 end-2">
+                            <Row className="position-absolute bottom-24 end-2">
                                 <img className="img-fluid si-2" src={hexagonal} alt="hexagonal" />
                             </Row>
                             <Row className="position-absolute bottom-5 end-2">

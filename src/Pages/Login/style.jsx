@@ -34,6 +34,7 @@ export const LoginStyle = styled.div`
         -webkit-text-stroke-width: 0.03em;
         -webkit-text-stroke-color: white;
     }
+
     .si-1 {
         width: 3.8em;
         height: 3.8em;
@@ -49,6 +50,9 @@ export const LoginStyle = styled.div`
     .si-4 {
         width: 3.2em;
         height: 3.2em;
+    }
+    .fs-0 {
+        font-size: 2.6em;
     }
     .w-80 {
         width: 80%;
@@ -66,7 +70,7 @@ export const LoginStyle = styled.div`
         left: 30%;
     }
     .left-4 {
-        left: 37%;
+        left: 33%;
     }
     .left-5 {
         left: 22%;
@@ -92,23 +96,26 @@ export const LoginStyle = styled.div`
     .bottom-23 {
         bottom: 23%;
     }
-    .bottom-27 {
-        bottom: 27%;
+    .bottom-25 {
+        bottom: 25%;
     }
-    .bottom-18 {
-        bottom: 18%;
+    .bottom-24 {
+        bottom: 24%;
     }
     .bottom-15 {
+        bottom: 15%;
+    }
+    .bottom-13 {
         bottom: 13%;
     }
     .bottom-5 {
         bottom: 5%;
     }
     .end-1 {
-        right: 1.5%;
+        right: 1.2%;
     }
     .end-2 {
-        right: 12%;
+        right: 8%;
     }
     .end-3 {
         right: 27%;
