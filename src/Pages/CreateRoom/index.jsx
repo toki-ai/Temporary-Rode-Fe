@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import roomAPI from '../../utils/api/roomAPI';
 import CreateQuestions from './components/CreateQuestions';
 import CreateRoomInfo from './components/CreateRoomInfo';
 
@@ -15,10 +16,21 @@ const CreateRoom = () => {
         if (Object.keys(roomInfo).length) setShow(true);
     }, [roomInfo]);
 
+    useEffect(() => {
+        console.log({ ...roomInfo, questions });
+        roomAPI
+            .createOne({ ...roomInfo, isPrivate: true, questions })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => console.log(err));
+    }, [questions]);
+
     return (
         <>
+            <h1>Create Room</h1>
             <CreateRoomInfo setRoomInfo={setRoomInfo} />
-            <CreateQuestions show={show} handleClose={handleClose} />
+            <CreateQuestions show={show} handleClose={handleClose} setQuestions={setQuestions} />
         </>
     );
 };

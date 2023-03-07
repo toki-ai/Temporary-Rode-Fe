@@ -53,11 +53,16 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
             label: 'Room Type',
             name: 'type',
             type: Form.Select,
-            children: roomType.map((item) => (
-                <option value={item} key={item}>
-                    {item}
-                </option>
-            )),
+            children: (
+                <>
+                    <option value="">Select room type</option>
+                    {roomType.map((item) => (
+                        <option value={item} key={item}>
+                            {item}
+                        </option>
+                    ))}
+                </>
+            ),
         },
     ];
 
@@ -102,7 +107,7 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
                             </Form.Group>
                         ))}
                     </Row>
-                    <Button type="submit">Submit form</Button>
+                    <Button type="submit">Create question</Button>
                 </Form>
             )}
         </Formik>
