@@ -12,9 +12,8 @@ import signal from '../../assets/Login/signal.svg';
 import x_blue from '../../assets/Login/x-blue.svg';
 import x_green from '../../assets/Login/x-green.svg';
 import GoogleSignInButton from '../../components/GoogleBtn';
-// import GoogleLoginCustom from './GoogleLogin';
-import GoogleSignUpCustom from './SignUpGoogle';
-import { LoginBtn, LoginStyle } from './style';
+import GoogleSignUpButton from '../../components/GoogleSignUp';
+import { LoginStyle } from './style';
 
 const Login = () => {
     return (
@@ -43,7 +42,7 @@ const Login = () => {
                                 <GoogleSignInButton />
                             </div>
                             <div className="mb-5">
-                                <GoogleSignUpCustom />
+                                <GoogleSignUpButton />
                             </div>
                         </Col>
                         <Col
@@ -109,13 +108,6 @@ const Login = () => {
                                         />
                                     </div>
                                     <Row className="ls-2 fw-bolder fs-1 text-stroke-1">BATTLE</Row>
-                                    {/* <Row>
-                                        <img
-                                            className="img-fluid"
-                                            src={rode_battle}
-                                            alt="rode_battle"
-                                        />
-                                    </Row> */}
                                 </Col>
                             </Row>
                             <Row className="position-absolute left-5 bottom-23 rotate-1">

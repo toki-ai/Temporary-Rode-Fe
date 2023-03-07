@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Localstorage from '../utils/Localstorage';
 import authApi from '../utils/api/authApi';
 
-function GoogleSignInButton() {
+function GoogleSignUpButton() {
     const [gapiLoaded, setGapiLoaded] = useState(false);
     const refBtn = useRef();
     const navigate = useNavigate();
@@ -35,7 +35,7 @@ function GoogleSignInButton() {
             });
             google.accounts.id.renderButton(
                 refBtn.current,
-                { theme: 'outline', size: 'large', width: '190' } // customization attributes
+                { theme: 'filled_blue', size: 'large', width: '190', text: 'signup_with' } // customization attributes
             );
             google.accounts.id.prompt();
             // google.accounts.id.disableAutoSelect();
@@ -51,4 +51,4 @@ function GoogleSignInButton() {
     return gapiLoaded ? <div type="button" ref={refBtn} /> : null;
 }
 
-export default GoogleSignInButton;
+export default GoogleSignUpButton;
