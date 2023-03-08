@@ -12,12 +12,9 @@ function GoogleSignUpButton() {
     const handleCredentialResponse = (response) => {
         console.log(`Encoded JWT ID token: ${response.credential}`);
         authApi.login(response.credential).then((response) => {
-            console.log(response);
-            Localstorage.setItem('token', response.data.data);
-            navigate('/');
-        });
-        authApi.register(response.credential).then((response) => {
-            console.log(response);
+            if (response.status == 200) {
+                navigate('/register');
+            }
         });
     };
 

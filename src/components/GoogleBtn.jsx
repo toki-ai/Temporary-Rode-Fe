@@ -13,11 +13,12 @@ function GoogleSignInButton() {
         console.log(`Encoded JWT ID token: ${response.credential}`);
         authApi.login(response.credential).then((response) => {
             console.log(response);
-            Localstorage.setItem('token', response.data.data);
-            navigate('/');
-        });
-        authApi.register(response.credential).then((response) => {
-            console.log(response);
+            if (response.data.status === 400) {
+                navigate('/register', { state: response.credential });
+            } else {
+                Localstorage.setItem('token', response.data.data);
+                navigate('/');
+            }
         });
     };
 
