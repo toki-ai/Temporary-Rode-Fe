@@ -5,19 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import Localstorage from '../utils/Localstorage';
 import authApi from '../utils/api/authApi';
 
-function GoogleSignInButton() {
+function GoogleSignUpButton() {
     const [gapiLoaded, setGapiLoaded] = useState(false);
     const refBtn = useRef();
     const navigate = useNavigate();
     const handleCredentialResponse = (response) => {
         console.log(`Encoded JWT ID token: ${response.credential}`);
         authApi.login(response.credential).then((response) => {
-            console.log(response);
-            if (response.data.status === 400) {
-                navigate('/register', { state: response.credential });
-            } else {
-                Localstorage.setItem('token', response.data.data);
-                navigate('/');
+            if (response.status == 200) {
+                navigate('/register');
             }
         });
     };
@@ -36,7 +32,7 @@ function GoogleSignInButton() {
             });
             google.accounts.id.renderButton(
                 refBtn.current,
-                { theme: 'outline', size: 'large', width: '190' } // customization attributes
+                { theme: 'filled_blue', size: 'large', width: '190', text: 'signup_with' } // customization attributes
             );
             google.accounts.id.prompt();
             // google.accounts.id.disableAutoSelect();
@@ -52,4 +48,4 @@ function GoogleSignInButton() {
     return gapiLoaded ? <div type="button" ref={refBtn} /> : null;
 }
 
-export default GoogleSignInButton;
+export default GoogleSignUpButton;
