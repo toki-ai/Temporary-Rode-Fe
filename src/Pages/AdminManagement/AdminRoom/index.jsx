@@ -1,8 +1,8 @@
 import { Col, Container, Row } from 'react-bootstrap';
 
 import ButtonCustom from './components/Button';
-import DropDownCustom from './components/DropDown';
 import SearchRoom from './components/SearchRoom';
+import SelectCustom from './components/Select';
 import TableRoom from './components/Tablle';
 import { RoomStyle } from './style';
 
@@ -24,7 +24,7 @@ const AdminRoom = () => {
                                 />
                             </Col>
                             <Col className="col-4">
-                                <DropDownCustom
+                                <SelectCustom
                                     props={{
                                         name: 'Visibility:',
                                         title: 'Select',

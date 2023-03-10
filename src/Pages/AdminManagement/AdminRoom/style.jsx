@@ -49,6 +49,10 @@ export const RoomStyle = styled.div`
     .btn-hover:hover {
         opacity: 1;
     }
+    .item-style {
+        background-color: white;
+        color: black;
+    }
     .item-style:hover {
         background-color: #00e7aa;
         color: white;
