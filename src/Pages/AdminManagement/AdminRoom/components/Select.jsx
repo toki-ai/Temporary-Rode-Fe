@@ -1,28 +1,51 @@
 import React from 'react';
 
-import { InputGroup } from 'react-bootstrap';
+import Select from 'react-select';
 
-const items = [
-    { id: 1, listName: 'Public' },
-    { id: 2, listName: 'Private' },
-    { id: 3, listName: 'Algorithms' },
-    { id: 4, listName: 'CSS Battle' },
-    { id: 5, listName: 'Room Code' },
-    { id: 6, listName: 'Student ID' },
+import { RoomStyle } from '../style';
+
+const options = [
+    { label: 'All', value: 1, className: 'item-style' },
+    { label: 'Public', value: 2, className: 'item-style' },
+    { label: 'Private', value: 3, className: 'item-style' },
 ];
+const CustomStyles = {
+    container: (base) => ({
+        ...base,
+        width: 'min-content',
+        minWidth: '100%',
+    }),
+    option: (style) => ({
+        ...style,
+        cursor: 'pointer',
+    }),
+    control: (styles) => ({
+        ...styles,
+        cursor: 'pointer',
+    }),
+};
 const SelectCustom = ({ props }) => {
     return (
-        <div className="d-flex">
-            <div className="p-2">{props.name}</div>
-            <InputGroup>
-                <select className="">
-                    <option selected>{props.title}</option>
-                    {items.map((item, id) => (
-                        <option key={id}>{item.listName}</option>
-                    ))}
-                </select>
-            </InputGroup>
-        </div>
+        <RoomStyle>
+            <div className="d-flex">
+                <div className="p-2">{props.name}</div>
+                <Select
+                    options={options}
+                    className="cur-pointer"
+                    classNamePrefix="filter"
+                    // menuIsOpen
+                    // openMenuOnFocus
+                    styles={CustomStyles}
+                    theme={(theme) => ({
+                        ...theme,
+                        colors: {
+                            ...theme.colors,
+                            primary: 'none',
+                        },
+                    })}
+                ></Select>
+            </div>
+        </RoomStyle>
     );
 };
 export default SelectCustom;

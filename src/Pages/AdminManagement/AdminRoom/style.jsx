@@ -50,10 +50,6 @@ export const RoomStyle = styled.div`
         opacity: 1;
         transition: all 300ms;
     }
-    /* .item-style {
-        background-color: white;
-        color: black; */
-    /* } */
     .w-90 {
         width: 90%;
     }
@@ -74,10 +70,28 @@ export const RoomStyle = styled.div`
         color: white;
         border-color: #00e7aa;
     }
-    table,
     th,
     td {
-        text-align: center;
         vertical-align: middle;
+        word-break: keep-all;
+    }
+    .filter {
+        &__menu {
+            cursor: pointer;
+        }
+        &__option {
+            background: white;
+            color: black;
+        }
+        &__option:hover {
+            background-color: #00e7aa;
+            color: white;
+        }
+        &__option:focus {
+            background-color: #00e7aa;
+        }
+    }
+    .cur-pointer {
+        cursor: pointer;
     }
 `;

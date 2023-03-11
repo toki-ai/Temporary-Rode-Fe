@@ -1,11 +1,14 @@
 import { Button } from 'react-bootstrap';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 const ButtonCustom = ({ props }) => {
     return (
         <>
             <Button className={props.className} variant="outline">
-                <i className="bi bi-plus"></i>
-                {props.text}
+                <div className="px-1">
+                    <AiOutlinePlus />
+                </div>
+                <div>{props.text}</div>
             </Button>
         </>
     );

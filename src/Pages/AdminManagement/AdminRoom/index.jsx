@@ -8,9 +8,9 @@ import { RoomStyle } from './style';
 
 const AdminRoom = () => {
     return (
-        <div>
-            <RoomStyle>
-                <div className="box-style">
+        <div style={{ width: '800px' }}>
+            <RoomStyle className="w-100">
+                <div className="box-style w-100">
                     <Col className="p-4">
                         <Row className="color-primary mb-3">
                             <h3 className="fw-bold">Room Management</h3>
@@ -23,19 +23,19 @@ const AdminRoom = () => {
                                     }}
                                 />
                             </Col>
-                            <Col className="col-4">
+                            <Col className="col-4 d-flex justify-content-center">
                                 <SelectCustom
                                     props={{
                                         name: 'Visibility:',
-                                        title: 'Select',
                                     }}
                                 />
                             </Col>
-                            <Col className="col-3 d-flex align-items-center">
+                            <Col className="col-3 d-flex align-items-center justify-content-end">
                                 <ButtonCustom
                                     props={{
                                         text: 'Create room',
-                                        className: 'bg-primary-1 text-light',
+                                        className:
+                                            'bg-primary-1 text-light d-flex align-items-center text-nowrap',
                                     }}
                                 />
                             </Col>
