@@ -2,25 +2,35 @@ import * as React from 'react';
 
 import { Button, Col, OverlayTrigger, Popover, Row } from 'react-bootstrap';
 
+import { RoomStyle } from '../style';
+
 const popoverRight = (
     <Popover>
-        <Col>
-            <Row>
-                <Button className="rounded-0 border-0" variant="item-style">
-                    View
-                </Button>
-            </Row>
-            <Row>
-                <Button className="rounded-0  border-0" variant="outline">
-                    Edit
-                </Button>
-            </Row>
-            <Row>
-                <Button className="rounded-0 px-4  border-0" variant="outline">
-                    Delete
-                </Button>
-            </Row>
-        </Col>
+        <RoomStyle>
+            <Col className="w-5">
+                <Row className="d-flex justify-content-center">
+                    <Button
+                        className="rounded-0 border-0 item-style w-75 rounded-top"
+                        variant="item-style"
+                    >
+                        View
+                    </Button>
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <Button className="rounded-0 border-0 item-style w-75" variant="outline">
+                        Edit
+                    </Button>
+                </Row>
+                <Row className="d-flex justify-content-center">
+                    <Button
+                        className="rounded-0 border-0 item-style w-75 rounded-bottom"
+                        variant="outline"
+                    >
+                        Delete
+                    </Button>
+                </Row>
+            </Col>
+        </RoomStyle>
     </Popover>
 );
 const More = () => {

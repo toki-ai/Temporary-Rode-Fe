@@ -48,14 +48,22 @@ export const RoomStyle = styled.div`
     }
     .btn-hover:hover {
         opacity: 1;
+        transition: all 300ms;
     }
-    .item-style {
+    /* .item-style {
         background-color: white;
-        color: black;
+        color: black; */
+    /* } */
+    .w-90 {
+        width: 90%;
+    }
+    .w-5 {
+        width: 5.2em;
     }
     .item-style:hover {
         background-color: #00e7aa;
         color: white;
+        transition: all 300ms;
     }
     .dropdown-style {
         background-color: white;
