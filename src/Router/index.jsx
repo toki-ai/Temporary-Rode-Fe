@@ -16,15 +16,6 @@ import TestModal from '../components/TestModal';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
 
-import ErrorPage from '../Pages/404Page';
-import Login from '../Pages/Login';
-import { Navigate } from 'react-router-dom';
-import AdminRoute from './AdminRoute';
-import Admin from '../Pages/Admin';
-import ModalComponent from '../components/Modal';
-import TestModal from '../components/TestModal';
-import TestAlert from '../components/TestAlert';
-import TestCodeMirror from '../Pages/CssBattle';
 const RouterComponent = () => {
     const router = createBrowserRouter([
         { exact: true, path: '/', element: <Navigate to="home" /> },
