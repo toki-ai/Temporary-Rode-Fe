@@ -94,4 +94,16 @@ export const RoomStyle = styled.div`
     .cur-pointer {
         cursor: pointer;
     }
+    .max-height {
+        max-height: 10em;
+        min-height: 1em;
+    }
+    .max-width {
+        width: 19em;
+    }
+    .info:hover {
+        background: #6c757d;
+        color: white;
+        cursor: pointer;
+    }
 `;

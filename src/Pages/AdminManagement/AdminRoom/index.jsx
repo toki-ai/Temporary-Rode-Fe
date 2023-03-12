@@ -1,7 +1,7 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import ButtonCustom from './components/Button';
-import SearchRoom from './components/SearchRoom';
+import SearchBar from './components/SearchRoom/SearchBar';
 import SelectCustom from './components/Select';
 import TableRoom from './components/Tablle';
 import { RoomStyle } from './style';
@@ -17,11 +17,7 @@ const AdminRoom = () => {
                         </Row>
                         <Row className="d-flex justify-content-around align-items-center mb-3">
                             <Col className="col-5">
-                                <SearchRoom
-                                    props={{
-                                        placeholder: 'Search room...',
-                                    }}
-                                />
+                                <SearchBar />
                             </Col>
                             <Col className="col-4 d-flex justify-content-center">
                                 <SelectCustom
