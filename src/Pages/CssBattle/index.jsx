@@ -1,48 +1,24 @@
-import { useState, useRef } from 'react';
+import RoomInfo from './components/RoomInfo';
 
-import { htmlLanguage } from '@codemirror/lang-html';
-import CodeMirror from '@uiw/react-codemirror';
-import Stack from 'react-bootstrap/Stack';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
-const TestCodeMirror = () => {
-    const [code, setCode] = useState();
-    const [count, setCount] = useState(0);
-    const iframeRef = useRef();
-    const [diffChecked, setDiffChecked] = useState(false);
-
-    console.log(code);
-    console.log(count);
-
+const ArenaCSS = () => {
     return (
-        <>
-            <div> test codemirror</div>
-            <Stack direction="horizontal" gap={3}>
-                <CodeMirror
-                    className="editor "
-                    value={code}
-                    width="500px"
-                    height="calc(100vh - 88px);"
-                    extensions={[htmlLanguage]}
-                    options={{ lineWrapping: 'true', lineNumbers: 'true', autoCloseBrackets: true }}
-                    onChange={(e) => {
-                        setCode(e);
-                        setCount(e.length);
-                    }}
-                />
-                <iframe
-                    id="source"
-                    className="iframe-output"
-                    // width="400px"
-                    // height="300px"
-                    title="output"
-                    style={{ mixBlendMode: diffChecked ? 'difference' : 'normal' }}
-                    scrolling="no"
-                    ref={iframeRef}
-                    srcDoc={code}
-                ></iframe>
-            </Stack>
-        </>
+        <Row className="px-2">
+            {/* Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop */}
+            <Col xs={12} md={3} className="px-2">
+                <RoomInfo />
+            </Col>
+            <Col xs={12} md={6} className="px-2">
+                xs=6 md=4
+            </Col>
+            <Col xs={12} md={3} className="px-2">
+                xs=6 md=4
+            </Col>
+        </Row>
     );
 };
 
-export default TestCodeMirror;
+export default ArenaCSS;

@@ -33,4 +33,12 @@ export const Wrap = styled.span`
         border-radius: 42px;
         width: 133px;
     }
+    .btn-borderNeon {
+        color: #fff;
+        border: 2px solid #00e7aa;
+        /* shadow */
+
+        filter: drop-shadow(0px 2px 15px #00c994);
+        border-radius: 21px;
+    }
 `;
