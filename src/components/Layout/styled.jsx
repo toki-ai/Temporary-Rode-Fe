@@ -6,8 +6,6 @@ export const ContainerLayout = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     min-height: 100vh;
-    margin: 0;
-    padding: 0;
 `;
 
 export const Body = styled.div`
@@ -27,5 +25,8 @@ export const Background = styled.div`
     width: 100%;
     height: 100vh;
     background-image: url('https://images2.imgbox.com/5d/21/BhenFkhB_o.png');
-    background-size: 100% 100%;
+    /* background-size: 100% 100%; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 `;
