@@ -131,7 +131,7 @@ function Register() {
                                                         <FormControl
                                                             control="input"
                                                             type="date"
-                                                            placeholder="Your phone number"
+                                                            placeholder="dd-mm-yyyy"
                                                             label="Date of Birth"
                                                             controlId="phone"
                                                             name="dob"
