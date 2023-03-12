@@ -11,8 +11,8 @@ import {
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    width: 225px;
-    height: 667px;
+    width: 20%;
+    height: 90vh;
     background: #ffffff;
     box-shadow: 6px 35px 24px rgba(0, 0, 0, 0.25);
     border-radius: 20px 20px 0 0;
@@ -23,7 +23,7 @@ export const Container = styled.div`
 `;
 
 export const User = styled.div`
-    width: 225px;
+    width: 100%;
     height: 28%;
     display: flex;
     flex-direction: column;
@@ -33,7 +33,7 @@ export const User = styled.div`
         font-family: 'Quicksand';
         font-style: normal;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 1.4vw;
         line-height: 21px;
     }
 
@@ -41,7 +41,7 @@ export const User = styled.div`
         font-family: 'Quicksand';
         font-style: normal;
         font-weight: 500;
-        font-size: 18px;
+        font-size: 1.3vw;
         line-height: 18px;
     }
 `;
@@ -53,13 +53,13 @@ export const Pagination = styled.div`
     height: calc(100% - 28%);
 `;
 export const IconUser = styled(PersonCircle)`
-    width: 70px;
-    height: 70px;
+    width: 35%;
+    height: 35%;
     margin-bottom: 10px;
 `;
 
 export const General = styled.div`
-    width: 316px;
+    width: 100%;
     height: 10%;
     margin-bottom: 20px;
     display: flex;
@@ -67,7 +67,7 @@ export const General = styled.div`
 
     div {
         display: flex;
-        width: 120px;
+        width: 95%;
         height: 21px;
         margin-left: 10px;
     }
@@ -77,9 +77,15 @@ export const Text = styled.div`
     font-family: 'Quicksand';
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1.2vw;
     line-height: 21px;
     color: #515151;
+    cursor: pointer;
+    a {
+        &:hover {
+            color: #00e7aa;
+        }
+    }
 `;
 
 export const IconHouse = styled(HouseDoorFill)`
@@ -94,7 +100,7 @@ export const Icon = styled.section`
     /* margin-left: 10px; */
 `;
 export const ContestInfo = styled.div`
-    width: 316px;
+    width: 100%;
     height: calc(100% - 28%);
     margin-bottom: 35px;
     display: flex;
@@ -102,7 +108,7 @@ export const ContestInfo = styled.div`
     row-gap: 14px;
 
     div {
-        width: 140px;
+        width: 95%;
         display: flex;
         justify-content: space-between;
         margin-left: 10px;
@@ -143,7 +149,7 @@ export const BoldText = styled.section`
     font-family: 'Quicksand';
     font-style: normal;
     font-weight: 700;
-    font-size: 17px;
+    font-size: 1.3vw;
     line-height: 21px;
     color: #111111;
     margin-bottom: 11px;
@@ -160,5 +166,51 @@ export const EndBar = styled.div`
         flex-direction: column;
         justify-content: space-between;
         row-gap: 14px;
+        cursor: pointer;
+    }
+
+    nav:last-child {
+        color: red;
+        a {
+            color: red;
+        }
+        div:first-child {
+            color: #111111;
+            a {
+                color: #111111;
+            }
+        }
+        div:hover {
+            color: #00e7aa;
+            a {
+                color: #00e7aa;
+            }
+        }
+    }
+`;
+
+// export const NavTop = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     row-gap: 14px;
+// `;
+
+// export const NavBottom = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     row-gap: 14px;
+//     &:last-child {
+//         color: red;
+//         background-color: black;
+//     }
+// `;
+
+export const Item = styled.div`
+    cursor: pointer;
+
+    &:hover {
+        color: #00e7aa;
     }
 `;

@@ -1,11 +1,10 @@
 import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
 
-export const ContainerLayout = styled(Container)`
+export const ContainerLayout = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    max-width: 1440px;
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -26,6 +25,7 @@ export const BackgroundGray = styled.div`
 `;
 export const Background = styled.div`
     width: 100%;
-    height: 50%;
+    height: 100vh;
     background-image: url('https://images2.imgbox.com/5d/21/BhenFkhB_o.png');
+    background-size: 100% 100%;
 `;

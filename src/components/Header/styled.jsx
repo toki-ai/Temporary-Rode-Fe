@@ -5,14 +5,12 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.div`
-    width: 96px;
-    height: 42px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 900;
-    font-size: 36px;
-    line-height: 42px;
+    font-size: 3vw;
     color: #00e7aa;
-    margin-left: 73px;
-    margin-bottom: 11px;
+    margin: 1% 0 2% 4%;
+    /* margin-left: 4%;
+    margin-bottom: 2%; */
 `;
