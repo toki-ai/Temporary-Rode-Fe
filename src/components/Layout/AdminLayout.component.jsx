@@ -13,9 +13,7 @@ const AdminLayoutComponent = ({ children }) => {
                 <Body>
                     <BackgroundGray />
                     <Sidebar />
-                    <ContentComponent>
-                        <div className="site-layout-background">{children}</div>
-                    </ContentComponent>
+                    <ContentComponent>{children}</ContentComponent>
                 </Body>
             </Background>
         </ContainerLayout>
@@ -23,3 +21,4 @@ const AdminLayoutComponent = ({ children }) => {
 };
 
 export default AdminLayoutComponent;
+// <div className="site-layout-background"></div>
