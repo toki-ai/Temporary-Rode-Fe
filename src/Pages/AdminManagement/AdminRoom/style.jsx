@@ -77,6 +77,7 @@ export const RoomStyle = styled.div`
     }
     th {
         font-size: 0.8em;
+        font-weight: 800;
     }
     tr:not(:first-child):hover {
         background-color: #f2f2f2;

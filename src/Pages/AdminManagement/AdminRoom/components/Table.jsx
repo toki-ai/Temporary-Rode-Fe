@@ -27,7 +27,7 @@ const TableRoom = () => {
                             <td>{props.close_time}</td>
                             <td>{props.duration}</td>
                             <td>{props.visibility}</td>
-                            <td>
+                            <td className="position-relative overflow-hidden">
                                 <More />
                             </td>
                         </tr>

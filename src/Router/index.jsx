@@ -9,6 +9,7 @@ import Home from '../Pages/Home';
 import HomeChild from '../Pages/HomeChild/HomeChild';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import ModalComponent from '../components/Modal';
 import TestAlert from '../components/TestAlert';
@@ -47,7 +48,11 @@ const RouterComponent = () => {
                     exact: true,
                     path: 'admin',
                     loader: Loading,
-                    element: <Admin />,
+                    element: (
+                        <AdminLayoutComponent>
+                            <Admin />
+                        </AdminLayoutComponent>
+                    ),
                 },
             ],
         },

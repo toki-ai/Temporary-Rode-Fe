@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Select from 'react-select';
-
+// import Select from 'react-select';
 import { RoomStyle } from '../style';
 
 const options = [
@@ -29,21 +28,21 @@ const SelectCustom = ({ props }) => {
         <RoomStyle>
             <div className="d-flex">
                 <div className="p-2">{props.name}</div>
-                <Select
-                    options={options}
-                    className="cur-pointer"
-                    classNamePrefix="filter"
-                    // menuIsOpen
-                    // openMenuOnFocus
-                    styles={CustomStyles}
-                    theme={(theme) => ({
-                        ...theme,
-                        colors: {
-                            ...theme.colors,
-                            primary: 'none',
-                        },
-                    })}
-                ></Select>
+                <select
+                // options={options}
+                // className="cur-pointer"
+                // classNamePrefix="filter"
+                // // menuIsOpen
+                // // openMenuOnFocus
+                // styles={CustomStyles}
+                // theme={(theme) => ({
+                //     ...theme,
+                //     colors: {
+                //         ...theme.colors,
+                //         primary: 'none',
+                //     },
+                // })}
+                ></select>
             </div>
         </RoomStyle>
     );

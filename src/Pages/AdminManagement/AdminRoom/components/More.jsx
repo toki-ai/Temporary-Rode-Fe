@@ -35,7 +35,7 @@ const popoverRight = (
 );
 const More = () => {
     return (
-        <OverlayTrigger trigger="focus" placement="right" overlay={popoverRight}>
+        <OverlayTrigger trigger="focus" placement="auto right" overlay={popoverRight}>
             <Button variant="outline border-0">
                 <i className="bi bi-three-dots-vertical bg-secondary-1 btn-hover"></i>
             </Button>
