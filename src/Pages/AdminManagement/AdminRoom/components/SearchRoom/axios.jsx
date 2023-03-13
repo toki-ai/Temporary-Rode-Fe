@@ -10,18 +10,18 @@ export const getInfos = async () => {
     return response.data;
 };
 
-// export const authApi = {
-//     getAllRoom: async () => {
-//         const endpoint = `/rooms/get-all`;
-//         // eslint-disable-next-line no-return-await
+export const authApi = {
+    getAllRoom: async () => {
+        const endpoint = `/rooms/get-all`;
+        // eslint-disable-next-line no-return-await
 
-//         return await get(endpoint, {}, {})
-//             .then((res) => {
-//                 // if (res.data.code !== 200) console.log(res.response);
-//                 return res;
-//             })
-//             .catch((err) => {
-//                 return err;
-//             });
-//     },
-// };
+        return await get(endpoint, {}, {})
+            .then((res) => {
+                // if (res.data.code !== 200) console.log(res.response);
+                return res;
+            })
+            .catch((err) => {
+                return err;
+            });
+    },
+};

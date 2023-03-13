@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback, useContext } from 'react';
-import authApi from './api/authApi';
-import Localstorage from './Localstorage';
+
 import { UserContext } from '../Context/User.context';
+import Localstorage from './Localstorage';
+import authApi from './api/authApi';
+
 const useAuth = () => {
     const { setCurrentUser } = useContext(UserContext);
     const [userRole, setUserRole] = useState(null);

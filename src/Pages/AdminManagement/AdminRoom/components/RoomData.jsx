@@ -1,4 +1,8 @@
+import { useState, useEffect } from 'react';
+
 import { TfiInfinite } from 'react-icons/tfi';
+
+import { authApi } from './SearchRoom/axios';
 
 const InfinityIcon = () => {
     return <TfiInfinite />;
@@ -42,4 +46,14 @@ const RoomData = [
         visibility: 'Private',
     },
 ];
+const useAuth = () => {
+    const [roomInfo, setRoomInfo] = useState([]);
+    useEffect(() => {
+        authApi.getAllRoom().then((room) => {
+            setRoomInfo(room);
+            console.log(room);
+            return room;
+        });
+    }, []);
+};
 export default RoomData;
