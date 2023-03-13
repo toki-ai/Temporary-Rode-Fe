@@ -115,7 +115,8 @@ export const ScoreText = styled.span`
 `;
 export const BoxEditor = styled.div`
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 290px);
+
     color: ${(props) => props.theme.colors.light};
     /* padding: 10px 20px; */
     background-color: ${(props) => props.theme.colors.arenaBG};
@@ -123,4 +124,119 @@ export const BoxEditor = styled.div`
     box-shadow: 0px 2px 15px #00c994;
     border-radius: 10px;
     overflow: hidden;
+    .ͼo {
+        background-color: transparent;
+        & .cm-gutters {
+            background-color: transparent;
+        }
+    }
 `;
+
+export const TextStyled = styled.div`
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: 0.457143px;
+    text-transform: uppercase;
+
+    /* button */
+
+    color: #00e7aa;
+
+    text-shadow: 0px 0px 4px #00c994;
+`;
+export const TextSmall = styled(TextStyled)`
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: 0.457143px;
+    text-transform: lowercase;
+
+    /* Yellow */
+
+    color: #f9c41c;
+`;
+export const LabelStyled = styled.label`
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: 0.457143px;
+    text-transform: lowercase;
+
+    /* Yellow */
+
+    color: #f9c41c;
+`;
+
+// OUTPUT CSS BATTLE
+export const BoxOutput = styled.div`
+    color: ${(props) => props.theme.colors.light};
+    /* padding: 10px 20px; */
+    background-color: ${(props) => props.theme.colors.arenaBG};
+    border: 1px solid #00e7aa;
+    box-shadow: 0px 2px 15px #00c994;
+    /* border-radius: 10px; */
+    .img-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        height: 300px;
+    }
+    .output-container {
+        position: relative;
+        width: 400px;
+        height: 300px;
+        background: transparent;
+        z-index: 20;
+        overflow: hidden;
+    }
+    .iframe-output {
+        border: none;
+        background: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        overflow: hidden;
+    }
+    .output-layer {
+        border: none;
+        width: 400px;
+        height: 300px;
+        background: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 20;
+        overflow: hidden;
+    }
+`;
+
+export const Target = styled.div`
+    max-width: 100vw;
+
+    img {
+        width: 400px;
+        height: 300px;
+    }
+`;
+
+// export const TargetContent = styled(OutPutContent)`
+//     height: 130%;
+// `;
