@@ -11,11 +11,19 @@ const AllAccounts = () => {
     console.log('🚀 ~ file: AllAccounts.jsx:7 ~ AllAccounts ~ accounts:', accounts);
     useEffect(() => {
         accountsApi.getAll().then((response) => {
+            console.log('getAll', response);
             setAccounts(response.data.data);
         });
     }, []);
 
     const handleFilter = () => {};
+    const handleActive = (id) => {
+        console.log(id);
+        accountsApi.postActive(id).then((response) => {
+            console.log(response);
+        });
+    };
+
     return (
         <div className="accounts">
             <div className="accounts-header">
@@ -56,7 +64,6 @@ const AllAccounts = () => {
                             <option>Select</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
-                            <option value="3">Three</option>
                         </Form.Select>
                     </div>
                 </div>
@@ -80,9 +87,15 @@ const AllAccounts = () => {
                             <td>{account.fname + ' ' + account.lname}</td>
                             <td>{account.email}</td>
                             <td>{account.phone}</td>
-                            <td>{JSON.stringify(account.dob).substring(1, 11)} </td>
+                            <td>{account.dob.substring(1, 11)} </td>
                             <td></td>
-                            <td></td>
+                            <td className="accounts-status-setting">
+                                {account.isActive ? 'Active' : 'InActive'}
+                                <i class="fas fa-ellipsis-v"></i>
+                                <button onClick={() => handleActive(account.id)}>
+                                    Ban / Unban
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
