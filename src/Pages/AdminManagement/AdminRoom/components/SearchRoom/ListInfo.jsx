@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Dropdown } from 'react-bootstrap';
-
 import Info from './Info';
 
 const ListInfo = ({ searchResults, value, onSearch }) => {

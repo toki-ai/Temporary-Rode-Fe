@@ -1,48 +1,24 @@
 import React from 'react';
 
-// import Select from 'react-select';
+import { Form } from 'react-bootstrap/esm';
+
 import { RoomStyle } from '../style';
 
 const options = [
-    { label: 'All', value: 1, className: 'item-style' },
-    { label: 'Public', value: 2, className: 'item-style' },
-    { label: 'Private', value: 3, className: 'item-style' },
+    { label: 'All', id: 1 },
+    { label: 'Public', id: 2 },
+    { label: 'Private', id: 3 },
 ];
-const CustomStyles = {
-    container: (base) => ({
-        ...base,
-        width: 'min-content',
-        minWidth: '100%',
-    }),
-    option: (style) => ({
-        ...style,
-        cursor: 'pointer',
-    }),
-    control: (styles) => ({
-        ...styles,
-        cursor: 'pointer',
-    }),
-};
 const SelectCustom = ({ props }) => {
     return (
         <RoomStyle>
             <div className="d-flex">
-                <div className="p-2">{props.name}</div>
-                <select
-                // options={options}
-                // className="cur-pointer"
-                // classNamePrefix="filter"
-                // // menuIsOpen
-                // // openMenuOnFocus
-                // styles={CustomStyles}
-                // theme={(theme) => ({
-                //     ...theme,
-                //     colors: {
-                //         ...theme.colors,
-                //         primary: 'none',
-                //     },
-                // })}
-                ></select>
+                <div className="p-2 rfs">{props.name}</div>
+                <Form.Select className="rfs rs">
+                    {options.map((item) => {
+                        return <option key={item.id}>{item.label}</option>;
+                    })}
+                </Form.Select>
             </div>
         </RoomStyle>
     );

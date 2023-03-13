@@ -1,45 +1,36 @@
 import * as React from 'react';
 
-import { Button, Col, OverlayTrigger, Popover, Row } from 'react-bootstrap';
+import { Dropdown, DropdownButton } from 'react-bootstrap/esm';
 
-import { RoomStyle } from '../style';
-
-const popoverRight = (
-    <Popover>
-        <RoomStyle>
-            <Col className="w-5">
-                <Row className="d-flex justify-content-center">
-                    <Button
-                        className="rounded-0 border-0 item-style w-75 rounded-top"
-                        variant="item-style"
-                    >
-                        View
-                    </Button>
-                </Row>
-                <Row className="d-flex justify-content-center">
-                    <Button className="rounded-0 border-0 item-style w-75" variant="outline">
-                        Edit
-                    </Button>
-                </Row>
-                <Row className="d-flex justify-content-center">
-                    <Button
-                        className="rounded-0 border-0 item-style w-75 rounded-bottom"
-                        variant="outline"
-                    >
-                        Delete
-                    </Button>
-                </Row>
-            </Col>
-        </RoomStyle>
-    </Popover>
-);
+const actions = [
+    { id: 1, href: '#', value: 'View' },
+    { id: 2, href: '#', value: 'Edit' },
+    { id: 3, href: '#', value: 'Delete' },
+];
 const More = () => {
     return (
-        <OverlayTrigger trigger="focus" placement="auto right" overlay={popoverRight}>
-            <Button variant="outline border-0">
-                <i className="bi bi-three-dots-vertical bg-secondary-1 btn-hover"></i>
-            </Button>
-        </OverlayTrigger>
+        <>
+            <DropdownButton
+                align="start"
+                variant="outline"
+                title={<i className="bi bi-three-dots-vertical bg-secondary-1 btn-hover"></i>}
+                style={{ width: '50px' }}
+                bsPrefix="w-75 d-flex justify-content-center dropdown-style-2 w-50"
+            >
+                {actions.map((item) => {
+                    return (
+                        <Dropdown.Item
+                            key={item.id}
+                            eventKey={item.id}
+                            href={item.href}
+                            className="w-100"
+                        >
+                            {item.value}
+                        </Dropdown.Item>
+                    );
+                })}
+            </DropdownButton>
+        </>
     );
 };
 export default More;

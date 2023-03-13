@@ -24,9 +24,7 @@ const SearchBar = () => {
     const handleChange = (e) => {
         setValue(e.target.value);
         if (!e.target.value) return setSearchResults(infos);
-        const resultsArray = infos.filter((info) =>
-            info.body.toLowerCase().includes(e.target.value)
-        );
+        const resultsArray = infos.filter((info) => info.body.includes(e.target.value));
         setSearchResults(resultsArray);
     };
     const onSearch = (searchTerm) => {
@@ -45,7 +43,7 @@ const SearchBar = () => {
                     <i className="bi bi-search"></i>
                 </Button>
                 <input
-                    className="border-0 rounded-pill dishover form-control"
+                    className="border-0 rounded-pill dishover form-control rfs"
                     placeholder="Search room..."
                     type="text"
                     value={value}

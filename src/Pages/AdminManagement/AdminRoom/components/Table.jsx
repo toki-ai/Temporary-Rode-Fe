@@ -5,7 +5,7 @@ import RoomData from './RoomData';
 
 const TableRoom = () => {
     return (
-        <Table striped>
+        <Table striped className="w-98 border-top">
             <thead>
                 <tr>
                     <th>Room Code</th>
@@ -27,7 +27,7 @@ const TableRoom = () => {
                             <td>{props.close_time}</td>
                             <td>{props.duration}</td>
                             <td>{props.visibility}</td>
-                            <td className="position-relative overflow-hidden">
+                            <td>
                                 <More />
                             </td>
                         </tr>
