@@ -75,6 +75,12 @@ export const RoomStyle = styled.div`
         vertical-align: middle;
         word-break: keep-all;
     }
+    th {
+        font-size: 0.8em;
+    }
+    tr:not(:first-child):hover {
+        background-color: #f2f2f2;
+    }
     .filter {
         &__menu {
             cursor: pointer;
@@ -93,10 +99,6 @@ export const RoomStyle = styled.div`
     }
     .cur-pointer {
         cursor: pointer;
-    }
-    .max-height {
-        max-height: 10em;
-        min-height: 1em;
     }
     .max-width {
         width: 19em;

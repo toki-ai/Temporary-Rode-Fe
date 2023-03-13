@@ -52,7 +52,6 @@ const SearchBar = () => {
                     onChange={handleChange}
                 />
             </InputGroup>
-
             <ListInfo searchResults={searchResults} value={value} onSearch={onSearch} />
         </div>
     );
