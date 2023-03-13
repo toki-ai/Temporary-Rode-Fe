@@ -12,7 +12,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 20%;
-    height: 90vh;
+    height: 87vh;
     background: #ffffff;
     box-shadow: 6px 35px 24px rgba(0, 0, 0, 0.25);
     border-radius: 20px 20px 0 0;
