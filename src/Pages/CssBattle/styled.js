@@ -113,3 +113,14 @@ export const ColorItem = styled.div`
 export const ScoreText = styled.span`
     font-weight: 700;
 `;
+export const BoxEditor = styled.div`
+    width: 100%;
+    height: 100%;
+    color: ${(props) => props.theme.colors.light};
+    /* padding: 10px 20px; */
+    background-color: ${(props) => props.theme.colors.arenaBG};
+    border: 1px solid #00e7aa;
+    box-shadow: 0px 2px 15px #00c994;
+    border-radius: 10px;
+    overflow: hidden;
+`;

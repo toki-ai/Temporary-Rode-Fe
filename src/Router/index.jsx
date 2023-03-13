@@ -5,13 +5,11 @@ import ErrorPage from '../Pages/404Page';
 import Admin from '../Pages/Admin';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
 import ArenaCSS from '../Pages/CssBattle';
-import TestCodeMirror from '../Pages/CssBattle/TestCodeMirror';
 import Home from '../Pages/Home';
 import HomeChild from '../Pages/HomeChild/HomeChild';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import Loading from '../components/Loading';
-import ModalComponent from '../components/Modal';
 import TestAlert from '../components/TestAlert';
 import TestModal from '../components/TestModal';
 import AdminRoute from './AdminRoute';
@@ -24,7 +22,6 @@ const RouterComponent = () => {
         { exact: true, path: '/register', element: <Register /> },
         { exact: true, path: '/modal', loader: Loading, element: <TestModal /> },
         { exact: true, path: '/alert', loader: Loading, element: <TestAlert /> },
-        { exact: true, path: '/testMirror', loader: Loading, element: <TestCodeMirror /> },
         { exact: true, path: '/arena_css', loader: Loading, element: <ArenaCSS /> },
         { exact: true, path: '/admin_room', loader: Loading, element: <AdminRoom /> },
         {
