@@ -68,7 +68,7 @@ function Sidebar() {
             <Container>
                 <User>
                     <IconUser></IconUser>
-                    <div>Lê Thành Long</div>
+                    <div className="mb-1">Lê Thành Long</div>
                     <p>Administrator</p>
                 </User>
                 <Pagination>
