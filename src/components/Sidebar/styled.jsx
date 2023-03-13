@@ -81,6 +81,7 @@ export const Text = styled.div`
     line-height: 21px;
     color: #515151;
     cursor: pointer;
+    transition: 0.3s;
     a {
         &:hover {
             color: #00e7aa;
@@ -209,7 +210,7 @@ export const EndBar = styled.div`
 
 export const Item = styled.div`
     cursor: pointer;
-
+    transition: 0.3s;
     &:hover {
         color: #00e7aa;
     }
