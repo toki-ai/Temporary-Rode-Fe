@@ -9,16 +9,32 @@
         }
     }
     &-title {
-        color: '#00E7AA';
         margin-bottom: 20px;
     }
     &-filter {
-        // width: 90%;
         display: flex;
         align-items: center;
+        &-search {
+            position: relative;
+            margin-right: 20px;
+            input {
+                border-radius: 10px;
+                padding: 4px;
+                border-color: #212529;
+            }
+            i {
+                position: absolute;
+                left: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
         select {
             width: 130px;
             margin: 0 10px;
+        }
+        input {
+            padding-left: 50px;
         }
     }
     &-status {
@@ -34,11 +50,16 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            span.isActive {
+                color: #198754;
+            }
+            span.isLocked {
+                color: #dc3545;
+            }
             & button {
                 border-radius: 6px;
                 position: absolute;
-                width: 100px;
-                left: 100%;
+                left: 90%;
                 color: #212529;
                 font-family: 'Quicksand';
                 font-style: normal;

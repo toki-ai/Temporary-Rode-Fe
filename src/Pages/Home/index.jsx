@@ -32,7 +32,7 @@ const Home = () => {
             .catch((err) => console.log(err));
     };
     return (
-        <>
+        <div className="home">
             <div>
                 <input
                     type="text"
@@ -41,7 +41,7 @@ const Home = () => {
                 />
             </div>
             <button onClick={handlePostRoom}>JOIN</button>
-        </>
+        </div>
     );
 };
 

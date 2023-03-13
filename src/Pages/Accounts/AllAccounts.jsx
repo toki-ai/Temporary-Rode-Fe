@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import accountsApi from '../../utils/api/accountsApi';
 import './AllAccounts.scss';
+import More from './components/More';
 
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
@@ -28,20 +29,24 @@ const AllAccounts = () => {
         <div className="accounts">
             <div className="accounts-header">
                 <div>
-                    <h2 className="accounts-title">User Management</h2>
+                    <h2 className="accounts-title" style={{ color: '#00E7AA' }}>
+                        User Management
+                    </h2>
                 </div>
 
                 <div className="accounts-header-wrapper">
                     <div className="accounts-filter">
-                        <input
-                            type="search"
-                            name=""
-                            id=""
-                            placeholder="Search member..."
-                            onChange={handleFilter}
-                            style={{ colorScheme: 'normal', borderRadius: '10px' }}
-                        />
-                        <label htmlFor="">Join at</label>
+                        <div className="accounts-filter-search">
+                            <input
+                                type="search"
+                                name=""
+                                id=""
+                                placeholder="Search member..."
+                                onChange={handleFilter}
+                            />
+                            <i className="bi bi-search"></i>
+                        </div>
+                        <label htmlFor="">Join at:</label>
                         {/* <div className="accounts-form"> */}
                         <Form.Select aria-label="Default select example">
                             <option>Select</option>
@@ -68,10 +73,10 @@ const AllAccounts = () => {
                     </div>
                 </div>
             </div>
-            <Table striped bordered hover>
+            <Table striped hover>
                 <thead>
                     <tr>
-                        <th>MSSV</th>
+                        <th>Student ID</th>
                         <th>Student Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -87,15 +92,22 @@ const AllAccounts = () => {
                             <td>{account.fname + ' ' + account.lname}</td>
                             <td>{account.email}</td>
                             <td>{account.phone}</td>
-                            <td>{account.dob.substring(1, 11)} </td>
+                            <td>{account.dob.substring(0, 10)} </td>
                             <td></td>
                             <td className="accounts-status-setting">
-                                {account.isActive ? 'Active' : 'InActive'}
-                                <i class="fas fa-ellipsis-v"></i>
-                                <button onClick={() => handleActive(account.id)}>
-                                    Ban / Unban
-                                </button>
+                                <div>
+                                    {account.isActive ? (
+                                        <span className="isActive">Active</span>
+                                    ) : (
+                                        <span className="isLocked">Locked</span>
+                                    )}
+                                    <More />
+                                    {/* <button onClick={() => handleActive(account.id)}>
+                                        Ban / Unban
+                                    </button> */}
+                                </div>
                             </td>
+                            <td></td>
                         </tr>
                     ))}
                 </tbody>
