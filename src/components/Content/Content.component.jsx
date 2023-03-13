@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Container, Content } from './styled';
 
-function ContentComponent() {
+function ContentComponent({ children }) {
     return (
         <Container>
-            <Content></Content>
+            <Content>{children}</Content>
         </Container>
     );
 }
