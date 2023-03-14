@@ -1,9 +1,22 @@
+import { useState, useEffect } from 'react';
+
 import { Table } from 'react-bootstrap';
 
 import More from './More';
-import RoomData from './RoomData';
+import { authApi } from './SearchRoom/axios';
 
 const TableRoom = () => {
+    const [rooms, setRooms] = useState([]);
+    useEffect(() => {
+        authApi
+            .getAllRoom()
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    });
     return (
         <Table striped className="w-98 border-top">
             <thead>
@@ -18,15 +31,15 @@ const TableRoom = () => {
                 </tr>
             </thead>
             <tbody>
-                {RoomData.map((props) => {
+                {rooms.map((room) => {
                     return (
-                        <tr key={props.id}>
-                            <td>{props.room_code}</td>
-                            <td>{props.room_type}</td>
-                            <td>{props.open_time}</td>
-                            <td>{props.close_time}</td>
-                            <td>{props.duration}</td>
-                            <td>{props.visibility}</td>
+                        <tr key={room.code}>
+                            <td>{room.code}</td>
+                            <td>{room.type}</td>
+                            <td>{room.openTime}</td>
+                            <td>{room.closeTime}</td>
+                            <td>{room.duration}</td>
+                            <td>room.isPrivate ? Private : Public</td>
                             <td>
                                 <More />
                             </td>
