@@ -15,6 +15,7 @@ import TestAlert from '../components/TestAlert';
 import TestModal from '../components/TestModal';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
+import { loaderInfoGG } from './RouterLoader/Loader';
 
 const RouterComponent = () => {
     const router = createBrowserRouter([

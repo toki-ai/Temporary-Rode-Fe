@@ -11,20 +11,27 @@ function GoogleSignInButton() {
     const { setCredential } = useContext(UserContext);
     const refBtn = useRef();
     const navigate = useNavigate();
-    const handleCredentialResponse = (response) => {
+    const handleCredentialResponse = async (response) => {
         console.log(`Encoded JWT ID token: ${response.credential}`);
         Localstorage.setItem('credential', response.credential);
-        authApi.login(response.credential).then((response) => {
-            console.log(response);
-            if (response.data.status === 400) {
-                navigate('/register', { state: response.credential });
-            } else {
-                Localstorage.setItem('token', response.data.data);
-                navigate('/');
-            }
-        });
+        const res = await authApi.login(response.credential);
+        console.log(res);
+        if (res.data.status === 400) {
+            navigate('/register', { state: res.credential });
+        } else {
+            Localstorage.setItem('token', res.data.data);
+            navigate('/');
+        }
     };
-
+    // .then((res) => {
+    //     console.log(res);
+    //     if (res.data.status === 400) {
+    //         navigate('/register', { state: res.credential });
+    //     } else {
+    //         Localstorage.setItem('token', res.data.data);
+    //         navigate('/');
+    //     }
+    // });
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://accounts.google.com/gsi/client';

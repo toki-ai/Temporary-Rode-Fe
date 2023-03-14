@@ -25,15 +25,15 @@ import { SchemaRegister } from './schema';
 import { TitleStyled } from './styled';
 
 function Register() {
-    const data = useLoaderData();
+    const { credential } = useContext(UserContext);
+    const RouteData = useLoaderData();
     const onSubmit = async (value) => {
         await authApi.register(value).then((res) => {
             console.log(res);
         });
         console.log(value);
     };
-
-    console.log(data);
+    console.log(RouteData);
     return (
         <div>
             <LoginStyle>
@@ -54,9 +54,9 @@ function Register() {
                                     validationSchema={SchemaRegister}
                                     onSubmit={onSubmit}
                                     initialValues={{
-                                        email: '',
-                                        fname: '',
-                                        lname: '',
+                                        email: RouteData?.email,
+                                        fname: RouteData?.family_name,
+                                        lname: RouteData?.given_name,
                                         studentId: '',
                                         phone: '',
                                         dob: '',
@@ -130,7 +130,7 @@ function Register() {
                                                         <FormControl
                                                             control="input"
                                                             type="date"
-                                                            placeholder="Your phone number"
+                                                            placeholder="dd-mm-yyyy"
                                                             label="Date of Birth"
                                                             controlId="phone"
                                                             name="dob"
