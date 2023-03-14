@@ -5,7 +5,7 @@ import Localstorage from './Localstorage';
 import authApi from './api/authApi';
 
 const useAuth = () => {
-    const { setCurrentUser } = useContext(UserContext);
+    const { setCurrentUser, setCredential } = useContext(UserContext);
     const [userRole, setUserRole] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const token = Localstorage.getToken();
@@ -29,7 +29,7 @@ const useAuth = () => {
     useEffect(() => {
         // Get the JWT token from the cookie
         const token = Localstorage.getToken();
-
+        const crea = Localstorage.getCredentialUser();
         // If there is no token, return
         if (!token) {
             setUserRole(undefined);
@@ -39,6 +39,12 @@ const useAuth = () => {
         try {
             console.log('checking token');
             setIsLoading(true);
+            setCredential(crea);
+            // authApi.getInfoFromGG(credential).then((response) => {
+            //     if (response.data.status === 200) {
+            //         // console.log(response.data.data);
+            //     }
+            // });
             authApi.getUser().then((user) => {
                 const formatUser = {
                     firstName: user?.data.fname,

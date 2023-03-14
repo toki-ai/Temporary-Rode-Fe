@@ -16,12 +16,13 @@ import TestAlert from '../components/TestAlert';
 import TestModal from '../components/TestModal';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
+import { loaderInfoGG } from './RouterLoader/Loader';
 
 const RouterComponent = () => {
     const router = createBrowserRouter([
         { exact: true, path: '/', element: <Navigate to="home" /> },
         { exact: true, path: '/login', loader: Loading, element: <Login /> },
-        { exact: true, path: '/register', loader: Loading, element: <Register /> },
+        { exact: true, path: '/register', loader: loaderInfoGG, element: <Register /> },
         { exact: true, path: '/modal', loader: Loading, element: <TestModal /> },
         { exact: true, path: '/alert', loader: Loading, element: <TestAlert /> },
         { exact: true, path: '/testMirror', loader: Loading, element: <TestCodeMirror /> },
