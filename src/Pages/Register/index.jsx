@@ -1,10 +1,9 @@
-import { useContext, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Formik } from 'formik';
 import { Stack, Col, Container, Row } from 'react-bootstrap';
-import { Form, useLoaderData } from 'react-router-dom';
+import { Form, useLoaderData, Navigate, useNavigate } from 'react-router-dom';
 
-import { UserContext } from '../../Context/User.context';
 import grid_img from '../../assets/Login/Gird.svg';
 import logo from '../../assets/Login/Logo.svg';
 import arrow_login from '../../assets/Login/arrow.svg';
@@ -18,6 +17,7 @@ import x_blue from '../../assets/Login/x-blue.svg';
 import x_green from '../../assets/Login/x-green.svg';
 import ButtonStyled from '../../components/Button';
 import FormControl from '../../components/Formik/FormControl';
+import { toastWarning } from '../../components/Toast';
 import Localstorage from '../../utils/Localstorage';
 import authApi from '../../utils/api/authApi';
 import { LoginStyle } from '../Login/style';
@@ -25,15 +25,23 @@ import { SchemaRegister } from './schema';
 import { TitleStyled } from './styled';
 
 function Register() {
-    const { credential } = useContext(UserContext);
     const RouteData = useLoaderData();
+    const regex = /@fpt\.edu\.vn$/;
+    const navigate = useNavigate();
     const onSubmit = async (value) => {
+        console.log(value);
         await authApi.register(value).then((res) => {
             console.log(res);
         });
-        console.log(value);
     };
-    console.log(RouteData);
+
+    useEffect(() => {
+        if (!regex.test(RouteData?.email)) {
+            toastWarning('Please use mail FPT');
+            // return <Navigate to="/login" replace />;
+            navigate('/login');
+        }
+    }, []);
     return (
         <div>
             <LoginStyle>
