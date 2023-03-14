@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { get } from '../../../../../utils/ApiCaller';
+import authHeader from '../../../../../utils/api/HeaderAuthorization';
 
 export const api = axios.create({
     baseURL: 'http://jsonplaceholder.typicode.com',
@@ -15,7 +16,7 @@ export const authApi = {
         const endpoint = `/rooms/get-all`;
         // eslint-disable-next-line no-return-await
 
-        return await get(endpoint, {}, {})
+        return await get(endpoint, {}, authHeader())
             .then((res) => {
                 // if (res.data.code !== 200) console.log(res.response);
                 return res;
