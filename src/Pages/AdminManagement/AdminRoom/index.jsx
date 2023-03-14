@@ -1,8 +1,8 @@
 import { Col, Row } from 'react-bootstrap';
 
 import ButtonCustom from './components/Button';
+import SelectCustom from './components/FilterRoom/Select';
 import SearchBar from './components/SearchRoom/SearchBar';
-import SelectCustom from './components/Select';
 import TableRoom from './components/Table';
 import { RoomStyle } from './style';
 

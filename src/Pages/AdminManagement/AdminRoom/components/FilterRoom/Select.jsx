@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Form } from 'react-bootstrap/esm';
 
-import { RoomStyle } from '../style';
+import { RoomStyle } from '../../style';
 
 const options = [
     { label: 'All', id: 1 },
