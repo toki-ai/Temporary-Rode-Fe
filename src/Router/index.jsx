@@ -46,7 +46,11 @@ const RouterComponent = () => {
                     exact: true,
                     path: 'admin',
                     loader: Loading,
-                    element: <Admin />,
+                    element: (
+                        <AdminLayoutComponent>
+                            <Admin />
+                        </AdminLayoutComponent>
+                    ),
                 },
             ],
         },

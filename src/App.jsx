@@ -1,18 +1,10 @@
 // import reactLogo from './assets/react.svg';
+// import './App.css';
 import RouterComponent from './Router';
-import LayoutComponent from './components/Layout/Layout.component';
-import './index.css';
-
-import Stack from 'react-bootstrap/Stack';
+import LayoutComponent from './components/Layout/AdminLayout.component';
 
 function App() {
-    return (
-        <>
-            <LayoutComponent>
-                <RouterComponent />
-            </LayoutComponent>
-        </>
-    );
+    return <RouterComponent />;
 }
 
 export default App;
