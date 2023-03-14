@@ -93,7 +93,7 @@ const AllAccounts = () => {
                             <td>{account.email}</td>
                             <td>{account.phone}</td>
                             <td>{account.dob.substring(0, 10)} </td>
-                            <td></td>
+                            <td>01/01/2022</td>
                             <td className="accounts-status-setting">
                                 <div>
                                     {account.isActive ? (
