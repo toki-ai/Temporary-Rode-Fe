@@ -8,6 +8,7 @@ import Home from '../Pages/Home';
 import HomeChild from '../Pages/HomeChild/HomeChild';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import { loaderInfoGG } from '../Pages/Register';
 import Loading from '../components/Loading';
 import ModalComponent from '../components/Modal';
 import TestAlert from '../components/TestAlert';
@@ -19,7 +20,7 @@ const RouterComponent = () => {
     const router = createBrowserRouter([
         { exact: true, path: '/', element: <Navigate to="home" /> },
         { exact: true, path: '/login', loader: Loading, element: <Login /> },
-        { exact: true, path: '/register', element: <Register /> },
+        { exact: true, path: '/register', loader: loaderInfoGG, element: <Register /> },
         { exact: true, path: '/modal', loader: Loading, element: <TestModal /> },
         { exact: true, path: '/alert', loader: Loading, element: <TestAlert /> },
         { exact: true, path: '/testMirror', loader: Loading, element: <TestCodeMirror /> },

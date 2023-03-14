@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 
 import { Formik } from 'formik';
 import { Stack, Col, Container, Row } from 'react-bootstrap';
-import { Form } from 'react-router-dom';
+import { Form, useLoaderData } from 'react-router-dom';
 
 import { UserContext } from '../../Context/User.context';
 import grid_img from '../../assets/Login/Gird.svg';
@@ -18,21 +18,22 @@ import x_blue from '../../assets/Login/x-blue.svg';
 import x_green from '../../assets/Login/x-green.svg';
 import ButtonStyled from '../../components/Button';
 import FormControl from '../../components/Formik/FormControl';
+import Localstorage from '../../utils/Localstorage';
 import authApi from '../../utils/api/authApi';
 import { LoginStyle } from '../Login/style';
 import { SchemaRegister } from './schema';
 import { TitleStyled } from './styled';
 
-import Button from 'react-bootstrap/Button';
-
 function Register() {
-    const { credential } = useContext(UserContext);
+    const data = useLoaderData();
     const onSubmit = async (value) => {
         await authApi.register(value).then((res) => {
             console.log(res);
         });
         console.log(value);
     };
+
+    console.log(data);
     return (
         <div>
             <LoginStyle>
@@ -284,3 +285,8 @@ function Register() {
 }
 
 export default Register;
+export async function loaderInfoGG() {
+    const credential = Localstorage.getCredential();
+    const info = await authApi.getInfoFromGG(credential);
+    return info.data.data;
+}
