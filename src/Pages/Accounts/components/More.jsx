@@ -1,32 +1,32 @@
 import * as React from 'react';
 
-import { Button, Col, OverlayTrigger, Popover, Row } from 'react-bootstrap';
+import { Dropdown, DropdownButton } from 'react-bootstrap/esm';
 
-import { RoomStyle } from '../style';
+import accountsApi from '../../../utils/api/accountsApi';
 
-const popoverRight = (
-    <Popover>
-        <RoomStyle>
-            <Col className="w-5">
-                <Row className="d-flex justify-content-center">
-                    <button
-                        className="rounded-0 border-0 item-style w-5 rounded-top"
-                        variant="item-style"
-                    >
-                        Ban / Unban
-                    </button>
-                </Row>
-            </Col>
-        </RoomStyle>
-    </Popover>
-);
-const More = () => {
+const More = ({ id, setAccounts }) => {
+    const handleActive = (id) => {
+        accountsApi.postActive(id).then((response) => {
+            if (response.data.status == 200) {
+                accountsApi.getAll().then((res) => {
+                    console.log(res);
+                    setAccounts(res.data.data);
+                });
+            }
+        });
+    };
     return (
-        <OverlayTrigger trigger="focus" placement="right" overlay={popoverRight}>
-            <Button variant="outline border-0">
-                <i className="bi bi-three-dots-vertical bg-secondary-1 btn-hover"></i>
-            </Button>
-        </OverlayTrigger>
+        <>
+            <DropdownButton
+                align="start"
+                variant="outline"
+                title={<i className="bi bi-three-dots-vertical bg-secondary-1 btn-hover"></i>}
+                style={{ width: '50px' }}
+                bsPrefix="w-75 d-flex justify-content-center dropdown-style-2 w-50"
+            >
+                <Dropdown.Item onClick={() => handleActive(id)}>Ban / Unban</Dropdown.Item>
+            </DropdownButton>
+        </>
     );
 };
 export default More;
