@@ -32,16 +32,20 @@ const Home = () => {
             .catch((err) => console.log(err));
     };
     return (
-        <div className="home">
-            <div>
-                <input
-                    type="text"
-                    placeholder="Code: 1234"
-                    onChange={(e) => setInputCode(e.target.value)}
-                />
+        <>
+            <h1 className="text-white"> this is home page</h1>
+            <h1 className="text-white"> this is home page</h1>
+            <div className="home">
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Code: 1234"
+                        onChange={(e) => setInputCode(e.target.value)}
+                    />
+                </div>
+                <button onClick={handlePostRoom}>JOIN</button>
             </div>
-            <button onClick={handlePostRoom}>JOIN</button>
-        </div>
+        </>
     );
 };
 

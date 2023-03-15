@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Outlet } from 'react-router-dom';
+
 import ContentComponent from '../Content/Content.component';
 import HeaderComponent from '../Header/Header.component';
 import Sidebar from '../Sidebar/Sidebar.component';
@@ -13,7 +15,9 @@ const AdminLayoutComponent = ({ children }) => {
                 <Body>
                     <BackgroundGray />
                     <Sidebar />
-                    <ContentComponent>{children}</ContentComponent>
+                    <ContentComponent>
+                        <Outlet />
+                    </ContentComponent>
                 </Body>
             </Background>
         </ContainerLayout>

@@ -39,16 +39,11 @@ const RouterComponent = () => {
             loader: loaderInfoGG,
             element: (
                 <UserLayoutComponent>
-                    <Register />{' '}
+                    <Register />
                 </UserLayoutComponent>
             ),
         },
-        { exact: true, path: '/modal', loader: Loading, element: <TestModal /> },
-        { exact: true, path: '/alert', loader: Loading, element: <TestAlert /> },
-        { exact: true, path: '/testMirror', loader: Loading, element: <TestCodeMirror /> },
-        { exact: true, path: '/allAccounts', loader: Loading, element: <AllAccounts /> },
 
-        { exact: true, path: '/admin_room', loader: Loading, element: <AdminRoom /> },
         {
             path: '/',
             exact: true,
@@ -58,12 +53,18 @@ const RouterComponent = () => {
                     exact: true,
                     path: 'home',
                     loader: Loading,
-                    element: (
-                        <UserLayoutComponent>
-                            <Home />
-                        </UserLayoutComponent>
-                    ),
-                    children: [{ path: 'homeChild', loader: Loading, element: <HomeChild /> }],
+                    element: <UserLayoutComponent />,
+                    children: [
+                        { path: 'homeChild', element: <Home /> },
+                        { exact: true, path: 'modal', loader: Loading, element: <TestModal /> },
+                        { exact: true, path: 'alert', loader: Loading, element: <TestAlert /> },
+                        {
+                            exact: true,
+                            path: 'testMirror',
+                            loader: Loading,
+                            element: <TestCodeMirror />,
+                        },
+                    ],
                 },
             ],
         },
@@ -75,11 +76,21 @@ const RouterComponent = () => {
                     exact: true,
                     path: 'admin',
                     loader: Loading,
-                    element: (
-                        <AdminLayoutComponent>
-                            <Admin />
-                        </AdminLayoutComponent>
-                    ),
+                    element: <AdminLayoutComponent />,
+                    children: [
+                        {
+                            exact: true,
+                            path: 'admin_room',
+                            loader: Loading,
+                            element: <AdminRoom />,
+                        },
+                        {
+                            exact: true,
+                            path: 'allAccounts',
+                            loader: Loading,
+                            element: <AllAccounts />,
+                        },
+                    ],
                 },
             ],
         },
