@@ -1,17 +1,17 @@
 import { Col, Row } from 'react-bootstrap';
 
 import ButtonCustom from './components/Button';
+import SelectCustom from './components/FilterRoom/Select';
 import SearchBar from './components/SearchRoom/SearchBar';
-import SelectCustom from './components/Select';
-import TableRoom from './components/Tablle';
+import TableRoom from './components/Table';
 import { RoomStyle } from './style';
 
 const AdminRoom = () => {
     return (
-        <div style={{ width: '800px' }}>
-            <RoomStyle className="w-100">
-                <div className="box-style w-100">
-                    <Col className="p-4">
+        <div className="p-2">
+            <RoomStyle>
+                <div className="box-style">
+                    <Col className="p-3">
                         <Row className="color-primary mb-3">
                             <h3 className="fw-bold">Room Management</h3>
                         </Row>
@@ -31,12 +31,12 @@ const AdminRoom = () => {
                                     props={{
                                         text: 'Create room',
                                         className:
-                                            'bg-primary-1 text-light d-flex align-items-center text-nowrap',
+                                            'bg-primary-1 text-light d-flex align-items-center text-nowrap rfs',
                                     }}
                                 />
                             </Col>
                         </Row>
-                        <Row className="border-top">
+                        <Row className="d-flex justify-content-center">
                             <TableRoom />
                         </Row>
                     </Col>

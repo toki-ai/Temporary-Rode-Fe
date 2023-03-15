@@ -17,7 +17,6 @@ const authApi = {
             });
     },
     getUser: async () => {
-        const token = Localstorage.getToken();
         const endpoint = `/auth/self`;
         // eslint-disable-next-line no-return-await
 

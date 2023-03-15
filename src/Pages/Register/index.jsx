@@ -1,10 +1,9 @@
-import { useContext, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Formik } from 'formik';
 import { Stack, Col, Container, Row } from 'react-bootstrap';
-import { Form } from 'react-router-dom';
+import { Form, useLoaderData, Navigate, useNavigate } from 'react-router-dom';
 
-import { UserContext } from '../../Context/User.context';
 import grid_img from '../../assets/Login/Gird.svg';
 import logo from '../../assets/Login/Logo.svg';
 import arrow_login from '../../assets/Login/arrow.svg';
@@ -18,21 +17,31 @@ import x_blue from '../../assets/Login/x-blue.svg';
 import x_green from '../../assets/Login/x-green.svg';
 import ButtonStyled from '../../components/Button';
 import FormControl from '../../components/Formik/FormControl';
+import { toastWarning } from '../../components/Toast';
+import Localstorage from '../../utils/Localstorage';
 import authApi from '../../utils/api/authApi';
 import { LoginStyle } from '../Login/style';
 import { SchemaRegister } from './schema';
 import { TitleStyled } from './styled';
 
-import Button from 'react-bootstrap/Button';
-
 function Register() {
-    const { credential } = useContext(UserContext);
+    const RouteData = useLoaderData();
+    const regex = /@fpt\.edu\.vn$/;
+    const navigate = useNavigate();
     const onSubmit = async (value) => {
+        console.log(value);
         await authApi.register(value).then((res) => {
             console.log(res);
         });
-        console.log(value);
     };
+
+    useEffect(() => {
+        if (!regex.test(RouteData?.email)) {
+            toastWarning('Please use mail FPT');
+            // return <Navigate to="/login" replace />;
+            navigate('/login');
+        }
+    }, []);
     return (
         <div>
             <LoginStyle>
@@ -53,9 +62,9 @@ function Register() {
                                     validationSchema={SchemaRegister}
                                     onSubmit={onSubmit}
                                     initialValues={{
-                                        email: '',
-                                        fname: '',
-                                        lname: '',
+                                        email: RouteData?.email,
+                                        fname: RouteData?.family_name,
+                                        lname: RouteData?.given_name,
                                         studentId: '',
                                         phone: '',
                                         dob: '',
@@ -129,7 +138,7 @@ function Register() {
                                                         <FormControl
                                                             control="input"
                                                             type="date"
-                                                            placeholder="Your phone number"
+                                                            placeholder="dd-mm-yyyy"
                                                             label="Date of Birth"
                                                             controlId="phone"
                                                             name="dob"
@@ -284,3 +293,8 @@ function Register() {
 }
 
 export default Register;
+export async function loaderInfoGG() {
+    const credential = Localstorage.getCredential();
+    const info = await authApi.getInfoFromGG(credential);
+    return info.data.data;
+}
