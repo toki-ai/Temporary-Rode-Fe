@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
 import Admin from '../Pages/Admin';
+import AdminRoom from '../Pages/AdminManagement/AdminRoom';
 import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
 import HomeChild from '../Pages/HomeChild/HomeChild';
@@ -14,6 +15,7 @@ import Loading from '../components/Loading';
 import ModalComponent from '../components/Modal';
 import TestAlert from '../components/TestAlert';
 import TestModal from '../components/TestModal';
+import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
 import { loaderInfoGG } from './RouterLoader/Loader';
@@ -21,13 +23,32 @@ import { loaderInfoGG } from './RouterLoader/Loader';
 const RouterComponent = () => {
     const router = createBrowserRouter([
         { exact: true, path: '/', element: <Navigate to="home" /> },
-        { exact: true, path: '/login', loader: Loading, element: <Login /> },
-        { exact: true, path: '/register', loader: loaderInfoGG, element: <Register /> },
+        {
+            exact: true,
+            path: '/login',
+            loader: Loading,
+            element: (
+                <UserLayoutComponent>
+                    <Login />
+                </UserLayoutComponent>
+            ),
+        },
+        {
+            exact: true,
+            path: '/register',
+            loader: loaderInfoGG,
+            element: (
+                <UserLayoutComponent>
+                    <Register />{' '}
+                </UserLayoutComponent>
+            ),
+        },
         { exact: true, path: '/modal', loader: Loading, element: <TestModal /> },
         { exact: true, path: '/alert', loader: Loading, element: <TestAlert /> },
         { exact: true, path: '/testMirror', loader: Loading, element: <TestCodeMirror /> },
         { exact: true, path: '/allAccounts', loader: Loading, element: <AllAccounts /> },
 
+        { exact: true, path: '/admin_room', loader: Loading, element: <AdminRoom /> },
         {
             path: '/',
             exact: true,
@@ -37,7 +58,11 @@ const RouterComponent = () => {
                     exact: true,
                     path: 'home',
                     loader: Loading,
-                    element: <Home />,
+                    element: (
+                        <UserLayoutComponent>
+                            <Home />
+                        </UserLayoutComponent>
+                    ),
                     children: [{ path: 'homeChild', loader: Loading, element: <HomeChild /> }],
                 },
             ],
