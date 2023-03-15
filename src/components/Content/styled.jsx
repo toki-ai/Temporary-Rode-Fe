@@ -8,11 +8,11 @@ export const Container = styled.div`
 export const Content = styled.div`
     width: 90%;
     height: 80%;
-    background: white;
-    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.25);
+    /* background: transparent; */
+    /* box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.25); */
     border-radius: 14px;
     position: absolute;
     bottom: 2%;
     right: 5%;
-    opacity: 0;
+    /* opacity: 1; */
 `;

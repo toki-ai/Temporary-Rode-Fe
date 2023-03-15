@@ -6,7 +6,7 @@ import { Container } from './styled';
 function UserLayoutComponent({ children }) {
     return (
         <Container>
-            <UserHeader></UserHeader>
+            <UserHeader />
             {children}
         </Container>
     );

@@ -5,5 +5,5 @@ import { device } from '../../utils/Breakpoints/index.jsx';
 
 export const Container = styled.div`
     background-color: ${themes.colors.dark};
-    height: 100vh;
+    min-height: 100vh;
 `;
