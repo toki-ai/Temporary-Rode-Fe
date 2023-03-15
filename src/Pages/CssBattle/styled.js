@@ -200,7 +200,7 @@ export const BoxOutput = styled.div`
     }
     .output-container {
         position: relative;
-        width: 400px;
+        width: 403px;
         height: 300px;
         background: transparent;
         z-index: 20;
