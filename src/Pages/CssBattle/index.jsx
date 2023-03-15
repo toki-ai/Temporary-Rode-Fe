@@ -17,10 +17,10 @@ const ArenaCSS = () => {
             <Col xs={12} md={3} className="px-4">
                 <RoomInfo />
             </Col>
-            <Col xs={12} md={6} className="px-2">
+            <Col xs={12} md={5} className="px-2">
                 <ArenaCSSCode setCode={setCode} setCount={setCount} count={count} code={code} />
             </Col>
-            <Col xs={12} md={3} className="px-2">
+            <Col xs={12} md={4} className="px-2">
                 <Output code={code} />
             </Col>
         </Row>

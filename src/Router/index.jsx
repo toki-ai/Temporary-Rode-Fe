@@ -27,8 +27,7 @@ const RouterComponent = () => {
         { exact: true, path: '/register', element: <Register /> },
         { exact: true, path: '/modal', loader: Loading, element: <TestModal /> },
         { exact: true, path: '/alert', loader: Loading, element: <TestAlert /> },
-        { exact: true, path: '/arena_css', loader: Loading, element: <ArenaCSS /> },
-        { exact: true, path: '/admin_room', loader: Loading, element: <AdminRoom /> },
+
         {
             path: '/',
             exact: true,
@@ -49,6 +48,7 @@ const RouterComponent = () => {
                             loader: Loading,
                             element: <TestCodeMirror />,
                         },
+                        { exact: true, path: 'arena_css', loader: Loading, element: <ArenaCSS /> },
                     ],
                 },
             ],

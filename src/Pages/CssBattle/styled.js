@@ -190,6 +190,8 @@ export const BoxOutput = styled.div`
     background-color: ${(props) => props.theme.colors.arenaBG};
     border: 1px solid #00e7aa;
     box-shadow: 0px 2px 15px #00c994;
+    width: 402px;
+    height: 300px;
     /* border-radius: 10px; */
     .img-layer {
         position: absolute;
@@ -197,10 +199,15 @@ export const BoxOutput = styled.div`
         left: 0;
         overflow: hidden;
         height: 300px;
+        & > img {
+            object-fit: cover;
+            width: 405px;
+            height: 300px;
+        }
     }
     .output-container {
         position: relative;
-        width: 403px;
+        width: 400px;
         height: 300px;
         background: transparent;
         z-index: 20;
@@ -210,8 +217,8 @@ export const BoxOutput = styled.div`
         border: none;
         background: white;
         position: absolute;
-        top: 0;
-        left: 0;
+        /* top: 0; */
+        /* left: 0; */
         z-index: 10;
         overflow: hidden;
     }
@@ -221,8 +228,8 @@ export const BoxOutput = styled.div`
         height: 300px;
         background: transparent;
         position: absolute;
-        top: 0;
-        left: 0;
+        /* top: 0; */
+        /* left: 0; */
         z-index: 20;
         overflow: hidden;
     }
@@ -232,7 +239,8 @@ export const Target = styled.div`
     max-width: 100vw;
 
     img {
-        width: 400px;
+        object-fit: cover;
+        width: 405px;
         height: 300px;
     }
 `;

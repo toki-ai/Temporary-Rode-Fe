@@ -10,7 +10,7 @@ function UserLayoutComponent() {
     return (
         <ContainerStyled>
             <UserHeader />
-            <Container fluid>
+            <Container>
                 <Outlet />
             </Container>
         </ContainerStyled>

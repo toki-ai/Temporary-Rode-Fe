@@ -53,7 +53,7 @@ const Output = ({ code }) => {
                         <iframe
                             id="source"
                             className="iframe-output"
-                            width="405px"
+                            width="400px"
                             height="300px"
                             title="output"
                             style={{ mixBlendMode: diffChecked ? 'difference' : 'normal' }}
@@ -67,17 +67,17 @@ const Output = ({ code }) => {
                             onMouseLeave={resetWidth}
                         ></div>
                         <div id="img-layer" className="img-layer" ref={imgRef}>
-                            <img src={UnknownBG} width="400px" height="300px" alt="level1" />
+                            <img src={UnknownBG} alt="level1" />
                         </div>
                     </div>
                 </BoxOutput>
-                <Stack direction="horizontal" className="justify-content-between mb-3">
+                <Stack direction="horizontal" className="justify-content-between">
                     <TextStyled>target</TextStyled>
                     <TextSmall>400px x 300px</TextSmall>
                 </Stack>
                 <BoxOutput>
                     <Target>
-                        <img src={UnknownBG} className="target_img" />
+                        <img src={UnknownBG} className="target_img" alt="target_img" />
                     </Target>
                 </BoxOutput>
             </Stack>
