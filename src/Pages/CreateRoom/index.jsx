@@ -13,11 +13,10 @@ const CreateRoom = () => {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        if (Object.keys(roomInfo).length) setShow(true);
+        if (Object.keys(roomInfo).length) handleShow();
     }, [roomInfo]);
 
     useEffect(() => {
-        console.log({ ...roomInfo, questions });
         roomAPI
             .createOne({ ...roomInfo, isPrivate: true, questions })
             .then((res) => {

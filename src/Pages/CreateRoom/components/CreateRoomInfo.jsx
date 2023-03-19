@@ -16,6 +16,7 @@ const schema = yup.object().shape({
     closeTime: yup.date().required(),
     duration: yup.number().required(),
     type: yup.string().required(),
+    isPrivate: yup.boolean(),
 });
 
 const CreateRoomInfo = ({ setRoomInfo }) => {
@@ -27,9 +28,26 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
 
     const FORM_LIST = [
         {
-            label: 'Code',
+            label: 'Room Code',
             name: 'code',
             type: Form.Control,
+        },
+        {
+            label: 'Room Type',
+            name: 'type',
+            type: Form.Select,
+            children: (
+                <>
+                    <option value="" disabled>
+                        Select room type
+                    </option>
+                    {roomType.map((item) => (
+                        <option value={item} key={item}>
+                            {item}
+                        </option>
+                    ))}
+                </>
+            ),
         },
         {
             label: 'Open Time',
@@ -38,7 +56,7 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
             inputType: 'datetime-local',
         },
         {
-            label: 'Close time',
+            label: 'Close Time',
             name: 'closeTime',
             type: Form.Control,
             inputType: 'datetime-local',
@@ -50,17 +68,16 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
             inputType: 'number',
         },
         {
-            label: 'Room Type',
-            name: 'type',
+            label: 'Visibility',
+            name: 'isPrivate',
             type: Form.Select,
             children: (
                 <>
-                    <option value="">Select room type</option>
-                    {roomType.map((item) => (
-                        <option value={item} key={item}>
-                            {item}
-                        </option>
-                    ))}
+                    <option value="" disabled>
+                        Select visibility
+                    </option>
+                    <option value="true">Private</option>
+                    <option value="false">Public</option>
                 </>
             ),
         },
