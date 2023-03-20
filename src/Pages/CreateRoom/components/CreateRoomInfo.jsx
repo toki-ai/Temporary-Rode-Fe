@@ -4,11 +4,17 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import roomAPI from '../../../utils/api/roomAPI';
+import * as St from '../styles';
 
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+
+/** Rule to add new input:
+ *  1. Add into 'schema' object
+ *  2. Add into FORM_LIST
+ *  3. Add into 'initialValues' attribute of <Formik  /> tag
+ *  */
 
 const schema = yup.object().shape({
     code: yup.string().required(),
@@ -20,7 +26,7 @@ const schema = yup.object().shape({
 });
 
 const CreateRoomInfo = ({ setRoomInfo }) => {
-    const [roomType, setRoomType] = useState([]);
+    const [roomType, setRoomType] = useState(['FE', 'BE']);
 
     useEffect(() => {
         roomAPI.getAllRoomType().then((res) => setRoomType(res.data.data));
@@ -105,7 +111,7 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
                         {FORM_LIST.map((item) => (
                             <Form.Group
                                 as={Col}
-                                md="4"
+                                md="6"
                                 controlId="validationFormik101"
                                 className="position-relative"
                                 key={item.name}
@@ -124,7 +130,6 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
                             </Form.Group>
                         ))}
                     </Row>
-                    <Button type="submit">Create question</Button>
                 </Form>
             )}
         </Formik>

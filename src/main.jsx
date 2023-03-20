@@ -9,12 +9,10 @@ import Toast from './components/Toast';
 import { themes } from './themes';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <ThemeProvider theme={themes}>
-            <UserProvider>
-                <App />
-                <Toast />
-            </UserProvider>
-        </ThemeProvider>
-    </React.StrictMode>
+    <ThemeProvider theme={themes}>
+        <UserProvider>
+            <App />
+            <Toast />
+        </UserProvider>
+    </ThemeProvider>
 );

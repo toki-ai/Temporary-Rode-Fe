@@ -41,6 +41,12 @@ const RouterComponent = () => {
                 </UserLayoutComponent>
             ),
         },
+        {
+            exact: true,
+            path: 'create',
+            loader: Loading,
+            element: <CreateRoom />,
+        },
 
         {
             path: '/',
@@ -92,18 +98,18 @@ const RouterComponent = () => {
                 },
             ],
         },
-        {
-            exact: true,
-            element: <AdminRoute />,
-            children: [
-                {
-                    exact: true,
-                    path: 'create',
-                    loader: Loading,
-                    element: <CreateRoom />,
-                },
-            ],
-        },
+        // {
+        //     exact: true,
+        //     element: <AdminRoute />,
+        //     children: [
+        //         {
+        //             exact: true,
+        //             path: 'create',
+        //             loader: Loading,
+        //             element: <CreateRoom />,
+        //         },
+        //     ],
+        // },
         { path: '*', element: <ErrorPage /> },
     ]);
 
