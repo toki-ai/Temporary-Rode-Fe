@@ -31,6 +31,9 @@ export const ARViewStyle = styled.div`
     .mw_fit {
         min-width: fit-content;
     }
+    tr:not(:first-child):hover {
+        background-color: ${(props) => props.theme.colors.grey};
+    }
     @media (max-width: 800px) {
         .rs {
             width: 70%;

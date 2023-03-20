@@ -44,6 +44,7 @@ const RouterComponent = () => {
                 </UserLayoutComponent>
             ),
         },
+        { exact: true, path: '/admin_room', loader: Loading, element: <AdminRoom /> },
         { exact: true, path: '/admin_room/:id', loader: Loading, element: <AdminRoomView /> },
         {
             path: '/',
