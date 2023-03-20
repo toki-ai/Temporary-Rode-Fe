@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
 import ErrorPage from '../Pages/404Page';
+import AllAccounts from '../Pages/Accounts/AllAccounts';
 import Admin from '../Pages/Admin';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
@@ -39,14 +40,10 @@ const RouterComponent = () => {
             loader: loaderInfoGG,
             element: (
                 <UserLayoutComponent>
-                    <Register />{' '}
+                    <Register />
                 </UserLayoutComponent>
             ),
         },
-        { exact: true, path: '/modal', loader: Loading, element: <TestModal /> },
-        { exact: true, path: '/alert', loader: Loading, element: <TestAlert /> },
-        { exact: true, path: '/testMirror', loader: Loading, element: <TestCodeMirror /> },
-        { exact: true, path: '/admin_room', loader: Loading, element: <AdminRoom /> },
         { exact: true, path: '/admin_room/:id', loader: Loading, element: <AdminRoomView /> },
         {
             path: '/',
@@ -57,12 +54,18 @@ const RouterComponent = () => {
                     exact: true,
                     path: 'home',
                     loader: Loading,
-                    element: (
-                        <UserLayoutComponent>
-                            <Home />
-                        </UserLayoutComponent>
-                    ),
-                    children: [{ path: 'homeChild', loader: Loading, element: <HomeChild /> }],
+                    element: <UserLayoutComponent />,
+                    children: [
+                        { path: 'homeChild', element: <Home /> },
+                        { exact: true, path: 'modal', loader: Loading, element: <TestModal /> },
+                        { exact: true, path: 'alert', loader: Loading, element: <TestAlert /> },
+                        {
+                            exact: true,
+                            path: 'testMirror',
+                            loader: Loading,
+                            element: <TestCodeMirror />,
+                        },
+                    ],
                 },
             ],
         },
@@ -74,11 +77,21 @@ const RouterComponent = () => {
                     exact: true,
                     path: 'admin',
                     loader: Loading,
-                    element: (
-                        <AdminLayoutComponent>
-                            <Admin />
-                        </AdminLayoutComponent>
-                    ),
+                    element: <AdminLayoutComponent />,
+                    children: [
+                        {
+                            exact: true,
+                            path: 'admin_room',
+                            loader: Loading,
+                            element: <AdminRoom />,
+                        },
+                        {
+                            exact: true,
+                            path: 'allAccounts',
+                            loader: Loading,
+                            element: <AllAccounts />,
+                        },
+                    ],
                 },
             ],
         },
