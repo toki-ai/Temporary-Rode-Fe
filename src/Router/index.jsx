@@ -14,6 +14,7 @@ import Loading from '../components/Loading';
 import ModalComponent from '../components/Modal';
 import TestAlert from '../components/TestAlert';
 import TestModal from '../components/TestModal';
+import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
@@ -56,9 +57,9 @@ const RouterComponent = () => {
                     path: 'home',
                     loader: Loading,
                     element: (
-                        <UserLayoutComponent>
+                        <UserHomeLayout>
                             <Home />
-                        </UserLayoutComponent>
+                        </UserHomeLayout>
                     ),
                     children: [{ path: 'homeChild', loader: Loading, element: <HomeChild /> }],
                 },
