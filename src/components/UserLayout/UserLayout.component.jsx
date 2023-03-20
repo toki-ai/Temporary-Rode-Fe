@@ -1,14 +1,17 @@
 import React from 'react';
 
+import { Container } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
+
 import UserHeader from '../UserHeader/UserHeader.component';
-import { Container } from './styled';
+import { ContainerStyled } from './styled';
 
 function UserLayoutComponent({ children }) {
     return (
-        <Container>
-            <UserHeader></UserHeader>
-            {children}
-        </Container>
+        <ContainerStyled>
+            <UserHeader />
+            <Container fluid>{children ? children : <Outlet />}</Container>
+        </ContainerStyled>
     );
 }
 

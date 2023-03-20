@@ -16,6 +16,7 @@ import GoogleSignUpButton from '../../components/GoogleSignUp';
 import { LoginStyle } from './style';
 
 const Login = () => {
+    console.log('check');
     return (
         <div>
             <LoginStyle>
