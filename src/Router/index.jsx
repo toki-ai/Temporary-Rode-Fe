@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import ErrorPage from '../Pages/404Page';
 import Admin from '../Pages/Admin';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
+import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
 import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
 import HomeChild from '../Pages/HomeChild/HomeChild';
@@ -46,6 +47,7 @@ const RouterComponent = () => {
         { exact: true, path: '/alert', loader: Loading, element: <TestAlert /> },
         { exact: true, path: '/testMirror', loader: Loading, element: <TestCodeMirror /> },
         { exact: true, path: '/admin_room', loader: Loading, element: <AdminRoom /> },
+        { exact: true, path: '/admin_room/:id', loader: Loading, element: <AdminRoomView /> },
         {
             path: '/',
             exact: true,

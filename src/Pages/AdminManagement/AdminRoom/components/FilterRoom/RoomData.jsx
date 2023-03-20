@@ -20,7 +20,7 @@ export function RoomData() {
             });
     }, []);
     const results = rooms.map((room) => (
-        <tr key={room.id}>
+        <tr key={room.code}>
             <td>{room.code}</td>
             <td>{room.type}</td>
             <td>{DateFormat(room.openTime)}</td>
@@ -28,7 +28,7 @@ export function RoomData() {
             <td>{room?.isPrivate ? room.duration : <TfiInfinite />}</td>
             <td>{room?.isPrivate ? 'Private' : 'Public'}</td>
             <td>
-                <More />
+                <More link={room.code} />
             </td>
         </tr>
     ));
