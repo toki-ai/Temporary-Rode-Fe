@@ -6,13 +6,11 @@ import { Outlet } from 'react-router-dom';
 import UserHeader from '../UserHeader/UserHeader.component';
 import { ContainerStyled } from './styled';
 
-function UserLayoutComponent() {
+function UserLayoutComponent({ children }) {
     return (
         <ContainerStyled>
             <UserHeader />
-            <Container fluid>
-                <Outlet />
-            </Container>
+            <Container fluid>{children ? children : <Outlet />}</Container>
         </ContainerStyled>
     );
 }
