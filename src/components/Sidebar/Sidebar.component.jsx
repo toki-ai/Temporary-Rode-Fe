@@ -1,23 +1,21 @@
 import React from 'react';
 
-import ContentNav from './ContentNav';
+import { AdminEndBar } from '../../ContentNav/AdminContentNav.styled';
+import ContentNav from '../../ContentNav/ContentNav';
 import {
     Container,
     General,
     IconUser,
     User,
-    Text,
     IconHouse,
     Pagination,
     BoldText,
-    Icon,
     IconPerson,
     IconFile,
     IconChat,
     IconLogOut,
     ContestInfo,
     IconBarChart,
-    EndBar,
 } from './styled';
 
 const generalItems = [
@@ -75,19 +73,19 @@ function Sidebar() {
                     <General>
                         <BoldText>General</BoldText>
                         <div>
-                            <ContentNav items={generalItems} />
+                            <ContentNav items={generalItems} layout={1} />
                         </div>
                     </General>
                     <ContestInfo>
                         <BoldText>Contest Information</BoldText>
-                        <EndBar>
+                        <AdminEndBar>
                             <nav>
-                                <ContentNav items={infoItems} />
+                                <ContentNav items={infoItems} layout={1} />
                             </nav>
                             <nav>
-                                <ContentNav items={endItems} />
+                                <ContentNav items={endItems} layout={1} />
                             </nav>
-                        </EndBar>
+                        </AdminEndBar>
                     </ContestInfo>
                 </Pagination>
             </Container>

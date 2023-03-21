@@ -1,12 +1,12 @@
-import Sidebar from '../Sidebar/Sidebar.component';
 import UserHeader from '../UserHeader/UserHeader.component';
+import UserSidebar from '../UserSidebar/UserSidebar.component';
 import { Container } from './styled';
 
 function UserHomeLayout({ children }) {
     return (
         <Container>
             <UserHeader></UserHeader>
-            <Sidebar></Sidebar>
+            <UserSidebar></UserSidebar>
             {children}
         </Container>
     );

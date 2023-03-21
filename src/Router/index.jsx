@@ -54,7 +54,7 @@ const RouterComponent = () => {
                     exact: true,
                     path: 'home',
                     loader: Loading,
-                    element: <UserLayoutComponent />,
+                    element: <UserHomeLayout />,
                     children: [
                         { path: 'homeChild', element: <Home /> },
                         { exact: true, path: 'modal', loader: Loading, element: <TestModal /> },
