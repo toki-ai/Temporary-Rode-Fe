@@ -32,6 +32,9 @@ function Register() {
         console.log(value);
         await authApi.register(value).then((res) => {
             console.log(res);
+            if (res.data.status == 200) {
+                navigate('/');
+            }
         });
     };
 
