@@ -21,24 +21,65 @@ export const Title = styled.h1`
     margin: 14px 0 28px 0;
 `;
 
-export const Questions = styled.h2`
+export const Questions = styled.div`
     margin-top: 50px;
 
-    input[name='maxSubmitTimes'] {
-        width: auto;
-        display: inline-block;
-        margin-left: 12px;
-    }
-
-    textarea {
-        border: 1px solid ${themes.colors.primary};
-        border-radius: 5px;
+    hr {
+        margin-top: 50px;
     }
 `;
 
 export const QuestionTitle = styled.h2`
     font-size: 16px;
     font-weight: 600;
+`;
+
+export const NumberInput = styled.div`
+    display: inline-block;
+    margin-left: 12px;
+
+    p {
+        position: relative;
+        top: -1px;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        border: 1px solid ${themes.colors.primary};
+        top: -1px;
+    }
+
+    button {
+        width: 25px;
+        height: 25px;
+        background-color: ${themes.colors.primary};
+        border: 1px solid ${themes.colors.primary};
+        color: ${themes.colors.light};
+    }
+`;
+
+export const UploadImage = styled.label`
+    border-radius: 10px;
+    width: 200px;
+    font-size: 10px;
+    height: 200px;
+    border: 1px dashed ${themes.colors.primary};
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    & span {
+        margin-top: 5px;
+    }
+
+    &:hover {
+        background-color: ${themes.colors.primary};
+        cursor: pointer;
+        color: ${themes.colors.light};
+    }
 `;
 
 export const Testcase = styled.div`
@@ -50,16 +91,27 @@ export const Testcase = styled.div`
         line-height: 16px;
         color: ${themes.colors.primary};
         background-color: ${themes.colors.light};
-        bottom: -12px;
-        left: 10px;
+        margin-left: 10px;
         padding: 5px;
+        z-index: 1;
     }
 
     textarea {
+        position: relative;
+        top: -12px;
         display: block;
+        border: 1px solid ${themes.colors.primary};
+        border-radius: 5px;
 
         &:focus-visible {
             outline-color: ${themes.colors.primary};
         }
     }
+`;
+
+export const PreviewImage = styled.img`
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 20px;
 `;

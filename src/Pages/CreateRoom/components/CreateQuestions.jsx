@@ -1,26 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import { Stack } from 'react-bootstrap';
 
+import ButtonStyled from '../../../components/Button';
 import localFilesAPI from '../../../utils/api/localFilesAPI';
 import * as St from '../styles';
+import PreviewImages from './PreviewImages';
 import Testcase from './Testcase';
 
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-
-/** Rule to add new input:
- *  1. Add into 'schema' object
- *  2. Add into FORM_LIST
- *  3. Add into 'initialValues' attribute of <Formik  /> tag
- *  */
-
-const schema = yup.object().shape({
-    questionImage: yup.array().required(),
-    maxSubmitTimes: yup.number().required(),
-});
 
 const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
     const [questions, setQuestions] = useState([
@@ -30,25 +18,9 @@ const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
             testcases: [{ input: '', output: '' }],
         },
     ]);
+    const inputRef = useRef(null);
 
     console.log(questions);
-
-    const FORM_LIST = [
-        {
-            label: 'Maximum Submit Time:',
-            name: 'maxSubmitTimes',
-            type: Form.Control,
-            inputType: 'number',
-        },
-        {
-            label: 'Image',
-            name: 'questionImage',
-            type: Form.Control,
-            inputType: 'file',
-            multiple: true,
-            handleChange: true,
-        },
-    ];
 
     const createQuestion = () => {
         setQuestions((prev) => [
@@ -56,7 +28,7 @@ const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
             {
                 maxSubmitTimes: 0,
                 questionImage: '',
-                testcases: [],
+                testcases: [{ input: '', output: '' }],
             },
         ]);
     };
@@ -91,129 +63,107 @@ const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
         });
     };
 
-    const handleSubmit = (values) => {
-        // values.setFieldValue('questionImage', Array.from(event.target.files));
-        // setTestcases([]);
-        localFilesAPI.uploadQuestionFile(values.questionImage).then((res) => {
-            let newQuestions = values;
-            delete newQuestions.input;
-            delete newQuestions.output;
-            newQuestions = { ...newQuestions, testcases: [] };
-            setQuestions((prev) => [...prev, newQuestions]);
-        });
-    };
-
     const handleDone = () => {
         setOuterQuestions(questions);
     };
 
+    const handleIncrease = (questionIdx) => {
+        console.log('hello');
+        setQuestions((prev) => {
+            let copy = [...prev];
+            copy[questionIdx].maxSubmitTimes += 1;
+            return copy;
+        });
+    };
+    const handleDecrease = (questionIdx) => {
+        setQuestions((prev) => {
+            let copy = [...prev];
+            copy[questionIdx].maxSubmitTimes -= 1;
+            return copy;
+        });
+    };
+
+    const uploadImages = (files, questionIdx) => {
+        console.log(questionIdx);
+        setQuestions((prev) => {
+            let copy = [...prev];
+            copy[questionIdx].questionImage = files;
+            return copy;
+        });
+    };
+
     return (
         <>
-            {questions.map((question, questionIdx) => (
-                <St.Questions>
-                    <St.QuestionTitle>Question {questionIdx + 1}</St.QuestionTitle>
+            {questions.map((question, id) => (
+                <St.Questions key={id}>
+                    <St.QuestionTitle>Question {id + 1}</St.QuestionTitle>
 
                     <div className="row">
                         <div className="col-md-6">
-                            <Formik
-                                validationSchema={schema}
-                                onSubmit={handleSubmit}
-                                initialValues={{
-                                    questionImage: [],
-                                    maxSubmitTimes: '',
-                                }}
-                            >
-                                {({
-                                    handleSubmit,
-                                    handleChange,
-                                    handleBlur,
-                                    values,
-                                    touched,
-                                    isValid,
-                                    errors,
-                                    setFieldValue,
-                                }) => (
-                                    <Form noValidate onSubmit={handleSubmit}>
-                                        <Row className="mb-3">
-                                            {FORM_LIST.map((item) => (
-                                                <Form.Group
-                                                    controlId="validationFormik101"
-                                                    className="position-relative"
-                                                    key={item.name}
-                                                >
-                                                    <Form.Label>{item.label}</Form.Label>
-                                                    <item.type
-                                                        type={item.inputType || 'text'}
-                                                        name={item.name}
-                                                        value={
-                                                            item.name === 'questionImage'
-                                                                ? undefined
-                                                                : values[item.name]
-                                                        }
-                                                        onChange={
-                                                            item.handleChange
-                                                                ? (e) => {
-                                                                      setFieldValue(
-                                                                          'questionImage',
-                                                                          Array.from(e.target.files)
-                                                                      );
-                                                                  }
-                                                                : handleChange
-                                                        }
-                                                        isValid={
-                                                            touched[item.name] && !errors[item.name]
-                                                        }
-                                                        as={item.as}
-                                                        multiple={item.multiple}
-                                                    >
-                                                        {item.children}
-                                                    </item.type>
-                                                    {/* <Form.Control.Feedback tooltip>Looks good</Form.Control.Feedback> */}
-                                                </Form.Group>
-                                            ))}
-                                        </Row>
-                                        {/* <Button
-                                            variant="outline-primary"
-                                            onClick={() => createTestcase(setFieldValue, values)}
-                                        >
-                                            Create next testcase
-                                        </Button> */}
-                                    </Form>
+                            <div>
+                                <label htmlFor="maxSubmitTimes">Maximum Submit Time:</label>
+                                <St.NumberInput>
+                                    <button onClick={() => handleDecrease(id)}>-</button>
+                                    <p>{question.maxSubmitTimes}</p>
+                                    <button onClick={() => handleIncrease(id)}>+</button>
+                                </St.NumberInput>
+                            </div>
+
+                            <div className="my-4">
+                                <p>Image</p>
+                                <input
+                                    id="questionImage"
+                                    type="file"
+                                    hidden
+                                    ref={inputRef}
+                                    onChange={(e) => uploadImages(e.target.files, id)}
+                                />
+                                {question.questionImage ? (
+                                    <PreviewImages FileList={question.questionImage} />
+                                ) : (
+                                    <St.UploadImage onClick={() => inputRef.current.click()}>
+                                        + <span>Upload your image here...</span>
+                                    </St.UploadImage>
                                 )}
-                            </Formik>
+                            </div>
                         </div>
 
                         <div className="col-md-6">
                             {question.testcases.map((testcase, testcaseIdx) => (
                                 <Testcase
+                                    key={testcaseIdx}
                                     item={testcase}
-                                    index={testcaseIdx}
+                                    testcaseIdx={testcaseIdx}
+                                    questionIdx={id}
                                     handleInput={editInputTestcase}
                                     handleOutput={editOutputTestcase}
                                 />
                             ))}
-                            <div className="d-grid gap-2 my-4">
-                                <Button
-                                    variant="outline-primary"
-                                    onClick={() => createTestcase(questionIdx)}
+                            <div className="d-grid gap-2 ">
+                                <ButtonStyled
+                                    buttonType="outline"
+                                    onClick={() => createTestcase(id)}
                                 >
                                     Add testcase
-                                </Button>
+                                </ButtonStyled>
                             </div>
                         </div>
                     </div>
+                    <hr />
                 </St.Questions>
             ))}
 
-            <div className="d-grid gap-2 my-4">
-                <Button variant="outline-primary" onClick={createQuestion}>
+            <div className="d-grid gap-2 my-2">
+                <ButtonStyled buttonType="dashed" onClick={createQuestion}>
                     Add questions
-                </Button>
+                </ButtonStyled>
             </div>
-            <div>
-                <Button variant="secondary">Cancel</Button>{' '}
-                <Button onClick={handleDone}>Create</Button>
-            </div>
+            <Stack direction="horizontal" gap={3} className="justify-content-end mb-4">
+                <ButtonStyled buttonType="secondary">Cancel</ButtonStyled>{' '}
+                <ButtonStyled buttonType="solid" onClick={handleDone}>
+                    Create
+                </ButtonStyled>
+            </Stack>
         </>
     );
 };
