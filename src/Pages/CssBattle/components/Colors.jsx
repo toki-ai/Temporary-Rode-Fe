@@ -1,14 +1,27 @@
-import { BoxColor, CircleColor, ColorItem } from '../styled';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
+import { toastSuccess } from '../../../components/Toast';
+import { BoxColor, CircleColor, ColorItem, TextColor } from '../styled';
+
+// const listOfColor = colors.map((color) => (
+//     <CopyToClipboard key={color} text={color} onCopy={() => toastSuccess('Copying💪')}>
+//         <button className="color" key={color} value={color}>
+//             <div className="color-demo" style={{ background: color }}></div>
+//             <h5 className="color-name">{color}</h5>
+//         </button>
+//     </CopyToClipboard>
+// ));
 const Colors = () => {
-    const LIST_COLOR = ['#45ce7b', '#45ce7b', '#45ce7b', '#45ce2f', '#ffffff'];
+    const LIST_COLOR = ['#45ce7b', '#45ce2f', '#ffffff'];
     return (
         <BoxColor>
             {LIST_COLOR.map((color) => (
-                <ColorItem key={color}>
-                    <CircleColor color={color}></CircleColor>
-                    <span>{color}</span>
-                </ColorItem>
+                <CopyToClipboard key={color} text={color} onCopy={() => toastSuccess('Copying💪')}>
+                    <ColorItem key={color}>
+                        <CircleColor color={color}></CircleColor>
+                        <TextColor color={color}>{color}</TextColor>
+                    </ColorItem>
+                </CopyToClipboard>
             ))}
         </BoxColor>
     );

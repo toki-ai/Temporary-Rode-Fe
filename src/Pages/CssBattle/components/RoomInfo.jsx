@@ -1,13 +1,20 @@
+import { useState } from 'react';
+
 import ButtonStyled from '../../../components/Button';
-import { Box, TextStyled } from '../styled';
+import OffCanvasComponents from '../../../components/OffCanvas/OffCanvas';
+import { Box, TextStyled, StyledWrap } from '../styled';
 import Colors from './Colors';
 import CountdownTimer from './CountDown';
 import InfoItem from './InfoItem';
+import Rank from './Rank';
 import Scores from './Score';
 
 import Stack from 'react-bootstrap/Stack';
 
 const RoomInfo = () => {
+    const [show, setShow] = useState(false);
+
+    const handleShow = () => setShow(true);
     const LIST_INFO = [
         {
             title: 'Timers',
@@ -23,7 +30,10 @@ const RoomInfo = () => {
         },
     ];
     return (
-        <>
+        <StyledWrap>
+            <OffCanvasComponents title={'LEADERBOARD'} show={show} setShow={setShow}>
+                <Rank />
+            </OffCanvasComponents>
             <Stack direction="horizontal" className="justify-content-between mb-3">
                 <TextStyled>ROOM #001</TextStyled>
             </Stack>
@@ -32,9 +42,11 @@ const RoomInfo = () => {
                 {LIST_INFO.map((item, id) => (
                     <InfoItem data={item} key={id} />
                 ))}
-                <ButtonStyled buttonType="borderNeon">Leaderboard</ButtonStyled>
+                <ButtonStyled buttonType="borderNeon" onClick={handleShow}>
+                    Leaderboard
+                </ButtonStyled>
             </Box>
-        </>
+        </StyledWrap>
     );
 };
 

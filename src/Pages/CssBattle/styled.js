@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+// export const TargetContent = styled(OutPutContent)`
+//     height: 130%;
+// `;
+//offCanvas
+import Offcanvas from 'react-bootstrap/Offcanvas';
+
 export const Box = styled.div`
     color: ${(props) => props.theme.colors.light};
     padding: 10px 20px;
@@ -91,6 +97,10 @@ export const BoxColor = styled.div`
     overflow-y: scroll;
     width: 100%;
     height: 100px;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
 `;
 export const CircleColor = styled.div`
     --size: 20px;
@@ -99,11 +109,18 @@ export const CircleColor = styled.div`
     border-radius: 50px;
     background-color: ${(props) => props.color};
 `;
-export const ColorItem = styled.div`
-    margin: 12px 0;
+export const TextColor = styled.span`
+    color: ${(props) => props.color};
+`;
+export const ColorItem = styled.button`
+    margin-bottom: 12px;
     display: flex;
+    padding: 0;
     align-items: center;
+    border: none;
+    background: transparent;
     justify-content: center;
+    gap: 4px;
 
     & span {
         margin-left: 6px;
@@ -115,7 +132,7 @@ export const ScoreText = styled.span`
 `;
 export const BoxEditor = styled.div`
     width: 100%;
-    height: calc(100vh - 290px);
+    /* height: calc(100vh - 290px); */
 
     color: ${(props) => props.theme.colors.light};
     /* padding: 10px 20px; */
@@ -192,13 +209,14 @@ export const BoxOutput = styled.div`
     box-shadow: 0px 2px 15px #00c994;
     width: 402px;
     height: 300px;
+
     /* border-radius: 10px; */
     .img-layer {
         position: absolute;
         top: 0;
         left: 0;
         overflow: hidden;
-        height: 300px;
+        /* height: 300px; */
         & > img {
             object-fit: cover;
             width: 405px;
@@ -240,11 +258,60 @@ export const Target = styled.div`
 
     img {
         object-fit: cover;
-        width: 405px;
+        width: 400px;
         height: 300px;
     }
 `;
 
-// export const TargetContent = styled(OutPutContent)`
-//     height: 130%;
-// `;
+export const StyledWrap = styled.div`
+    .offcanvas-bg {
+        background: #01091d;
+    }
+`;
+export const OffcanvasStyled = styled(Offcanvas)`
+    margin-top: 70px;
+    background: #01091d;
+    border: 1px solid #2e7dff !important;
+    border-radius: 10px;
+`;
+export const OffcanvasTitle = styled(Offcanvas.Title)`
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 50px;
+    /* identical to box height */
+
+    text-transform: capitalize;
+
+    /* button */
+
+    color: #00e7aa;
+`;
+
+export const RankBox = styled.div`
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid
+        ${(props) =>
+            props.id == 0
+                ? props.theme.colors.gold
+                : props.id == 1
+                ? props.theme.colors.silver
+                : props.id == 2
+                ? props.theme.colors.cooper
+                : 'transparent'};
+    border-radius: 7px;
+    .textAward {
+        font-family: 'Quicksand';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 25 px;
+        /* identical to box height */
+
+        text-transform: capitalize;
+
+        color: #ffffff;
+    }
+`;

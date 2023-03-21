@@ -48,38 +48,42 @@ const Output = ({ code }) => {
                 changeDiffCheckBoxValue={changeDiffCheckBoxValue}
             />
             <Stack gap={3}>
-                <BoxOutput>
-                    <div className="output-container" ref={outputContainerRef}>
-                        <iframe
-                            id="source"
-                            className="iframe-output"
-                            width="400px"
-                            height="300px"
-                            title="output"
-                            style={{ mixBlendMode: diffChecked ? 'difference' : 'normal' }}
-                            ref={iframeRef}
-                            srcDoc={code}
-                        ></iframe>
-                        <div
-                            ref={userOutPutRef}
-                            className="output-layer"
-                            onMouseMove={imageCompareSlider}
-                            onMouseLeave={resetWidth}
-                        ></div>
-                        <div id="img-layer" className="img-layer" ref={imgRef}>
-                            <img src={UnknownBG} alt="level1" />
+                <Stack className="align-items-center justify-content-center">
+                    <BoxOutput>
+                        <div className="output-container" ref={outputContainerRef}>
+                            <iframe
+                                id="source"
+                                className="iframe-output"
+                                width="400px"
+                                height="300px"
+                                title="output"
+                                style={{ mixBlendMode: diffChecked ? 'difference' : 'normal' }}
+                                ref={iframeRef}
+                                srcDoc={code}
+                            ></iframe>
+                            <div
+                                ref={userOutPutRef}
+                                className="output-layer"
+                                onMouseMove={imageCompareSlider}
+                                onMouseLeave={resetWidth}
+                            ></div>
+                            <div id="img-layer" className="img-layer" ref={imgRef}>
+                                <img src={UnknownBG} alt="level1" />
+                            </div>
                         </div>
-                    </div>
-                </BoxOutput>
+                    </BoxOutput>
+                </Stack>
                 <Stack direction="horizontal" className="justify-content-between">
                     <TextStyled>target</TextStyled>
                     <TextSmall>400px x 300px</TextSmall>
                 </Stack>
-                <BoxOutput>
-                    <Target>
-                        <img src={UnknownBG} className="target_img" alt="target_img" />
-                    </Target>
-                </BoxOutput>
+                <Stack className="align-items-center justify-content-center">
+                    <BoxOutput>
+                        <Target>
+                            <img src={UnknownBG} className="target_img" alt="target_img" />
+                        </Target>
+                    </BoxOutput>
+                </Stack>
             </Stack>
         </Stack>
     );

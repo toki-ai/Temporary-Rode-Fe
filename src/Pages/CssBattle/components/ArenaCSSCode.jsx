@@ -21,7 +21,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code }) => {
                     value={code}
                     width="100%"
                     theme={tokyoNight}
-                    height="calc(100vh - 290px);"
+                    height="calc(100vh - 200px);"
                     extensions={[htmlLanguage]}
                     options={{ lineWrapping: 'true', lineNumbers: 'true', autoCloseBrackets: true }}
                     onChange={(e) => {
@@ -35,22 +35,11 @@ const ArenaCSSCode = ({ setCode, setCount, count, code }) => {
                 className="align-items-center mt-3 justify-content-center"
                 gap={3}
             >
-                <ButtonStyled buttonType="base">My Solution</ButtonStyled>
-                <ButtonStyled buttonType="base">Finished</ButtonStyled>
+                <ButtonStyled buttonType="base">My SOLUTION</ButtonStyled>
+                <ButtonStyled buttonType="base">SUBMIT</ButtonStyled>
             </Stack>
         </>
     );
 };
 
 export default ArenaCSSCode;
-// <iframe
-// id="source"
-// className="iframe-output"
-// // width="400px"
-// // height="300px"
-// title="output"
-// style={{ mixBlendMode: diffChecked ? 'difference' : 'normal' }}
-// scrolling="no"
-// ref={iframeRef}
-// srcDoc={code}
-// ></iframe>

@@ -23,5 +23,8 @@ export const themes = {
         grey: '#f2f2f2',
         grey2: '#6c757d',
         grey3: '#495057',
+        gold: '#FEE500',
+        sliver: '#CED4DA',
+        cooper: '#EF7329',
     },
 };
