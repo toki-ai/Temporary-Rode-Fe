@@ -8,15 +8,17 @@ import * as St from '../styles';
 import PreviewImages from './PreviewImages';
 import Testcase from './Testcase';
 
-import Button from 'react-bootstrap/Button';
-
 const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
     const [questions, setQuestions] = useState([
         {
             maxSubmitTimes: 0,
             questionImage: '',
-            testcases: [{ input: '', output: '' }],
+            testcases: [
+                { input: '', output: '' },
+                // May have a lot of testcase { input, output }
+            ],
         },
+        // May have a lot of question { maxSubmitTimes, questionImage, testcases }
     ]);
     const inputRef = useRef(null);
 
@@ -84,7 +86,6 @@ const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
     };
 
     const uploadImages = (files, questionIdx) => {
-        console.log(questionIdx);
         setQuestions((prev) => {
             let copy = [...prev];
             copy[questionIdx].questionImage = files;
@@ -94,18 +95,18 @@ const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
 
     return (
         <>
-            {questions.map((question, id) => (
-                <St.Questions key={id}>
-                    <St.QuestionTitle>Question {id + 1}</St.QuestionTitle>
+            {questions.map((question, questionIdx) => (
+                <St.Questions key={questionIdx}>
+                    <St.QuestionTitle>Question {questionIdx + 1}</St.QuestionTitle>
 
                     <div className="row">
                         <div className="col-md-6">
                             <div>
                                 <label htmlFor="maxSubmitTimes">Maximum Submit Time:</label>
                                 <St.NumberInput>
-                                    <button onClick={() => handleDecrease(id)}>-</button>
+                                    <button onClick={() => handleDecrease(questionIdx)}>-</button>
                                     <p>{question.maxSubmitTimes}</p>
-                                    <button onClick={() => handleIncrease(id)}>+</button>
+                                    <button onClick={() => handleIncrease(questionIdx)}>+</button>
                                 </St.NumberInput>
                             </div>
 
@@ -116,7 +117,7 @@ const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
                                     type="file"
                                     hidden
                                     ref={inputRef}
-                                    onChange={(e) => uploadImages(e.target.files, id)}
+                                    onChange={(e) => uploadImages(e.target.files, questionIdx)}
                                 />
                                 {question.questionImage ? (
                                     <PreviewImages FileList={question.questionImage} />
@@ -134,7 +135,7 @@ const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
                                     key={testcaseIdx}
                                     item={testcase}
                                     testcaseIdx={testcaseIdx}
-                                    questionIdx={id}
+                                    questionIdx={questionIdx}
                                     handleInput={editInputTestcase}
                                     handleOutput={editOutputTestcase}
                                 />
@@ -142,9 +143,9 @@ const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
                             <div className="d-grid gap-2 ">
                                 <ButtonStyled
                                     buttonType="outline"
-                                    onClick={() => createTestcase(id)}
+                                    onClick={() => createTestcase(questionIdx)}
                                 >
-                                    Add testcase
+                                    + Add testcase
                                 </ButtonStyled>
                             </div>
                         </div>
@@ -155,11 +156,11 @@ const CreateQuestions = ({ setQuestions: setOuterQuestions }) => {
 
             <div className="d-grid gap-2 my-2">
                 <ButtonStyled buttonType="dashed" onClick={createQuestion}>
-                    Add questions
+                    + Add questions
                 </ButtonStyled>
             </div>
             <Stack direction="horizontal" gap={3} className="justify-content-end mb-4">
-                <ButtonStyled buttonType="secondary">Cancel</ButtonStyled>{' '}
+                <ButtonStyled buttonType="secondary">Cancel</ButtonStyled>
                 <ButtonStyled buttonType="solid" onClick={handleDone}>
                     Create
                 </ButtonStyled>

@@ -102,6 +102,7 @@ export const Testcase = styled.div`
         display: block;
         border: 1px solid ${themes.colors.primary};
         border-radius: 5px;
+        padding: 10px 0;
 
         &:focus-visible {
             outline-color: ${themes.colors.primary};
