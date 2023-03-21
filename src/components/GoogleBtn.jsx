@@ -23,15 +23,7 @@ function GoogleSignInButton() {
             navigate('/');
         }
     };
-    // .then((res) => {
-    //     console.log(res);
-    //     if (res.data.status === 400) {
-    //         navigate('/register', { state: res.credential });
-    //     } else {
-    //         Localstorage.setItem('token', res.data.data);
-    //         navigate('/');
-    //     }
-    // });
+
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://accounts.google.com/gsi/client';
