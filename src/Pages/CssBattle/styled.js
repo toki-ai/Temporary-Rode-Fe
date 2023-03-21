@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
+import Accordion from 'react-bootstrap/Accordion';
 // export const TargetContent = styled(OutPutContent)`
 //     height: 130%;
 // `;
-//offCanvas
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
 export const Box = styled.div`
@@ -268,6 +268,7 @@ export const StyledWrap = styled.div`
         background: #01091d;
     }
 `;
+//offCanvas//
 export const OffcanvasStyled = styled(Offcanvas)`
     margin-top: 70px;
     background: #01091d;
@@ -292,7 +293,8 @@ export const OffcanvasTitle = styled(Offcanvas.Title)`
 export const RankBox = styled.div`
     padding: 0.25rem 0.75rem;
     margin-bottom: 1rem;
-    border: 1px solid
+    font-weight: 700;
+    border: 2px solid
         ${(props) =>
             props.id == 0
                 ? props.theme.colors.gold
@@ -314,4 +316,28 @@ export const RankBox = styled.div`
 
         color: #ffffff;
     }
+`;
+
+///Accordion Styled///
+export const AccordionItem = styled(Accordion.Item)`
+    background: #000;
+    color: #00e7aa;
+    border: 1px solid #00e7aa !important;
+    border-radius: 7px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+`;
+export const AccordionHeader = styled(Accordion.Header)`
+    background: blue;
+`;
+export const AccordionBody = styled(Accordion.Body)`
+    /* background: blue; */
+    color: white;
+`;
+
+export const AccordionButton = styled(Accordion.Button)`
+    /* background: transparent;
+    color: white;
+    border: 1px solid #00e7aa;
+    border-radius: 7px; */
 `;

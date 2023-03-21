@@ -24,7 +24,7 @@ export const themes = {
         grey2: '#6c757d',
         grey3: '#495057',
         gold: '#FEE500',
-        sliver: '#CED4DA',
+        sliver: '#d8dddf',
         cooper: '#EF7329',
     },
 };
