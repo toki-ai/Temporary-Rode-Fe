@@ -52,7 +52,6 @@ const RouterComponent = () => {
             children: [
                 {
                     exact: true,
-
                     loader: Loading,
                     element: <UserHomeLayout />,
                     children: [
