@@ -149,6 +149,7 @@ const Home = () => {
                                             </div>
                                         </Row>
                                         <Row xs={8} lg={12} className="w-100">
+                                            {/** GIỮ lại phần input code này  */}
                                             <form action="" onSubmit={(e) => handlePostRoom(e)}>
                                                 <input
                                                     type="text"
@@ -159,6 +160,7 @@ const Home = () => {
                                                     className="bg-dark-secondary text-white bc-primary rounded-pill inputRoomCode"
                                                 />
                                             </form>
+                                            {/** GIỮ lại phần input code này  */}
                                         </Row>
                                     </Col>
                                 </Row>
