@@ -26,12 +26,13 @@ const CountdownTimer = ({ targetDate }) => {
 
     const [minute, second, countdownValue] = useCountdown(targetDate);
 
-    if (minute <= 0) {
+    if (minute <= 0 || second <= 0) {
         if (expired == false) {
             setExpired(true);
         }
-
+        localStorage.removeItem('countdownFuture');
         window.location = '/';
+
         return <ExpiredNotice />;
     } else {
         return <ShowCounter counterValue={countdownValue} minutes={minute} />;
