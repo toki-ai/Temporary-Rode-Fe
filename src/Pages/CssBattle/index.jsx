@@ -1,48 +1,31 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
-import { htmlLanguage } from '@codemirror/lang-html';
-import CodeMirror from '@uiw/react-codemirror';
-import Stack from 'react-bootstrap/Stack';
+import ArenaCSSCode from './components/ArenaCSSCode';
+import Output from './components/Output';
+import RoomInfo from './components/RoomInfo';
 
-const TestCodeMirror = () => {
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
+const ArenaCSS = () => {
     const [code, setCode] = useState();
     const [count, setCount] = useState(0);
-    const iframeRef = useRef();
-    const [diffChecked, setDiffChecked] = useState(false);
-
-    console.log(code);
-    console.log(count);
-
     return (
-        <>
-            <div> test codemirror</div>
-            <Stack direction="horizontal" gap={3}>
-                <CodeMirror
-                    className="editor "
-                    value={code}
-                    width="500px"
-                    height="calc(100vh - 88px);"
-                    extensions={[htmlLanguage]}
-                    options={{ lineWrapping: 'true', lineNumbers: 'true', autoCloseBrackets: true }}
-                    onChange={(e) => {
-                        setCode(e);
-                        setCount(e.length);
-                    }}
-                />
-                <iframe
-                    id="source"
-                    className="iframe-output"
-                    // width="400px"
-                    // height="300px"
-                    title="output"
-                    style={{ mixBlendMode: diffChecked ? 'difference' : 'normal' }}
-                    scrolling="no"
-                    ref={iframeRef}
-                    srcDoc={code}
-                ></iframe>
-            </Stack>
-        </>
+        <Row className="p-3">
+            {/* Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop */}
+
+            <Col xs={12} md={3} className="px-4">
+                <RoomInfo />
+            </Col>
+            <Col xs={12} md={5} className="px-4">
+                <ArenaCSSCode setCode={setCode} setCount={setCount} count={count} code={code} />
+            </Col>
+            <Col xs={12} md={4} className="px-4">
+                <Output code={code} />
+            </Col>
+        </Row>
     );
 };
 
-export default TestCodeMirror;
+export default ArenaCSS;
