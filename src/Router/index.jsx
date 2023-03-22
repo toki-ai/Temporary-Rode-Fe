@@ -15,6 +15,7 @@ import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import TestAlert from '../components/TestAlert';
 import TestModal from '../components/TestModal';
+import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
@@ -53,7 +54,7 @@ const RouterComponent = () => {
                     exact: true,
 
                     loader: Loading,
-                    element: <UserLayoutComponent />,
+                    element: <UserHomeLayout />,
                     children: [
                         { index: true, path: 'home', element: <Home /> },
                         { exact: true, path: 'modal', loader: Loading, element: <TestModal /> },

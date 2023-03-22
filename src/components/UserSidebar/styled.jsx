@@ -10,16 +10,37 @@ import {
 } from 'react-bootstrap-icons';
 import styled from 'styled-components';
 
+import { themes } from '../../themes';
+import { device } from '../../utils/Breakpoints/index.jsx';
+
 export const Container = styled.div`
-    width: 20%;
-    min-height: 87vh;
-    background: #ffffff;
-    box-shadow: 6px 35px 24px rgba(0, 0, 0, 0.25);
-    border-radius: 20px 20px 0 0;
+    background: ${themes.colors.primary5};
+    border: 1.8434px solid ${themes.colors.primary};
+    box-shadow: 0px 0px 22px #00c994;
+    border-radius: 12px;
     z-index: 1;
+    margin: 50px 20px 20px 40px;
     a {
-        color: #515151;
+        color: ${themes.colors.light};
         text-decoration: none;
+    }
+    @media ${device.tablet} {
+        width: 170px;
+        height: 75vh;
+    }
+    @media ${device.laptop} {
+        width: 200px;
+        height: 80vh;
+    }
+
+    @media ${device.laptopL} {
+        width: 229px;
+        height: 82vh;
+    }
+
+    @media ${device.desktop} {
+        width: 250px;
+        height: 82vh;
     }
 `;
 
@@ -30,39 +51,40 @@ export const User = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: ${themes.colors.primary};
     div {
         font-family: 'Quicksand';
         font-style: normal;
         font-weight: 600;
         font-size: 1.4vw;
         line-height: 21px;
+        margin-bottom: 5px;
     }
 
     p {
         font-family: 'Quicksand';
         font-style: normal;
         font-weight: 500;
-        font-size: 1.3vw;
+        font-size: 1.1vw;
         line-height: 18px;
     }
 `;
-
+export const IconUser = styled(PersonCircle)`
+    width: 40%;
+    height: 40%;
+    margin-bottom: 10px;
+    color: ${themes.colors.light};
+`;
 export const Pagination = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 20px;
     height: calc(100% - 28%);
 `;
-export const IconUser = styled(PersonCircle)`
-    width: 35%;
-    height: 35%;
-    margin-bottom: 10px;
-`;
 
 export const General = styled.div`
     width: 100%;
     height: 10%;
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
 
@@ -72,21 +94,20 @@ export const General = styled.div`
         height: 21px;
         margin-left: 10px;
     }
-`;
 
-export const Text = styled.div`
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.2vw;
-    line-height: 21px;
-    color: #515151;
-    cursor: pointer;
-    transition: 0.3s;
-    a {
-        &:hover {
-            color: #00e7aa;
-        }
+    @media ${device.tablet} {
+        margin-bottom: 10px;
+    }
+    @media ${device.laptop} {
+        margin-bottom: 15px;
+    }
+
+    @media ${device.laptopL} {
+        margin-bottom: 30px;
+    }
+
+    @media ${device.desktop} {
+        margin-bottom: 35px;
     }
 `;
 
@@ -95,19 +116,12 @@ export const IconHouse = styled(HouseDoorFill)`
     height: 14px;
 `;
 
-export const Icon = styled.section`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* margin-left: 10px; */
-`;
 export const ContestInfo = styled.div`
     width: 100%;
     height: calc(100% - 28%);
     margin-bottom: 35px;
     display: flex;
     flex-direction: column;
-    row-gap: 14px;
 
     div {
         width: 95%;
@@ -151,60 +165,21 @@ export const BoldText = styled.section`
     font-family: 'Quicksand';
     font-style: normal;
     font-weight: 700;
-    font-size: 1.3vw;
+    font-size: 1.2vw;
     line-height: 21px;
-    color: #111111;
-    margin-bottom: 11px;
-`;
-
-export const EndBar = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    row-gap: 14px;
-    height: 100%;
-    nav {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        row-gap: 14px;
-        cursor: pointer;
+    color: ${themes.colors.primary};
+    @media ${device.tablet} {
+        margin-bottom: 0;
+    }
+    @media ${device.laptop} {
+        margin-bottom: 5px;
     }
 
-    nav:last-child {
-        color: red;
-        a {
-            color: red;
-        }
-        div:first-child {
-            color: #111111;
-            a {
-                color: #111111;
-            }
-        }
-        div:hover {
-            color: #00e7aa;
-            a {
-                color: #00e7aa;
-            }
-        }
+    @media ${device.laptopL} {
+        margin-bottom: 11px;
+    }
+
+    @media ${device.desktop} {
+        margin-bottom: 11px;
     }
 `;
-
-// export const NavTop = styled.div`
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-//     row-gap: 14px;
-// `;
-
-// export const NavBottom = styled.div`
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-//     row-gap: 14px;
-//     &:last-child {
-//         color: red;
-//         background-color: black;
-//     }
-// `;
