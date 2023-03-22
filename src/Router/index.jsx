@@ -5,6 +5,7 @@ import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
+import ArenaCSS from '../Pages/CssBattle';
 import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
@@ -62,6 +63,7 @@ const RouterComponent = () => {
                             loader: Loading,
                             element: <TestCodeMirror />,
                         },
+                        { exact: true, path: 'arena_css', loader: Loading, element: <ArenaCSS /> },
                     ],
                 },
             ],
