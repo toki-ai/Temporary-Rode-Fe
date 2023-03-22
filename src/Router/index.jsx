@@ -5,6 +5,7 @@ import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
+import Algorithm from '../Pages/Algorithm';
 import ArenaCSS from '../Pages/CssBattle';
 import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
@@ -18,7 +19,7 @@ import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.componen
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
-import { loaderInfoGG } from './RouterLoader/Loader';
+import { loaderInfoGG, GetInfoRoomByCode } from './RouterLoader/Loader';
 
 const RouterComponent = () => {
     const router = createBrowserRouter([
@@ -64,7 +65,18 @@ const RouterComponent = () => {
                             loader: Loading,
                             element: <TestCodeMirror />,
                         },
-                        { exact: true, path: 'arena_css', loader: Loading, element: <ArenaCSS /> },
+                        {
+                            exact: true,
+                            path: 'arena_css/:id',
+                            loader: GetInfoRoomByCode,
+                            element: <ArenaCSS />,
+                        },
+                        {
+                            exact: true,
+                            path: 'algorithm/:id',
+                            loader: Loading,
+                            element: <Algorithm />,
+                        },
                     ],
                 },
             ],

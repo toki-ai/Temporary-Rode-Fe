@@ -11,14 +11,14 @@ import Scores from './Score';
 
 import Stack from 'react-bootstrap/Stack';
 
-const RoomInfo = () => {
+const RoomInfo = ({ data }) => {
     const [show, setShow] = useState(false);
 
     const handleShow = () => setShow(true);
     const LIST_INFO = [
         {
             title: 'Timers',
-            body: <CountdownTimer targetDate={'2023-12-3'} />,
+            body: <CountdownTimer targetDate={data.duration} />,
         },
         {
             title: 'Colors to use',
@@ -26,7 +26,7 @@ const RoomInfo = () => {
         },
         {
             title: 'Scores',
-            body: <Scores />,
+            body: <Scores submitTimes={data?.questions[0].maxSubmitTimes} />,
         },
     ];
     return (
@@ -35,7 +35,7 @@ const RoomInfo = () => {
                 <Rank />
             </OffCanvasComponents>
             <Stack direction="horizontal" className="justify-content-between mb-3">
-                <TextStyled>ROOM #001</TextStyled>
+                <TextStyled>ROOM {data.code}</TextStyled>
             </Stack>
 
             <Box>

@@ -14,7 +14,7 @@ function GoogleSignUpButton() {
         authApi.login(response.credential).then((res) => {
             console.log(res);
             if (res.status == 200) {
-                // navigate('/register');
+                navigate('/register');
             }
         });
     };

@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import ContentNav from '../../ContentNav/ContentNav.jsx';
 import { UserEndBar } from '../../ContentNav/UserContentNav.styled.jsx';
 import { UserContext } from '../../Context/User.context.jsx';
-import { formatUserName } from '../../utils/helper.jsx';
+import { formatUserName } from '../../utils/helper.js';
 import {
     BoldText,
     Container,
