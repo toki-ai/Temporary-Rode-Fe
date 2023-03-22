@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { TiArrowLeft } from 'react-icons/ti';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import FilterQues from './components/FilterQues';
 import RoomInfo from './components/RoomInfo';
@@ -15,7 +14,7 @@ const AdminRoomView = () => {
             <div className="p-3 box-style">
                 <div className="d-flex align-items-center">
                     <Link
-                        to="/admin_room"
+                        to="/admin/admin_room"
                         className="fs-1 d-flex justify-items-center color_primary"
                     >
                         <TiArrowLeft />

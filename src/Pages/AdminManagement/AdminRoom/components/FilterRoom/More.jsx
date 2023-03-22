@@ -6,7 +6,7 @@ const More = ({ link }) => {
     const actions = [
         {
             id: 1,
-            href: `/admin_room/${link}`,
+            href: `/admin/admin_room/${link}`,
             value: 'View',
         },
         { id: 2, href: '#', value: 'Edit' },
