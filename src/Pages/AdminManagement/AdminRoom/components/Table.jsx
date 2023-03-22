@@ -2,7 +2,7 @@ import { Table } from 'react-bootstrap';
 
 import { RoomData } from './FilterRoom/RoomData';
 
-function TableRoom() {
+function TableRoom({ state }) {
     return (
         <Table striped className="w-98 border-top">
             <thead>
@@ -17,7 +17,7 @@ function TableRoom() {
                 </tr>
             </thead>
             <tbody>
-                <RoomData />
+                <RoomData state={state} />
             </tbody>
         </Table>
     );

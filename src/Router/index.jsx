@@ -3,12 +3,11 @@ import { Navigate } from 'react-router-dom';
 
 import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
-import Admin from '../Pages/Admin';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
+import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
 import ArenaCSS from '../Pages/CssBattle';
 import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
-import HomeChild from '../Pages/HomeChild/HomeChild';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
@@ -23,10 +22,26 @@ import { loaderInfoGG } from './RouterLoader/Loader';
 const RouterComponent = () => {
     const router = createBrowserRouter([
         { exact: true, path: '/', element: <Navigate to="home" /> },
-        { exact: true, path: '/login', loader: Loading, element: <Login /> },
-        { exact: true, path: '/register', element: <Register /> },
-        { exact: true, path: '/modal', loader: Loading, element: <TestModal /> },
-        { exact: true, path: '/alert', loader: Loading, element: <TestAlert /> },
+        {
+            exact: true,
+            path: '/login',
+            loader: Loading,
+            element: (
+                <UserLayoutComponent>
+                    <Login />
+                </UserLayoutComponent>
+            ),
+        },
+        {
+            exact: true,
+            path: '/register',
+            loader: loaderInfoGG,
+            element: (
+                <UserLayoutComponent>
+                    <Register />
+                </UserLayoutComponent>
+            ),
+        },
 
         {
             path: '/',
@@ -68,6 +83,12 @@ const RouterComponent = () => {
                             path: 'admin_room',
                             loader: Loading,
                             element: <AdminRoom />,
+                        },
+                        {
+                            exact: true,
+                            path: 'admin_room/:id',
+                            loader: Loading,
+                            element: <AdminRoomView />,
                         },
                         {
                             exact: true,

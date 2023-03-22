@@ -30,7 +30,6 @@
         "react-jwt": "^1.1.8",
         "react-router-dom": "^6.8.1",
         "react-toastify": "^9.1.1",
-        "sass": "^1.59.2",
         "styled-components": "^5.3.6",
         "yup": "^1.0.2"
     },
@@ -48,6 +47,7 @@
         "eslint-plugin-react": "^7.28.0",
         "eslint-plugin-react-hooks": "^4.3.0",
         "prettier": "^2.8.4",
+        "sass": "^1.59.3",
         "vite": "^4.1.0"
     }
 }

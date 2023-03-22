@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Col, Row } from 'react-bootstrap';
 
 import ButtonCustom from './components/Button';
@@ -7,6 +9,10 @@ import TableRoom from './components/Table';
 import { RoomStyle } from './style';
 
 const AdminRoom = () => {
+    const [result, setResult] = useState('All');
+    function handleChange(e) {
+        setResult(e.target.value);
+    }
     return (
         <div className="p-2">
             <RoomStyle>
@@ -24,6 +30,7 @@ const AdminRoom = () => {
                                     props={{
                                         name: 'Visibility:',
                                     }}
+                                    handleChange={handleChange}
                                 />
                             </Col>
                             <Col className="col-3 d-flex align-items-center justify-content-end">
@@ -37,7 +44,7 @@ const AdminRoom = () => {
                             </Col>
                         </Row>
                         <Row className="d-flex justify-content-center">
-                            <TableRoom />
+                            <TableRoom state={result} />
                         </Row>
                     </Col>
                 </div>
