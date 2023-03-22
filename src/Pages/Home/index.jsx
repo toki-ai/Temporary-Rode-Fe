@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Button, Col, Container, InputGroup, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
+import { toastWarning } from '../../components/Toast';
+import UserSidebar from '../../components/UserSidebar/UserSidebar.component';
 import roomApi from '../../utils/api/roomApi';
 import userRoomApi from '../../utils/api/userRoomApi';
 import { HomeStyle } from './style';
@@ -15,33 +17,42 @@ const Home = () => {
 
     const navigate = useNavigate();
     // Viết lại function join room - Hân
-    const handlePostRoom = async () => {
+    const handlePostRoom = async (e) => {
+        e.preventDefault();
         await roomApi
             .getRoomByCode(inputCode)
             .then((res) => {
-                const RoutingRoom = async () => {
-                    console.log(res?.data.data.id);
-                    await userRoomApi
-                        .postJoinUserRoom({
-                            roomId: res?.data.data.id,
-                            code: inputCode,
-                        })
-                        .then((response) => {
-                            if (response.data.status == 200) {
-                                //routing area test
-                                if (res.data.data.type == 'FE') {
-                                    navigate(`/arena_css/${inputCode}`);
-                                } else {
-                                    navigate(`/algorithm/${inputCode}`);
+                if (res.data.status == 400) {
+                    setInputCode('');
+                    toastWarning(res.data.err);
+                } else {
+                    const RoutingRoom = async () => {
+                        await userRoomApi
+                            .postJoinUserRoom({
+                                roomId: res?.data.data.id,
+                                code: inputCode,
+                            })
+                            .then((response) => {
+                                if (response.data.status == 200) {
+                                    //routing area test
+                                    if (res.data.data.type == 'FE') {
+                                        navigate(`/arena_css/${inputCode}`);
+                                    } else {
+                                        navigate(`/algorithm/${inputCode}`);
+                                    }
+                                } else if (response.data.status == 400) {
+                                    // alert Modal popup error
+                                    toastWarning(response.data.err);
+                                    setInputCode('');
                                 }
-                            } else if (res.data.status == 400) {
-                                // alert Modal popup error
-                                console.log('Fail');
-                            }
-                        })
-                        .catch((e) => console.log(e));
-                };
-                RoutingRoom();
+                            })
+                            .catch((err) => {
+                                toastWarning(err.data.err);
+                                setInputCode('');
+                            });
+                    };
+                    RoutingRoom();
+                }
             })
             .catch((err) => console.log(err));
     };
@@ -56,15 +67,7 @@ const Home = () => {
                             lg={12}
                             className="w-100 bg-dark-secondary rounded-3 box-shadow-primary border border-2 border-dark "
                         >
-                            <Col
-                                lg={4}
-                                sm={8}
-                                md={12}
-                                className="text-light d-flex flex-column justify-content-start align-items-center rounded-3 bc-primary "
-                            >
-                                DashBoard
-                            </Col>
-
+                            <UserSidebar />
                             <Col
                                 lg={8}
                                 className="d-flex flex-column justify-content-center align-items-center position-relative d-none d-lg-flex "
@@ -146,10 +149,11 @@ const Home = () => {
                                             </div>
                                         </Row>
                                         <Row xs={8} lg={12} className="w-100">
-                                            <form action="">
+                                            <form action="" onSubmit={(e) => handlePostRoom(e)}>
                                                 <input
                                                     type="text"
                                                     placeholder="Enter Room Code"
+                                                    value={inputCode}
                                                     onChange={(e) => setInputCode(e.target.value)}
                                                     autoComplete="off"
                                                     className="bg-dark-secondary text-white bc-primary rounded-pill inputRoomCode"
