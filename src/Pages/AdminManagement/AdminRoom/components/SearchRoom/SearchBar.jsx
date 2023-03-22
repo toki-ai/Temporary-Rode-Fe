@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Button, InputGroup } from 'react-bootstrap';
 
 import ListInfo from './ListInfo';
 import { getInfos } from './axios';

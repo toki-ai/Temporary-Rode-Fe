@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 100%;
-    position: relative;
+    padding: 3rem 1rem;
 `;
 
 export const Content = styled.div`
@@ -11,8 +11,9 @@ export const Content = styled.div`
     /* background: transparent; */
     /* box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.25); */
     border-radius: 14px;
-    position: absolute;
+    /* position: absolute;
     bottom: 2%;
-    right: 5%;
+    right: 5%; */
     /* opacity: 1; */
+    transform: translate(50px, 50px);
 `;
