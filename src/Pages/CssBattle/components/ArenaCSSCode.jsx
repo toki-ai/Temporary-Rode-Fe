@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import ButtonStyled from '../../../components/Button';
 import OffCanvasComponents from '../../../components/OffCanvas/OffCanvas';
+import submitApi from '../../../utils/api/submitApi';
 import { BoxEditor, TextStyled, TextSmall } from '../styled';
 import MySolution from './MySolution';
 
@@ -32,10 +33,19 @@ const LIST_SOLUTION = [
         code: '<div></div> <style> div { width: 100%; height: 100%; border-radius: 5px; background: #F5D6B4; } </style> <!-- OBJECTIVE --> <!-- Write HTML/CSS in this editor and replicate the given target image in the least code possible. What you write here, renders as it is --> <!-- SCORING --> <!-- The score is calculated based on the number of characters you use (this comment included :P) and how close you replicate the image. Read the FAQS (https://cssbattle.dev/faqs) for more info. --> <!-- IMPORTANT: remove the comments before submitting -->',
     },
 ];
-const ArenaCSSCode = ({ setCode, setCount, count, code }) => {
+const ArenaCSSCode = ({ setCode, setCount, count, code, data }) => {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
-
+    const submitCode = async () => {
+        const formatData = {
+            roomId: data?.id,
+            questionId: data?.questions[0].id,
+            code: code,
+            // language: 'C_CPP',
+        };
+        const res = await submitApi.submit(formatData);
+        console.log(res);
+    };
     return (
         <>
             <OffCanvasComponents title="My Solution" show={show} setShow={setShow}>
@@ -68,7 +78,9 @@ const ArenaCSSCode = ({ setCode, setCount, count, code }) => {
                 <ButtonStyled buttonType="base" onClick={handleShow}>
                     My SOLUTION
                 </ButtonStyled>
-                <ButtonStyled buttonType="base">SUBMIT</ButtonStyled>
+                <ButtonStyled buttonType="base" onClick={submitCode}>
+                    SUBMIT
+                </ButtonStyled>
             </Stack>
         </>
     );

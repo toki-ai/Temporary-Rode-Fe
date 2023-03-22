@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react';
 
 import UnknownBG from '../../../assets/Unknown/UnknownBG.png';
+import localFileApi from '../../../utils/api/localFileApi';
 import { BoxOutput, Target, TextStyled, TextSmall } from '../styled';
 import OutPutHeader from './OutPutHeader';
 
 import Stack from 'react-bootstrap/Stack';
 
-const Output = ({ code }) => {
+const Output = ({ code, data }) => {
     const userOutPutRef = useRef();
     const imgRef = useRef();
     const outputContainerRef = useRef();
@@ -20,6 +21,7 @@ const Output = ({ code }) => {
     const changeDiffCheckBoxValue = () => {
         setDiffChecked((state) => !state);
     };
+    const TestImg = localFileApi.getImg(data?.questions[0].questionImage);
     function imageCompareSlider(e) {
         if (slideChecked) {
             userOutPutRef.current.style.cursor = 'col-resize';
@@ -68,7 +70,7 @@ const Output = ({ code }) => {
                                 onMouseLeave={resetWidth}
                             ></div>
                             <div id="img-layer" className="img-layer" ref={imgRef}>
-                                <img src={UnknownBG} alt="level1" />
+                                <img src={TestImg ? TestImg : UnknownBG} alt="level1" />
                             </div>
                         </div>
                     </BoxOutput>
@@ -80,7 +82,11 @@ const Output = ({ code }) => {
                 <Stack className="align-items-center justify-content-center">
                     <BoxOutput>
                         <Target>
-                            <img src={UnknownBG} className="target_img" alt="target_img" />
+                            <img
+                                src={TestImg ? TestImg : UnknownBG}
+                                className="target_img"
+                                alt="target_img"
+                            />
                         </Target>
                     </BoxOutput>
                 </Stack>

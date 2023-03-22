@@ -9,25 +9,34 @@ const Home = () => {
     const [inputCode, setInputCode] = useState('');
 
     const navigate = useNavigate();
-
+    // Viết lại function join room - Hân
     const handlePostRoom = async () => {
         await roomApi
             .getRoomByCode(inputCode)
             .then((res) => {
-                console.log(res);
-                userRoomApi
-                    .postJoinUserRoom({
-                        roomId: res?.data.data.id,
-                        code: inputCode,
-                    })
-                    .then((res) => {
-                        if (res.data.status == 200) {
-                            navigate('/arena_css');
-                        } else if (res.data.status == 400) {
-                            console.log('Fail ');
-                        }
-                    })
-                    .catch((e) => console.log(e));
+                const RoutingRoom = async () => {
+                    console.log(res?.data.data.id);
+                    await userRoomApi
+                        .postJoinUserRoom({
+                            roomId: res?.data.data.id,
+                            code: inputCode,
+                        })
+                        .then((response) => {
+                            if (response.data.status == 200) {
+                                //routing area test
+                                if (res.data.data.type == 'FE') {
+                                    navigate(`/arena_css/${inputCode}`);
+                                } else {
+                                    navigate(`/algorithm/${inputCode}`);
+                                }
+                            } else if (res.data.status == 400) {
+                                // alert Modal popup error
+                                console.log('Fail');
+                            }
+                        })
+                        .catch((e) => console.log(e));
+                };
+                RoutingRoom();
             })
             .catch((err) => console.log(err));
     };

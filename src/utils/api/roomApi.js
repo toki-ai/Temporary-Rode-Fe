@@ -20,8 +20,17 @@ const roomApi = {
         const endpoint = `/rooms/get-one-by-code/${code}`;
         return await get(endpoint, {}, authHeader())
             .then((res) => {
-                console.log(res);
-                console.log(res.data.id);
+                return res;
+            })
+            .catch((err) => {
+                console.log('🚀 ~ file: roomApi.js:17 ~ getAll: ~ err:', err);
+                return err;
+            });
+    },
+    getRoomById: async (roomID) => {
+        const endpoint = `/rooms/get-one-by-id/${roomID}`;
+        return await get(endpoint, {}, authHeader())
+            .then((res) => {
                 return res;
             })
             .catch((err) => {
