@@ -1,0 +1,37 @@
+//custom
+
+$input-focus-border-color: #fff;
+$btn-focus-box-shadow: #f23;
+$accordion-padding-y: 1rem;
+$accordion-padding-x: 1.25rem;
+$accordion-color: blue; // Sass variable because of $accordion-button-icon
+$accordion-bg: transparent;
+$accordion-border-width: 1px;
+$accordion-border-color: green;
+$accordion-border-radius: 10px;
+$accordion-inner-border-radius: subtract($accordion-border-radius, $accordion-border-width);
+
+$accordion-body-padding-y: $accordion-padding-y;
+$accordion-body-padding-x: $accordion-padding-x;
+
+$accordion-button-padding-y: $accordion-padding-y;
+$accordion-button-padding-x: $accordion-padding-x;
+$accordion-button-color: #00e7aa;
+$accordion-button-bg: transparent;
+$accordion-transition: border-radius 0.15s ease;
+$accordion-button-active-bg: #00e7aa;
+$accordion-button-active-color: #fff;
+
+$accordion-button-focus-border-color: $input-focus-border-color;
+$accordion-button-focus-box-shadow: $btn-focus-box-shadow;
+
+$accordion-icon-width: 1.25rem;
+$accordion-icon-color: #fff;
+$accordion-icon-active-color: #fff;
+$accordion-icon-transition: transform 0.3s ease-in-out;
+$accordion-icon-transform: rotate(-180deg);
+
+$accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+$accordion-button-active-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+
+@import '../node_modules/bootstrap/scss/bootstrap';
