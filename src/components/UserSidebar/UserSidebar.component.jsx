@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import ContentNav from '../../ContentNav/ContentNav.jsx';
 import { UserEndBar } from '../../ContentNav/UserContentNav.styled.jsx';
+import { UserContext } from '../../Context/User.context.jsx';
+import { formatUserName } from '../../utils/helper.jsx';
 import {
     BoldText,
     Container,
@@ -44,13 +46,19 @@ function UserSidebar() {
         },
     ];
 
+    const { currentUser } = useContext(UserContext);
+    console.log(currentUser);
     return (
         <>
             <Container>
                 <User>
                     <IconUser></IconUser>
-                    <div>Lê Thành Long</div>
-                    <p>SE172125</p>
+                    <div>
+                        {currentUser != null
+                            ? formatUserName(currentUser.firstName, currentUser.lastName)
+                            : ''}
+                    </div>
+                    <p>{currentUser != null ? currentUser.studentId : ''}</p>
                 </User>
                 <Pagination>
                     <General>

@@ -50,6 +50,7 @@ const useAuth = () => {
                 const formatUser = {
                     firstName: user?.data.fname,
                     lastName: user?.data.lname,
+                    studentId: user?.data.studentId,
                     role: user?.data.role,
                     id: user?.data.id,
                 };

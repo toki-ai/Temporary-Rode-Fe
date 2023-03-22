@@ -1,27 +1,14 @@
-import React from 'react';
+import { useContext } from 'react';
 
+import { UserContext } from '../../Context/User.context';
 import logo from '../../assets/Header/logo.svg';
-import localStorageUtils from '../../utils/Localstorage/index.js';
-import authApi from '../../utils/api/authApi.js';
-import useAuth from '../../utils/useAuth';
+import { formatUserName } from '../../utils/helper';
 import { Container, Hero, Left, Right } from './styled';
 
 function UserHeader() {
-    // const { data } = useAuth();
-    // console.log(data);
-    const credential = localStorageUtils.getItem('credential');
-    const [isUpdated, SetUpdated] = useState(false);
-    useEffect(() => {
-        getALlEvent();
-    }, []);
-    const getALlEvent = async () => {
-        const path = await authApi.getInfoFromGG(credential);
-        console.log(path);
-        SetUpdated(true);
-        if (path.data.code === 408) {
-            toastError('Token hết hạn');
-        }
-    };
+    const { currentUser } = useContext(UserContext);
+    console.log(currentUser);
+
     return (
         <Container>
             <Left>
@@ -29,7 +16,13 @@ function UserHeader() {
                 <Hero>R.ode battle</Hero>
             </Left>
             <Right>
-                <Hero>LE THANH LONG - SE172125</Hero>
+                <Hero>
+                    {currentUser != null
+                        ? formatUserName(currentUser.firstName, currentUser.lastName) +
+                          ' - ' +
+                          currentUser.studentId
+                        : ''}
+                </Hero>
             </Right>
         </Container>
     );
