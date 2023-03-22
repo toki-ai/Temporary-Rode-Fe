@@ -3,11 +3,7 @@ import React from 'react';
 import { Container, Content } from './styled';
 
 function ContentComponent({ children }) {
-    return (
-        <Container>
-            <Content>{children}</Content>
-        </Container>
-    );
+    return <Container>{children}</Container>;
 }
 
 export default ContentComponent;
