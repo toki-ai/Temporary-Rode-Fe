@@ -2,9 +2,13 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { Icon, Item, Text } from './styled';
+import { AdminIcon, AdminItem, AdminText } from './AdminContentNav.styled';
+import { UserIcon, UserItem, UserText } from './UserContentNav.styled';
 
-function ContentNav({ items }) {
+function ContentNav({ items, layout }) {
+    const Item = layout == 1 ? AdminItem : UserItem;
+    const Icon = layout == 1 ? AdminIcon : UserIcon;
+    const Text = layout == 1 ? AdminText : UserText;
     return items.map((item, index) => {
         return (
             <Item key={index}>
