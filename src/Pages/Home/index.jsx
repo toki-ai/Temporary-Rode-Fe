@@ -112,7 +112,7 @@ const Home = () => {
                                             </div>
                                         </Row>
                                         <Row xs={8} lg={12} className="w-100">
-                                            <form action="" onSubmit={handlePostRoom}>
+                                            <form action="">
                                                 <input
                                                     type="text"
                                                     placeholder="Enter Room Code"
