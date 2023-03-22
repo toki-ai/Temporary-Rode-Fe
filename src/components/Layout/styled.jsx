@@ -23,8 +23,8 @@ export const BackgroundGray = styled.div`
 `;
 export const Background = styled.div`
     width: 100%;
-    height: 100vh;
-    background-image: url('https://images2.imgbox.com/5d/21/BhenFkhB_o.png');
+
+    background-image: ${({ url }) => (url ? `url(${url})` : null)};
     /* background-size: 100% 100%; */
     background-position: center;
     background-repeat: no-repeat;

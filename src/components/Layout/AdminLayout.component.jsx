@@ -2,27 +2,28 @@ import React from 'react';
 
 import { Outlet } from 'react-router-dom';
 
+import AdminBg from '../../assets/backgroundAD/AdminBg.png';
 import ContentComponent from '../Content/Content.component';
 import HeaderComponent from '../Header/Header.component';
 import Sidebar from '../Sidebar/Sidebar.component';
 import { ContainerLayout, Body, Background, BackgroundGray } from './styled';
 
-const AdminLayoutComponent = ({ children }) => {
+const AdminLayoutComponent = () => {
     return (
-        <ContainerLayout>
-            <Background>
+        <Background url={AdminBg}>
+            <ContainerLayout>
                 <HeaderComponent />
                 <Body>
-                    <BackgroundGray />
                     <Sidebar />
                     <ContentComponent>
                         <Outlet />
                     </ContentComponent>
                 </Body>
-            </Background>
-        </ContainerLayout>
+            </ContainerLayout>
+        </Background>
     );
 };
+// <BackgroundGray />
 
 export default AdminLayoutComponent;
 // <div className="site-layout-background"></div>
