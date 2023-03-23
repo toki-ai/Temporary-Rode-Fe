@@ -1,9 +1,14 @@
-import React from 'react';
+import { useContext } from 'react';
 
+import { UserContext } from '../../Context/User.context';
 import logo from '../../assets/Header/logo.svg';
+import { formatUserName } from '../../utils/helper';
 import { Container, Hero, Left, Right } from './styled';
 
 function UserHeader() {
+    const { currentUser } = useContext(UserContext);
+    console.log(currentUser);
+
     return (
         <Container>
             <Left>
@@ -12,8 +17,11 @@ function UserHeader() {
             </Left>
             <Right>
                 <Hero>
-                    © 2023
-                    <span> F-Code.</span> All rights reserved | Bao IS THE BEST
+                    {currentUser != null
+                        ? formatUserName(currentUser.firstName, currentUser.lastName) +
+                          ' - ' +
+                          currentUser.studentId
+                        : ''}
                 </Hero>
             </Right>
         </Container>

@@ -8,6 +8,7 @@ const useAuth = () => {
     const { setCurrentUser, setCredential } = useContext(UserContext);
     const [userRole, setUserRole] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [data, setData] = useState(null);
     const token = Localstorage.getToken();
 
     const checkTokenExpiration = useCallback(() => {
@@ -49,6 +50,7 @@ const useAuth = () => {
                 const formatUser = {
                     firstName: user?.data.fname,
                     lastName: user?.data.lname,
+                    studentId: user?.data.studentId,
                     role: user?.data.role,
                     id: user?.data.id,
                 };
@@ -56,6 +58,7 @@ const useAuth = () => {
                     setUserRole(undefined);
                 } else {
                     setUserRole(user?.data.role);
+                    setData(user?.data);
                     setCurrentUser(formatUser);
                     setTimeout(() => {
                         setIsLoading(false);
@@ -71,6 +74,6 @@ const useAuth = () => {
         return () => clearInterval(intervalId);
     }, [checkTokenExpiration]);
 
-    return { isLoading, userRole };
+    return { isLoading, userRole, data };
 };
 export default useAuth;

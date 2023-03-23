@@ -1,6 +1,6 @@
 import { ScoreText } from '../styled';
 
-const Scores = () => {
+const Scores = ({ submitTimes }) => {
     return (
         <>
             <div>
@@ -9,7 +9,7 @@ const Scores = () => {
             </div>
             <div>
                 {' '}
-                Submit:<ScoreText> {'5'} times</ScoreText>
+                MaxSubmit:<ScoreText> {submitTimes} times</ScoreText>
             </div>
         </>
     );

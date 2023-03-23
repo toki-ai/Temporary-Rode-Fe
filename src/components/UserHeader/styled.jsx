@@ -49,9 +49,6 @@ export const Hero = styled.div`
     text-transform: uppercase;
     color: ${themes.colors.primary};
 
-    span {
-        font-weight: 800;
-    }
     @media ${device.tablet} {
         font-size: 16px;
     }

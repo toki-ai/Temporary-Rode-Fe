@@ -3,8 +3,8 @@ import Localstorage from '../Localstorage';
 import authHeader from './HeaderAuthorization';
 
 const submitApi = {
-    testScore: async (data) => {
-        const endpoint = `/scoring/test-submit`;
+    submit: async (data) => {
+        const endpoint = `/scoring/submit`;
         // eslint-disable-next-line no-return-await
 
         return await post(endpoint, data, {}, authHeader())

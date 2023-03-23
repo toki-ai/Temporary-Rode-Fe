@@ -10,7 +10,7 @@ const More = ({ id, setAccounts }) => {
             if (response.data.status == 200) {
                 accountsApi.getAll().then((res) => {
                     console.log(res);
-                    setAccounts(res.data.data);
+                    setAccounts(res.data.data.data);
                 });
             }
         });

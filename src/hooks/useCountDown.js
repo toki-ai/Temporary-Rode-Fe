@@ -1,27 +1,39 @@
 import { useEffect, useState } from 'react';
 
-const useCountdown = (targetDate) => {
-    const countDownDate = new Date(targetDate).getTime();
+import moment from 'moment';
 
-    const [countDown, setCountDown] = useState(countDownDate - new Date().getTime());
+const useCountdown = (minutes) => {
+    const [countdownValue, setCountdownValue] = useState(0);
+    const [minute, setMinute] = useState();
+    const [second, setSecond] = useState();
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCountDown(countDownDate - new Date().getTime());
+        let future = localStorage.getItem('countdownFuture');
+        if (future) {
+            future = moment(future);
+        } else {
+            future = moment().add(minutes, 'minutes');
+            localStorage.setItem('countdownFuture', future.toString());
+        }
+        const intervalId = setInterval(() => {
+            const now = moment();
+            const diff = moment.duration(future.diff(now));
+            const totalMinutes = diff.asMinutes();
+            const minutes = Math.floor(totalMinutes);
+            const seconds = Math.floor((totalMinutes - minutes) * 60);
+            const value = `${minutes.toString().padStart(3, '0')}:${seconds
+                .toString()
+                .padStart(2, '0')}`;
+            setCountdownValue(value);
+            setMinute(minutes);
+            setSecond(seconds);
         }, 1000);
 
-        return () => clearInterval(interval);
-    }, [countDownDate]);
-
-    return getReturnValues(countDown);
-};
-
-const getReturnValues = (countDown) => {
-    // calculate time left
-    const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
-
-    return [minutes, seconds];
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [minutes]);
+    return [minute, second, countdownValue];
 };
 
 export { useCountdown };
