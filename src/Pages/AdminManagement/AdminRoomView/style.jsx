@@ -28,11 +28,26 @@ export const ARViewStyle = styled.div`
         background-color: ${(props) => props.theme.colors.primary};
         color: ${(props) => props.theme.colors.light};
     }
-    .mw_fit {
-        min-width: fit-content;
+    .miw-108 {
+        min-width: 108px;
     }
     tr:not(:first-child):hover {
         background-color: ${(props) => props.theme.colors.grey};
+    }
+    .mw-180 {
+        max-width: 180px;
+    }
+    .rounded-left {
+        border-radius: 0.4em 0 0 0.4em;
+    }
+    .rounded-right {
+        border-radius: 0 0.4em 0.4em 0;
+    }
+    .br-none {
+        border-right: none;
+    }
+    .bl-none {
+        border-left: none;
     }
     @media (max-width: 800px) {
         .rs {
