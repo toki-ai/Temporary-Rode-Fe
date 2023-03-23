@@ -18,7 +18,6 @@ export const RoomStyle = styled.div`
     .bg-primary-1 {
         background-color: ${(props) => props.theme.colors.primary2};
     }
-
     .bg-primary-1:hover,
     .bg-primary-1:focus,
     .bg-primary-1:active,
@@ -130,7 +129,6 @@ export const RoomStyle = styled.div`
             width: 70%;
             height: 70%;
         }
-
         .rfs {
             font-size: 0.8em;
         }

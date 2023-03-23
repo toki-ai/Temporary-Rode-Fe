@@ -18,7 +18,7 @@ export function RoomData({ state }) {
             .getAllRoom()
             .then((res) => {
                 console.log(res);
-                setRooms(res.data.data);
+                setRooms(res.data.data.data);
             })
             .catch((err) => {
                 console.log(err);
