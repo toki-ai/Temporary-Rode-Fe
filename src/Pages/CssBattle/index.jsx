@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useLoaderData } from 'react-router-dom';
 
+import { CodeTemplateTmp } from '../../utils/Constant/Dummy';
 import roomApi from '../../utils/api/roomApi';
 import ArenaCSSCode from './components/ArenaCSSCode';
 import Output from './components/Output';

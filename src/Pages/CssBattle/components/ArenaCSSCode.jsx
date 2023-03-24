@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import ButtonStyled from '../../../components/Button';
 import OffCanvasComponents from '../../../components/OffCanvas/OffCanvas';
+import { CodeTemplateTmp } from '../../../utils/Constant/Dummy';
 import submitApi from '../../../utils/api/submitApi';
 import { BoxEditor, TextStyled, TextSmall } from '../styled';
 import MySolution from './MySolution';
@@ -58,7 +59,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data }) => {
             <BoxEditor>
                 <CodeMirror
                     className="editor"
-                    value={code}
+                    value={code ? code : CodeTemplateTmp}
                     width="100%"
                     theme={tokyoNight}
                     height="calc(100vh - 200px);"

@@ -26,7 +26,7 @@ const CountdownTimer = ({ targetDate }) => {
 
     const [minute, second, countdownValue] = useCountdown(targetDate);
 
-    if (minute <= 0 || second <= 0) {
+    if (minute <= 0 && second <= 0) {
         if (expired == false) {
             setExpired(true);
         }
