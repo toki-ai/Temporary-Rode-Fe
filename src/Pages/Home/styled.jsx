@@ -15,48 +15,24 @@ export const Container = styled.div`
     }
 
     @media ${device.laptopL} {
-        height: calc(100vh - 70px);
+        width: 956px;
+        height: 603px;
     }
 
     @media ${device.desktop} {
         height: calc(100vh - 100px);
     }
 `;
-
-export const Box = styled.div`
-    background: #01091d;
-    /* button */
-
-    border: 3.55556px solid ${themes.colors.primary};
-    box-shadow: 7.11111px 20.6222px 130.844px -9.95556px #01e2a6;
-    border-radius: 10.6667px;
+export const Background = styled.div`
+    width: 956px;
+    height: 603px;
     position: relative;
-    /* align-items: center; */
-    @media ${device.tablet} {
-        width: 534px;
-        height: 380px;
-    }
-    @media ${device.laptop} {
-        width: 764px;
-        height: 544px;
-    }
-
-    @media ${device.laptopL} {
-        width: 916px;
-        height: 652px;
-    }
-
-    @media ${device.desktop} {
-        width: 1146px;
-        height: 816px;
-    }
-
-    img {
-        width: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+    overflow: hidden;
+    background-image: ${({ url }) => (url ? `url(${url})` : null)};
+    /* background-size: 100% 100%; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 `;
 
 export const Hero = styled.div`

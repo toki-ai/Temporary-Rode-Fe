@@ -52,11 +52,23 @@ const RouterComponent = () => {
             children: [
                 {
                     exact: true,
+                    loader: Loading,
+                    element: <UserHomeLayout />,
+                    children: [
+                        {
+                            exact: true,
+                            path: 'home',
+                            loader: Loading,
+                            element: <Home />,
+                        },
+                    ],
+                },
+                {
+                    exact: true,
 
                     loader: Loading,
                     element: <UserLayoutComponent />,
                     children: [
-                        { index: true, path: 'home', element: <Home /> },
                         { exact: true, path: 'modal', loader: Loading, element: <TestModal /> },
                         { exact: true, path: 'alert', loader: Loading, element: <TestAlert /> },
                         {
