@@ -4,7 +4,7 @@ import { themes } from '../../themes';
 import { device } from '../../utils/Breakpoints/index.jsx';
 
 export const Container = styled.div`
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
     @media ${device.tablet} {
@@ -15,24 +15,33 @@ export const Container = styled.div`
     }
 
     @media ${device.laptopL} {
-        width: 956px;
-        height: 603px;
+        height: calc(100vh - 70px);
     }
 
     @media ${device.desktop} {
         height: calc(100vh - 100px);
-    }
+    } */
 `;
-export const Background = styled.div`
+export const Box = styled.div`
     width: 956px;
-    height: 603px;
-    position: relative;
+    height: 599px;
+    /* Background */
+
+    background: #01091d;
+    /* button */
+
+    border: 2px solid #00e7aa;
+    box-shadow: 0px 0px 13px #00c994;
+    border-radius: 19.699px;
+`;
+export const Background = styled.img`
+    /* width: 100%;
+    height: 482px; */
     overflow: hidden;
-    background-image: ${({ url }) => (url ? `url(${url})` : null)};
     /* background-size: 100% 100%; */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
 `;
 
 export const Hero = styled.div`
