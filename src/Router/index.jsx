@@ -11,6 +11,7 @@ import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import TestTabs from '../Pages/Test/TestTabs';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import TestAlert from '../components/TestAlert';
@@ -76,6 +77,12 @@ const RouterComponent = () => {
                             path: 'algorithm/:id',
                             loader: Loading,
                             element: <Algorithm />,
+                        },
+                        {
+                            exact: true,
+                            path: 'testTabs',
+                            loader: Loading,
+                            element: <TestTabs />,
                         },
                     ],
                 },

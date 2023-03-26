@@ -26,7 +26,7 @@ const RoomInfo = ({ data }) => {
         },
         {
             title: 'Scores',
-            body: <Scores submitTimes={data?.questions[0].maxSubmitTimes} />,
+            body: <Scores submitTimes={data?.questions[0]?.maxSubmitTimes} />,
         },
     ];
     return (
