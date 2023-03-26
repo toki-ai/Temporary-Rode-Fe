@@ -11,7 +11,7 @@ function UserHomeLayout() {
             <UserHeader></UserHeader>
             <Body>
                 <UserSidebar></UserSidebar>
-                <ContentComponent>
+                <ContentComponent layout={2}>
                     {/* {children} */}
                     <Outlet />
                 </ContentComponent>

@@ -11,6 +11,7 @@ export const Container = styled.div`
 export const Body = styled.div`
     display: flex;
     width: 100%;
+    align-items: flex-end;
     @media ${device.tablet} {
         height: calc(100vh - 50px - 1rem);
     }

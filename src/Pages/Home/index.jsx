@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { Button, Col, Container, InputGroup, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-import HomeBg from '../../assets/Home/homebg.png';
+import Bg from '../../assets/Home/bg.png';
 import { toastWarning } from '../../components/Toast';
 import UserSidebar from '../../components/UserSidebar/UserSidebar.component';
 import roomApi from '../../utils/api/roomApi';
 import userRoomApi from '../../utils/api/userRoomApi';
 import { HomeStyle } from './style';
-import { Background } from './styled';
+import { Background, Box } from './styled';
 
 import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
@@ -75,7 +75,9 @@ const Home = () => {
                 </form>
                 {/** GIỮ lại phần input code này  */}
             </div>
-            <Background url={HomeBg}></Background>
+            {/* <Box>
+                <Background src={Bg}></Background>
+            </Box> */}
             {/* </Container> */}
         </>
     );

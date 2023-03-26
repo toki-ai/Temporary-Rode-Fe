@@ -29,7 +29,7 @@ export const UserText = styled.div`
     font-family: 'Quicksand';
     font-style: normal;
     font-weight: 500;
-    font-size: 1.1vw;
+    font-size: 1.2vw;
     line-height: 21px;
     color: ${themes.colors.light};
     cursor: pointer;

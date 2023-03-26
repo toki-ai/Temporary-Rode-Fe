@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { Container, Content } from './styled';
+import { AdminContainer } from './styled';
+import { UserContainer } from './user.styled';
 
-function ContentComponent({ children }) {
+function ContentComponent({ children, layout }) {
+    const Container = layout == 1 ? AdminContainer : UserContainer;
     return <Container>{children}</Container>;
 }
 
