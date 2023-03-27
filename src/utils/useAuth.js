@@ -35,7 +35,7 @@ const useAuth = () => {
         }
     }, [token]);
     socket.on('connected', () => {
-        console.log(socket); // true
+        console.log(socket.connected); // true
     });
 
     socket.on('error', () => {
