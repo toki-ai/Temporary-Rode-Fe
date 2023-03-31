@@ -4,7 +4,7 @@ import { UserContext } from '../Context/User.context';
 import Localstorage from './Localstorage';
 import authApi from './api/authApi';
 
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
 // import { Socket } from 'socket.io';
 
@@ -14,11 +14,11 @@ const useAuth = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState(null);
     const token = Localstorage.getToken();
-    const socket = io('ws://localhost:5000/polls', {
-        auth: {
-            token: `${Localstorage.getToken()}`,
-        },
-    });
+    // const socket = io('ws://localhost:5000/polls', {
+    //     auth: {
+    //         token: `${Localstorage.getToken()}`,
+    //     },
+    // });
     const checkTokenExpiration = useCallback(() => {
         if (token) {
             const decoded = Localstorage.getJWTUser();
@@ -34,13 +34,13 @@ const useAuth = () => {
             }
         }
     }, [token]);
-    socket.on('connected', () => {
-        console.log(socket.connected); // true
-    });
+    // socket.on('connected', () => {
+    //     console.log(socket.connected); // true
+    // });
 
-    socket.on('error', () => {
-        console.log(socket.connected); // false
-    });
+    // socket.on('error', () => {
+    //     console.log(socket.connected); // false
+    // });
     useEffect(() => {
         // Get the JWT token from the cookie
         const token = Localstorage.getToken();

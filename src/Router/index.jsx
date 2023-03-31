@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
+import AdminAttendance from '../Pages/AdminManagement/AdminAttendance';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
 import Algorithm from '../Pages/Algorithm';
@@ -120,6 +121,12 @@ const RouterComponent = () => {
                             path: 'allAccounts',
                             loader: Loading,
                             element: <AllAccounts />,
+                        },
+                        {
+                            exact: true,
+                            path: 'attendance/:id',
+                            loader: Loading,
+                            element: <AdminAttendance />,
                         },
                     ],
                 },

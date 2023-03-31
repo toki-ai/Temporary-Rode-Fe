@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Button, Col, Container, InputGroup, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -56,6 +56,10 @@ const Home = () => {
             })
             .catch((err) => console.log(err));
     };
+    const getAllRoom = async () => {
+        await roomApi.getAllUserRoom();
+    };
+
     return (
         <>
             <div>
@@ -68,6 +72,10 @@ const Home = () => {
                             className="w-100 bg-dark-secondary rounded-3 box-shadow-primary border border-2 border-dark "
                         >
                             <UserSidebar />
+                            <button alt="" type="button" onClick={() => getAllRoom()}>
+                                {' '}
+                                get all user room
+                            </button>
                             <Col
                                 lg={8}
                                 className="d-flex flex-column justify-content-center align-items-center position-relative d-none d-lg-flex "
