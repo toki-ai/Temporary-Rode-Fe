@@ -5,10 +5,29 @@ import TableAll from './Table/TableAll';
 import TableQuestion from './Table/TableQuestion';
 
 const fields = [
-    { id: 1, value: 'All' },
-    { id: 2, value: 'Question 1' },
-    { id: 3, value: 'Question 2' },
-    { id: 4, value: 'Question 3' },
+    {
+        id: 1,
+        value: 'All',
+        className:
+            'color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-left br-none',
+    },
+    {
+        id: 2,
+        value: 'Question 1',
+        className: 'color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-0 ',
+    },
+    {
+        id: 3,
+        value: 'Question 2',
+        className:
+            'color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-0 bl-none',
+    },
+    {
+        id: 4,
+        value: 'Question 3',
+        className:
+            'color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-right bl-none',
+    },
 ];
 
 const FilterQues = () => {
@@ -25,9 +44,16 @@ const FilterQues = () => {
     };
     return (
         <>
-            <div className="my-3">
+            <div className="my-3 listBtn_custom">
                 {fields.map((item) => {
-                    return <Btn key={item.id} name={item.value} handleOnClick={handleOnClick} />;
+                    return (
+                        <Btn
+                            key={item.id}
+                            name={item.value}
+                            handleOnClick={handleOnClick}
+                            className={item.className}
+                        />
+                    );
                 })}
             </div>
             <TableQues />

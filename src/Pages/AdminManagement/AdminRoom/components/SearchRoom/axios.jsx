@@ -13,7 +13,7 @@ export const getInfos = async () => {
 
 export const authApi = {
     getAllRoom: async () => {
-        const endpoint = `/rooms/get-all`;
+        const endpoint = `/rooms/admin-get-all`;
         // eslint-disable-next-line no-return-await
 
         return await get(endpoint, {}, authHeader())
