@@ -93,13 +93,13 @@ const RouterComponent = () => {
                     children: [
                         {
                             exact: true,
-                            path: 'admin_room',
+                            path: 'room',
                             loader: Loading,
                             element: <AdminRoom />,
                         },
                         {
                             exact: true,
-                            path: 'admin_room/:id',
+                            path: 'room/:id',
                             loader: Loading,
                             element: <AdminRoomView />,
                         },

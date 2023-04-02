@@ -14,7 +14,7 @@ const AdminRoomView = () => {
             <div className="p-3 box-style">
                 <div className="d-flex align-items-center">
                     <Link
-                        to="/admin/admin_room"
+                        to="/admin/room"
                         className="fs-1 d-flex justify-items-center color_primary"
                     >
                         <TiArrowLeft />
