@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Col, Row } from 'react-bootstrap';
+import { useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
 
+import adminRoomApi from '../../../utils/api/adminRoomApi';
 import ButtonCustom from './components/Button';
 import SelectCustom from './components/FilterRoom/Select';
 import SearchBar from './components/SearchRoom/SearchBar';
@@ -9,10 +11,58 @@ import TableRoom from './components/Table';
 import { RoomStyle } from './style';
 
 const AdminRoom = () => {
+    const { id } = useParams();
     const [result, setResult] = useState('All');
+    const [searchParams, setSearchParams] = useSearchParams(location.search);
+    const [listRoom, setListRoom] = useState([]);
+    const filterRoom = searchParams.get('filter.room') || '';
+    const [meta, setMeta] = useState();
     function handleChange(e) {
-        setResult(e.target.value);
+        setResult(e.target.name);
     }
+
+    const searchValue = searchParams.get('search') || '';
+    const [currentPage, setCurrentPage] = useState(meta?.currentPage || 1);
+    const handleSearchInputChange = (event) => {
+        console.log(event.target.name);
+        // let params = serializeFormQuery(event.target);
+        setSearchParams((prevSearchParams) => {
+            const newSearchParams = new URLSearchParams(prevSearchParams);
+            newSearchParams.set(`${event.target.name}`, event.target.value);
+            return newSearchParams;
+        });
+        // setSearchTerm(event.target.value);
+        // setCurrentPage(1);
+    };
+    const handleFilterChange = (event) => {
+        setSearchParams((prevSearchParams) => {
+            const newSearchParams = new URLSearchParams(prevSearchParams);
+            newSearchParams.set('filter.room', event.target.value);
+            return newSearchParams;
+        });
+        // setCurrentPage(1);
+    };
+    useEffect(() => {
+        const fetchRoom = async () => {
+            const filter = {
+                room: 'filter.room',
+            };
+            console.log(filter);
+            let req = {
+                roomId: id,
+                page: currentPage,
+                limit: 10,
+                search: searchValue,
+                [filter.room]: filterRoom,
+            };
+
+            adminRoomApi.getAllRoom(req).then((response) => {
+                setListRoom([...response?.data.data.data]);
+                setMeta(response.data.data.meta);
+            });
+        };
+        fetchRoom();
+    }, [searchValue, filterRoom, currentPage]);
     return (
         <div className="p-2">
             <RoomStyle>
@@ -23,14 +73,18 @@ const AdminRoom = () => {
                         </Row>
                         <Row className="d-flex justify-content-around align-items-center mb-3">
                             <Col className="col-5">
-                                <SearchBar />
+                                <SearchBar
+                                    handleChange={handleSearchInputChange}
+                                    value={searchValue}
+                                />
                             </Col>
                             <Col className="col-4 d-flex justify-content-center">
                                 <SelectCustom
                                     props={{
                                         name: 'Visibility:',
                                     }}
-                                    handleChange={handleChange}
+                                    value={filterRoom}
+                                    handleChange={handleFilterChange}
                                 />
                             </Col>
                             <Col className="col-3 d-flex align-items-center justify-content-end">
@@ -44,7 +98,7 @@ const AdminRoom = () => {
                             </Col>
                         </Row>
                         <Row className="d-flex justify-content-center">
-                            <TableRoom state={result} />
+                            <TableRoom listRoom={listRoom} state={result} />
                         </Row>
                     </Col>
                 </div>

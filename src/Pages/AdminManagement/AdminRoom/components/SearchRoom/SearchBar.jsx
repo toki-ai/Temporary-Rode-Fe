@@ -1,45 +1,39 @@
-import { useState, useEffect } from 'react';
-
+// import { useState, useEffect } from 'react';
 import { Button, InputGroup } from 'react-bootstrap';
 
-import ListInfo from './ListInfo';
-import { getInfos } from './axios';
+// import ListInfo from './ListInfo';
+// import { getInfos } from './axios';
 
-const SearchBar = () => {
-    const [value, setValue] = useState('');
-    const handleSubmit = (e) => e.preventDefault();
+const SearchBar = ({ value, handleChange }) => {
+    // const [value, setValue] = useState('');
+    // const handleSubmit = (e) => e.preventDefault();
 
-    const [infos, setInfos] = useState([]);
-    const [searchResults, setSearchResults] = useState([]);
-    useEffect(() => {
-        getInfos()
-            .then((json) => {
-                setInfos(json);
-                return json;
-            })
-            .then((json) => {
-                setSearchResults(json);
-            });
-    }, []);
-    const handleChange = (e) => {
-        setValue(e.target.value);
-        if (!e.target.value) return setSearchResults(infos);
-        const resultsArray = infos.filter((info) => info.body.includes(e.target.value));
-        setSearchResults(resultsArray);
-    };
-    const onSearch = (searchTerm) => {
-        setValue(searchTerm);
-        console.log(searchTerm);
-    };
+    // const [infos, setInfos] = useState([]);
+    // const [searchResults, setSearchResults] = useState([]);
+    // useEffect(() => {
+    //     getInfos()
+    //         .then((json) => {
+    //             setInfos(json);
+    //             return json;
+    //         })
+    //         .then((json) => {
+    //             setSearchResults(json);
+    //         });
+    // }, []);
+    // const handleChange = (e) => {
+    //     setValue(e.target.value);
+    //     if (!e.target.value) return setSearchResults(infos);
+    //     const resultsArray = infos.filter((info) => info.body.includes(e.target.value));
+    //     setSearchResults(resultsArray);
+    // };
+    // const onSearch = (searchTerm) => {
+    //     setValue(searchTerm);
+    //     console.log(searchTerm);
+    // };
     return (
         <div>
-            <InputGroup className="border rounded-pill" onSubmit={handleSubmit}>
-                <Button
-                    className="rounded-pill dishover"
-                    variant="none"
-                    type="submit"
-                    onClick={() => onSearch(value)}
-                >
+            <InputGroup className="border rounded-pill">
+                <Button className="rounded-pill dishover" variant="none">
                     <i className="bi bi-search"></i>
                 </Button>
                 <input
@@ -47,10 +41,10 @@ const SearchBar = () => {
                     placeholder="Search room..."
                     type="text"
                     value={value}
-                    onChange={handleChange}
+                    name="search"
+                    onChange={(e) => handleChange(e)}
                 />
             </InputGroup>
-            <ListInfo searchResults={searchResults} value={value} onSearch={onSearch} />
         </div>
     );
 };
