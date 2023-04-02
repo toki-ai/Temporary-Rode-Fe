@@ -19,7 +19,7 @@ function RoomInfo({ room_code }) {
         authApi
             .getAllRoom()
             .then((res) => {
-                setRooms(res.data.data);
+                setRooms(res.data.data.data);
             })
             .catch((err) => {
                 console.log(err);
