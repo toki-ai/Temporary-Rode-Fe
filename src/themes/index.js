@@ -1,5 +1,7 @@
 export const themes = {
     colors: {
+        arenaBG: '#020D26',
+        neonLine: '#00e7aa',
         light: '#FFFFFF',
         dark: '#000000',
         primary: '#00E7AA',
@@ -21,5 +23,8 @@ export const themes = {
         grey: '#f2f2f2',
         grey2: '#6c757d',
         grey3: '#495057',
+        gold: '#FEE500',
+        sliver: '#d8dddf',
+        cooper: '#EF7329',
     },
 };

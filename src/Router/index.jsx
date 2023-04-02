@@ -4,7 +4,10 @@ import { Navigate } from 'react-router-dom';
 import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
+import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
+import Algorithm from '../Pages/Algorithm';
 import CreateRoom from '../Pages/CreateRoom';
+import ArenaCSS from '../Pages/CssBattle';
 import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
@@ -13,10 +16,11 @@ import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import TestAlert from '../components/TestAlert';
 import TestModal from '../components/TestModal';
+import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
-import { loaderInfoGG } from './RouterLoader/Loader';
+import { loaderInfoGG, GetInfoRoomByCode } from './RouterLoader/Loader';
 
 const RouterComponent = () => {
     const router = createBrowserRouter([
@@ -55,11 +59,11 @@ const RouterComponent = () => {
             children: [
                 {
                     exact: true,
-                    path: 'home',
+
                     loader: Loading,
                     element: <UserLayoutComponent />,
                     children: [
-                        { path: 'homeChild', element: <Home /> },
+                        { index: true, path: 'home', element: <Home /> },
                         { exact: true, path: 'modal', loader: Loading, element: <TestModal /> },
                         { exact: true, path: 'alert', loader: Loading, element: <TestAlert /> },
                         {
@@ -67,6 +71,18 @@ const RouterComponent = () => {
                             path: 'testMirror',
                             loader: Loading,
                             element: <TestCodeMirror />,
+                        },
+                        {
+                            exact: true,
+                            path: 'arena_css/:id',
+                            loader: GetInfoRoomByCode,
+                            element: <ArenaCSS />,
+                        },
+                        {
+                            exact: true,
+                            path: 'algorithm/:id',
+                            loader: Loading,
+                            element: <Algorithm />,
                         },
                     ],
                 },
@@ -87,6 +103,12 @@ const RouterComponent = () => {
                             path: 'admin_room',
                             loader: Loading,
                             element: <AdminRoom />,
+                        },
+                        {
+                            exact: true,
+                            path: 'admin_room/:id',
+                            loader: Loading,
+                            element: <AdminRoomView />,
                         },
                         {
                             exact: true,

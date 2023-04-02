@@ -12,13 +12,14 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 20%;
-    height: 87vh;
+    min-height: 87vh;
     background: #ffffff;
     box-shadow: 6px 35px 24px rgba(0, 0, 0, 0.25);
     border-radius: 20px 20px 0 0;
     z-index: 1;
     a {
         color: #515151;
+        text-decoration: none;
     }
 `;
 
@@ -207,11 +208,3 @@ export const EndBar = styled.div`
 //         background-color: black;
 //     }
 // `;
-
-export const Item = styled.div`
-    cursor: pointer;
-    transition: 0.3s;
-    &:hover {
-        color: #00e7aa;
-    }
-`;

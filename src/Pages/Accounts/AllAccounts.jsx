@@ -18,7 +18,7 @@ const AllAccounts = () => {
     useEffect(() => {
         accountsApi.getAll().then((response) => {
             console.log('getAll', response);
-            setAccounts(response.data.data);
+            setAccounts(response.data.data.data);
         });
     }, []);
 

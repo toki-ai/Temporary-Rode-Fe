@@ -12,9 +12,9 @@ export const Wrap = styled.div`
         align-items: center;
         padding: 9px 12px;
         gap: 10px;
-        background: linear-gradient(90deg, ${themes.colors.primary} 0.05%, #00513c -5%);
-        color: #fff;
-        border: 2px solid ${themes.colors.primary};
+        background: linear-gradient(90deg, #00e7aa 0.05%, #00513c -5%);
+        color: ${(props) => props.theme.colors.light};
+        border: 2px solid #00e7aa;
         border-radius: 42px;
         width: 233px;
 
@@ -58,8 +58,21 @@ export const Wrap = styled.div`
         padding: 9px 12px;
         gap: 10px;
         color: #007dff;
-        background: #ffffff;
+        background: ${(props) => props.theme.colors.light};
         border-radius: 42px;
         width: 133px;
+    }
+    .btn-borderNeon {
+        color: ${(props) => props.theme.colors.light};
+        border: 2px solid #00e7aa;
+        /* shadow */
+
+        filter: drop-shadow(0px 2px 15px #00c994);
+        border-radius: 21px;
+        &:hover {
+            transition: all 0.4s ease-out;
+            color: ${(props) => props.theme.colors.neonLine};
+            background: ${(props) => props.theme.colors.light};
+        }
     }
 `;

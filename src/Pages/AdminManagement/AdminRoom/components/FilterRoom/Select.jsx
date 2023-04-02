@@ -9,12 +9,13 @@ const options = [
     { label: 'Public', id: 2 },
     { label: 'Private', id: 3 },
 ];
-const SelectCustom = ({ props }) => {
+
+const SelectCustom = ({ props, handleChange }) => {
     return (
         <RoomStyle>
             <div className="d-flex">
                 <div className="p-2 rfs">{props.name}</div>
-                <Form.Select className="rfs rs">
+                <Form.Select className="rfs rs" onChange={(e) => handleChange(e)}>
                     {options.map((item) => {
                         return <option key={item.id}>{item.label}</option>;
                     })}
