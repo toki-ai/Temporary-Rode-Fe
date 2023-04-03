@@ -38,7 +38,7 @@ const roomApi = {
                 return err;
             });
     },
-    adminGetAll: async () => {
+    adminGetAll: async (credential) => {
         const endpoint = `/rooms/admin-get-all`;
         // eslint-disable-next-line no-return-await
 

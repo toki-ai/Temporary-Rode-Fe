@@ -56,7 +56,7 @@ const AdminRoom = () => {
                 [filter.room]: filterRoom,
             };
 
-            roomApi.adminGetAll().then((response) => {
+            roomApi.adminGetAll(req).then((response) => {
                 console.log(response);
                 setListRoom([...response?.data.data.data]);
                 setMeta(response.data.data.meta);
