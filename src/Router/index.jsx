@@ -14,7 +14,6 @@ import Register from '../Pages/Register';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import TestAlert from '../components/TestAlert';
-import TestModal from '../components/TestModal';
 import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
@@ -57,7 +56,6 @@ const RouterComponent = () => {
                     element: <UserLayoutComponent />,
                     children: [
                         { index: true, path: 'home', element: <Home /> },
-                        { exact: true, path: 'modal', loader: Loading, element: <TestModal /> },
                         { exact: true, path: 'alert', loader: Loading, element: <TestAlert /> },
                         {
                             exact: true,
