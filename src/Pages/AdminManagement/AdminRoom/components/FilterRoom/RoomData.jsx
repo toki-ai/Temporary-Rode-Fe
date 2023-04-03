@@ -11,8 +11,6 @@ export function functionCheckFilter({ state }) {
     console.log(state);
 }
 export function RoomData({ state, listRoom }) {
-    console.log(listRoom);
-    console.log(state);
     const results = listRoom
         .filter((room) => {
             if (state == 'All') return room.isPrivate == true || room.isPrivate == false;

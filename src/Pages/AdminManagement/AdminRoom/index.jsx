@@ -47,7 +47,6 @@ const AdminRoom = () => {
             const filter = {
                 room: 'filter.room',
             };
-            console.log(filter);
             let req = {
                 roomId: id,
                 page: currentPage,
