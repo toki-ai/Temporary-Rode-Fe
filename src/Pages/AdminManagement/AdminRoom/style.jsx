@@ -124,6 +124,7 @@ export const RoomStyle = styled.div`
         background-color: ${(props) => props.theme.colors.primary2};
         color: ${(props) => props.theme.colors.light};
     }
+
     @media (max-width: 800px) {
         .rs {
             width: 70%;
@@ -138,5 +139,15 @@ export const RoomStyle = styled.div`
         td {
             font-size: 0.75em;
         }
+    }
+`;
+export const BtnStyle = styled.div`
+    .btn-save {
+        background-color: red;
+        color: ${(props) => props.theme.colors.light};
+    }
+    .btn-closes {
+        background-color: ${(props) => props.theme.colors.grey};
+        color: ${(props) => props.theme.colors.light};
     }
 `;
