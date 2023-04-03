@@ -1,5 +1,8 @@
+import { useState } from 'react';
+
 import { Table } from 'react-bootstrap';
 
+import userRoomApi from '../../../../../utils/api/userRoomApi';
 import { RoomDetailData } from '../RoomDetailData';
 
 const titles = [
@@ -9,6 +12,7 @@ const titles = [
     { id: 4, name: 'Execution Time' },
     { id: 5, name: 'Finish at' },
 ];
+
 const questions = [
     {
         id: 1,
@@ -101,6 +105,23 @@ const data = [
     },
 ];
 function TableQues({ ques }) {
+    const [accounts, setAccounts] = useState([]);
+
+    const { id } = useParams();
+    const userInfo = (idUserRoom) => {
+        userRoomApi.then((res) => {
+            console.log('line 10: ', res);
+            if (res.data.status == 200) {
+                let req = {
+                    roomId: id,
+                };
+                userRoomApi.getAllUserInRoom(req).then((response) => {
+                    console.log(response);
+                    setAccounts([...response?.data.data.data]);
+                });
+            }
+        });
+    };
     let i = ques;
     return (
         <Table striped className="w-98 border-top">
@@ -112,7 +133,7 @@ function TableQues({ ques }) {
                 </tr>
             </thead>
             <tbody>
-                <RoomDetailData data={questions[i - 1].data} />
+                <RoomDetailData data={accounts} />
             </tbody>
         </Table>
     );
