@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
 
-import adminRoomApi from '../../../utils/api/adminRoomApi';
+import roomApi from '../../../utils/api/roomApi';
 import ButtonCustom from './components/Button';
 import SelectCustom from './components/FilterRoom/Select';
 import SearchBar from './components/SearchRoom/SearchBar';
@@ -18,7 +18,7 @@ const AdminRoom = () => {
     const filterRoom = searchParams.get('filter.room') || '';
     const [meta, setMeta] = useState();
     function handleChange(e) {
-        setResult(e.target.name);
+        setResult(e.target.value);
     }
 
     const searchValue = searchParams.get('search') || '';
@@ -56,7 +56,8 @@ const AdminRoom = () => {
                 [filter.room]: filterRoom,
             };
 
-            adminRoomApi.getAllRoom(req).then((response) => {
+            roomApi.adminGetAll().then((response) => {
+                console.log(response);
                 setListRoom([...response?.data.data.data]);
                 setMeta(response.data.data.meta);
             });
@@ -84,7 +85,7 @@ const AdminRoom = () => {
                                         name: 'Visibility:',
                                     }}
                                     value={filterRoom}
-                                    handleChange={handleFilterChange}
+                                    handleChange={handleChange}
                                 />
                             </Col>
                             <Col className="col-3 d-flex align-items-center justify-content-end">

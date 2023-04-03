@@ -38,6 +38,19 @@ const roomApi = {
                 return err;
             });
     },
+    adminGetAll: async () => {
+        const endpoint = `/rooms/admin-get-all`;
+        // eslint-disable-next-line no-return-await
+
+        return await get(endpoint, {}, authHeader())
+            .then((res) => {
+                // if (res.data.code !== 200) console.log(res.response);
+                return res;
+            })
+            .catch((err) => {
+                return err;
+            });
+    },
 };
 
 export default roomApi;
