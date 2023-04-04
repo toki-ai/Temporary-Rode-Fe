@@ -107,7 +107,6 @@ const data = [
 function TableQues({ ques }) {
     const [accounts, setAccounts] = useState([]);
 
-    const { id } = useParams();
     const userInfo = (idUserRoom) => {
         userRoomApi.then((res) => {
             console.log('line 10: ', res);

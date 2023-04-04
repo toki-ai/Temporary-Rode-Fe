@@ -23,12 +23,14 @@ export const BtnStyle = styled.div`
         font-size: 1.2em;
     }
     //for modal delete
-    .btn-grey {
+    .btn-grey,
+    .btn-grey:hover {
         background-color: ${(props) => props.theme.colors.grey2};
         color: ${(props) => props.theme.colors.light};
         border: none;
     }
-    .btn-red {
+    .btn-red,
+    .btn-red:hover {
         background-color: ${(props) => props.theme.colors.red2};
         color: ${(props) => props.theme.colors.light};
         border: none;

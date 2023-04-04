@@ -38,8 +38,21 @@ const roomApi = {
                 return err;
             });
     },
-    adminGetAll: async (credential) => {
+    adminGetAll: async (req) => {
         const endpoint = `/rooms/admin-get-all`;
+        // eslint-disable-next-line no-return-await
+
+        return await get(endpoint, req, authHeader())
+            .then((res) => {
+                // if (res.data.code !== 200) console.log(res.response);
+                return res;
+            })
+            .catch((err) => {
+                return err;
+            });
+    },
+    getAllRomType: async () => {
+        const endpoint = `/rooms/get-all-room-type`;
         // eslint-disable-next-line no-return-await
 
         return await get(endpoint, {}, authHeader())

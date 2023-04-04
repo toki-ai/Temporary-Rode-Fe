@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap/esm';
 
 import ModalComponent from '../../../../../components/Modal';
-import { BtnStyle, RoomStyle } from '../../style';
 
 const More = ({ link }) => {
     const [show, setShow] = useState(false);
@@ -14,8 +13,8 @@ const More = ({ link }) => {
             href: `/admin/room/${link}`,
             value: 'View',
         },
-        { id: 2, href: '#', value: 'Edit' },
-        { id: 3, href: '#', value: 'Delete', func: () => setShow(true) },
+        { id: 2, href: `/admin/room/edit/${link}`, value: 'Edit' },
+        { id: 3, value: 'Delete', func: () => setShow(true) },
     ];
     return (
         <>

@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
+import AdminRoomEdit from '../Pages/AdminManagement/AdminRoomEdit';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
 import Algorithm from '../Pages/Algorithm';
 import ArenaCSS from '../Pages/CssBattle';
@@ -100,6 +101,12 @@ const RouterComponent = () => {
                             path: 'room/:id',
                             loader: Loading,
                             element: <AdminRoomView />,
+                        },
+                        {
+                            exact: true,
+                            path: 'room/edit/:id',
+                            loader: Loading,
+                            element: <AdminRoomEdit />,
                         },
                         {
                             exact: true,

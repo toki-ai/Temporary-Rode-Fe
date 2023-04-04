@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Col, Row } from 'react-bootstrap';
+import { Col, Form, Row } from 'react-bootstrap';
 import { useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
 
 import roomApi from '../../../utils/api/roomApi';
@@ -17,10 +17,10 @@ const AdminRoom = () => {
     const [listRoom, setListRoom] = useState([]);
     const filterRoom = searchParams.get('filter.room') || '';
     const [meta, setMeta] = useState();
-    function handleChange(e) {
-        setResult(e.target.value);
-    }
-
+    // function handleChange(e) {
+    //     setResult(e.target.value);
+    //     console.log(result);
+    // }
     const searchValue = searchParams.get('search') || '';
     const [currentPage, setCurrentPage] = useState(meta?.currentPage || 1);
     const handleSearchInputChange = (event) => {
@@ -37,24 +37,30 @@ const AdminRoom = () => {
     const handleFilterChange = (event) => {
         setSearchParams((prevSearchParams) => {
             const newSearchParams = new URLSearchParams(prevSearchParams);
-            newSearchParams.set('filter.room', event.target.value);
+            if (event.target.value == '1' || event.target.value == '0') {
+                newSearchParams.set('filter.room', event.target.value);
+            } else {
+                newSearchParams.set('filter.room', '2');
+            }
             return newSearchParams;
         });
         // setCurrentPage(1);
     };
+
+    const filterRoomResult = () => {};
     useEffect(() => {
         const fetchRoom = async () => {
             const filter = {
-                room: 'filter.room',
+                room: 'filter.isPrivate',
             };
             let req = {
                 roomId: id,
                 page: currentPage,
                 limit: 10,
                 search: searchValue,
-                [filter.room]: filterRoom,
+                [filter.room]: filterRoom == '2' ? '' : filterRoom,
             };
-
+            console.log(req);
             roomApi.adminGetAll(req).then((response) => {
                 console.log(response);
                 setListRoom([...response?.data.data.data]);
@@ -79,13 +85,26 @@ const AdminRoom = () => {
                                 />
                             </Col>
                             <Col className="col-4 d-flex justify-content-center">
-                                <SelectCustom
+                                <Form.Select
+                                    id="isPrivate"
+                                    aria-label="Default select"
+                                    value={filterRoom}
+                                    onChange={(e) => {
+                                        handleFilterChange(e);
+                                    }}
+                                >
+                                    <option value="2">All</option>
+                                    <option value="0">Public</option>
+                                    <option value="1">Private</option>
+                                </Form.Select>
+
+                                {/* <SelectCustom
                                     props={{
                                         name: 'Visibility:',
                                     }}
                                     value={filterRoom}
                                     handleChange={handleChange}
-                                />
+                                /> */}
                             </Col>
                             <Col className="col-3 d-flex align-items-center justify-content-end">
                                 <ButtonCustom
