@@ -10818,4 +10818,53 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+.form-control-xxl {
+  padding: 10px;
+  background-color: transparent;
+  border: 2px solid #00e7aa;
+  border-radius: 15px;
+  color: #fff;
+}
+
+.form-control:focus {
+  background-color: transparent;
+  color: white;
+  border-color: #00e7aa;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 231, 169, 0.2352941176);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #686478;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b1b1b1;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  opacity: 0.6;
+  filter: invert(0.8);
+}
+
+input[type=date]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }/*# sourceMappingURL=custom-variables.css.map */

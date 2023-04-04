@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import ButtonStyled from '../../../components/Button';
 import OffCanvasComponents from '../../../components/OffCanvas/OffCanvas';
+import { useDebounce } from '../../../hooks/useDebounce';
 import { CodeTemplateTmp } from '../../../utils/Constant/Dummy';
 import submitApi from '../../../utils/api/submitApi';
 import { BoxEditor, TextStyled, TextSmall } from '../styled';
@@ -34,19 +35,32 @@ const LIST_SOLUTION = [
         code: '<div></div> <style> div { width: 100%; height: 100%; border-radius: 5px; background: #F5D6B4; } </style> <!-- OBJECTIVE --> <!-- Write HTML/CSS in this editor and replicate the given target image in the least code possible. What you write here, renders as it is --> <!-- SCORING --> <!-- The score is calculated based on the number of characters you use (this comment included :P) and how close you replicate the image. Read the FAQS (https://cssbattle.dev/faqs) for more info. --> <!-- IMPORTANT: remove the comments before submitting -->',
     },
 ];
-const ArenaCSSCode = ({ setCode, setCount, count, code, data }) => {
+const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) => {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
+    const [submitStatus, setSubmitStatus] = useState(true);
+
     const submitCode = async () => {
+        setSubmitStatus(false);
         const formatData = {
             roomId: data?.id,
             questionId: data?.questions[0].id,
             code: code,
             // language: 'C_CPP',
         };
+        console.log(formatData);
         const res = await submitApi.submit(formatData);
+
+        if (res.data.status === 200) {
+            submitService.setSubmit(res.data.data);
+            setTimeout(() => {
+                setSubmitStatus(true);
+            }, 5000);
+        }
+
         console.log(res);
     };
+
     return (
         <>
             <OffCanvasComponents title="My Solution" show={show} setShow={setShow}>
@@ -79,7 +93,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data }) => {
                 <ButtonStyled buttonType="base" onClick={handleShow}>
                     My SOLUTION
                 </ButtonStyled>
-                <ButtonStyled buttonType="base" onClick={submitCode}>
+                <ButtonStyled buttonType="base" onClick={submitCode} disabled={!submitStatus}>
                     SUBMIT
                 </ButtonStyled>
             </Stack>
