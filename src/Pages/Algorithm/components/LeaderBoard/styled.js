@@ -10,6 +10,8 @@ export const LeaderBoardStyled = styled.div`
     background-color: #020d26;
     height: 100%;
     position: relative;
+    overflow: hidden;
+    z-index: 0;
     .bg-blue {
         background-color: #020d26;
     }
@@ -35,13 +37,17 @@ export const TitleLB = styled.h1`
     font-size: 40px;
     font-weight: 700;
     color: #00e7aa;
+    @media screen and (max-width: 570px) {
+        font-size: 24px;
+    }
 `;
 
 export const QuestionLB = styled.select`
     border: 1px solid #2e7dff;
-    width: 200px;
+    width: 180px;
+    height: 50px;
     padding: 10px 20px;
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 300;
     border-radius: 10px;
     -moz-appearance: none;
@@ -49,6 +55,12 @@ export const QuestionLB = styled.select`
     appearance: none;
     &:focus {
         outline: none;
+    }
+    @media screen and (max-width: 570px) {
+        font-size: 14px;
+        width: 140px;
+        height: 40px;
+        padding: 10px 20px;
     }
 `;
 
@@ -58,16 +70,22 @@ export const TableLB = styled.div`
     padding: 0;
     margin: 0;
     border: 1px solid #00e7aa;
+    .mb-0 {
+        margin-bottom: 0;
+    }
     .thead_table {
         margin: 40px;
         border-top: 2px solid #00e7aa;
         border-bottom: 2px solid #00e7aa;
         font-weight: 700;
-        font-size: 24px;
+        font-size: 20px;
         line-height: 30px;
         color: #ffffff;
         & th {
             padding-left: 26px;
+        }
+        @media screen and (max-width: 570px) {
+            font-size: 12px;
         }
     }
     .tbody_table {

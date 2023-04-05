@@ -11,64 +11,66 @@ import { LeaderBoardStyled, HeaderLB, QuestionLB, TitleLB, TableLB, PaginationLB
 import Table from 'react-bootstrap/Table';
 
 const LeaderBoard = () => {
-    // fix cứng QuestionCode -> Cần sửa lại
-
     const [userSubmitHistory, setUserSubmitHistory] = useState([]);
     const roomInfo = useLoaderData();
-    console.log(roomInfo);
+    const [questionCode, setQuestionCode] = useState(roomInfo.questions[1].id || '');
+    // console.log('roomInfooooooooooooooooo ', roomInfo);
     useEffect(() => {
-        const questionCode = 'ffb8287d-1b01-4daf-8eb4-3127e1fb21hg';
-
         const fetchDataSubmitHistory = async () => {
             submitHistoryApi.getSubmitHistoryByQuestion(questionCode).then((response) => {
-                // console.log('Fake data: ', response.data.data.items);
                 setUserSubmitHistory(response.data.data.items);
             });
         };
         fetchDataSubmitHistory();
-    }, []);
-    console.log(userSubmitHistory);
+    }, [questionCode]);
     return (
         <LeaderBoardStyled>
             <Row sm={12} md={12} lg={12} className="w-100">
                 <HeaderLB>
                     <TitleLB>LeaderBoard</TitleLB>
 
-                    <QuestionLB aria-label=" ">
-                        <option value="1">Question 1</option>
-                        <option value="2">Question 2</option>
-                        <option value="2">Question 3</option>
+                    <QuestionLB
+                        aria-label=""
+                        onChange={(e) => setQuestionCode(e.currentTarget.value)}
+                    >
+                        {roomInfo.questions.map((question, index) => (
+                            <option key={question.id} value={question.id}>
+                                Question {index + 1}
+                            </option>
+                        ))}
                     </QuestionLB>
                 </HeaderLB>
                 <Row className="m-0">
                     <TableLB>
-                        <Table striped hover bordered variant="dark">
+                        <Table striped hover bordered variant="dark" className="mb-0">
                             <thead className="thead_table">
                                 <tr>
-                                    <th>Top</th>
-                                    <th>Name</th>
-                                    <th>Student ID</th>
-                                    <th>Score</th>
-                                    <th>Language</th>
-                                    <th>Time</th>
+                                    <td>Top</td>
+                                    <td>Name</td>
+                                    <td>Student ID</td>
+                                    <td>Score</td>
+                                    <td>Language</td>
+                                    <td>Time</td>
                                 </tr>
                             </thead>
-                            {userSubmitHistory.map((item, index) => (
-                                <tbody key={index} className="tbody_table">
-                                    <th>{index}</th>
-                                    <th>{item.account.fname + ' ' + item.account.lname}</th>
-                                    <th>{item.account.studentId}</th>
-                                    <th>{item.score}</th>
-                                    <th>{item.language}</th>
-                                    <th>{item.time}</th>
+                            {userSubmitHistory?.map((item, index) => (
+                                <tbody key={index} className="">
+                                    <tr>
+                                        <td>{index}</td>
+                                        <td>{item.account.fname + ' ' + item.account.lname}</td>
+                                        <td>{item.account.studentId}</td>
+                                        <td>{item.score}</td>
+                                        <td>{item.language}</td>
+                                        <td>{item.time}</td>
+                                    </tr>
                                 </tbody>
                             ))}
                         </Table>
                     </TableLB>
                 </Row>
-                <PaginationLB>
+                {/* <PaginationLB>
                     <PaginationLeaderboard />
-                </PaginationLB>
+                </PaginationLB> */}
             </Row>
         </LeaderBoardStyled>
     );

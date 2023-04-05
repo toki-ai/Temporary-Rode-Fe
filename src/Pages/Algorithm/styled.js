@@ -56,6 +56,7 @@ export const AlgorithmContent = styled.div`
     border-radius: 10px;
     border: 1px solid #00e7aa;
     padding: 0 -20px;
+    overflow: hidden;
 `;
 
 export const AlgorithmNavItem = styled.div`
@@ -83,5 +84,12 @@ export const AlgorithmNavItem = styled.div`
         color: #2e7dff;
         word-break: break-word;
         width: 100%;
+    }
+    @media screen and (max-width: 570px) {
+        gap: 20px;
+        .algorithm-nav-title {
+            font-size: 14px;
+            transform: rotate(0deg);
+        }
     }
 `;
