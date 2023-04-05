@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { Container, Row } from 'react-bootstrap';
+import { useLoaderData } from 'react-router-dom';
 
+import roomApi from '../../../../utils/api/roomApi';
 import submitHistoryApi from '../../../../utils/api/submitHistoryApi';
 import PaginationLeaderboard from './PaginationLeaderboard';
 import { LeaderBoardStyled, HeaderLB, QuestionLB, TitleLB, TableLB, PaginationLB } from './styled';
@@ -10,9 +12,13 @@ import Table from 'react-bootstrap/Table';
 
 const LeaderBoard = () => {
     // fix cứng QuestionCode -> Cần sửa lại
+
     const [userSubmitHistory, setUserSubmitHistory] = useState([]);
+    const roomInfo = useLoaderData();
+    console.log(roomInfo);
     useEffect(() => {
         const questionCode = 'ffb8287d-1b01-4daf-8eb4-3127e1fb21hg';
+
         const fetchDataSubmitHistory = async () => {
             submitHistoryApi.getSubmitHistoryByQuestion(questionCode).then((response) => {
                 // console.log('Fake data: ', response.data.data.items);
