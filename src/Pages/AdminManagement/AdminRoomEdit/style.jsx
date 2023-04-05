@@ -93,4 +93,19 @@ export const RoomEditStyle = styled.div`
         object-fit: cover;
         margin-bottom: 20px;
     }
+    @media (min-width: 1001px) {
+        .input-num {
+            width: 1em;
+        }
+    }
+    @media (max-width: 1000px) {
+        .btn-sm-sm {
+            width: 2.4em;
+            height: 2.3em;
+        }
+        .input-num {
+            width: 2em;
+            height: 2.3em;
+        }
+    }
 `;

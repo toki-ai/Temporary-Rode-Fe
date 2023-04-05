@@ -14,17 +14,17 @@ const ButtonUpDown = ({ variant }) => {
     };
     return (
         <div className="d-flex">
-            <Button variant={variant} className="rounded-l-0" onClick={decrease}>
+            <Button variant={variant} className="rounded-l-0 btn-sm-sm" onClick={decrease}>
                 <i className="bi bi-dash"></i>
             </Button>
             <Form.Control
                 type="text"
                 pattern="[0-9]*"
-                className="rounded-0 mw-fit text-center bg-light border-green color-primary"
+                className="rounded-0 mw-fit text-center bg-light border-green color-primary input-num"
                 value={quantity}
                 disabled
             />
-            <Button variant={variant} className="rounded-r-0" onClick={increase}>
+            <Button variant={variant} className="rounded-r-0 btn-sm-sm" onClick={increase}>
                 <i className="bi bi-plus"></i>
             </Button>
         </div>

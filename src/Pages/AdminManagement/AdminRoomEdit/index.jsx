@@ -146,7 +146,7 @@ const AdminRoomEdit = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
-                            <Row className="mb-3">
+                            <Row className="mb-4">
                                 <Form.Group as={Col} controlId="duration">
                                     <Form.Label className="fw-bold">Duration</Form.Label>
                                     <Form.Control
@@ -178,16 +178,16 @@ const AdminRoomEdit = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
-                            <h3>Question 1:</h3>
+                            <h4>Question 1:</h4>
                             <Row>
                                 <Col>
                                     <Row className="d-flex align-items-center mb-4">
-                                        <Col className="col-4">
-                                            <div className="text-secondary fw-bold">
+                                        <Col className="col-6 col-lg-5">
+                                            <div className="text-secondary fw-bold rfs">
                                                 Max Submit Time:
                                             </div>
                                         </Col>
-                                        <Col className="col-3">
+                                        <Col className="col-3 col-lg-4 ">
                                             <ButtonUpDown variant="green" />
                                         </Col>
                                     </Row>
@@ -202,8 +202,8 @@ const AdminRoomEdit = () => {
                                 </Col>
                                 <Col>
                                     <span className="text-secondary fw-bold">Test Case 1:</span>
-                                    <Row>
-                                        <Col className="col-6">
+                                    <Row className="d-flex">
+                                        <Col className="col-lg-6 col-12">
                                             <label htmlFor="input">Input</label>
                                             <textarea
                                                 name="input"
@@ -212,7 +212,7 @@ const AdminRoomEdit = () => {
                                                 cols="22"
                                             ></textarea>
                                         </Col>
-                                        <Col className="col-6">
+                                        <Col className="col-lg-6 col-12">
                                             {/* <Form.Group>
                                                 <Form.Label className="color-primary">
                                                     Output
