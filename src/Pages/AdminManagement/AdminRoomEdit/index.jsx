@@ -118,17 +118,8 @@ const AdminRoomEdit = () => {
                             </Row>
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="openTime">
-                                    {/* <Form.Label className="fw-bold">Open Time</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="openTime"
-                                        value={values.openTime}
-                                        onChange={handleChange}
-                                        isValid={touched.openTime && !errors.openTime}
-                                        isInvalid={!!errors.openTime}
-                                    />  */}
                                     <Form.Label className="fw-bold">Open Time</Form.Label>
-                                    <DateTimePickerValue dayApi={values.closeTime} />
+                                    <DateTimePickerValue dayApi={room.openTime} />
 
                                     <Form.Control.Feedback type="invalid">
                                         {errors.openTime}
@@ -136,15 +127,19 @@ const AdminRoomEdit = () => {
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="closeTime">
                                     <Form.Label className="fw-bold">Close Time</Form.Label>
-                                    {/* <Form.Control
-                                        type="text"
-                                        name="closeTime"
-                                        value={values.closeTime}
-                                        onChange={handleChange}
-                                        isValid={touched.closeTime && !errors.closeTime}
-                                        isInvalid={!!errors.closeTime}
-                                    /> */}
-                                    <DateTimePickerValue dayApi={values.closeTime} />
+                                    {values.visibility == 'Public' ? (
+                                        <Form.Control
+                                            type="text"
+                                            name="closeTime"
+                                            value={values.closeTime}
+                                            onChange={handleChange}
+                                            isValid={touched.closeTime && !errors.closeTime}
+                                            isInvalid={!!errors.closeTime}
+                                            style={{ marginTop: '10px' }}
+                                        />
+                                    ) : (
+                                        <DateTimePickerValue dayApi={room.closeTime} />
+                                    )}
                                     <Form.Control.Feedback type="invalid">
                                         {errors.closeTime}
                                     </Form.Control.Feedback>
@@ -196,10 +191,12 @@ const AdminRoomEdit = () => {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        {/* <Form.Group controlId="formFile" className="">
-                                            <Form.Label>Upload question</Form.Label>
+                                        <Form.Group controlId="formFile" className="">
+                                            <Form.Label className="fw-bold">
+                                                Upload question
+                                            </Form.Label>
                                             <Form.Control type="file" />
-                                        </Form.Group> */}
+                                        </Form.Group>
                                     </Row>
                                 </Col>
                                 <Col>
@@ -249,7 +246,7 @@ const AdminRoomEdit = () => {
                             <hr></hr>
                             <ButtonCustom
                                 variant="light border-dashed w-100"
-                                name="Add test case"
+                                name="Add question"
                                 className="bi bi-plus d-flex align-items-center fs-4"
                             />
                             <div className="d-flex justify-content-end mt-4">

@@ -18,14 +18,12 @@ function TableAll({ roomID }) {
         roomApi
             .getSubmitHistoryByRoom(roomID)
             .then((res) => {
-                console.log(res.data.data);
                 setQuestions(res.data.data.items);
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
-    console.log(questions);
     return (
         <Table striped className="w-98 border-top">
             <thead>
