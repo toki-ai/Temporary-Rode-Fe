@@ -18,6 +18,7 @@ const AdminRoomView = () => {
             .getRoomByCode(id)
             .then((res) => {
                 setRoom(res.data.data);
+                console.log(room.id);
             })
             .catch((err) => {
                 console.log(err);
@@ -41,7 +42,7 @@ const AdminRoomView = () => {
                 <div className="p-3">
                     <RoomInfo room={room} />
                     <div className="w-sm-75 w-md-50 w-lg-50">
-                        <FilterQues roomID={room.id} />
+                        <FilterQues roomId={room.id} />
                     </div>
                 </div>
             </div>
