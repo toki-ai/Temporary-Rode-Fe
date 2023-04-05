@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Button, InputGroup } from 'react-bootstrap';
 
-const Search = () => {
+const Search = ({ action, value }) => {
+    console.log(value);
     return (
         <div>
             <div>
@@ -14,6 +15,9 @@ const Search = () => {
                         className="border-0 rounded-pill dishover form-control rfs"
                         placeholder="Search room..."
                         type="text"
+                        value={value}
+                        name="search"
+                        onChange={(e) => action(e)}
                     />
                 </InputGroup>
             </div>

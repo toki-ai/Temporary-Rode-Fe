@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 import { Col, Row } from 'react-bootstrap';
+import { useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
 
 import accountsApi from '../../utils/api/accountsApi';
 import './AllAccounts.scss';
 import Join from './components/Join';
 import More from './components/More';
+import PaginationAccounts from './components/PaginationAccounts';
 import Search from './components/Search';
 import { RoomStyle } from './style';
 
@@ -13,15 +15,71 @@ import Form from 'react-bootstrap/Form';
 import Table from 'react-bootstrap/Table';
 
 const AllAccounts = () => {
+    const location = useLocation();
+
+    const [searchParams, setSearchParams] = useSearchParams(location.search);
+    const { id } = useParams();
+    //giá trị còn fixed cứng -> cần thay đổi khúc này
+    const searchValue = searchParams.get('search') || '';
+    const filterRoom = searchParams.get('filter.room') || '';
+
+    const [listAttend, setListAttend] = useState([]);
+    const [meta, setMeta] = useState();
+    //search and filter
+    // const [searchTerm, setSearchTerm] = useState('');
+
+    //pagination and current page
+    const [currentPage, setCurrentPage] = useState(meta?.currentPage || 1);
+    const handleSearchInputChange = (event) => {
+        console.log(event.target.name);
+        // let params = serializeFormQuery(event.target);
+        setSearchParams((prevSearchParams) => {
+            const newSearchParams = new URLSearchParams(prevSearchParams);
+            newSearchParams.set(`${event.target.name}`, event.target.value);
+            return newSearchParams;
+        });
+        // setSearchTerm(event.target.value);
+        // setCurrentPage(1);
+    };
+
+    const handleFilterChange = (event) => {
+        setSearchParams((prevSearchParams) => {
+            const newSearchParams = new URLSearchParams(prevSearchParams);
+            newSearchParams.set('filter.attendance', event.target.value);
+            return newSearchParams;
+        });
+        // setCurrentPage(1);
+    };
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
     const [accounts, setAccounts] = useState([]);
+    const [status, setStatus] = useState('');
     console.log('🚀 ~ file: AllAccounts.jsx:7 ~ AllAccounts ~ accounts:', accounts);
     useEffect(() => {
-        accountsApi.getAll().then((response) => {
-            console.log('getAll', response);
-            setAccounts(response.data.data.data);
-        });
-    }, []);
-
+        const fetchDataFilter = async () => {
+            const filter = {
+                room: 'filter.room',
+                joinAt: 'filter.joinAt',
+                isActive: 'filter.isActive',
+            };
+            let req = {
+                roomId: id,
+                page: currentPage,
+                limit: 10,
+                search: searchValue,
+                [filter.isActive]: status === '' ? null : status,
+                [filter.room]: filterRoom,
+            };
+            console.log('req', req);
+            accountsApi.getAll(req).then((response) => {
+                console.log('getAll', response);
+                setAccounts(response.data.data.data);
+            });
+        };
+        fetchDataFilter();
+    }, [searchValue, filterRoom, currentPage, status]);
     return (
         <div className="p-2">
             <RoomStyle>
@@ -31,19 +89,23 @@ const AllAccounts = () => {
                             <h3 className="fw-bold">User Management</h3>
                         </Row>
                         <Row className="d-flex justify-content-around align-items-center mb-3">
-                            <Col className="col-5">
-                                <Search />
+                            <Col className="col-4">
+                                <Search action={handleSearchInputChange} value={searchValue} />
                             </Col>
-                            <Col className="col-4 d-flex ">
+                            <Col className="col-5 d-flex ">
                                 <Join />
                             </Col>
                             <Col className="col-3 d-flex align-items-center justify-content-end">
                                 <div className="accounts-status">
                                     <label htmlFor="">Status</label>
-                                    <Form.Select aria-label="Default select example">
-                                        <option>Select</option>
+                                    <Form.Select
+                                        aria-label="Default select example"
+                                        value={status}
+                                        onChange={(e) => setStatus(e.currentTarget.value)}
+                                    >
+                                        <option value="">All</option>
                                         <option value="1">Active</option>
-                                        <option value="2">Inactive</option>
+                                        <option value="0">Inactive</option>
                                     </Form.Select>
                                 </div>
                             </Col>
@@ -88,6 +150,7 @@ const AllAccounts = () => {
                             </Table>
                         </Row>
                     </Col>
+                    <PaginationAccounts />
                 </div>
             </RoomStyle>
         </div>
