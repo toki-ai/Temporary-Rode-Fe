@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import * as St from '../styles';
+import * as St from '../Pages/CreateRoom/styles';
 
 const PreviewImages = ({ FileList }) => {
     const [images, setImages] = useState([]);

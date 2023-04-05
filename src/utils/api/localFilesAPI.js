@@ -1,24 +1,9 @@
 import { post, get } from '../ApiCaller';
 
 const localFilesAPI = {
-    uploadQuestionFile: async (files) => {
-        const formData = new FormData();
-        files.forEach((file) => {
-            formData.append('files', file);
-        });
-
-        // formData.entries().forEach((pair) => console.log(pair));
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
-
+    uploadQuestionFile: async (file) => {
         const endpoint = `/local-files/upload-question-file`;
-        return await post(
-            endpoint,
-            { files: formData },
-            {},
-            { 'Content-Type': 'multipart/form-data' }
-        );
+        return await post(endpoint, { files: file }, {}, { 'Content-Type': 'multipart/form-data' });
     },
 };
 

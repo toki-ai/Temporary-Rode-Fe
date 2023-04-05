@@ -46,13 +46,6 @@ const RouterComponent = () => {
             ),
         },
         {
-            exact: true,
-            path: 'create',
-            loader: Loading,
-            element: <CreateRoom />,
-        },
-
-        {
             path: '/',
             exact: true,
             element: <PublicRoute />,
@@ -116,22 +109,16 @@ const RouterComponent = () => {
                             loader: Loading,
                             element: <AllAccounts />,
                         },
+                        {
+                            exact: true,
+                            path: 'create',
+                            loader: Loading,
+                            element: <CreateRoom />,
+                        },
                     ],
                 },
             ],
         },
-        // {
-        //     exact: true,
-        //     element: <AdminRoute />,
-        //     children: [
-        //         {
-        //             exact: true,
-        //             path: 'create',
-        //             loader: Loading,
-        //             element: <CreateRoom />,
-        //         },
-        //     ],
-        // },
         { path: '*', element: <ErrorPage /> },
     ]);
 

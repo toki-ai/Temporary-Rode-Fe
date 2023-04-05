@@ -43,14 +43,14 @@ const roomApi = {
         const endpoint = `/rooms/create-one`;
         return await post(endpoint, data, {}, { Authorization: 'Bearer ' + token })
             .then((res) => console.log(res))
-            .catch((err) => console.err(err));
+            .catch((err) => console.error(err));
     },
     getAllRoomType: async () => {
         const token = localStorage.getItem('token');
         const endpoint = `/rooms/get-all-room-type`;
         return await get(endpoint, {}, { Authorization: 'Bearer ' + token })
-            .then((res) => console.log(res))
-            .catch((err) => console.err(err));
+            .then((res) => res)
+            .catch((err) => console.error(err));
     },
 };
 
