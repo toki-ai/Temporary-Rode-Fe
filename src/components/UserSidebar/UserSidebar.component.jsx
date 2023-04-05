@@ -47,7 +47,7 @@ function UserSidebar() {
     ];
 
     const { currentUser } = useContext(UserContext);
-    console.log(currentUser);
+
     return (
         <>
             <Container>

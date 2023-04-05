@@ -13,25 +13,25 @@ import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
-import TestAlert from '../components/TestAlert';
-import TestModal from '../components/TestModal';
+import PublicLayout from '../components/PublicLayout/UserLayout.component';
 import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
+import useAuth from '../utils/useAuth';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
 import { loaderInfoGG, GetInfoRoomByCode } from './RouterLoader/Loader';
 
 const RouterComponent = () => {
     const router = createBrowserRouter([
-        { exact: true, path: '/', element: <Navigate to="home" /> },
+        { path: '/', element: <Navigate to="home" /> },
         {
             exact: true,
             path: '/login',
-            loader: Loading,
+
             element: (
-                <UserLayoutComponent>
+                <PublicLayout>
                     <Login />
-                </UserLayoutComponent>
+                </PublicLayout>
             ),
         },
         {
@@ -39,9 +39,9 @@ const RouterComponent = () => {
             path: '/register',
             loader: loaderInfoGG,
             element: (
-                <UserLayoutComponent>
+                <PublicLayout>
                     <Register />
-                </UserLayoutComponent>
+                </PublicLayout>
             ),
         },
 
@@ -52,13 +52,9 @@ const RouterComponent = () => {
             children: [
                 {
                     exact: true,
-
-                    loader: Loading,
                     element: <UserLayoutComponent />,
                     children: [
                         { index: true, path: 'home', element: <Home /> },
-                        { exact: true, path: 'modal', loader: Loading, element: <TestModal /> },
-                        { exact: true, path: 'alert', loader: Loading, element: <TestAlert /> },
                         {
                             exact: true,
                             path: 'testMirror',
@@ -82,17 +78,16 @@ const RouterComponent = () => {
             ],
         },
         {
+            path: '/admin',
             exact: true,
             element: <AdminRoute />,
             children: [
                 {
                     exact: true,
-                    path: 'admin',
-                    loader: Loading,
                     element: <AdminLayoutComponent />,
                     children: [
                         {
-                            exact: true,
+                            index: true,
                             path: 'admin_room',
                             loader: Loading,
                             element: <AdminRoom />,
@@ -113,6 +108,7 @@ const RouterComponent = () => {
                 },
             ],
         },
+
         { path: '*', element: <ErrorPage /> },
     ]);
 
