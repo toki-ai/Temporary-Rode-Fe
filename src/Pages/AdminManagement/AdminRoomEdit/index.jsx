@@ -15,9 +15,8 @@ import DateTimePickerValue from './components/DateTimePicker';
 import { RoomEditStyle } from './style';
 
 const schema = yup.object().shape({
-    code: yup.string().required('Please enter room code'),
-    type: yup.string().required('Please enter room type'),
     openTime: yup.string().required('Please enter open time'),
+    duration: yup.string().required('Please enter duration'),
 });
 
 const AdminRoomEdit = () => {
@@ -96,6 +95,7 @@ const AdminRoomEdit = () => {
                                         value={values.code}
                                         onChange={handleChange}
                                         isInvalid={!!errors.code}
+                                        disabled
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.code}
@@ -108,6 +108,7 @@ const AdminRoomEdit = () => {
                                         name="type"
                                         onChange={handleChange}
                                         isInvalid={!!errors.type}
+                                        disabled
                                     >
                                         <option>FE</option>;<option>BE</option>
                                     </Form.Select>

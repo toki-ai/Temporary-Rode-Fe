@@ -4,8 +4,8 @@ import { Col, Form, Row } from 'react-bootstrap';
 import { useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
 
 import roomApi from '../../../utils/api/roomApi';
-import PaginationRoom from '../AdminRoomEdit/components/Pagination';
 import ButtonCustom from './components/Button';
+import PaginationRoom from './components/Pagination';
 import SearchBar from './components/SearchBar';
 import TableRoom from './components/Table';
 import { RoomStyle } from './style';

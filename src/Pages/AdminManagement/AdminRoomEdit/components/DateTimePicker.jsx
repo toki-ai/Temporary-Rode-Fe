@@ -10,13 +10,23 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 
 export default function DateTimePickerValue({ dayApi }) {
     const [value, setValue] = React.useState(dayjs(dayApi));
+    function toTimestamp(strDate) {
+        var datum = Date.parse(strDate);
+        return datum / 1000;
+    }
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs} className="fw-light" adapterLocale={'vi'}>
             <DemoContainer components={['DateTimePicker', 'DateTimePicker']}>
                 <DateTimePicker
                     value={value}
-                    onChange={(newValue) => setValue(newValue)}
+                    defaultValue={dayjs(dayApi)}
+                    onChange={(e) => {
+                        setValue(e);
+                        console.log(e);
+                        let date = new Date(e);
+                        console.log(date.toISOString());
+                    }}
                     sx={{
                         '& .MuiInputBase-root': {
                             height: 40,
