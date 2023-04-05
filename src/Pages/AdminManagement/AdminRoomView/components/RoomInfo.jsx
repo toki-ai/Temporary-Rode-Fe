@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react';
-
 import { TfiInfinite } from 'react-icons/tfi';
 
-import roomApi from '../../../../utils/api/roomApi';
 import DateFormat from '../../AdminRoom/components/FilterRoom/DateFormat';
 
 const RoomFormat = ({ name, value }) => {
@@ -13,18 +10,7 @@ const RoomFormat = ({ name, value }) => {
         </div>
     );
 };
-function RoomInfo({ room_code }) {
-    const [room, setRoom] = useState({});
-    useEffect(() => {
-        roomApi
-            .getRoomByCode(room_code)
-            .then((res) => {
-                setRoom(res.data.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+function RoomInfo({ room }) {
     console.log(room);
     const result = (
         <div>

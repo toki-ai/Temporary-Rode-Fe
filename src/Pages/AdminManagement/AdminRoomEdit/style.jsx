@@ -63,4 +63,34 @@ export const RoomEditStyle = styled.div`
     .width {
         width: 100px;
     }
+    label[for='input'],
+    label[for='output'] {
+        position: relative;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 16px;
+        color: ${(props) => props.theme.colors.primary};
+        background-color: ${(props) => props.theme.colors.light};
+        margin-left: 10px;
+        padding: 5px;
+        z-index: 1;
+    }
+
+    textarea {
+        position: relative;
+        top: -12px;
+        display: block;
+        border: 1px solid ${(props) => props.theme.colors.primary};
+        border-radius: 5px;
+        padding: 10px;
+        &:focus-visible {
+            outline-color: ${(props) => props.theme.colors.primary};
+        }
+    }
+    .preview-image {
+        width: 300px;
+        height: 250px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
 `;

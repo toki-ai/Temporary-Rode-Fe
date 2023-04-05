@@ -4,9 +4,9 @@ import { Col, Form, Row } from 'react-bootstrap';
 import { useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
 
 import roomApi from '../../../utils/api/roomApi';
+import PaginationRoom from '../AdminRoomEdit/components/Pagination';
 import ButtonCustom from './components/Button';
-import SelectCustom from './components/FilterRoom/Select';
-import SearchBar from './components/SearchRoom/SearchBar';
+import SearchBar from './components/SearchBar';
 import TableRoom from './components/Table';
 import { RoomStyle } from './style';
 
@@ -17,10 +17,7 @@ const AdminRoom = () => {
     const [listRoom, setListRoom] = useState([]);
     const filterRoom = searchParams.get('filter.room') || '';
     const [meta, setMeta] = useState();
-    // function handleChange(e) {
-    //     setResult(e.target.value);
-    //     console.log(result);
-    // }
+    const [status, setStatus] = useState();
     const searchValue = searchParams.get('search') || '';
     const [currentPage, setCurrentPage] = useState(meta?.currentPage || 1);
     const handleSearchInputChange = (event) => {
@@ -37,28 +34,29 @@ const AdminRoom = () => {
     const handleFilterChange = (event) => {
         setSearchParams((prevSearchParams) => {
             const newSearchParams = new URLSearchParams(prevSearchParams);
-            if (event.target.value == '1' || event.target.value == '0') {
-                newSearchParams.set('filter.room', event.target.value);
-            } else {
-                newSearchParams.set('filter.room', '2');
-            }
+            setStatus(event.target.value);
+            newSearchParams.set('filter.room', event.target.value);
             return newSearchParams;
         });
         // setCurrentPage(1);
     };
-
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
     const filterRoomResult = () => {};
     useEffect(() => {
         const fetchRoom = async () => {
             const filter = {
-                room: 'filter.isPrivate',
+                room: 'filter.room',
+                isPrivate: 'filter.isPrivate',
             };
             let req = {
                 roomId: id,
                 page: currentPage,
                 limit: 10,
                 search: searchValue,
-                [filter.room]: filterRoom == '2' ? '' : filterRoom,
+                [filter.isPrivate]: status === '' ? null : status,
+                [filter.room]: filterRoom,
             };
             console.log(req);
             roomApi.adminGetAll(req).then((response) => {
@@ -68,7 +66,7 @@ const AdminRoom = () => {
             });
         };
         fetchRoom();
-    }, [searchValue, filterRoom, currentPage]);
+    }, [searchValue, filterRoom, currentPage, status]);
     return (
         <div className="p-2">
             <RoomStyle>
@@ -78,33 +76,33 @@ const AdminRoom = () => {
                             <h3 className="fw-bold">Room Management</h3>
                         </Row>
                         <Row className="d-flex justify-content-around align-items-center mb-3">
-                            <Col className="col-5">
+                            <Col className="col-5 col-md-6">
                                 <SearchBar
                                     handleChange={handleSearchInputChange}
                                     value={searchValue}
                                 />
                             </Col>
-                            <Col className="col-4 d-flex justify-content-center">
-                                <Form.Select
-                                    id="isPrivate"
-                                    aria-label="Default select"
-                                    value={filterRoom}
-                                    onChange={(e) => {
-                                        handleFilterChange(e);
-                                    }}
-                                >
-                                    <option value="2">All</option>
-                                    <option value="0">Public</option>
-                                    <option value="1">Private</option>
-                                </Form.Select>
-
-                                {/* <SelectCustom
-                                    props={{
-                                        name: 'Visibility:',
-                                    }}
-                                    value={filterRoom}
-                                    handleChange={handleChange}
-                                /> */}
+                            <Col className="col-4 d-flex justify-content-center col-md-3">
+                                <Col className="col-lg-6">
+                                    <Form.Select
+                                        id="isPrivate"
+                                        aria-label="Default select"
+                                        value={status}
+                                        onChange={(e) => {
+                                            handleFilterChange(e);
+                                        }}
+                                    >
+                                        <option value="" className="rfs">
+                                            All
+                                        </option>
+                                        <option value="0" className="rfs">
+                                            Public
+                                        </option>
+                                        <option value="1" className="rfs">
+                                            Private
+                                        </option>
+                                    </Form.Select>
+                                </Col>
                             </Col>
                             <Col className="col-3 d-flex align-items-center justify-content-end">
                                 <ButtonCustom
@@ -119,6 +117,11 @@ const AdminRoom = () => {
                         <Row className="d-flex justify-content-center">
                             <TableRoom listRoom={listRoom} state={result} />
                         </Row>
+                        <PaginationRoom
+                            action={handlePageChange}
+                            totalPages={meta?.totalPages}
+                            currentPage={meta?.currentPage}
+                        />
                     </Col>
                 </div>
             </RoomStyle>

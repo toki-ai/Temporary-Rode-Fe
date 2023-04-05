@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Table } from 'react-bootstrap';
 
-import userRoomApi from '../../../../../utils/api/userRoomApi';
+import roomApi from '../../../../../utils/api/roomApi';
 import { RoomDetailData } from '../RoomDetailData';
 
 const titles = [
@@ -104,24 +104,21 @@ const data = [
         time: '2023-03-19T13:46:36.673Z',
     },
 ];
+
 function TableQues({ ques }) {
     const [accounts, setAccounts] = useState([]);
-
-    const userInfo = (idUserRoom) => {
-        userRoomApi.then((res) => {
-            console.log('line 10: ', res);
-            if (res.data.status == 200) {
-                let req = {
-                    roomId: id,
-                };
-                userRoomApi.getAllUserInRoom(req).then((response) => {
-                    console.log(response);
-                    setAccounts([...response?.data.data.data]);
-                });
-            }
-        });
-    };
-    let i = ques;
+    useEffect(() => {
+        roomApi
+            .getSubmitHistoryByQuestion('string-tmp')
+            .then((res) => {
+                console.log(res.data.data);
+                setAccounts(res.data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+    console.log(accounts);
     return (
         <Table striped className="w-98 border-top">
             <thead>
@@ -131,9 +128,7 @@ function TableQues({ ques }) {
                     })}
                 </tr>
             </thead>
-            <tbody>
-                <RoomDetailData data={accounts} />
-            </tbody>
+            <tbody>{/* <RoomDetailData data={data} /> */}</tbody>
         </Table>
     );
 }

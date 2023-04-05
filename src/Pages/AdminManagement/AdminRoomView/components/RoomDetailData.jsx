@@ -1,13 +1,14 @@
 import DateFormatS from './DateFormartS';
 
-export function RoomDetailData({ data }) {
-    const results = data.map((props) => (
-        <tr key={props.id}>
-            <td>{props.rank}</td>
-            <td>{props.name}</td>
-            <td>{props.score}</td>
-            <td>{props.execution}</td>
-            <td>{DateFormatS(props.time)}</td>
+export function RoomDetailData({ data, question }) {
+    console.log(data);
+    const results = data.map((props, index) => (
+        <tr key={props.account.id}>
+            <td>{index + 1}</td>
+            <td>{props.account.fullname}</td>
+            <td>{question == 'All' ? props.totalScore : 2}</td>
+            <td>{question == 'All' ? props.totalSpace : 2}</td>
+            <td>{question == 'All' ? DateFormatS(props.totalTime) : 2}</td>
         </tr>
     ));
     const content = results?.length ? (

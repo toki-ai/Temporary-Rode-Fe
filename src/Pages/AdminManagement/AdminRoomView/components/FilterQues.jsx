@@ -30,7 +30,7 @@ const fields = [
     },
 ];
 
-const FilterQues = () => {
+const FilterQues = ({ roomID }) => {
     const [ques, setQues] = useState('All');
 
     const handleOnClick = (e) => {
@@ -38,7 +38,7 @@ const FilterQues = () => {
         setQues(result);
     };
     const TableQues = () => {
-        if (ques == 'All') return <TableAll />;
+        if (ques == 'All') return <TableAll roomID={roomID} />;
         else if (ques == 'Question 1') return <TableQuestion ques="1" />;
         else if (ques == 'Question 2') return <TableQuestion ques="2" />;
         else if (ques == 'Question 3') return <TableQuestion ques="3" />;

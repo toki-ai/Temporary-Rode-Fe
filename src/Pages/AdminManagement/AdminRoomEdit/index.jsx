@@ -7,15 +7,17 @@ import { useParams } from 'react-router-dom';
 import * as yup from 'yup';
 
 import Loading from '../../../components/Loading';
-import roomApi from '../../../utils/api/roomApi';
+import roomApi from '../../../utils/api/roomApi.js';
 import DateFormat from '../AdminRoom/components/FilterRoom/DateFormat';
 import ButtonCustom from './components/Button';
 import ButtonUpDown from './components/ButtonUpDown';
+import DateTimePickerValue from './components/DateTimePicker';
 import { RoomEditStyle } from './style';
 
 const schema = yup.object().shape({
     code: yup.string().required('Please enter room code'),
     type: yup.string().required('Please enter room type'),
+    openTime: yup.string().required('Please enter open time'),
 });
 
 const AdminRoomEdit = () => {
@@ -26,6 +28,7 @@ const AdminRoomEdit = () => {
     const [load, setLoad] = useState(false);
     const [load2, setLoad2] = useState(false);
     const [numOfTestCase, setNumOfTestCase] = useState(1);
+
     useEffect(() => {
         roomApi
             .getRoomByCode(room_code)
@@ -115,7 +118,7 @@ const AdminRoomEdit = () => {
                             </Row>
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="openTime">
-                                    <Form.Label className="fw-bold">Open Time</Form.Label>
+                                    {/* <Form.Label className="fw-bold">Open Time</Form.Label>
                                     <Form.Control
                                         type="text"
                                         name="openTime"
@@ -123,21 +126,25 @@ const AdminRoomEdit = () => {
                                         onChange={handleChange}
                                         isValid={touched.openTime && !errors.openTime}
                                         isInvalid={!!errors.openTime}
-                                    />
+                                    />  */}
+                                    <Form.Label className="fw-bold">Open Time</Form.Label>
+                                    <DateTimePickerValue dayApi={values.closeTime} />
+
                                     <Form.Control.Feedback type="invalid">
                                         {errors.openTime}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="closeTime">
                                     <Form.Label className="fw-bold">Close Time</Form.Label>
-                                    <Form.Control
+                                    {/* <Form.Control
                                         type="text"
                                         name="closeTime"
                                         value={values.closeTime}
                                         onChange={handleChange}
                                         isValid={touched.closeTime && !errors.closeTime}
                                         isInvalid={!!errors.closeTime}
-                                    />
+                                    /> */}
+                                    <DateTimePickerValue dayApi={values.closeTime} />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.closeTime}
                                     </Form.Control.Feedback>
@@ -189,31 +196,26 @@ const AdminRoomEdit = () => {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Form.Group controlId="formFile" className="">
+                                        {/* <Form.Group controlId="formFile" className="">
                                             <Form.Label>Upload question</Form.Label>
                                             <Form.Control type="file" />
-                                        </Form.Group>
+                                        </Form.Group> */}
                                     </Row>
                                 </Col>
                                 <Col>
                                     <span className="text-secondary fw-bold">Test Case 1:</span>
                                     <Row>
                                         <Col className="col-6">
-                                            <Form.Group>
-                                                <Form.Label className="color-primary">
-                                                    Input
-                                                </Form.Label>
-                                                <Form.Control
-                                                    as="textarea"
-                                                    row="10"
-                                                    style={{ height: '150px' }}
-                                                    label="Input"
-                                                    className="border-green"
-                                                ></Form.Control>
-                                            </Form.Group>
+                                            <label htmlFor="input">Input</label>
+                                            <textarea
+                                                name="input"
+                                                id="input"
+                                                rows="7"
+                                                cols="22"
+                                            ></textarea>
                                         </Col>
                                         <Col className="col-6">
-                                            <Form.Group>
+                                            {/* <Form.Group>
                                                 <Form.Label className="color-primary">
                                                     Output
                                                 </Form.Label>
@@ -224,7 +226,15 @@ const AdminRoomEdit = () => {
                                                     label="Input"
                                                     className=" border-green"
                                                 ></Form.Control>
-                                            </Form.Group>
+                                            </Form.Group> */}
+
+                                            <label htmlFor="output">Output</label>
+                                            <textarea
+                                                name="output"
+                                                id="output"
+                                                rows="7"
+                                                cols="22"
+                                            ></textarea>
                                         </Col>
                                     </Row>
                                     <hr></hr>

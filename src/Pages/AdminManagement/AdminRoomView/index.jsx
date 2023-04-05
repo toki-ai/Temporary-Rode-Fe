@@ -1,14 +1,29 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { TiArrowLeft } from 'react-icons/ti';
 import { Link, useParams } from 'react-router-dom';
 
+import roomApi from '../../../utils/api/roomApi';
 import FilterQues from './components/FilterQues';
 import RoomInfo from './components/RoomInfo';
 import { ARViewStyle } from './style';
 
 const AdminRoomView = () => {
     const { id } = useParams();
+    const [room, setRoom] = useState({});
+    useEffect(() => {
+        roomApi
+            .getRoomByCode(id)
+            .then((res) => {
+                setRoom(res.data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     return (
         <ARViewStyle>
             <div className="p-3 box-style">
@@ -24,9 +39,9 @@ const AdminRoomView = () => {
                 </div>
                 <hr />
                 <div className="p-3">
-                    <RoomInfo room_code={id} />
+                    <RoomInfo room={room} />
                     <div className="w-sm-75 w-md-50 w-lg-50">
-                        <FilterQues />
+                        <FilterQues roomID={room.id} />
                     </div>
                 </div>
             </div>

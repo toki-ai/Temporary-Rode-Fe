@@ -125,7 +125,7 @@ export const RoomStyle = styled.div`
         color: ${(props) => props.theme.colors.light};
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 1010px) {
         .rs {
             width: 70%;
             height: 70%;
@@ -134,10 +134,25 @@ export const RoomStyle = styled.div`
             font-size: 0.8em;
         }
         th {
-            font-size: 0.82em;
+            font-size: 0.8em;
         }
         td {
             font-size: 0.75em;
+        }
+    }
+    @media (max-width: 850px) {
+        .rs {
+            width: 70%;
+            height: 70%;
+        }
+        .rfs {
+            font-size: 0.8em;
+        }
+        th {
+            font-size: 0.6em;
+        }
+        td {
+            font-size: 0.57em;
         }
     }
 `;
