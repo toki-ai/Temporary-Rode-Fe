@@ -38,7 +38,7 @@ export const Container = styled.div`
     }
 
     @media ${device.desktop} {
-        width: 350px;
+        width: 550px;
     }
 `;
 
@@ -56,7 +56,7 @@ export const User = styled.div`
         font-weight: 600;
         font-size: 1.6vw;
         line-height: 21px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     p {
@@ -65,6 +65,12 @@ export const User = styled.div`
         font-weight: 500;
         font-size: 1.3vw;
         line-height: 18px;
+        letter-spacing: 0.05em;
+    }
+    @media ${device.desktop} {
+        div {
+            margin-bottom: 20px;
+        }
     }
 `;
 export const IconUser = styled(PersonCircle)`
@@ -105,7 +111,7 @@ export const General = styled.div`
     }
 
     @media ${device.desktop} {
-        margin-bottom: 35px;
+        margin-bottom: 50px;
     }
 `;
 
@@ -129,32 +135,12 @@ export const ContestInfo = styled.div`
     }
 `;
 
-export const IconPerson = styled(PersonFill)`
-    width: 20px;
-    height: 16px;
-`;
-
-export const IconFile = styled(FileEarmarkText)`
-    width: 20px;
-    height: 16px;
-`;
-
 export const IconChat = styled(ChatDots)`
     width: 20px;
     height: 16px;
 `;
 
-export const IconSetting = styled(GearFill)`
-    width: 20px;
-    height: 16px;
-`;
-
 export const IconLogOut = styled(Power)`
-    width: 20px;
-    height: 16px;
-`;
-
-export const IconBarChart = styled(BarChartFill)`
     width: 20px;
     height: 16px;
 `;
@@ -178,6 +164,6 @@ export const BoldText = styled.section`
     }
 
     @media ${device.desktop} {
-        margin-bottom: 11px;
+        margin-bottom: 35px;
     }
 `;

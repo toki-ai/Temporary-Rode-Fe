@@ -9,6 +9,7 @@ export const UserContainer = styled.div`
     justify-content: end;
     align-items: center;
     height: 100%;
+    position: relative;
     /* background-color: aqua; */
     @media ${device.tablet} {
         width: calc(100% - 300px);
