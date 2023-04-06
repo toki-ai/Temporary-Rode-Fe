@@ -2,11 +2,11 @@ import React, { useRef } from 'react';
 
 import ButtonStyled from '../../../components/Button';
 import PreviewImages from '../../../components/PreviewImages';
+import { themes } from '../../../themes';
 import localFilesAPI from '../../../utils/api/localFilesAPI';
 import * as St from '../styles';
 
 const CreateBEQuestions = ({ questions, setQuestions }) => {
-    console.log(questions);
     const inputRef = useRef(null);
 
     // Functions
@@ -16,7 +16,7 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
             {
                 maxSubmitTimes: 0,
                 questionImage: '',
-                colors: '#45ce7b',
+                colors: themes.colors.primary,
                 codeTemplate: '',
             },
         ]);
@@ -77,7 +77,7 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
     };
 
     // Components
-    const MaxSumbitTimes = ({ question }) => {
+    const MaxSumbitTimes = ({ question, questionIdx }) => {
         return (
             <div>
                 <label htmlFor="maxSubmitTimes">Maximum Submit Time:</label>
@@ -112,45 +112,6 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
         );
     };
 
-    const Colors = ({ question, questionIdx }) => {
-        return (
-            <div>
-                <label htmlFor="color">Color</label>
-                <div>
-                    {question.colors?.split(', ').map((color, idx) => (
-                        <St.ColorWrapper key={idx}>
-                            <St.Color color={color}></St.Color>
-                            <input
-                                value={color}
-                                onChange={(e) => editColor(e.target.value, questionIdx, color)}
-                            />
-                        </St.ColorWrapper>
-                    ))}
-                </div>
-                <ButtonStyled buttonType="dashed" onClick={() => addColor(questionIdx)}>
-                    Add color
-                </ButtonStyled>
-            </div>
-        );
-    };
-
-    const CodeTemplate = ({ question, questionIdx }) => {
-        return (
-            <St.CodeTemplate>
-                <label htmlFor="codeTemplate">Code</label>
-                <div>
-                    <textarea
-                        name="codeTemplate"
-                        id="codeTemplate"
-                        cols="40"
-                        rows="20"
-                        onChange={(e) => addCodeTemplate(e.target.value, questionIdx)}
-                    ></textarea>
-                </div>
-            </St.CodeTemplate>
-        );
-    };
-
     return (
         <>
             {questions.map((question, questionIdx) => (
@@ -161,11 +122,46 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                         <div className="col-md-6">
                             <MaxSumbitTimes question={question} questionIdx={questionIdx} />
                             <UploadImages question={question} questionIdx={questionIdx} />
-                            <Colors question={question} questionIdx={questionIdx} />
+                            <div>
+                                <label htmlFor="color">Color</label>
+                                <div>
+                                    {question.colors?.split(', ').map((color, idx) => (
+                                        <St.ColorWrapper key={idx}>
+                                            <St.Color color={color}></St.Color>
+                                            <input
+                                                value={color}
+                                                onChange={(e) =>
+                                                    editColor(e.target.value, questionIdx, color)
+                                                }
+                                            />
+                                        </St.ColorWrapper>
+                                    ))}
+                                </div>
+                                <ButtonStyled
+                                    buttonType="dashed"
+                                    onClick={() => addColor(questionIdx)}
+                                >
+                                    Add color
+                                </ButtonStyled>
+                            </div>
                         </div>
 
                         <div className="col-md-6">
-                            <CodeTemplate question={question} questionIdx={questionIdx} />
+                            <St.CodeTemplate>
+                                <label htmlFor="codeTemplate">Code</label>
+                                <div>
+                                    <textarea
+                                        name="codeTemplate"
+                                        id="codeTemplate"
+                                        cols="40"
+                                        rows="20"
+                                        onChange={(e) =>
+                                            addCodeTemplate(e.target.value, questionIdx)
+                                        }
+                                        placeholder={`<div></div>\n<style>\n    div {\n\twidth: 100px;\n\theight: 100px;\n\tbackground: #dd6b4d;\n    }\n</style>`}
+                                    />
+                                </div>
+                            </St.CodeTemplate>
                         </div>
                     </div>
                     <hr />

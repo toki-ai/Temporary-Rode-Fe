@@ -1,3 +1,5 @@
+import { themes } from '../../themes';
+
 const BEInitQuestion = [
     {
         maxSubmitTimes: 0,
@@ -14,7 +16,7 @@ const FEInitQuestion = [
     {
         maxSubmitTimes: 0,
         questionImage: '',
-        colors: '#45ce7b',
+        colors: themes.colors.primary,
         codeTemplate: '',
     },
     // May have a lot of question { maxSubmitTimes, questionImage, colors, codeTemplate }

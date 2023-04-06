@@ -7,6 +7,7 @@ import * as St from '../styles';
 import Testcase from './Testcase';
 
 const CreateBEQuestions = ({ questions, setQuestions }) => {
+    console.log(questions);
     const inputRef = useRef(null);
 
     // Functions
@@ -113,28 +114,6 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
         );
     };
 
-    const CreateTestcases = ({ question, questionIdx }) => {
-        return (
-            <>
-                {question.testcases.map((testcase, testcaseIdx) => (
-                    <Testcase
-                        key={testcaseIdx}
-                        item={testcase}
-                        testcaseIdx={testcaseIdx}
-                        questionIdx={questionIdx}
-                        handleInput={editInputTestcase}
-                        handleOutput={editOutputTestcase}
-                    />
-                ))}
-                <div className="d-grid gap-2 ">
-                    <ButtonStyled buttonType="outline" onClick={() => createTestcase(questionIdx)}>
-                        + Add testcase
-                    </ButtonStyled>
-                </div>
-            </>
-        );
-    };
-
     return (
         <>
             {questions.map((question, questionIdx) => (
@@ -148,7 +127,24 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                         </div>
 
                         <div className="col-md-6">
-                            <CreateTestcases question={question} questionIdx={questionIdx} />
+                            {question.testcases?.map((testcase, testcaseIdx) => (
+                                <Testcase
+                                    key={testcaseIdx}
+                                    item={testcase}
+                                    testcaseIdx={testcaseIdx}
+                                    questionIdx={questionIdx}
+                                    handleInput={editInputTestcase}
+                                    handleOutput={editOutputTestcase}
+                                />
+                            ))}
+                            <div className="d-grid gap-2 ">
+                                <ButtonStyled
+                                    buttonType="outline"
+                                    onClick={() => createTestcase(questionIdx)}
+                                >
+                                    + Add testcase
+                                </ButtonStyled>
+                            </div>
                         </div>
                     </div>
                     <hr />

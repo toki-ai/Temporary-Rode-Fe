@@ -4,8 +4,8 @@ import { themes } from '../../themes';
 
 export const Wrapper = styled.div`
     border-radius: 28px;
-    padding: 20px 52px;
-    margin: auto;
+    padding: 20px 50px;
+    margin: auto 50px;
     font-family: 'Quicksand';
     background-color: ${themes.colors.light};
 

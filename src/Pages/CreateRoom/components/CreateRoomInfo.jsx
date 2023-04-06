@@ -93,7 +93,7 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
         },
     ];
 
-    const [formList, setFormList] = useState(FORM_LIST_PUBLIC_ROOM);
+    const [formList, setFormList] = useState(FORM_LIST_PRIVATE_ROOM);
 
     return (
         <Formik
