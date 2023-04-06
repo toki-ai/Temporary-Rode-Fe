@@ -398,13 +398,23 @@ export const RTable = styled(Table)`
     tr {
         align-items: center;
         color: white;
-        background-color: ${themes.colors.primary5} !important;
+        background-color: ${themes.colors.primary5};
     }
     tr {
         border: 2px solid ${themes.colors.primary};
     }
+    tr:hover {
+        background-color: ${themes.colors.primary};
+    }
+    td:hover {
+        background-color: ${themes.colors.primary};
+    }
     th {
-        background-color: ${themes.colors.primary5} !important;
+        background-color: ${themes.colors.primary5};
+    }
+    .table-hover tbody tr:hover {
+        background-color: #f5f5f5;
+        color: #333;
     }
 `;
 export const MyTable = styled.div`
@@ -413,26 +423,41 @@ export const MyTable = styled.div`
     align-items: center;
 `;
 
-// export const MyPagination = styled(Pagination)`
-//     position: absolute;
-//     bottom: 0%;
-//     left: 40%;
-//     border: 0px;
-//     background-color: ${themes.colors.primary5} !important;
-// `;
-export const MyPagination = styled.div`
+export const MyPagination = styled(Pagination)`
+    position: absolute;
+    bottom: 0%;
+    left: 40%;
     border: 0px;
-
-    .position-absolute {
-        position: absolute;
+    /* background-color: ${themes.colors.primary5} !important; */
+    a {
+        background-color: transparent !important;
+        color: ${themes.colors.light};
+        border: none;
     }
-    .bg-color {
-        background-color: ${themes.colors.primary5} !important;
+    a:hover {
+        color: ${themes.colors.primary};
     }
-    .bottom-0 {
-        bottom: 0%;
-    }
-    .left-0 {
-        left: 40%;
+    li.active span {
+        background-color: transparent !important;
+        border: 1px solid ${themes.colors.primary}!important;
     }
 `;
+// export const MyPagination = styled.div`
+//     border: 0px;
+
+//     .position-absolute {
+//         position: absolute;
+//     }
+//     .bg-color {
+//         background-color: ${themes.colors.primary5} !important;
+//     }
+//     .bottom-0 {
+//         bottom: 0%;
+//     }
+//     .left-0 {
+//         left: 40%;
+//     }
+//     .pagination {
+//         background-color: ${themes.colors.primary5} !important;
+//     }
+// `;

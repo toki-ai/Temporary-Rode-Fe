@@ -89,7 +89,7 @@ function Content() {
                 ></DropdownType>
             </Type>
             <MyTable>
-                <RTable striped variant="dark">
+                <RTable striped variant="dark" hover>
                     <thead>
                         <tr>
                             {titles.map((titles) => {
