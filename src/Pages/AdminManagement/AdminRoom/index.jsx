@@ -43,7 +43,7 @@ const AdminRoom = () => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-    const filterRoomResult = () => {};
+
     useEffect(() => {
         const fetchRoom = async () => {
             const filter = {

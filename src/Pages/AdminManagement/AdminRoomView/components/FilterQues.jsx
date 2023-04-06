@@ -9,6 +9,8 @@ import TableQuestion from './Table/TableQuestion';
 const FilterQues = ({ roomId }) => {
     const [ques, setQues] = useState('All');
     const [numOfQues, setNumOfQues] = useState([]);
+    const [loading, setLoading] = useState([]);
+    const [room, setRoom] = useState([]);
     useEffect(() => {
         roomApi
             .getRoomById(roomId)
@@ -16,6 +18,7 @@ const FilterQues = ({ roomId }) => {
                 console.log(res.data.data);
                 setNumOfQues(res.data.data.questions);
                 console.log(res.data.data.questions);
+                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -72,13 +75,13 @@ const FilterQues = ({ roomId }) => {
                 <Btn
                     name="All"
                     handleOnClick={handleOnClick}
-                    className="color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-left"
+                    className="color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded"
                 />
             </div>
             <TableQues />
         </>
     );
-    return <>{content}</>;
+    return loading ? <Loading /> : <>{content}</>;
 };
 
 export default FilterQues;

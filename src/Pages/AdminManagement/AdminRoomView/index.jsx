@@ -6,6 +6,7 @@ import { TiArrowLeft } from 'react-icons/ti';
 import { Link, useParams } from 'react-router-dom';
 
 import roomApi from '../../../utils/api/roomApi';
+import PaginationRoom from '../AdminRoom/components/Pagination';
 import FilterQues from './components/FilterQues';
 import RoomInfo from './components/RoomInfo';
 import { ARViewStyle } from './style';
@@ -13,6 +14,10 @@ import { ARViewStyle } from './style';
 const AdminRoomView = () => {
     const { id } = useParams();
     const [room, setRoom] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
     useEffect(() => {
         roomApi
             .getRoomByCode(id)
@@ -45,6 +50,11 @@ const AdminRoomView = () => {
                         <FilterQues roomId={room.id} />
                     </div>
                 </div>
+                <PaginationRoom
+                    action={handlePageChange}
+                    totalPages="3"
+                    currentPage={currentPage}
+                />
             </div>
         </ARViewStyle>
     );
