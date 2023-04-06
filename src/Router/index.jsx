@@ -80,7 +80,7 @@ const RouterComponent = () => {
                         {
                             exact: true,
                             path: 'algorithm/:id',
-                            loader: Loading,
+                            loader: GetInfoRoomByCode,
                             element: <Algorithm />,
                         },
                         {
