@@ -55,7 +55,6 @@ export const RoomEditStyle = styled.div`
         color: ${(props) => props.theme.colors.light};
         border: none;
     }
-
     .btn-grey:hover {
         opacity: 0.8;
         transform: scale(1.025);
@@ -92,6 +91,23 @@ export const RoomEditStyle = styled.div`
         height: 250px;
         object-fit: cover;
         margin-bottom: 20px;
+    }
+
+    .show {
+        min-height: 0;
+        max-height: 275px;
+    }
+    .hide {
+        max-height: 0;
+    }
+    .questions-mh {
+        min-height: 370px;
+    }
+    .test-case-mh {
+        height: 275px;
+    }
+    .overflow-y-auto {
+        overflow-y: auto;
     }
     @media (min-width: 1001px) {
         .input-num {

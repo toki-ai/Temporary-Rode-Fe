@@ -10,7 +10,7 @@ import Loading from '../../../components/Loading';
 import roomApi from '../../../utils/api/roomApi.js';
 import DateFormat from '../AdminRoom/components/FilterRoom/DateFormat';
 import ButtonCustom from './components/Button';
-import ButtonUpDown from './components/ButtonUpDown';
+import CreateQuestion from './components/CreateQuestion';
 import DateTimePickerValue from './components/DateTimePicker';
 import { RoomEditStyle } from './style';
 
@@ -21,30 +21,28 @@ const schema = yup.object().shape({
 
 const AdminRoomEdit = () => {
     const { id } = useParams();
-    const room_code = id;
+    const roomId = id;
     const [room, setRoom] = useState({});
     const [roomTypes, setRoomTypes] = useState([]);
-    const [load, setLoad] = useState(false);
-    const [load2, setLoad2] = useState(false);
-    const [numOfTestCase, setNumOfTestCase] = useState(1);
+    const [load, setLoad] = useState([]);
+    const [questions, setQuestions] = useState([]);
 
+    console.log(id);
     useEffect(() => {
-        roomApi
-            .getRoomByCode(room_code)
-            .then((res) => {
-                console.log(res.data.data);
-                setRoom(res.data.data);
-                setLoad(true);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        roomApi.getRoomById(roomId).then((res) => {
+            setRoom(res.data.data);
+            console.log(res.data.data);
+            setQuestions(res.data.data.questions);
+            console.log(res.data.data.questions);
+            setLoad(false);
+        });
+
         roomApi
             .getAllRomType()
             .then((res) => {
                 console.log(res.data.data);
                 setRoomTypes(res.data.data);
-                setLoad2(true);
+                setLoad(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -53,14 +51,28 @@ const AdminRoomEdit = () => {
     const checkPrivate = room.isPrivate ? 'Private' : 'Public';
     const checkPrivate2 = room.isPrivate ? 'Public' : 'Private';
 
-    function increaseTestCase() {
-        setNumOfTestCase(numOfTestCase + 1);
-    }
-    function decreaseTestCase() {
-        setNumOfTestCase(numOfTestCase - 1);
-    }
-    console.log(numOfTestCase);
-    return !load && !load2 ? (
+    const [questionsResults, setQuestionsResults] = useState([...questions]);
+    const [numOfQues, setNumOfQues] = useState(questions.length);
+    const defaultQuestion = {
+        questionImage: '',
+        maxSubmitTimes: 1,
+        colors: '',
+        codeTemplate: '',
+        id: '',
+        testCases: [
+            {
+                input: '',
+                output: '',
+            },
+        ],
+    };
+    console.log(questions.length);
+    const handleAddQuestion = (e) => {
+        questions.push(defaultQuestion);
+        setNumOfQues(questions.length + 1);
+        console.log(questions.length);
+    };
+    return load ? (
         <Loading />
     ) : (
         <RoomEditStyle>
@@ -71,8 +83,8 @@ const AdminRoomEdit = () => {
                         code: room.code,
                         type: room.type,
                         duration: room.isPrivate ? room.duration : '',
-                        openTime: DateFormat(room.openTime),
-                        closeTime: room.isPrivate ? DateFormat(room.closeTime) : '',
+                        openTime: room.openTime,
+                        closeTime: room.isPrivate ? room.closeTime : '',
                         visibility: checkPrivate,
                     }}
                 >
@@ -110,7 +122,9 @@ const AdminRoomEdit = () => {
                                         isInvalid={!!errors.type}
                                         disabled
                                     >
-                                        <option>FE</option>;<option>BE</option>
+                                        {roomTypes.map((item, i) => {
+                                            return <option key={i}>{item}</option>;
+                                        })}
                                     </Form.Select>
                                     <Form.Control.Feedback type="invalid">
                                         {errors.type}
@@ -132,11 +146,12 @@ const AdminRoomEdit = () => {
                                         <Form.Control
                                             type="text"
                                             name="closeTime"
-                                            value={values.closeTime}
+                                            value=""
                                             onChange={handleChange}
                                             isValid={touched.closeTime && !errors.closeTime}
                                             isInvalid={!!errors.closeTime}
                                             style={{ marginTop: '10px' }}
+                                            disabled
                                         />
                                     ) : (
                                         <DateTimePickerValue dayApi={room.closeTime} />
@@ -178,77 +193,30 @@ const AdminRoomEdit = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
-                            <h4>Question 1:</h4>
                             <Row>
-                                <Col>
-                                    <Row className="d-flex align-items-center mb-4">
-                                        <Col className="col-6 col-lg-5">
-                                            <div className="text-secondary fw-bold rfs">
-                                                Max Submit Time:
-                                            </div>
-                                        </Col>
-                                        <Col className="col-3 col-lg-4 ">
-                                            <ButtonUpDown variant="green" />
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Form.Group controlId="formFile" className="">
-                                            <Form.Label className="fw-bold">
-                                                Upload question
-                                            </Form.Label>
-                                            <Form.Control type="file" />
-                                        </Form.Group>
-                                    </Row>
-                                </Col>
-                                <Col>
-                                    <span className="text-secondary fw-bold">Test Case 1:</span>
-                                    <Row className="d-flex">
-                                        <Col className="col-lg-6 col-12">
-                                            <label htmlFor="input">Input</label>
-                                            <textarea
-                                                name="input"
-                                                id="input"
-                                                rows="7"
-                                                cols="22"
-                                            ></textarea>
-                                        </Col>
-                                        <Col className="col-lg-6 col-12">
-                                            {/* <Form.Group>
-                                                <Form.Label className="color-primary">
-                                                    Output
-                                                </Form.Label>
-                                                <Form.Control
-                                                    as="textarea"
-                                                    row="10"
-                                                    style={{ height: '150px' }}
-                                                    label="Input"
-                                                    className=" border-green"
-                                                ></Form.Control>
-                                            </Form.Group> */}
-
-                                            <label htmlFor="output">Output</label>
-                                            <textarea
-                                                name="output"
-                                                id="output"
-                                                rows="7"
-                                                cols="22"
-                                            ></textarea>
-                                        </Col>
-                                    </Row>
-                                    <hr></hr>
-                                    <ButtonCustom
-                                        variant="light border-dashed w-100"
-                                        name="Add test case"
-                                        className="bi bi-plus d-flex align-items-center fs-4"
-                                        onClick={increaseTestCase}
-                                    />
-                                </Col>
+                                {[...Array(questions.length)].map((_, i) => (
+                                    <>
+                                        <CreateQuestion
+                                            key={i}
+                                            i={i}
+                                            questionNum={questions?.length ? i + 1 : 1}
+                                            maxSubmitTime={
+                                                questions?.length ? questions[i].maxSubmitTimes : 1
+                                            }
+                                            questionImages={
+                                                questions?.length ? questions[i].questionImage : ''
+                                            }
+                                            question={questions}
+                                        />
+                                    </>
+                                ))}
                             </Row>
-                            <hr></hr>
+
                             <ButtonCustom
                                 variant="light border-dashed w-100"
                                 name="Add question"
                                 className="bi bi-plus d-flex align-items-center fs-4"
+                                onClick={handleAddQuestion}
                             />
                             <div className="d-flex justify-content-end mt-4">
                                 <ButtonCustom

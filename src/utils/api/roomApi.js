@@ -58,6 +58,20 @@ const roomApi = {
             .then((res) => console.log(res))
             .catch((err) => console.err(err));
     },
+    updateRoomById: async (roomID, data) => {
+        const token = localStorage.getItem('token');
+        const endpoint = `/rooms/update-one-by-id/${roomID}`;
+        // eslint-disable-next-line no-return-await
+
+        return await post(endpoint, data, {}, { Authorization: 'Bearer ' + token })
+            .then((res) => {
+                // if (res.data.code !== 200) console.log(res.response);
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    },
     getAllRomType: async () => {
         const endpoint = `/rooms/get-all-room-type`;
         // eslint-disable-next-line no-return-await
