@@ -10,5 +10,6 @@ export async function loaderInfoGG() {
 export async function GetInfoRoomByCode({ params }) {
     const CodeID = params.id;
     const info = await roomApi.getRoomByCode(CodeID);
+
     return info.data.data;
 }

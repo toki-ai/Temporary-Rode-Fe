@@ -50,12 +50,12 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
         };
         console.log(formatData);
         const res = await submitApi.submit(formatData);
-
+        console.log('line 53: ', res);
         if (res.data.status === 200) {
             submitService.setSubmit(res.data.data);
             setTimeout(() => {
                 setSubmitStatus(true);
-            }, 5000);
+            }, 2000);
         }
 
         console.log(res);

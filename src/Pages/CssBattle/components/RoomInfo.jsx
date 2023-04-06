@@ -29,6 +29,7 @@ const RoomInfo = ({ data, submit }) => {
             body: <Scores submitTimes={data?.questions[0].maxSubmitTimes} submit={submit} />,
         },
     ];
+
     return (
         <StyledWrap>
             <OffCanvasComponents title={'LEADERBOARD'} show={show} setShow={setShow}>
