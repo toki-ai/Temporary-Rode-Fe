@@ -13,6 +13,17 @@ const submitHistoryApi = {
                 return err;
             });
     },
+    getInfoSubmission: async (req) => {
+        const endpoint = `/submit-history/get-user-history`;
+        return await get(endpoint, req, authHeader())
+            .then((res) => {
+                return res;
+            })
+            .catch((err) => {
+                console.log('🚀 ~ file: roomApi.js:17 ~ getAll: ~ err:', err);
+                return err;
+            });
+    },
 };
 
 export default submitHistoryApi;

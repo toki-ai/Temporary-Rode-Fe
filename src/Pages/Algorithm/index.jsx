@@ -1,5 +1,6 @@
 import LeaderBoard from './components/LeaderBoard/LeaderBoard';
 import PaginationLeaderboard from './components/LeaderBoard/PaginationLeaderboard';
+import Submission from './components/Submission/Submission';
 import SubmitEx from './components/SubmitExample';
 import { AlgorithmWrapper, AlgorithmNav, AlgorithmNavItem, AlgorithmContent } from './styled';
 
@@ -36,11 +37,11 @@ function Algorithm() {
                     <Col sm={11} className="p-0">
                         <AlgorithmContent>
                             <Tab.Content className="h-100">
-                                <Tab.Pane eventKey="first">
+                                <Tab.Pane eventKey="first" className="h-100">
                                     <h1> The first</h1>
                                 </Tab.Pane>
-                                <Tab.Pane eventKey="second">
-                                    <h1> The second</h1>
+                                <Tab.Pane eventKey="second" className="h-100">
+                                    <Submission />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="third" className="h-100">
                                     <LeaderBoard />

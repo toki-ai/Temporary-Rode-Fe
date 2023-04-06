@@ -32,9 +32,10 @@ const LeaderBoard = () => {
                     <QuestionLB
                         aria-label=""
                         onChange={(e) => setQuestionCode(e.currentTarget.value)}
+                        className="numQuestion"
                     >
                         {roomInfo.questions.map((question, index) => (
-                            <option key={question.id} value={question.id}>
+                            <option key={question.id} value={question.id} className="numQuestion">
                                 Question {index + 1}
                             </option>
                         ))}

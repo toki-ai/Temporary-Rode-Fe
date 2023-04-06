@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 export const NavStyled = styled(Nav)`
     border: 1px solid #45ce7b;
 `;
-export const LeaderBoardStyled = styled.div`
+export const SubmissionStyled = styled.div`
     padding: 20px;
     background-color: #020d26;
     height: 100%;
@@ -26,14 +26,14 @@ export const LeaderBoardStyled = styled.div`
     }
 `;
 
-export const HeaderLB = styled.div`
+export const HeaderSubmission = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
     height: 60px;
 `;
 
-export const TitleLB = styled.h1`
+export const TitleSubmission = styled.h1`
     font-size: 40px;
     font-weight: 700;
     color: #00e7aa;
@@ -42,32 +42,7 @@ export const TitleLB = styled.h1`
     }
 `;
 
-export const QuestionLB = styled.select`
-    width: 335px;
-    height: 60px;
-    appearance: none;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 32px;
-    background: #000000;
-    border-radius: 15px;
-    color: #ffffff;
-    padding: 0 20px;
-    border: 2px solid #2e7dff;
-
-    &:focus {
-        outline: none;
-        margin-bottom: 50px;
-    }
-    @media screen and (max-width: 570px) {
-        font-size: 14px;
-        width: 140px;
-        height: 40px;
-        padding: 10px 20px;
-    }
-`;
-
-export const TableLB = styled.div`
+export const TableSubmission = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 0;
@@ -99,8 +74,47 @@ export const TableLB = styled.div`
         color: #ffffff;
         transform: translate(30px, 20px);
     }
+    .error {
+        color: #ea4335 !important;
+    }
+    .accepted {
+        color: #06c755 !important;
+    }
+    .viewResult {
+        color: blue !important;
+    }
+    .viewResult:hover {
+        cursor: pointer;
+    }
 `;
 
+export const TableSubmitted = styled.div`
+    margin: 12px;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #2e7dff;
+    border-radius: 9px;
+    .title {
+        margin: 20px 70px;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 40px;
+        text-transform: uppercase;
+        color: #00e7aa;
+    }
+`;
+export const AnswerSubmitted = styled.div`
+    height: auto;
+    width: 100%;
+    margin: 0 140px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    text-transform: capitalize;
+    .answer {
+        color: yellow !important;
+    }
+`;
 export const PaginationLB = styled.div`
     padding: 0;
     margin: 0;
