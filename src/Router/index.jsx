@@ -137,7 +137,7 @@ const RouterComponent = () => {
                         // },
                         {
                             exact: true,
-                            path: 'allAccounts',
+                            path: 'contestant',
                             loader: Loading,
                             element: <AllAccounts />,
                         },
