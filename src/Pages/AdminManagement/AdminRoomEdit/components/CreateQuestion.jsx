@@ -18,6 +18,7 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
     const [newClassName, setNewClassName] = useState('d-none');
     const [fileName, setFileName] = useState();
     const [numOfTestCase, setNumOfTestCase] = useState(testCasesResult.length);
+    const [testCaseResultFinal, setTestCaseResultFinal] = useState(testCasesResult);
     function increaseTestCase() {
         testCasesResult.push(defaultTestCases);
         setNumOfTestCase(numOfTestCase + 1);
@@ -50,6 +51,8 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
         };
     };
 
+    // console.log(question);
+
     return (
         <div>
             <ButtonCustom
@@ -80,7 +83,7 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
                             />
                         </Form.Group>
 
-                        <div className="position-relative">
+                        <div className="position-relative mt-2">
                             {/* {(questionId != '' || fileName != null) && (
                                 <ButtonCustom
                                     className={`bi bi-x-circle-fill justify-content-center color-red fs-4 d-flex`}
@@ -109,6 +112,9 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
                                 input={item.input}
                                 output={item.output}
                                 show={showQues}
+                                key={i}
+                                testCase={testCasesResult.at(i)}
+                                handleTestCaseDecrease={decreaseTestCase}
                             />
                         ))}
                     </div>

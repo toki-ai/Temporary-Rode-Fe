@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { Button, Form } from 'react-bootstrap';
 
-const ButtonUpDown = ({ variant, maxSubmitTime }) => {
+const ButtonUpDown = ({ variant, maxSubmitTime, question }) => {
     const [quantity, setQuantity] = useState(maxSubmitTime);
     const increase = (e) => {
         setQuantity(quantity + 1);
@@ -23,7 +23,10 @@ const ButtonUpDown = ({ variant, maxSubmitTime }) => {
                 className="rounded-0 mw-fit text-center bg-light border-green color-primary input-num"
                 value={quantity}
                 disabled
-                onChange={(e) => setQuantity(e.target.value)}
+                onChange={(e) => {
+                    setQuantity(e.target.value);
+                    question.maxSubmitTime = e.target.value;
+                }}
             />
             <Button variant={variant} className="rounded-r-0 btn-sm-sm" onClick={increase}>
                 <i className="bi bi-plus"></i>
