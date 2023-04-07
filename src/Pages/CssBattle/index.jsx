@@ -15,8 +15,9 @@ import Row from 'react-bootstrap/Row';
 
 const ArenaCSS = () => {
     const roomInfo = useLoaderData();
-    const codeTemplate = roomInfo?.questions[0].codeTemplate;
-
+    const codeTemplate = roomInfo?.questions[0]?.codeTemplate
+        ? roomInfo?.questions[0].codeTemplate
+        : CodeTemplateTmp;
     const [code, setCode] = useState(codeTemplate);
     const [count, setCount] = useState(0);
     const [submit, setSubmit] = useState();
