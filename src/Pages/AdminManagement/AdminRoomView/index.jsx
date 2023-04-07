@@ -23,6 +23,7 @@ const AdminRoomView = () => {
             .getRoomByCode(id)
             .then((res) => {
                 setRoom(res.data.data);
+                console.log(room);
                 console.log(room.id);
             })
             .catch((err) => {

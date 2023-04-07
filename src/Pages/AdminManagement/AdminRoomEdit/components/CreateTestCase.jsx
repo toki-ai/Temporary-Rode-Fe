@@ -4,8 +4,8 @@ import { Button, Col, Row } from 'react-bootstrap';
 
 import ButtonCustom from './Button';
 
-const CreateTestCase = ({ numOfTestCase, input, output }) => {
-    const [show, setShow] = useState(false);
+const CreateTestCase = ({ numOfTestCase, input, output, showQues }) => {
+    const [show, setShow] = useState(showQues);
     const [newClassName, setNewClassName] = useState('d-none');
     const handleShow = (e) => {
         setShow(!show);
@@ -21,7 +21,6 @@ const CreateTestCase = ({ numOfTestCase, input, output }) => {
                 className2="d-flex flex-row-reverse justify-content-between"
                 name={`Test Case ${numOfTestCase}:`}
             ></ButtonCustom>
-            {/* {show ? ( */}
             <div className={newClassName}>
                 <Row className="d-flex">
                     <Col className="col-lg-6 col-12">
@@ -36,19 +35,6 @@ const CreateTestCase = ({ numOfTestCase, input, output }) => {
                         ></textarea>
                     </Col>
                     <Col className="col-lg-6 col-12">
-                        {/* <Form.Group>
-        <Form.Label className="color-primary">
-            Output
-        </Form.Label>
-        <Form.Control
-            as="textarea"
-            row="10"
-            style={{ height: '150px' }}
-            label="Input"
-            className=" border-green"
-        ></Form.Control>
-    </Form.Group> */}
-
                         <label htmlFor="output">Output</label>
                         <textarea
                             name="output"
@@ -62,7 +48,6 @@ const CreateTestCase = ({ numOfTestCase, input, output }) => {
                 </Row>
                 <hr></hr>
             </div>
-            {/* ) : null} */}
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import { post, get } from '../ApiCaller';
 import Localstorage from '../Localstorage';
 import authHeader from './HeaderAuthorization';
+import localFileApi from './localFileApi';
 
 const roomApi = {
     getAllRoom: async (credential) => {

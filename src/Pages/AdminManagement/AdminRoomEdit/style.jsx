@@ -49,6 +49,9 @@ export const RoomEditStyle = styled.div`
     .border-dashed {
         border: 0.5px dashed;
     }
+    .border-dashed-green {
+        border: 0.5px ${(props) => props.theme.colors.primary} dashed;
+    }
     .btn-grey,
     .btn-grey:hover {
         background-color: ${(props) => props.theme.colors.grey2};
@@ -108,6 +111,9 @@ export const RoomEditStyle = styled.div`
     }
     .overflow-y-auto {
         overflow-y: auto;
+    }
+    .color-red {
+        color: ${(props) => props.theme.colors.red2};
     }
     @media (min-width: 1001px) {
         .input-num {

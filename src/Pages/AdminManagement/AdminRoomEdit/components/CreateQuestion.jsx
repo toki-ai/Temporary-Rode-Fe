@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 import { Col, Form, Row } from 'react-bootstrap';
 
+import localFileApi from '../../../../utils/api/localFileApi';
+import roomApi from '../../../../utils/api/roomApi';
 import ButtonCustom from './Button';
 import ButtonUpDown from './ButtonUpDown';
 import CreateTestCase from './CreateTestCase';
@@ -10,26 +13,43 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
     console.log(question[i]);
     const defaultTestCases = { input: '', output: '' };
     const [testCasesResult, setTestCaseResult] = useState([...question[i].testCases]);
-    const [showQues, setShowQues] = useState(true);
-    const [show, setShow] = useState(true);
+    const [showQues, setShowQues] = useState(false);
+    const [questionId, setQuestionId] = useState(questionImages);
     const [newClassName, setNewClassName] = useState('d-none');
-    const [fileName, setFileName] = useState(questionImages);
+    const [fileName, setFileName] = useState();
     const [numOfTestCase, setNumOfTestCase] = useState(testCasesResult.length);
     function increaseTestCase() {
         testCasesResult.push(defaultTestCases);
         setNumOfTestCase(numOfTestCase + 1);
-        setShow(false);
+        setShowQues(false);
     }
     function decreaseTestCase() {
-        setNumOfTestCase(numOfTestCase - 1);
         testCasesResult.pop(defaultTestCases);
-        setShow(true);
+        setNumOfTestCase(numOfTestCase - 1);
+        setShowQues(true);
     }
     const handleShow = (e) => {
         setShowQues(!showQues);
         showQues ? setNewClassName('d-none') : setNewClassName('d-flex');
     };
-    console.log(testCasesResult);
+    console.log(questionImages);
+    const handleImageChange = (e) => {
+        setQuestionId('');
+        setFileName('');
+    };
+    const handleChangeImage = (e) => {
+        const reader = new FileReader();
+        const file = e.target.files[0];
+        if (file) reader.readAsDataURL(file);
+        console.log(file);
+        reader.onload = (e) => {
+            console.log(e.target.result);
+            setQuestionId('');
+            setFileName(e.target.result);
+            console.log(fileName);
+        };
+    };
+
     return (
         <div>
             <ButtonCustom
@@ -51,14 +71,34 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
                         </Col>
                     </Row>
                     <Row>
-                        <Form.Group controlId="formFile" className="">
+                        <Form.Group controlId="formFile">
                             <Form.Label className="fw-bold">Upload question</Form.Label>
                             <Form.Control
                                 type="file"
-                                name={fileName}
-                                onChange={(e) => setFileName(e.target.files[0].name)}
+                                name="fileUpload"
+                                onChange={handleChangeImage}
                             />
                         </Form.Group>
+
+                        <div className="position-relative">
+                            {/* {(questionId != '' || fileName != null) && (
+                                <ButtonCustom
+                                    className={`bi bi-x-circle-fill justify-content-center color-red fs-4 d-flex`}
+                                    variant="outline border-0 position-absolute end-0 my-2 mx-3"
+                                    onClick={handleImageChange}
+                                />
+                            )} */}
+
+                            {questionId != '' ? (
+                                <img
+                                    src={localFileApi.getImg(questionImages)}
+                                    alt="Question Image"
+                                    className="rounded cover img-fluid img-thumbnail border-dashed-green"
+                                />
+                            ) : (
+                                fileName != null && <img src={fileName} alt="" />
+                            )}
+                        </div>
                     </Row>
                 </Col>
                 <Col>
@@ -68,7 +108,7 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
                                 numOfTestCase={i + 1}
                                 input={item.input}
                                 output={item.output}
-                                show={show}
+                                show={showQues}
                             />
                         ))}
                     </div>
@@ -81,7 +121,6 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
                 </Col>
                 <hr className="mt-3"></hr>
             </Row>
-            {/* ) : null} */}
         </div>
     );
 };
