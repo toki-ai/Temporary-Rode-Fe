@@ -5,7 +5,9 @@ import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
 import AdminAttendance from '../Pages/AdminManagement/AdminAttendance';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
+import AdminRoomEdit from '../Pages/AdminManagement/AdminRoomEdit';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
+import CreateRoom from '../Pages/AdminManagement/CreateRoom';
 import Algorithm from '../Pages/Algorithm';
 import ArenaCSS from '../Pages/CssBattle';
 import TestCodeMirror from '../Pages/CssBattle';
@@ -16,7 +18,6 @@ import TestTabs from '../Pages/Test/TestTabs';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import TestAlert from '../components/TestAlert';
-import TestModal from '../components/TestModal';
 import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
@@ -71,7 +72,6 @@ const RouterComponent = () => {
                     loader: Loading,
                     element: <UserLayoutComponent />,
                     children: [
-                        { exact: true, path: 'modal', loader: Loading, element: <TestModal /> },
                         { exact: true, path: 'alert', loader: Loading, element: <TestAlert /> },
                         {
                             exact: true,
@@ -113,15 +113,27 @@ const RouterComponent = () => {
                     children: [
                         {
                             exact: true,
-                            path: 'admin_room',
+                            path: 'room',
                             loader: Loading,
                             element: <AdminRoom />,
                         },
                         {
                             exact: true,
-                            path: 'admin_room/:id',
+                            path: 'room/:id',
                             loader: Loading,
                             element: <AdminRoomView />,
+                        },
+                        {
+                            exact: true,
+                            path: 'room/edit/:id',
+                            loader: Loading,
+                            element: <AdminRoomEdit />,
+                        },
+                        {
+                            exact: true,
+                            path: 'room/create-room',
+                            loader: Loading,
+                            element: <CreateRoom />,
                         },
                         {
                             exact: true,

@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { TfiInfinite } from 'react-icons/tfi';
 
-import { authApi } from '../SearchRoom/axios';
 import DateFormat from './DateFormat';
 import More from './More';
 
@@ -11,20 +10,8 @@ export function functionCheckFilter({ state }) {
     else if (state == 'Public') return false;
     console.log(state);
 }
-export function RoomData({ state }) {
-    const [rooms, setRooms] = useState([]);
-    useEffect(() => {
-        authApi
-            .getAllRoom()
-            .then((res) => {
-                console.log(res);
-                setRooms(res.data.data.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
-    const results = rooms
+export function RoomData({ state, listRoom }) {
+    const results = listRoom
         .filter((room) => {
             if (state == 'All') return room.isPrivate == true || room.isPrivate == false;
             else if (state == 'Private') return room.isPrivate == true;

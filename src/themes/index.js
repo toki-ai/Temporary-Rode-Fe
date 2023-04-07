@@ -26,5 +26,6 @@ export const themes = {
         gold: '#FEE500',
         sliver: '#d8dddf',
         cooper: '#EF7329',
+        red2: '#DC3545',
     },
 };

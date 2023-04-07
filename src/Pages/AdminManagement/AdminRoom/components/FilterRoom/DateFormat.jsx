@@ -9,7 +9,7 @@ const DateFormat = (props) => {
     if (day < 10) day = '0' + day;
     if (hour < 10) hour = '0' + hour;
     if (minute < 10) minute = '0' + minute;
-    var newDate = day + '-' + month + '-' + year + ' ' + hour + ':' + minute;
+    var newDate = day + '/' + month + '/' + year + ' ' + hour + ':' + minute;
     return newDate;
 };
 export default DateFormat;
