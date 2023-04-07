@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { Dropdown, DropdownButton } from 'react-bootstrap/esm';
 
-import ModalComponent from '../../../../../components/Modal';
+import ModalComponent from '../../../../../components/Modal/Modal';
 
 const More = ({ link, roomId }) => {
     const [show, setShow] = useState(false);
