@@ -14,7 +14,7 @@ const AdminRoom = () => {
         setResult(e.target.value);
     }
     return (
-        <div className="p-2">
+        <div className="p-3">
             <RoomStyle>
                 <div className="box-style">
                     <Col className="p-3">
