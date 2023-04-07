@@ -1,16 +1,21 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 import { Dropdown, DropdownButton } from 'react-bootstrap/esm';
 
-const More = ({ link }) => {
+import ModalComponent from '../../../../../components/Modal';
+
+const More = ({ link, roomId }) => {
+    const [show, setShow] = useState(false);
     const actions = [
         {
             id: 1,
-            href: `/admin/admin_room/${link}`,
+            href: `/admin/room/${link}`,
             value: 'View',
         },
-        { id: 2, href: '#', value: 'Edit' },
-        { id: 3, href: '#', value: 'Delete' },
+        { id: 2, href: `/admin/room/edit/${link}`, value: 'Edit' },
+        { id: 3, href: `/admin/attendance/${roomId}`, value: 'Attendance' },
+        { id: 4, value: 'Delete', func: () => setShow(true) },
     ];
     return (
         <>
@@ -28,12 +33,24 @@ const More = ({ link }) => {
                             eventKey={item.id}
                             href={item.href}
                             className="w-100"
+                            onClick={item.func}
                         >
                             {item.value}
                         </Dropdown.Item>
                     );
                 })}
             </DropdownButton>
+            <ModalComponent
+                show={show}
+                close={() => setShow(false)}
+                value="Close"
+                value2="Delete"
+                title="Delete Room"
+                body="Are you sure to delete this room?"
+                className="text-danger"
+                variant1="grey"
+                variant2="red"
+            />
         </>
     );
 };

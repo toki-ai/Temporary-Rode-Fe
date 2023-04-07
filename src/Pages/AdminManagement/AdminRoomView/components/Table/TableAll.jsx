@@ -1,5 +1,8 @@
+import { useState, useEffect } from 'react';
+
 import { Table } from 'react-bootstrap';
 
+import roomApi from '../../../../../utils/api/roomApi';
 import { RoomDetailData } from '../RoomDetailData';
 
 const titles = [
@@ -27,7 +30,18 @@ const data = [
         time: '2023-03-19T13:46:36.673Z',
     },
 ];
-function TableAll() {
+function TableAll({ roomID }) {
+    const [questions, setQuestions] = useState([]);
+    useEffect(() => {
+        roomApi
+            .getSubmitHistoryByRoom(roomID)
+            .then((res) => {
+                setQuestions(res.data.data.items);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
     return (
         <Table striped className="w-98 border-top">
             <thead>
@@ -38,7 +52,7 @@ function TableAll() {
                 </tr>
             </thead>
             <tbody>
-                <RoomDetailData data={data} />
+                <RoomDetailData data={questions} quesId="All" />
             </tbody>
         </Table>
     );

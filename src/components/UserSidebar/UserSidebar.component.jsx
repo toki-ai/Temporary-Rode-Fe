@@ -22,7 +22,7 @@ function UserSidebar() {
         {
             icon: <IconHouse />,
             Info: 'Dashboard',
-            Action: './dashboard',
+            Action: '/dashboard',
         },
     ];
     const infoItems = [
@@ -42,12 +42,12 @@ function UserSidebar() {
         {
             icon: <IconLogOut />,
             Info: 'Log out',
-            Action: '/',
+            Action: '/login',
         },
     ];
 
     const { currentUser } = useContext(UserContext);
-    console.log(currentUser);
+
     return (
         <>
             <Container>

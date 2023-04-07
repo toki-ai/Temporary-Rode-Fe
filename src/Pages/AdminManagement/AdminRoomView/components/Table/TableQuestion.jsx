@@ -1,5 +1,8 @@
+import { useState, useEffect } from 'react';
+
 import { Table } from 'react-bootstrap';
 
+import roomApi from '../../../../../utils/api/roomApi';
 import { RoomDetailData } from '../RoomDetailData';
 
 const titles = [
@@ -9,99 +12,20 @@ const titles = [
     { id: 4, name: 'Execution Time' },
     { id: 5, name: 'Finish at' },
 ];
-const questions = [
-    {
-        id: 1,
-        data: [
-            {
-                id: 1,
-                rank: 1,
-                name: 'Lee Jung Suk',
-                score: '90',
-                execution: '100ms',
-                time: '2023-03-19T14:56:36.673Z',
-            },
-        ],
-    },
-    {
-        id: 2,
-        data: [
-            {
-                id: 1,
-                rank: 1,
-                name: 'Lee Jung Suk',
-                score: '90',
-                execution: '100ms',
-                time: '2023-03-19T14:56:36.673Z',
-            },
-            {
-                id: 2,
-                rank: 2,
-                name: 'IU',
-                score: '97',
-                execution: '110ms',
-                time: '2023-03-19T13:46:36.673Z',
-            },
-        ],
-    },
-    {
-        id: 3,
-        data: [
-            {
-                id: 1,
-                rank: 1,
-                name: 'Lee Jung Suk',
-                score: '90',
-                execution: '100ms',
-                time: '2023-03-19T14:56:36.673Z',
-            },
-            {
-                id: 2,
-                rank: 2,
-                name: 'IU',
-                score: '97',
-                execution: '110ms',
-                time: '2023-03-19T13:46:36.673Z',
-            },
-            {
-                id: 3,
-                rank: 3,
-                name: 'Lee Jung Suk',
-                score: '90',
-                execution: '100ms',
-                time: '2023-03-19T14:56:36.673Z',
-            },
-            {
-                id: 4,
-                rank: 4,
-                name: 'IU',
-                score: '97',
-                execution: '110ms',
-                time: '2023-03-19T13:46:36.673Z',
-            },
-        ],
-    },
-];
-const data = [
-    {
-        id: 1,
-        rank: 1,
-        name: 'Lee Thành Long',
-        score: '100',
-        execution: '120ms',
-        time: '2023-03-19T13:46:36.673Z',
-    },
-    {
-        id: 2,
-        rank: 2,
-        name: 'Lee Thành Long',
-        score: '100',
-        execution: '120ms',
-        time: '2023-03-19T13:46:36.673Z',
-    },
-];
-function TableQues({ ques }) {
-    let i = ques;
+const data = [];
+function TableQues({ quesId }) {
+    const [accounts, setAccounts] = useState([]);
+    useEffect(() => {
+        roomApi
+            .getSubmitHistoryByQuestion(quesId)
+            .then((res) => {
+                console.log(res.data.data);
+                setAccounts(res.data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
     return (
         <Table striped className="w-98 border-top">
             <thead>
@@ -112,7 +36,7 @@ function TableQues({ ques }) {
                 </tr>
             </thead>
             <tbody>
-                <RoomDetailData data={questions[i - 1].data} />
+                <RoomDetailData data={data} quesId={quesId} />
             </tbody>
         </Table>
     );
