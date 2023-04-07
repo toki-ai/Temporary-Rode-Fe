@@ -9,13 +9,22 @@ function ContentNav({ items, layout }) {
     const Item = layout == 1 ? AdminItem : UserItem;
     const Icon = layout == 1 ? AdminIcon : UserIcon;
     const Text = layout == 1 ? AdminText : UserText;
+    const handleOnClick = () => {
+        localStorage.clear();
+    };
     return items.map((item, index) => {
         return (
             <Item key={index}>
                 <Icon>{item.icon}</Icon>
-                <Text>
-                    <Link to={item.Action}>{item.Info}</Link>
-                </Text>
+                {index < items.length - 1 ? (
+                    <Text>
+                        <Link to={item.Action}>{item.Info}</Link>
+                    </Text>
+                ) : (
+                    <Text>
+                        <Link onClick={handleOnClick}>{item.Info}</Link>
+                    </Text>
+                )}
             </Item>
         );
     });

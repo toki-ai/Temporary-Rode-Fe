@@ -4,14 +4,15 @@ import { useEffect } from 'react';
 
 import Bg from '../../../assets/Home/bg.png';
 import roomApi from '../../../utils/api/roomApi';
-import { Background, Box, MyPagination, MyTable, Text, Type } from '../styled';
+import { Box, MyPagination, MyTable, Text, Type } from '../styled';
 import { RTable } from '../styled';
 import DropdownType from './DropdownType';
+import ModalJoinRoom from './Modal';
 import PaginationRoom from './PaginationRoom';
 import { RoomData } from './RoomData';
 import SearchRoom from './SearchRoom';
 
-function Content() {
+function Content({ handlePostRoom, setInputCode, inputCode }) {
     const titles = [
         { id: 1, name: 'Room Code' },
         { id: 2, name: 'Room Type' },
@@ -26,6 +27,7 @@ function Content() {
     const [rooms, setRooms] = useState([]);
     const [type, setType] = useState('');
     const [meta, setMeta] = useState();
+    const [show, setShow] = useState(false);
     const [currentPage, setCurrentPage] = useState(meta?.currentPage || 1);
     console.log(meta?.currentPage);
     console.log(currentPage);
@@ -75,9 +77,28 @@ function Content() {
             });
     }, [searchValue, type, currentPage]);
     console.log(meta);
+
+    const handleOnClickRow = (e) => {
+        const value = e.currentTarget.firstChild.textContent;
+        setInputCode(value);
+        handleShow(true);
+        // handlePostRoom(e);
+    };
+    const handleClose = () => {
+        setShow(false);
+    };
+    const handleShow = () => {
+        setShow(true);
+    };
     return (
-        <Box>
-            <Background src={Bg}></Background>
+        <Box url={Bg}>
+            <ModalJoinRoom
+                handleClose={handleClose}
+                handleShow={handleShow}
+                show={show}
+                inputRoom={inputCode}
+                handlePostRoom={handlePostRoom}
+            />
             <Text>Practice Room</Text>
             <SearchRoom handleSearchChange={handleSearchChange} value={searchValue}></SearchRoom>
             <Type>
@@ -88,7 +109,7 @@ function Content() {
                 ></DropdownType>
             </Type>
             <MyTable>
-                <RTable striped variant="dark" hover>
+                <RTable striped variant="dark" hover responsive="xl">
                     <thead>
                         <tr>
                             {titles.map((titles) => {
@@ -96,7 +117,11 @@ function Content() {
                             })}
                         </tr>
                     </thead>
-                    <tbody>{update && <RoomData rooms={rooms}></RoomData>}</tbody>
+                    <tbody>
+                        {update && (
+                            <RoomData rooms={rooms} handleOnClickRow={handleOnClickRow}></RoomData>
+                        )}
+                    </tbody>
                 </RTable>
             </MyTable>
             <PaginationRoom

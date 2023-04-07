@@ -13,11 +13,11 @@ function DropdownType({ handleTypeChange, selected }) {
 
     return (
         <Dropdown className="d-inline mx-2" onSelect={handleTypeChange}>
-            <Dropdown.Toggle id="dropdown-autoclose-true" className="bg border w-150 button">
+            <Dropdown.Toggle id="dropdown-autoclose-true" className="bg border button head">
                 {selected}
             </Dropdown.Toggle>
 
-            <Dropdown.Menu className="bg border transform w-150">
+            <Dropdown.Menu className="bg border transform menu">
                 {types.map((type) => {
                     return (
                         <Dropdown.Item eventKey={type.name} key={type.id}>

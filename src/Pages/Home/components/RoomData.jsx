@@ -4,9 +4,9 @@ import { Infinity } from 'react-bootstrap-icons';
 
 import roomApi from '../../../utils/api/roomApi';
 
-export function RoomData({ rooms }) {
+export function RoomData({ rooms, handleOnClickRow }) {
     const results = rooms.map((room) => (
-        <tr key={room.code}>
+        <tr key={room.code} onClick={handleOnClickRow}>
             <td>{room.code}</td>
             <td>{room.type}</td>
             <td>{<Infinity />}</td>
