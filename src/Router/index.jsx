@@ -6,7 +6,6 @@ import AllAccounts from '../Pages/Accounts/AllAccounts';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
 import AdminRoomEdit from '../Pages/AdminManagement/AdminRoomEdit';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
-import CreateRoom from '../Pages/AdminManagement/CreateRoom';
 import Algorithm from '../Pages/Algorithm';
 import ArenaCSS from '../Pages/CssBattle';
 import TestCodeMirror from '../Pages/CssBattle';
@@ -108,12 +107,6 @@ const RouterComponent = () => {
                             path: 'room/edit/:id',
                             loader: Loading,
                             element: <AdminRoomEdit />,
-                        },
-                        {
-                            exact: true,
-                            path: 'room/create-room',
-                            loader: Loading,
-                            element: <CreateRoom />,
                         },
                         {
                             exact: true,
