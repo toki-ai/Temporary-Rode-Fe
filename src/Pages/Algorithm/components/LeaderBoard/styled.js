@@ -8,8 +8,7 @@ export const NavStyled = styled(Nav)`
 export const LeaderBoardStyled = styled.div`
     padding: 20px;
     background-color: #020d26;
-    height: 100%;
-    position: relative;
+    min-height: 100vh;
     overflow: hidden;
     z-index: 0;
     .bg-blue {

@@ -23,6 +23,7 @@ const Submission = () => {
     useEffect(() => {
         const fetchData = async () => {
             submitHistoryApi.getInfoSubmission(roomInfo.id).then((res) => {
+                console.log(res);
                 setDataSubmission(res.data.data);
             });
         };

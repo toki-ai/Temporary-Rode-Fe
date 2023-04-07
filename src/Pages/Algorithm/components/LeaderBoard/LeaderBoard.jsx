@@ -13,8 +13,8 @@ import Table from 'react-bootstrap/Table';
 const LeaderBoard = () => {
     const [userSubmitHistory, setUserSubmitHistory] = useState([]);
     const roomInfo = useLoaderData();
-    const [questionCode, setQuestionCode] = useState(roomInfo.questions[1].id || '');
-    // console.log('roomInfooooooooooooooooo ', roomInfo);
+    const [questionCode, setQuestionCode] = useState(roomInfo?.questions[0].id || '');
+
     useEffect(() => {
         const fetchDataSubmitHistory = async () => {
             submitHistoryApi.getSubmitHistoryByQuestion(questionCode).then((response) => {
