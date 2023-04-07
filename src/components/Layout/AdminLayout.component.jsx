@@ -15,7 +15,7 @@ const AdminLayoutComponent = () => {
                 <HeaderComponent />
                 <Body>
                     <Sidebar />
-                    <ContentComponent>
+                    <ContentComponent layout={1}>
                         <Outlet />
                     </ContentComponent>
                 </Body>

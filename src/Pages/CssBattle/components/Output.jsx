@@ -21,7 +21,7 @@ const Output = ({ code, data }) => {
     const changeDiffCheckBoxValue = () => {
         setDiffChecked((state) => !state);
     };
-    const TestImg = localFileApi.getImg(data?.questions[0].questionImage);
+    const TestImg = localFileApi.getImg(data?.questions[0]?.questionImage);
     function imageCompareSlider(e) {
         if (slideChecked) {
             userOutPutRef.current.style.cursor = 'col-resize';

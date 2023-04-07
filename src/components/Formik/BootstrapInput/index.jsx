@@ -1,5 +1,6 @@
 import { Field } from 'formik';
 
+import '../../../index.css';
 import { WrapperInput } from './styled';
 
 import Form from 'react-bootstrap/Form';

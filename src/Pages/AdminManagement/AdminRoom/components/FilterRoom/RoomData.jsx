@@ -26,7 +26,7 @@ export function RoomData({ state, listRoom }) {
                 <td>{room?.isPrivate ? room.duration : <TfiInfinite />}</td>
                 <td>{room?.isPrivate ? 'Private' : 'Public'}</td>
                 <td>
-                    <More link={room.code} />
+                    <More link={room.code} roomId={room.id} />
                 </td>
             </tr>
         ));
