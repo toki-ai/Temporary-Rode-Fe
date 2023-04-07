@@ -9,6 +9,7 @@ import AdminRoomEdit from '../Pages/AdminManagement/AdminRoomEdit';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
 // import CreateRoom from '../Pages/AdminManagement/CreateRoom';
 import Algorithm from '../Pages/Algorithm';
+import TestLayout from '../Pages/Algorithm/LayoutAlgorithm';
 import CreateRoom from '../Pages/CreateRoom';
 import ArenaCSS from '../Pages/CssBattle';
 import TestCodeMirror from '../Pages/CssBattle';
@@ -90,6 +91,11 @@ const RouterComponent = () => {
                             path: 'algorithm/:id',
                             loader: GetInfoRoomByCode,
                             element: <Algorithm />,
+                        },
+                        {
+                            path: 'TestLayout',
+
+                            element: <TestLayout />,
                         },
                         {
                             exact: true,

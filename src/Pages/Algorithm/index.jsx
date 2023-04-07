@@ -1,8 +1,15 @@
+import ArenaAlgorithm from './components/ArenaAlrgorithm';
 import LeaderBoard from './components/LeaderBoard/LeaderBoard';
 import PaginationLeaderboard from './components/LeaderBoard/PaginationLeaderboard';
 import Submission from './components/Submission/Submission';
 import SubmitEx from './components/SubmitExample';
-import { AlgorithmWrapper, AlgorithmNav, AlgorithmNavItem, AlgorithmContent } from './styled';
+import {
+    TabPane,
+    AlgorithmWrapper,
+    AlgorithmNav,
+    AlgorithmNavItem,
+    AlgorithmContent,
+} from './styled';
 
 // import { NavStyled, NavItemStyled, TextStyled } from './styled';
 import Col from 'react-bootstrap/Col';
@@ -14,20 +21,20 @@ function Algorithm() {
     return (
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
             <AlgorithmWrapper>
-                <Row>
+                <Row className="p-4 m-y-20">
                     <Col sm={1} className="p-0 m-y-20">
                         <AlgorithmNav>
-                            <AlgorithmNavItem className="">
+                            <AlgorithmNavItem eventKey="first">
                                 <Nav.Link eventKey="first" className="algorithm-nav-title">
                                     Problem
                                 </Nav.Link>
                             </AlgorithmNavItem>
-                            <AlgorithmNavItem className="border-tran">
+                            <AlgorithmNavItem eventKey="second" className="border-tran">
                                 <Nav.Link eventKey="second" className="algorithm-nav-title">
                                     Submission
                                 </Nav.Link>
                             </AlgorithmNavItem>
-                            <AlgorithmNavItem className="active-border bg-blue">
+                            <AlgorithmNavItem eventKey="third" className=" ">
                                 <Nav.Link eventKey="third" className="algorithm-nav-title">
                                     LeaderBoard
                                 </Nav.Link>
@@ -37,15 +44,15 @@ function Algorithm() {
                     <Col sm={11} className="p-0">
                         <AlgorithmContent>
                             <Tab.Content className="h-100">
-                                <Tab.Pane eventKey="first" className="h-100">
-                                    <h1> The first</h1>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="second" className="h-100">
+                                <TabPane eventKey="first" className="h-100">
+                                    <ArenaAlgorithm />
+                                </TabPane>
+                                <TabPane eventKey="second" className="h-100">
                                     <Submission />
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="third" className="h-100">
+                                </TabPane>
+                                <TabPane eventKey="third" className="h-100">
                                     <LeaderBoard />
-                                </Tab.Pane>
+                                </TabPane>
                             </Tab.Content>
                         </AlgorithmContent>
                     </Col>
