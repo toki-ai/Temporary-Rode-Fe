@@ -15,3 +15,8 @@ export const DateFormatS = (props) => {
     var newDate = day + '/' + month + '/' + year;
     return newDate;
 };
+
+export function percentToNumber(percent = 0) {
+    var roundedNumber = parseFloat(percent.toFixed(2));
+    return roundedNumber;
+}
