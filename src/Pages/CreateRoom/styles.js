@@ -153,7 +153,7 @@ export const Color = styled.div`
 
 export const CodeTemplate = styled.div`
     textarea {
-        width: 400px
+        width: 400px;
         height: 60px;
         border-color: ${themes.colors.primary};
     }
