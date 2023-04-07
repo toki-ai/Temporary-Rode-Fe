@@ -1,64 +1,84 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
+import Loading from '../../../../components/Loading';
+import roomApi from '../../../../utils/api/roomApi';
 import Btn from './Btn';
 import TableAll from './Table/TableAll';
 import TableQuestion from './Table/TableQuestion';
 
-const fields = [
-    {
-        id: 1,
-        value: 'All',
-        className:
-            'color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-left br-none',
-    },
-    {
-        id: 2,
-        value: 'Question 1',
-        className: 'color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-0 ',
-    },
-    {
-        id: 3,
-        value: 'Question 2',
-        className:
-            'color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-0 bl-none',
-    },
-    {
-        id: 4,
-        value: 'Question 3',
-        className:
-            'color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-right bl-none',
-    },
-];
-
-const FilterQues = () => {
+const FilterQues = ({ roomId }) => {
     const [ques, setQues] = useState('All');
+    const [numOfQues, setNumOfQues] = useState([]);
+    useEffect(() => {
+        roomApi
+            .getRoomById(roomId)
+            .then((res) => {
+                console.log(res.data.data);
+                setNumOfQues(res.data.data.questions);
+                console.log(res.data.data.questions);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
     const handleOnClick = (e) => {
         var result = e.target.value;
         setQues(result);
     };
     const TableQues = () => {
-        if (ques == 'All') return <TableAll />;
-        else if (ques == 'Question 1') return <TableQuestion ques="1" />;
-        else if (ques == 'Question 2') return <TableQuestion ques="2" />;
-        else if (ques == 'Question 3') return <TableQuestion ques="3" />;
+        if (ques == 'All') return <TableAll roomID={roomId} />;
+        for (let i = 1; i <= numOfQues.length; i++) {
+            console.log(i);
+            if (ques == `Question ${i}`) return <TableQuestion quesId={numOfQues[i - 1].id} />;
+        }
     };
-    return (
+    const LastBtnValue = `Question ${numOfQues.length}`;
+    const results = (
         <>
             <div className="my-3 listBtn_custom">
-                {fields.map((item) => {
-                    return (
+                <Btn
+                    name="All"
+                    handleOnClick={handleOnClick}
+                    className="color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-left"
+                />
+                {/*numOfQues.length-1 but error promise */}
+                {numOfQues?.length >= 2 ? (
+                    [...Array(numOfQues.length - 1)].map((_, i) => (
                         <Btn
-                            key={item.id}
-                            name={item.value}
+                            key={i}
+                            name={`Question ${i + 1}`}
                             handleOnClick={handleOnClick}
-                            className={item.className}
+                            className="color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-0 bl-none"
                         />
-                    );
-                })}
+                    ))
+                ) : (
+                    <></>
+                )}
+
+                <Btn
+                    name={LastBtnValue}
+                    handleOnClick={handleOnClick}
+                    className="color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-right bl-none"
+                />
             </div>
             <TableQues />
         </>
     );
+    const content = numOfQues?.length ? (
+        results
+    ) : (
+        <>
+            <div className="my-3 listBtn_custom">
+                <Btn
+                    name="All"
+                    handleOnClick={handleOnClick}
+                    className="color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-left"
+                />
+            </div>
+            <TableQues />
+        </>
+    );
+    return <>{content}</>;
 };
 
 export default FilterQues;

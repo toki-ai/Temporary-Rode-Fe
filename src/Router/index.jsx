@@ -3,10 +3,14 @@ import { Navigate } from 'react-router-dom';
 
 import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
+import AdminAttendance from '../Pages/AdminManagement/AdminAttendance';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
+import AdminRoomEdit from '../Pages/AdminManagement/AdminRoomEdit';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
+// import CreateRoom from '../Pages/AdminManagement/CreateRoom';
 import Algorithm from '../Pages/Algorithm';
 import TestLayout from '../Pages/Algorithm/LayoutAlgorithm';
+import CreateRoom from '../Pages/CreateRoom';
 import ArenaCSS from '../Pages/CssBattle';
 import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
@@ -16,7 +20,6 @@ import TestTabs from '../Pages/Test/TestTabs';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import TestAlert from '../components/TestAlert';
-import TestModal from '../components/TestModal';
 import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
@@ -46,7 +49,6 @@ const RouterComponent = () => {
                 </UserLayoutComponent>
             ),
         },
-
         {
             path: '/',
             exact: true,
@@ -54,17 +56,23 @@ const RouterComponent = () => {
             children: [
                 {
                     exact: true,
+                    loader: Loading,
+                    element: <UserHomeLayout />,
+                    children: [
+                        {
+                            exact: true,
+                            path: 'home',
+                            loader: Loading,
+                            element: <Home />,
+                        },
+                    ],
+                },
+                {
+                    exact: true,
 
                     loader: Loading,
                     element: <UserLayoutComponent />,
                     children: [
-                        { index: true, path: 'home', element: <Home /> },
-                        {
-                            exact: true,
-                            path: 'modal',
-                            loader: Loading,
-                            element: <TestModal />,
-                        },
                         { exact: true, path: 'alert', loader: Loading, element: <TestAlert /> },
                         {
                             exact: true,
@@ -111,21 +119,45 @@ const RouterComponent = () => {
                     children: [
                         {
                             exact: true,
-                            path: 'admin_room',
+                            path: 'room',
                             loader: Loading,
                             element: <AdminRoom />,
                         },
                         {
                             exact: true,
-                            path: 'admin_room/:id',
+                            path: 'room/:id',
                             loader: Loading,
                             element: <AdminRoomView />,
                         },
                         {
                             exact: true,
-                            path: 'allAccounts',
+                            path: 'room/edit/:id',
+                            loader: Loading,
+                            element: <AdminRoomEdit />,
+                        },
+                        // {
+                        //     exact: true,
+                        //     path: 'room/create-room',
+                        //     loader: Loading,
+                        //     element: <CreateRoom />,
+                        // },
+                        {
+                            exact: true,
+                            path: 'contestant',
                             loader: Loading,
                             element: <AllAccounts />,
+                        },
+                        {
+                            exact: true,
+                            path: 'create',
+                            loader: Loading,
+                            element: <CreateRoom />,
+                        },
+                        {
+                            exact: true,
+                            path: 'attendance/:id',
+                            loader: Loading,
+                            element: <AdminAttendance />,
                         },
                     ],
                 },

@@ -7,7 +7,6 @@ import { Container, Hero, Left, Right } from './styled';
 
 function UserHeader() {
     const { currentUser } = useContext(UserContext);
-    console.log(currentUser);
 
     return (
         <Container>
