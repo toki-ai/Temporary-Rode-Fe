@@ -1,8 +1,7 @@
 import { post, get } from '../ApiCaller';
-import Localstorage from '../Localstorage';
 import authHeader from './HeaderAuthorization';
 
-const roomApi = {
+const roomAPI = {
     userGetAllRoom: async (data) => {
         const endpoint = `/rooms/user-get-all`;
         // eslint-disable-next-line no-return-await
@@ -16,18 +15,10 @@ const roomApi = {
                 return err;
             });
     },
-    getAllRoom: async (credential) => {
-        const endpoint = `/rooms/get-all`;
-        // eslint-disable-next-line no-return-await
-
-        return await get(endpoint, {}, authHeader())
-            .then((res) => {
-                // if (res.data.code !== 200) console.log(res.response);
-                return res;
-            })
-            .catch((err) => {
-                return err;
-            });
+    getAllRoomType: async () => {
+        const token = localStorage.getItem('token');
+        const endpoint = `/rooms/get-all-room-type`;
+        return await get(endpoint, {}, { Authorization: 'Bearer ' + token });
     },
     getRoomByCode: async (code) => {
         const endpoint = `/rooms/get-one-by-code/${code}`;
@@ -113,4 +104,4 @@ const roomApi = {
     },
 };
 
-export default roomApi;
+export default roomAPI;
