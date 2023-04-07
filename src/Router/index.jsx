@@ -3,35 +3,41 @@ import { Navigate } from 'react-router-dom';
 
 import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
+import AdminAttendance from '../Pages/AdminManagement/AdminAttendance';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
+import AdminRoomEdit from '../Pages/AdminManagement/AdminRoomEdit';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
+// import CreateRoom from '../Pages/AdminManagement/CreateRoom';
 import Algorithm from '../Pages/Algorithm';
+import TestLayout from '../Pages/Algorithm/LayoutAlgorithm';
+import CreateRoom from '../Pages/CreateRoom';
 import ArenaCSS from '../Pages/CssBattle';
 import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import TestTabs from '../Pages/Test/TestTabs';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
-import TestAlert from '../components/TestAlert';
-import TestModal from '../components/TestModal';
+import PublicLayout from '../components/PublicLayout/UserLayout.component';
 import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
+import useAuth from '../utils/useAuth';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
 import { loaderInfoGG, GetInfoRoomByCode } from './RouterLoader/Loader';
 
 const RouterComponent = () => {
     const router = createBrowserRouter([
-        { exact: true, path: '/', element: <Navigate to="home" /> },
+        { path: '/', element: <Navigate to="home" /> },
         {
             exact: true,
             path: '/login',
-            loader: Loading,
+
             element: (
-                <UserLayoutComponent>
+                <PublicLayout>
                     <Login />
-                </UserLayoutComponent>
+                </PublicLayout>
             ),
         },
         {
@@ -39,12 +45,11 @@ const RouterComponent = () => {
             path: '/register',
             loader: loaderInfoGG,
             element: (
-                <UserLayoutComponent>
+                <PublicLayout>
                     <Register />
-                </UserLayoutComponent>
+                </PublicLayout>
             ),
         },
-
         {
             path: '/',
             exact: true,
@@ -69,8 +74,6 @@ const RouterComponent = () => {
                     loader: Loading,
                     element: <UserLayoutComponent />,
                     children: [
-                        { exact: true, path: 'modal', loader: Loading, element: <TestModal /> },
-                        { exact: true, path: 'alert', loader: Loading, element: <TestAlert /> },
                         {
                             exact: true,
                             path: 'testMirror',
@@ -86,45 +89,81 @@ const RouterComponent = () => {
                         {
                             exact: true,
                             path: 'algorithm/:id',
-                            loader: Loading,
+                            loader: GetInfoRoomByCode,
                             element: <Algorithm />,
+                        },
+                        {
+                            path: 'TestLayout',
+
+                            element: <TestLayout />,
+                        },
+                        {
+                            exact: true,
+                            path: 'testTabs',
+                            loader: Loading,
+                            element: <TestTabs />,
                         },
                     ],
                 },
             ],
         },
         {
+            path: '/admin',
             exact: true,
             element: <AdminRoute />,
             children: [
                 {
                     exact: true,
-                    path: 'admin',
-                    loader: Loading,
                     element: <AdminLayoutComponent />,
                     children: [
                         {
                             exact: true,
-                            path: 'admin_room',
+                            path: 'room',
+                            index: true,
                             loader: Loading,
                             element: <AdminRoom />,
                         },
                         {
                             exact: true,
-                            path: 'admin_room/:id',
+                            path: 'room/:id',
                             loader: Loading,
                             element: <AdminRoomView />,
                         },
                         {
                             exact: true,
-                            path: 'allAccounts',
+                            path: 'room/edit/:id',
+                            loader: Loading,
+                            element: <AdminRoomEdit />,
+                        },
+                        // {
+                        //     exact: true,
+                        //     path: 'room/create-room',
+                        //     loader: Loading,
+                        //     element: <CreateRoom />,
+                        // },
+                        {
+                            exact: true,
+                            path: 'contestant',
                             loader: Loading,
                             element: <AllAccounts />,
+                        },
+                        {
+                            exact: true,
+                            path: 'create',
+                            loader: Loading,
+                            element: <CreateRoom />,
+                        },
+                        {
+                            exact: true,
+                            path: 'attendance/:id',
+                            loader: Loading,
+                            element: <AdminAttendance />,
                         },
                     ],
                 },
             ],
         },
+
         { path: '*', element: <ErrorPage /> },
     ]);
 

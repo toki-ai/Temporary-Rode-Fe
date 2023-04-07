@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -67,6 +67,10 @@ const Home = () => {
             })
             .catch((err) => console.log(err));
     };
+    const getAllRoom = async () => {
+        await roomApi.getAllUserRoom();
+    };
+
     return (
         <>
             <Container>

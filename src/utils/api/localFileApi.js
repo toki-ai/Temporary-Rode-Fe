@@ -20,8 +20,10 @@ const localFileApi = {
             });
     },
     getImg: (id) => {
-        console.log(id);
-        return API_URL + `/local-files/file/${id}`;
+        if (id) {
+            return API_URL + `/local-files/file/${id}`;
+        }
+        return null;
     },
 };
 

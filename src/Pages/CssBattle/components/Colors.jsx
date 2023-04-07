@@ -11,8 +11,9 @@ import { BoxColor, CircleColor, ColorItem, TextColor } from '../styled';
 //         </button>
 //     </CopyToClipboard>
 // ));
-const Colors = () => {
-    const LIST_COLOR = ['#45ce7b', '#45ce2f', '#ffffff'];
+const Colors = ({ colors }) => {
+    const LIST_COLOR = colors?.split(',');
+
     return (
         <BoxColor>
             {LIST_COLOR.map((color) => (

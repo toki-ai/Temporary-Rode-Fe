@@ -142,9 +142,9 @@ export const BoxEditor = styled.div`
     border-radius: 10px;
     overflow: hidden;
     .ͼo {
-        background-color: transparent;
+        /* background-color: transparent; */
         & .cm-gutters {
-            background-color: transparent;
+            /* background-color: transparent; */
         }
     }
 `;

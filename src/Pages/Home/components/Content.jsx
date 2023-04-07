@@ -48,7 +48,6 @@ function Content({ handlePostRoom, setInputCode, inputCode }) {
     };
 
     const handleSearchChange = (e) => {
-        console.log(e.target.value);
         setSearchValue(e.target.value);
     };
 
