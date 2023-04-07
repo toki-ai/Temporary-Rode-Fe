@@ -73,7 +73,6 @@ const RouterComponent = () => {
                     loader: Loading,
                     element: <UserLayoutComponent />,
                     children: [
-                        { exact: true, path: 'alert', loader: Loading, element: <TestAlert /> },
                         {
                             exact: true,
                             path: 'testMirror',
