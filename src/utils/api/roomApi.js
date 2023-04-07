@@ -3,19 +3,16 @@ import Localstorage from '../Localstorage';
 import authHeader from './HeaderAuthorization';
 
 const roomApi = {
-    getAllUserRoom: async () => {
+    userGetAllRoom: async (data) => {
         const endpoint = `/rooms/user-get-all`;
         // eslint-disable-next-line no-return-await
-
-        return await get(endpoint, {}, authHeader())
+        console.log(data);
+        return await get(endpoint, data, authHeader())
             .then((res) => {
                 // if (res.data.code !== 200) console.log(res.response);
-                console.log(res);
                 return res;
             })
             .catch((err) => {
-                console.log(err);
-
                 return err;
             });
     },

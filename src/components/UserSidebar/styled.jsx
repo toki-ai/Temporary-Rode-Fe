@@ -19,28 +19,26 @@ export const Container = styled.div`
     box-shadow: 0px 0px 22px #00c994;
     border-radius: 12px;
     z-index: 1;
-    margin: 50px 20px 20px 40px;
+    margin: 0 20px 0 40px;
+    align-items: end;
+    height: 88vh;
     a {
         color: ${themes.colors.light};
         text-decoration: none;
     }
     @media ${device.tablet} {
-        width: 170px;
-        height: 75vh;
+        width: 200px;
     }
     @media ${device.laptop} {
-        width: 200px;
-        height: 80vh;
+        width: 250px;
     }
 
     @media ${device.laptopL} {
-        width: 229px;
-        height: 82vh;
+        width: 290px;
     }
 
     @media ${device.desktop} {
-        width: 250px;
-        height: 82vh;
+        width: 550px;
     }
 `;
 
@@ -56,17 +54,23 @@ export const User = styled.div`
         font-family: 'Quicksand';
         font-style: normal;
         font-weight: 600;
-        font-size: 1.4vw;
+        font-size: 1.6vw;
         line-height: 21px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     p {
         font-family: 'Quicksand';
         font-style: normal;
         font-weight: 500;
-        font-size: 1.1vw;
+        font-size: 1.3vw;
         line-height: 18px;
+        letter-spacing: 0.05em;
+    }
+    @media ${device.desktop} {
+        div {
+            margin-bottom: 20px;
+        }
     }
 `;
 export const IconUser = styled(PersonCircle)`
@@ -107,7 +111,7 @@ export const General = styled.div`
     }
 
     @media ${device.desktop} {
-        margin-bottom: 35px;
+        margin-bottom: 50px;
     }
 `;
 
@@ -131,22 +135,7 @@ export const ContestInfo = styled.div`
     }
 `;
 
-export const IconPerson = styled(PersonFill)`
-    width: 20px;
-    height: 16px;
-`;
-
-export const IconFile = styled(FileEarmarkText)`
-    width: 20px;
-    height: 16px;
-`;
-
 export const IconChat = styled(ChatDots)`
-    width: 20px;
-    height: 16px;
-`;
-
-export const IconSetting = styled(GearFill)`
     width: 20px;
     height: 16px;
 `;
@@ -156,16 +145,11 @@ export const IconLogOut = styled(Power)`
     height: 16px;
 `;
 
-export const IconBarChart = styled(BarChartFill)`
-    width: 20px;
-    height: 16px;
-`;
-
 export const BoldText = styled.section`
     font-family: 'Quicksand';
     font-style: normal;
     font-weight: 700;
-    font-size: 1.2vw;
+    font-size: 1.3vw;
     line-height: 21px;
     color: ${themes.colors.primary};
     @media ${device.tablet} {
@@ -180,6 +164,6 @@ export const BoldText = styled.section`
     }
 
     @media ${device.desktop} {
-        margin-bottom: 11px;
+        margin-bottom: 35px;
     }
 `;
