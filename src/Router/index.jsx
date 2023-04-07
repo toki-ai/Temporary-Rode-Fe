@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 import ErrorPage from '../Pages/404Page';
 import AllAccounts from '../Pages/Accounts/AllAccounts';
+import AdminAttendance from '../Pages/AdminManagement/AdminAttendance';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
 import Algorithm from '../Pages/Algorithm';
@@ -11,6 +12,7 @@ import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import TestTabs from '../Pages/Test/TestTabs';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import TestAlert from '../components/TestAlert';
@@ -89,6 +91,12 @@ const RouterComponent = () => {
                             loader: GetInfoRoomByCode,
                             element: <Algorithm />,
                         },
+                        {
+                            exact: true,
+                            path: 'testTabs',
+                            loader: Loading,
+                            element: <TestTabs />,
+                        },
                     ],
                 },
             ],
@@ -120,6 +128,12 @@ const RouterComponent = () => {
                             path: 'allAccounts',
                             loader: Loading,
                             element: <AllAccounts />,
+                        },
+                        {
+                            exact: true,
+                            path: 'attendance/:id',
+                            loader: Loading,
+                            element: <AdminAttendance />,
                         },
                     ],
                 },

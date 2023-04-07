@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Dropdown, DropdownButton } from 'react-bootstrap/esm';
 
-const More = ({ link }) => {
+const More = ({ link, roomId }) => {
     const actions = [
         {
             id: 1,
@@ -10,7 +10,8 @@ const More = ({ link }) => {
             value: 'View',
         },
         { id: 2, href: '#', value: 'Edit' },
-        { id: 3, href: '#', value: 'Delete' },
+        { id: 3, href: `/admin/attendance/${roomId}`, value: 'Attendance' },
+        { id: 4, href: '#', value: 'Delete' },
     ];
     return (
         <>
