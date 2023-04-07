@@ -1,4 +1,5 @@
 import { post, get } from '../ApiCaller';
+import authHeader from './HeaderAuthorization';
 
 const roomAPI = {
     userGetAllRoom: async (data) => {
