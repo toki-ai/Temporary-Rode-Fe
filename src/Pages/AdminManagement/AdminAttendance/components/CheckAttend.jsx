@@ -30,7 +30,9 @@ const CheckAttend = ({ idUserRoom, setAccounts }) => {
                 style={{ width: '50px' }}
                 bsPrefix="w-75 d-flex justify-content-center dropdown-style-2 w-50"
             >
-                <Dropdown.Item onClick={() => handleActive(idUserRoom)}>Ban / Unban</Dropdown.Item>
+                <Dropdown.Item onClick={() => handleActive(idUserRoom)}>
+                    Attend / Absent
+                </Dropdown.Item>
             </DropdownButton>
         </>
     );
