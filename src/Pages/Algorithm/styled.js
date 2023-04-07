@@ -145,4 +145,66 @@ export const Tabs = styled.div`
 
 export const TabPane = styled(Tab.Pane)`
     transform: none !important;
+    width: 100% !important;
+`;
+//DraggableLine//
+
+export const WrapperStyle = styled.div`
+    height: 100%;
+    background-color: ${(props) => props.theme.colors.arenaBG};
+    .app {
+        display: flex;
+        height: 100%;
+    }
+
+    .left-section,
+    .right-section {
+        height: 100%;
+    }
+
+    .left-section {
+        /* background-color: lightblue; */
+        overflow: hidden;
+    }
+
+    .separator {
+        width: 10px;
+        background-color: gray;
+        cursor: col-resize;
+    }
+
+    .right-section {
+        flex-grow: 1;
+        /* background-color: lightgreen; */
+        overflow: hidden;
+    }
+`;
+export const BoxEditor = styled.div`
+    width: 100%;
+    /* height: calc(100vh - 290px); */
+
+    color: ${(props) => props.theme.colors.light};
+    /* padding: 10px 20px; */
+    /* background-color: ${(props) => props.theme.colors.arenaBG}; */
+    /* border: 1px solid #00e7aa; */
+    /* box-shadow: 0px 2px 15px #00c994; */
+    border-radius: 10px;
+    overflow: hidden;
+    .ͼo {
+        background-color: transparent;
+        & .cm-gutters {
+            background-color: transparent;
+        }
+    }
+`;
+export const TimeText = styled.span`
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+    letter-spacing: 0.457143px;
+    text-transform: uppercase;
+
+    color: #ffffff;
 `;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 
 export const NavStyled = styled(Nav)`
@@ -110,4 +111,51 @@ export const PaginationLB = styled.div`
         padding: 0;
         margin: 0;
     }
+`;
+
+export const FormSelectStyled = styled(Form.Select)`
+    /* width: 335px;
+    height: 60px; */
+
+    background: #000000;
+    border-radius: 15px;
+    color: #ffffff;
+
+    border: 2px solid #2e7dff;
+
+    &:focus {
+        outline: none;
+        border: none;
+        margin-bottom: 50px;
+    }
+`;
+
+export const OptionStyled = styled.option``;
+export const Timer = styled.div`
+    width: 200px;
+    display: flex;
+    gap: 10px;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    border: 2px solid #00e7aa;
+    /* shadow */
+
+    filter: drop-shadow(0px 2px 15px #00c994);
+    border-radius: 15px;
+`;
+export const Title = styled.span`
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 28px;
+    /* identical to box height */
+
+    letter-spacing: 0.457143px;
+    text-transform: uppercase;
+
+    /* Yellow */
+
+    color: #f9c41c;
+    text-shadow: 0px 1px 3px #f9c41c;
+    /* margin-bottom: 10px; */
 `;

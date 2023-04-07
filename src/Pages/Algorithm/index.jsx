@@ -1,3 +1,4 @@
+import ArenaAlgorithm from './components/ArenaAlrgorithm';
 import LeaderBoard from './components/LeaderBoard/LeaderBoard';
 import PaginationLeaderboard from './components/LeaderBoard/PaginationLeaderboard';
 import Submission from './components/Submission/Submission';
@@ -44,7 +45,7 @@ function Algorithm() {
                         <AlgorithmContent>
                             <Tab.Content className="h-100">
                                 <TabPane eventKey="first" className="h-100">
-                                    <SubmitEx />
+                                    <ArenaAlgorithm />
                                 </TabPane>
                                 <TabPane eventKey="second" className="h-100">
                                     <Submission />
