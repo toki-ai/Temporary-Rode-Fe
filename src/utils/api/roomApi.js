@@ -1,7 +1,7 @@
 import { post, get } from '../ApiCaller';
 import authHeader from './HeaderAuthorization';
 
-const roomAPI = {
+const roomApi = {
     userGetAllRoom: async (data) => {
         const endpoint = `/rooms/user-get-all`;
         // eslint-disable-next-line no-return-await
@@ -104,4 +104,4 @@ const roomAPI = {
     },
 };
 
-export default roomAPI;
+export default roomApi;
