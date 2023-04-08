@@ -33,7 +33,7 @@ const AdminRoomView = () => {
 
     return (
         <ARViewStyle>
-            <div className="p-3 box-style">
+            <div className="w-100 p-3 box-style">
                 <div className="d-flex align-items-center">
                     <Link
                         to="/admin/room"

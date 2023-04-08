@@ -9,7 +9,14 @@ import ButtonCustom from './Button';
 import ButtonUpDown from './ButtonUpDown';
 import CreateTestCase from './CreateTestCase';
 
-const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
+const CreateQuestion = ({
+    maxSubmitTime,
+    questionImages,
+    question,
+    i,
+    setNewQuestions,
+    setMaxSubmitTimes,
+}) => {
     console.log(question[i]);
     const defaultTestCases = { input: '', output: '' };
     const [testCasesResult, setTestCaseResult] = useState([...question[i].testCases]);
@@ -19,6 +26,8 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
     const [fileName, setFileName] = useState();
     const [numOfTestCase, setNumOfTestCase] = useState(testCasesResult.length);
     const [testCaseResultFinal, setTestCaseResultFinal] = useState(testCasesResult);
+    const [newMaxSubmitTimes, setNewMaxSubmitTimes] = useState();
+
     function increaseTestCase() {
         testCasesResult.push(defaultTestCases);
         setNumOfTestCase(numOfTestCase + 1);
@@ -51,8 +60,9 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
         };
     };
 
-    // console.log(question);
-
+    const handleDone = () => {
+        setNewQuestions(question);
+    };
     return (
         <div>
             <ButtonCustom
@@ -70,7 +80,11 @@ const CreateQuestion = ({ maxSubmitTime, questionImages, question, i }) => {
                             <div className="text-secondary fw-bold rfs">Max Submit Time:</div>
                         </Col>
                         <Col className="col-3 col-lg-4 ">
-                            <ButtonUpDown variant="green" maxSubmitTime={maxSubmitTime} />
+                            <ButtonUpDown
+                                variant="green"
+                                maxSubmitTime={maxSubmitTime}
+                                setNewMaxSubmitTimes={setMaxSubmitTimes}
+                            />
                         </Col>
                     </Row>
                     <Row>

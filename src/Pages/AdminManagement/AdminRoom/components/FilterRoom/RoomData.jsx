@@ -10,6 +10,7 @@ export function functionCheckFilter({ state }) {
     else if (state == 'Public') return false;
     console.log(state);
 }
+
 export function RoomData({ state, listRoom }) {
     const results = listRoom
         .filter((room) => {
@@ -26,7 +27,7 @@ export function RoomData({ state, listRoom }) {
                 <td>{room?.isPrivate ? room.duration : <TfiInfinite />}</td>
                 <td>{room?.isPrivate ? 'Private' : 'Public'}</td>
                 <td>
-                    <More link={room.code} roomId={room.id} />
+                    <More link={room.code} roomId={room.id} openTime={room.openTime} />
                 </td>
             </tr>
         ));

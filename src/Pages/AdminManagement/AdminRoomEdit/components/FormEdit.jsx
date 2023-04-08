@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState, useEffect } from 'react';
 
 import { Formik } from 'formik';
@@ -17,17 +17,24 @@ import DateTimePickerValue from './DateTimePicker';
 
 const schema = yup.object().shape({
     openTime: yup.string().required('Please enter open time'),
-    duration: yup.string().required('Please enter duration'),
+    duration: yup
+        .number('Please enter number')
+        .required('Please enter duration')
+        .positive('Duration must be greater than 1'),
 });
 
-const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
+const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
     const { id } = useParams();
     const roomId = id;
     const [room, setRoom] = useState({});
     const [roomTypes, setRoomTypes] = useState([]);
     const [load, setLoad] = useState([]);
     const [questions, setQuestions] = useState([]);
-
+    const [newQuestions, setNewQuestions] = useState([]);
+    const [openTime, setOpenTime] = useState('');
+    const [closeTime, setCloseTime] = useState('');
+    const [duration, setDuration] = useState(0);
+    const formRef = useRef();
     console.log(id);
     useEffect(() => {
         roomApi.getRoomById(roomId).then((res) => {
@@ -75,9 +82,16 @@ const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
         console.log(questions.length);
     };
     const handleSubmit = async (roomId) => {
-        setRoomInfo(values);
+        let newRoom = room;
+        newRoom.openTime = openTime;
+        newRoom.closeTime = closeTime;
+        newRoom.duration = parseInt(formRef.current.values.duration);
+        console.log(newRoom);
+        setRoomInfo(newRoom);
     };
-
+    // handleSubmit();
+    console.log(openTime);
+    console.log(closeTime);
     const [done, setDone] = useState(false);
     return load ? (
         <Loading />
@@ -94,6 +108,7 @@ const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
                     closeTime: room.isPrivate ? room.closeTime : '',
                     visibility: checkPrivate,
                 }}
+                innerRef={formRef}
             >
                 {({ handleSubmit, handleChange, handleBlur, values, touched, isValid, errors }) => (
                     <Form noValidate onSubmit={handleSubmit}>
@@ -106,6 +121,7 @@ const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
                                     value={values.code}
                                     onChange={handleChange}
                                     isInvalid={!!errors.code}
+                                    disabled
                                 />
                                 <Form.Control.Feedback type="invalid">
                                     {errors.code}
@@ -118,6 +134,7 @@ const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
                                     name="type"
                                     onChange={handleChange}
                                     isInvalid={!!errors.type}
+                                    disabled
                                 >
                                     {roomTypes.map((item, i) => {
                                         return <option key={i}>{item}</option>;
@@ -131,7 +148,10 @@ const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
                         <Row className="mb-3">
                             <Form.Group as={Col} controlId="openTime">
                                 <Form.Label className="fw-bold">Open Time</Form.Label>
-                                <DateTimePickerValue dayApi={room.openTime} />
+                                <DateTimePickerValue
+                                    dayApi={room.openTime}
+                                    setTimeISO={setOpenTime}
+                                />
 
                                 <Form.Control.Feedback type="invalid">
                                     {errors.openTime}
@@ -139,6 +159,7 @@ const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
                             </Form.Group>
                             <Form.Group as={Col} controlId="closeTime">
                                 <Form.Label className="fw-bold">Close Time</Form.Label>
+
                                 {values.visibility == 'Public' ? (
                                     <Form.Control
                                         type="text"
@@ -151,7 +172,13 @@ const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
                                         disabled
                                     />
                                 ) : (
-                                    <DateTimePickerValue dayApi={room.closeTime} />
+                                    <>
+                                        <DateTimePickerValue
+                                            dayApi={room.closeTime}
+                                            setTimeISO={setCloseTime}
+                                            openTime={openTime}
+                                        />
+                                    </>
                                 )}
                                 <Form.Control.Feedback type="invalid">
                                     {errors.closeTime}
@@ -181,6 +208,7 @@ const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
                                     onChange={handleChange}
                                     isValid={touched.visibility && !errors.visibility}
                                     isInvalid={!!errors.visibility}
+                                    disabled
                                 >
                                     <option>{checkPrivate}</option>
                                     <option>{checkPrivate2}</option>
@@ -204,6 +232,7 @@ const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
                                             questions?.length ? questions[i].questionImage : ''
                                         }
                                         question={questions}
+                                        setNewQuestions={setNewQuestions}
                                         done={done}
                                     />
                                 </>
@@ -226,11 +255,9 @@ const FormEdit = ({ setRoomInfo, setQuestionsInfo }) => {
                             <ButtonCustom
                                 variant="green width"
                                 name="Save"
-                                href="/admin/room"
+                                // href="/admin/room"
                                 className="d-flex align-items-center fs-4"
-                                onClick={() => {
-                                    setDone;
-                                }}
+                                onClick={handleSubmit}
                             />
                         </div>
                     </Form>

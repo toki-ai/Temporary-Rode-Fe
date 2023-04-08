@@ -3,7 +3,13 @@ import { useState } from 'react';
 
 import { Button, Form } from 'react-bootstrap';
 
-const ButtonUpDown = ({ variant, maxSubmitTime, question }) => {
+const ButtonUpDown = ({
+    variant,
+    maxSubmitTime,
+    question,
+    done,
+    setMaxSubmitTimes: setNewMaxSubmitTimes,
+}) => {
     const [quantity, setQuantity] = useState(maxSubmitTime);
     const increase = (e) => {
         setQuantity(quantity + 1);
@@ -12,6 +18,9 @@ const ButtonUpDown = ({ variant, maxSubmitTime, question }) => {
         if (quantity <= 1) return;
         setQuantity(quantity - 1);
     };
+    if (done) {
+        setNewMaxSubmitTimes(quantity);
+    }
     return (
         <div className="d-flex">
             <Button variant={variant} className="rounded-l-0 btn-sm-sm" onClick={decrease}>
