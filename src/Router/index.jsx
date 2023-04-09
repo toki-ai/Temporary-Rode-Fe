@@ -22,14 +22,20 @@ import Loading from '../components/Loading';
 import PublicLayout from '../components/PublicLayout/UserLayout.component';
 import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
-import useAuth from '../utils/useAuth';
 import AdminRoute from './AdminRoute';
+import Controller from './Controller';
 import PublicRoute from './PublicRoute';
-import { loaderInfoGG, GetInfoRoomByCode } from './RouterLoader/Loader';
+import { loaderInfoGG, GetInfoRoomByCode, GetInfoUser } from './RouterLoader/Loader';
 
 const RouterComponent = () => {
     const router = createBrowserRouter([
-        { path: '/', element: <Navigate to="home" /> },
+        // { path: '/', element: <Navigate to="home" /> },
+        {
+            exact: true,
+            path: '/',
+            loader: GetInfoUser,
+            element: <Controller />,
+        },
         {
             exact: true,
             path: '/login',
@@ -51,27 +57,24 @@ const RouterComponent = () => {
             ),
         },
         {
-            path: '/',
+            path: '/home',
             exact: true,
             element: <PublicRoute />,
             children: [
                 {
                     exact: true,
-                    loader: Loading,
                     element: <UserHomeLayout />,
                     children: [
                         {
                             exact: true,
-                            path: 'home',
-                            loader: Loading,
                             element: <Home />,
                         },
                     ],
                 },
                 {
                     exact: true,
-
-                    loader: Loading,
+                    path: 'user-home',
+                    index: true,
                     element: <UserLayoutComponent />,
                     children: [
                         {
@@ -114,12 +117,13 @@ const RouterComponent = () => {
             children: [
                 {
                     exact: true,
+                    // index: true,
                     element: <AdminLayoutComponent />,
                     children: [
                         {
                             exact: true,
                             path: 'room',
-                            index: true,
+                            // index: true,
                             loader: Loading,
                             element: <AdminRoom />,
                         },
