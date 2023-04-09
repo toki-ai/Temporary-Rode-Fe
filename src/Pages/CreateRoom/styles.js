@@ -146,7 +146,6 @@ export const ColorWrapper = styled.div`
 
 export const Color = styled.div`
     display: inline-flex;
-
     background-color: ${(props) => props.color};
     width: 28px;
     height: 28px;

@@ -67,8 +67,8 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
 
     const uploadImages = async (files, questionIdx) => {
         try {
-            const res = await localFilesAPI.uploadQuestionFile(files[0]);
             const file = files[0];
+            const res = await localFilesAPI.uploadQuestionFile(file);
             const reader = new FileReader();
 
             reader.onload = (event) => {

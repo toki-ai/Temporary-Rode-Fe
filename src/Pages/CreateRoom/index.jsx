@@ -42,11 +42,7 @@ const CreateRoom = () => {
 
     // Re-render when room type change
     useEffect(() => {
-        if (roomInfo.type === 'FE') {
-            setQuestions(FEInitQuestion);
-        } else if (roomInfo.type === 'BE') {
-            setQuestions(BEInitQuestion);
-        }
+        setQuestions(roomInfo.type === 'FE' ? FEInitQuestion : BEInitQuestion);
     }, [roomInfo.type]);
 
     return (
