@@ -115,21 +115,25 @@ const CreateRoomInfo = ({ roomInfo, setRoomInfo }) => {
                                     value={values[item.name]}
                                     onChange={(e) => {
                                         handleChange(e);
-                                        const isPrivate = e.target.value === 'true';
-                                        const duration =
-                                            item.name === 'duration'
-                                                ? Number.parseInt(e.target.value)
-                                                : Number.parseInt(values.duration);
+                                        const isPrivate =
+                                            item.name === 'isPrivate'
+                                                ? e.target.value === 'true'
+                                                : values.isPrivate === 'true';
                                         setFormList(
                                             isPrivate
                                                 ? FORM_LIST_PRIVATE_ROOM
                                                 : FORM_LIST_PUBLIC_ROOM
                                         );
+                                        const duration = Number.parseInt(
+                                            item.name === 'duration'
+                                                ? e.target.value
+                                                : values.duration
+                                        );
                                         setRoomInfo({
                                             ...values,
+                                            [item.name]: e.target.value,
                                             isPrivate,
                                             duration,
-                                            [item.name]: e.target.value,
                                         });
                                     }}
                                     isValid={touched[item.name] && !errors[item.name]}

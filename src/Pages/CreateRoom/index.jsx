@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Stack, Toast } from 'react-bootstrap';
 
 import ButtonStyled from '../../components/Button/';
-import { toastDefault, toastError, toastSuccess } from '../../components/Toast';
+import { toastError, toastSuccess } from '../../components/Toast';
 import roomAPI from '../../utils/api/roomAPI';
 import CreateBEQuestions from './components/CreateBEQuestions';
 import CreateFEQuestions from './components/CreateFEQuestions';
@@ -23,9 +23,11 @@ const CreateRoom = () => {
 
     // Submit
     const handleSubmit = () => {
-        console.log('Payload', { ...roomInfo, questions });
+        const payload = { ...roomInfo, questions };
+        console.log('Payload', payload);
+
         roomAPI
-            .createOne({ ...roomInfo, questions })
+            .createOne(payload)
             .then((res) => {
                 console.warn('Response: ', res.data);
                 if (res.data.status === 200) {

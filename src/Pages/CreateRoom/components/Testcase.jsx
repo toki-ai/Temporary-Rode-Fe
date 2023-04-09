@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as St from '../styles';
 
-const Testcase = ({ testcaseIdx, questionIdx, handleInput, handleOutput }) => {
+const Testcase = ({ testcaseIdx, questionIdx, handleInput, handleOutput, setQuestions }) => {
     return (
         <St.Testcase className="row">
             <h3 className="fw-semibold fs-6">Testcase {testcaseIdx + 1}:</h3>
@@ -13,7 +13,9 @@ const Testcase = ({ testcaseIdx, questionIdx, handleInput, handleOutput }) => {
                     id="input"
                     cols="20"
                     rows="7"
-                    onChange={(e) => handleInput(e.target.value, questionIdx, testcaseIdx)}
+                    onChange={(e) =>
+                        handleInput(e.target.value, questionIdx, testcaseIdx, setQuestions)
+                    }
                 ></textarea>
             </div>
             <div className="col-6">
@@ -23,7 +25,9 @@ const Testcase = ({ testcaseIdx, questionIdx, handleInput, handleOutput }) => {
                     id="output"
                     cols="20"
                     rows="7"
-                    onChange={(e) => handleOutput(e.target.value, questionIdx, testcaseIdx)}
+                    onChange={(e) =>
+                        handleOutput(e.target.value, questionIdx, testcaseIdx, setQuestions)
+                    }
                 ></textarea>
             </div>
             <hr className="my-3" />

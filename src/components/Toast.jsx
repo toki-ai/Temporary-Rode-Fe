@@ -43,18 +43,6 @@ export const toastError = (messages) => {
     });
 };
 
-export const toastDefault = (message) => {
-    toast(message, {
-        position: 'bottom-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-    });
-};
 function Toast() {
     return (
         <div>
