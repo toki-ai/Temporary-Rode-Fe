@@ -15,6 +15,9 @@ import GoogleSignInButton from '../../components/GoogleBtn';
 import GoogleSignUpButton from '../../components/GoogleSignUp';
 import { LoginStyle } from './style';
 
+// <div className="mb-5">
+// <GoogleSignUpButton />
+// </div>
 const Login = () => {
     console.log('check');
     return (
@@ -41,9 +44,6 @@ const Login = () => {
                             </Row>
                             <div className="mb-4">
                                 <GoogleSignInButton />
-                            </div>
-                            <div className="mb-5">
-                                <GoogleSignUpButton />
                             </div>
                         </Col>
                         <Col

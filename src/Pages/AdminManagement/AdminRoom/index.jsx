@@ -111,6 +111,8 @@ const AdminRoom = () => {
                             </Col>
                             <Col className="col-3 d-flex align-items-center justify-content-end">
                                 <ButtonCustom
+                                    as={Link}
+                                    to="/admin/create"
                                     props={{
                                         text: 'Create room',
                                         className:

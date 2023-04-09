@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import Nav from 'react-bootstrap/Nav';
+import Tab from 'react-bootstrap/Tab';
 
 export const AlgorithmWrapper = styled.div`
     padding-bottom: 20px;
@@ -24,20 +25,20 @@ export const AlgorithmWrapper = styled.div`
     }
 `;
 
-export const AlgorithmNav = styled.div`
+export const AlgorithmNav = styled(Nav)`
     height: 100%;
-    padding: 200px 0;
-    background-color: transparent;
-    padding: 0;
+    /* padding: 200px 0; */
+    /* background-color: transparent; */
+    /* padding: 0; */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-end;
     align-item: center;
-    .active-border {
+    .active {
         border-color: #00e7aa;
         border-right-color: transparent;
-        position: relative;
     }
+
     .active-border::before {
         position: absolute;
         content: '';
@@ -55,35 +56,28 @@ export const AlgorithmContent = styled.div`
     height: 90vh;
     border-radius: 10px;
     border: 1px solid #00e7aa;
-    padding: 0 -20px;
+    /* padding: 0; */
     overflow: hidden;
 `;
 
-export const AlgorithmNavItem = styled.div`
-    height: 90%;
+export const AlgorithmNavItem = styled(Nav.Link)`
+    /* height: 90%; */
     display: flex;
     justify-content: center;
     align-items: center;
     border: 2px solid #2e7dff;
     border-radius: 8px 0 0 8px;
     border-right-color: transparent;
-
+    width: 5rem;
     .algorithm-nav-title {
         margin: 0;
         padding: 0;
-        font-weight: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+
         transform: rotate(-90deg);
         font-weight: 600;
-        font-size: 16px;
-        line-height: 30px;
+
         letter-spacing: 0.457143px;
         text-transform: uppercase;
-        color: #2e7dff;
-        word-break: break-word;
-        width: 100%;
     }
     @media screen and (max-width: 570px) {
         gap: 20px;
@@ -92,4 +86,125 @@ export const AlgorithmNavItem = styled.div`
             transform: rotate(0deg);
         }
     }
+`;
+
+///////////////NEw tabs layout//////////////////////
+// need and active state for animations
+export const Tabs = styled.div`
+    & .tabs {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 350px;
+        background-color: #eee;
+        overflow: hidden;
+        box-shadow: 2px 2px 5px 2px #ccc;
+        display: flex;
+    }
+    & .tab-header {
+        width: 150px;
+        & > div {
+            width: 100%;
+            height: calc(100% / 4);
+            background: #ddd;
+            text-indent: 20px;
+            color: #888;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            border-left: 5px solid #ddd;
+            &.active {
+                border-left: 5px solid #00acee;
+                color: #00acee;
+                background: #eee;
+            }
+        }
+    }
+
+    & .tab-content {
+        padding: 20px 30px;
+        position: relative;
+        flex: 1;
+        & > div {
+            position: absolute;
+            top: -50vh;
+            left: 100px;
+            opacity: 0;
+            &.active {
+                top: 20px;
+                left: 20px;
+                opacity: 1;
+            }
+        }
+    }
+`;
+
+export const TabPane = styled(Tab.Pane)`
+    transform: none !important;
+    width: 100% !important;
+`;
+//DraggableLine//
+
+export const WrapperStyle = styled.div`
+    height: 100%;
+    background-color: ${(props) => props.theme.colors.arenaBG};
+    .app {
+        display: flex;
+        height: 100%;
+    }
+
+    .left-section,
+    .right-section {
+        height: 100%;
+    }
+
+    .left-section {
+        /* background-color: lightblue; */
+        overflow: hidden;
+    }
+
+    .separator {
+        width: 10px;
+        background-color: gray;
+        cursor: col-resize;
+    }
+
+    .right-section {
+        flex-grow: 1;
+        /* background-color: lightgreen; */
+        overflow: hidden;
+    }
+`;
+export const BoxEditor = styled.div`
+    width: 100%;
+    /* height: calc(100vh - 290px); */
+
+    color: ${(props) => props.theme.colors.light};
+    /* padding: 10px 20px; */
+    /* background-color: ${(props) => props.theme.colors.arenaBG}; */
+    /* border: 1px solid #00e7aa; */
+    /* box-shadow: 0px 2px 15px #00c994; */
+    border-radius: 10px;
+    overflow: hidden;
+    .ͼo {
+        background-color: transparent;
+        & .cm-gutters {
+            background-color: transparent;
+        }
+    }
+`;
+export const TimeText = styled.span`
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+    letter-spacing: 0.457143px;
+    text-transform: uppercase;
+
+    color: #ffffff;
 `;

@@ -11,7 +11,7 @@ import Scores from './Score';
 
 import Stack from 'react-bootstrap/Stack';
 
-const RoomInfo = ({ data }) => {
+const RoomInfo = ({ data, submit }) => {
     const [show, setShow] = useState(false);
 
     const handleShow = () => setShow(true);
@@ -22,13 +22,14 @@ const RoomInfo = ({ data }) => {
         },
         {
             title: 'Colors to use',
-            body: <Colors />,
+            body: <Colors colors={data?.questions[0].colors} />,
         },
         {
             title: 'Scores',
-            body: <Scores submitTimes={data?.questions[0].maxSubmitTimes} />,
+            body: <Scores submitTimes={data?.questions[0].maxSubmitTimes} submit={submit} />,
         },
     ];
+
     return (
         <StyledWrap>
             <OffCanvasComponents title={'LEADERBOARD'} show={show} setShow={setShow}>
