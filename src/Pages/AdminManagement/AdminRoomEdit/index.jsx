@@ -12,11 +12,11 @@ import { RoomEditStyle } from './style';
 const AdminRoomEdit = () => {
     const { id } = useParams();
     const [roomInfo, setRoomInfo] = useState({});
-    const [questions, setQuestions] = useState([]);
     useEffect(() => {
+        console.log(roomInfo);
         roomApi.updateRoomById(id, roomInfo);
-    });
-    console.log(roomInfo);
+    }, []);
+
     return (
         <div className="w-100">
             <RoomEditStyle>

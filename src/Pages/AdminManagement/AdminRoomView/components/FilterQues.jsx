@@ -11,6 +11,7 @@ const FilterQues = ({ roomId }) => {
     const [numOfQues, setNumOfQues] = useState([]);
     const [loading, setLoading] = useState([]);
     const [room, setRoom] = useState([]);
+    const [key, setKey] = useState(0);
     useEffect(() => {
         roomApi
             .getRoomById(roomId)
@@ -24,6 +25,7 @@ const FilterQues = ({ roomId }) => {
                 console.log(err);
             });
     }, []);
+
     const handleOnClick = (e) => {
         var result = e.target.value;
         setQues(result);
@@ -44,9 +46,8 @@ const FilterQues = ({ roomId }) => {
                     handleOnClick={handleOnClick}
                     className="color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-left"
                 />
-                {/*numOfQues.length-1 but error promise */}
                 {numOfQues?.length >= 2 ? (
-                    [...Array(numOfQues.length - 1)].map((_, i) => (
+                    [...Array(numOfQues.length - 1)].map((item, i) => (
                         <Btn
                             key={i}
                             name={`Question ${i + 1}`}

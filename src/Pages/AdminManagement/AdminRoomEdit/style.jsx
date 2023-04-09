@@ -52,6 +52,9 @@ export const RoomEditStyle = styled.div`
     .border-dashed-green {
         border: 0.5px ${(props) => props.theme.colors.primary} dashed;
     }
+    .border-solid-green {
+        border: 0.5px ${(props) => props.theme.colors.primary} solid;
+    }
     .btn-grey,
     .btn-grey:hover {
         background-color: ${(props) => props.theme.colors.grey2};
@@ -65,6 +68,19 @@ export const RoomEditStyle = styled.div`
     .width {
         width: 100px;
     }
+    .height-x {
+        width: 4px;
+        height: 2px;
+        /* height: 4px; */
+        position: absolute;
+    }
+    .height-wrap-x {
+        height: 4px;
+    }
+    .btn-height-x {
+        height: 10px;
+    }
+
     label[for='input'],
     label[for='output'] {
         position: relative;
@@ -80,7 +96,7 @@ export const RoomEditStyle = styled.div`
 
     textarea {
         position: relative;
-        top: -12px;
+        top: -18px;
         display: block;
         border: 1px solid ${(props) => props.theme.colors.primary};
         border-radius: 5px;
@@ -90,10 +106,8 @@ export const RoomEditStyle = styled.div`
         }
     }
     .preview-image {
-        width: 300px;
         height: 250px;
-        object-fit: cover;
-        margin-bottom: 20px;
+        object-fit: fill;
     }
 
     .show {

@@ -21,6 +21,11 @@ const schema = yup.object().shape({
         .number('Please enter number')
         .required('Please enter duration')
         .positive('Duration must be greater than 1'),
+    formFile: yup.string().required('Please choose file'),
+    input: yup.string().required('Please enter input'),
+    output: yup.string().required('Please enter output'),
+    codeTemplate: yup.string().required('Please enter code template'),
+    colorPicker: yup.string().required('Please enter color'),
 });
 
 const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
@@ -35,7 +40,6 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
     const [closeTime, setCloseTime] = useState('');
     const [duration, setDuration] = useState(0);
     const formRef = useRef();
-    console.log(id);
     useEffect(() => {
         roomApi.getRoomById(roomId).then((res) => {
             setRoom(res.data.data);
@@ -81,18 +85,29 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
         setNumOfQues(questions.length + 1);
         console.log(questions.length);
     };
+    function handleRemoveQuestion() {
+        questions.pop(defaultQuestion);
+        setNumOfQues(questions.length - 1);
+        console.log(questions.length);
+        console.log(questions);
+    }
+
+    const [done, setDone] = useState(false);
     const handleSubmit = async (roomId) => {
+        // setDone(true);
         let newRoom = room;
-        newRoom.openTime = openTime;
-        newRoom.closeTime = closeTime;
+        newRoom.openTime = openTime != '' ? openTime : room.openTime;
+        newRoom.closeTime = closeTime != '' ? closeTime : room.closeTime;
         newRoom.duration = parseInt(formRef.current.values.duration);
+        newRoom.questions = newQuestions.slice();
+        console.log(newQuestions);
+        console.log(newRoom.questions[0].colors.split(','));
         console.log(newRoom);
         setRoomInfo(newRoom);
     };
-    // handleSubmit();
-    console.log(openTime);
-    console.log(closeTime);
-    const [done, setDone] = useState(false);
+    useEffect(() => {
+        handleSubmit();
+    }, [newQuestions]);
     return load ? (
         <Loading />
     ) : (
@@ -107,6 +122,11 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
                     openTime: room.openTime,
                     closeTime: room.isPrivate ? room.closeTime : '',
                     visibility: checkPrivate,
+                    formFile: '',
+                    input: '',
+                    output: '',
+                    codeTemplate: '',
+                    colorPicker: '',
                 }}
                 innerRef={formRef}
             >
@@ -222,7 +242,7 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
                             {[...Array(questions.length)].map((_, i) => (
                                 <>
                                     <CreateQuestion
-                                        key={i}
+                                        key={questions[i].id}
                                         i={i}
                                         questionNum={questions?.length ? i + 1 : 1}
                                         maxSubmitTime={
@@ -231,9 +251,32 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
                                         questionImages={
                                             questions?.length ? questions[i].questionImage : ''
                                         }
+                                        questionColors={
+                                            questions?.length ? questions[i].colors : ''
+                                        }
+                                        codeTemp={
+                                            questions?.length ? questions[i].codeTemplate : ''
+                                        }
                                         question={questions}
                                         setNewQuestions={setNewQuestions}
                                         done={done}
+                                        isValid={touched.formFile && !errors.formFile}
+                                        isInvalid={!!errors.formFile}
+                                        errorFile={errors.formFile}
+                                        handleRemoveQuestion={handleRemoveQuestion}
+                                        inputValid={touched.input && !errors.input}
+                                        inputInvalid={!!errors.input}
+                                        outputValid={touched.output && !errors.output}
+                                        outputInvalid={!!errors.output}
+                                        inputError={errors.input}
+                                        outputError={errors.output}
+                                        handleChange={handleChange}
+                                        codeTValid={touched.codeTemplate && !errors.codeTemplate}
+                                        codeTInvalid={!!errors.codeTemplate}
+                                        codeTError={errors.codeTemplate}
+                                        colorPValid={touched.colorPicker && !errors.colorPicker}
+                                        colorPInvalid={!!errors.colorPicker}
+                                        colorPError={errors.colorPicker}
                                     />
                                 </>
                             ))}

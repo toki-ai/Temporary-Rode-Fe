@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Col, Row } from 'react-bootstrap';
+import { Col, Form, Row } from 'react-bootstrap';
 
 import ButtonCustom from './Button';
 
 const CreateTestCase = ({
+    i,
     numOfTestCase,
     input,
     output,
     showQues,
     testCase,
     handleTestCaseDecrease,
+    setNewTestCase: setNewTestCase,
+    allTestCase,
+    inputValid,
+    inputInvalid,
+    outputValid,
+    outputInvalid,
+    inputError,
+    outputError,
 }) => {
     const [show, setShow] = useState(showQues);
     const [newClassName, setNewClassName] = useState('d-none');
@@ -26,14 +35,32 @@ const CreateTestCase = ({
     const handleOutput = (e) => {
         setOutputValue(e.target.value);
     };
-
+    useEffect(() => {
+        let newTestCases = allTestCase.slice();
+        let newTestCase = newTestCases[i];
+        console.log(newTestCases);
+        newTestCase.input = value;
+        newTestCase.output = valueOutput;
+        console.log(newTestCase);
+        newTestCases[i] = newTestCase;
+        setNewTestCase(newTestCases);
+    }, [value, valueOutput]);
     console.log(testCase);
+    const isOutputValid = () => {
+        if (valueOutput != '') return true;
+        else return false;
+    };
+    const isInputValid = () => {
+        if (value != '') {
+            return true;
+        } else return false;
+    };
 
     return (
         <div>
-            <div className="position-relative">
+            <div className="position-relative d-flex align-items-center">
                 <ButtonCustom
-                    variant="text-secondary fw-bold outline col-lg-5 border-secondary mb-2 "
+                    variant="text-secondary fw-bold outline col-lg-5 border-secondary mb-2 w-75"
                     onClick={handleShow}
                     className="bi bi-chevron-down"
                     className2="d-flex flex-row-reverse justify-content-between"
@@ -48,26 +75,40 @@ const CreateTestCase = ({
             <div className={newClassName}>
                 <Row className="d-flex">
                     <Col className="col-lg-6 col-12">
-                        <label htmlFor="input">Input</label>
-                        <textarea
-                            name="input"
-                            id="input"
-                            rows="7"
-                            cols="22"
-                            defaultValue={value}
-                            onChange={handleInput}
-                        ></textarea>
+                        <Form.Group as={Col} controlId="input">
+                            <Form.Label id="label">Input</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                name="input"
+                                rows={7}
+                                cols={22}
+                                defaultValue={value}
+                                onChange={handleInput}
+                                isValid={isInputValid()}
+                                isInvalid={!isInputValid()}
+                            ></Form.Control>
+                            <Form.Control.Feedback type="invalid" className="mb-3">
+                                Please enter input
+                            </Form.Control.Feedback>
+                        </Form.Group>
                     </Col>
                     <Col className="col-lg-6 col-12">
-                        <label htmlFor="output">Output</label>
-                        <textarea
-                            name="output"
-                            id="output"
-                            rows="7"
-                            cols="22"
-                            defaultValue={valueOutput}
-                            onChange={handleOutput}
-                        ></textarea>
+                        <Form.Group as={Col} controlId="output">
+                            <Form.Label>Output</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                name="output"
+                                rows={7}
+                                cols={22}
+                                defaultValue={valueOutput}
+                                onChange={handleOutput}
+                                isValid={isOutputValid()}
+                                isInvalid={!isOutputValid()}
+                            ></Form.Control>
+                            <Form.Control.Feedback type="invalid" className="mb-3">
+                                Please enter output
+                            </Form.Control.Feedback>
+                        </Form.Group>
                     </Col>
                 </Row>
                 <hr></hr>
