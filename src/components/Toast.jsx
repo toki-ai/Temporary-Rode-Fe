@@ -1,6 +1,9 @@
 import React from 'react';
+
 import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
+
 export const toastSuccess = (messages) => {
     toast.success(`${messages}`, {
         position: 'bottom-right',
@@ -13,6 +16,7 @@ export const toastSuccess = (messages) => {
         theme: 'colored',
     });
 };
+
 export const toastWarning = (messages) => {
     toast.warn(`${messages}`, {
         position: 'bottom-right',
@@ -25,8 +29,22 @@ export const toastWarning = (messages) => {
         theme: 'colored',
     });
 };
+
 export const toastError = (messages) => {
     toast.error(`${messages}`, {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+    });
+};
+
+export const toastDefault = (message) => {
+    toast(message, {
         position: 'bottom-right',
         autoClose: 5000,
         hideProgressBar: false,

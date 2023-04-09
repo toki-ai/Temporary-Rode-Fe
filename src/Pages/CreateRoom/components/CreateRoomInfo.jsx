@@ -24,7 +24,7 @@ const schema = yup.object().shape({
     isPrivate: yup.boolean().required(),
 });
 
-const CreateRoomInfo = ({ setRoomInfo }) => {
+const CreateRoomInfo = ({ roomInfo, setRoomInfo }) => {
     const [roomType, setRoomType] = useState(['FE', 'BE']);
 
     useEffect(() => {
@@ -96,17 +96,7 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
     const [formList, setFormList] = useState(FORM_LIST_PRIVATE_ROOM);
 
     return (
-        <Formik
-            validationSchema={schema}
-            initialValues={{
-                code: '',
-                openTime: '',
-                closeTime: '',
-                duration: '',
-                type: '',
-                isPrivate: '',
-            }}
-        >
+        <Formik validationSchema={schema} initialValues={roomInfo}>
             {({ values, handleChange, touched, errors }) => (
                 <Form noValidate>
                     <Row className="mb-3">
@@ -129,19 +119,24 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
                                             setFormList(FORM_LIST_PRIVATE_ROOM);
                                             setRoomInfo({
                                                 ...values,
-                                                isPrivate: e.target.value === 'true',
+                                                isPrivate: true,
+                                                duration: Number.parseInt(e.target.value),
                                             });
                                         } else if (e.target.value === 'false') {
                                             setFormList(FORM_LIST_PUBLIC_ROOM);
                                             setRoomInfo({
                                                 ...values,
-                                                isPrivate: e.target.value === 'false',
+                                                isPrivate: false,
+                                                duration: Number.parseInt(e.target.value),
+                                            });
+                                        } else {
+                                            setRoomInfo({
+                                                ...values,
+                                                isPrivate: values.isPrivate === 'true',
+                                                duration: Number.parseInt(e.target.value),
+                                                [item.name]: e.target.value,
                                             });
                                         }
-                                        setRoomInfo({
-                                            ...values,
-                                            [item.name]: e.target.value,
-                                        });
                                     }}
                                     isValid={touched[item.name] && !errors[item.name]}
                                 >

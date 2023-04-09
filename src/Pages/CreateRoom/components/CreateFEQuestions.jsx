@@ -1,13 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+
+import { extractColors } from 'extract-colors';
 
 import ButtonStyled from '../../../components/Button';
-import PreviewImages from '../../../components/PreviewImages';
 import { themes } from '../../../themes';
 import localFilesAPI from '../../../utils/api/localFilesAPI';
 import * as St from '../styles';
 
 const CreateBEQuestions = ({ questions, setQuestions }) => {
     const inputRef = useRef(null);
+    const [imageUrls, setImageUrls] = useState([]);
 
     // Functions
     const createQuestion = () => {
@@ -23,7 +25,6 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
     };
 
     const handleIncrease = (questionIdx) => {
-        console.log('hello');
         setQuestions((prev) => {
             let copy = [...prev];
             copy[questionIdx].maxSubmitTimes += 1;
@@ -39,23 +40,44 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
     };
 
     const uploadImages = async (files, questionIdx) => {
-        await localFilesAPI.uploadQuestionFile(files[0]).then((res) => {
-            setQuestions((prev) => {
-                let copy = [...prev];
-                copy[questionIdx].images = files;
-                copy[questionIdx].questionImage = res.data.data[0].id;
-                return copy;
-            });
-        });
+        try {
+            const res = await localFilesAPI.uploadQuestionFile(files[0]);
+            const file = files[0];
+            const reader = new FileReader();
+
+            reader.onload = (event) => {
+                const imageUrl = event.target.result;
+
+                extractColors(imageUrl)
+                    .then((colors) => {
+                        setQuestions((prev) => {
+                            let copy = [...prev];
+                            copy[questionIdx].colors = colors.map((color) => color.hex).join();
+                            copy[questionIdx].questionImage = res.data.data[0].id;
+                            return copy;
+                        });
+                    })
+                    .catch(console.error);
+                setImageUrls((prev) => {
+                    let copy = [...prev];
+                    copy[questionIdx] = imageUrl;
+                    return copy;
+                });
+            };
+
+            reader.readAsDataURL(file);
+        } catch (error) {
+            console.log('Error: ', error);
+        }
     };
 
     const editColor = (value, questionIdx, currentColor) => {
         setQuestions((prev) => {
             let copy = [...prev];
-            let colors = copy[questionIdx].colors.split(', ');
+            let colors = copy[questionIdx].colors.split(',');
             const idx = colors.indexOf(currentColor);
             colors[idx] = value;
-            copy[questionIdx].colors = colors.join(', ');
+            copy[questionIdx].colors = colors.join(',');
             return copy;
         });
     };
@@ -63,7 +85,7 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
     const addColor = (questionIdx) => {
         setQuestions((prev) => {
             let copy = [...prev];
-            copy[questionIdx].colors += ', #ffffff';
+            copy[questionIdx].colors += ',#ffffff';
             return copy;
         });
     };
@@ -102,7 +124,7 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                     onChange={(e) => uploadImages(e.target.files, questionIdx)}
                 />
                 {question.questionImage ? (
-                    <PreviewImages FileList={question.images} />
+                    <St.PreviewImage src={imageUrls[questionIdx]} alt="Image" />
                 ) : (
                     <St.UploadImage onClick={() => inputRef.current.click()}>
                         + <span>Upload your image here...</span>
@@ -125,7 +147,7 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                             <div>
                                 <label htmlFor="color">Color</label>
                                 <div>
-                                    {question.colors?.split(', ').map((color, idx) => (
+                                    {question.colors?.split(',').map((color, idx) => (
                                         <St.ColorWrapper key={idx}>
                                             <St.Color color={color}></St.Color>
                                             <input
@@ -154,7 +176,7 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                                         name="codeTemplate"
                                         id="codeTemplate"
                                         cols="40"
-                                        rows="20"
+                                        rows="80"
                                         onChange={(e) =>
                                             addCodeTemplate(e.target.value, questionIdx)
                                         }

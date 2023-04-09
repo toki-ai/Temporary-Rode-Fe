@@ -1,14 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import ButtonStyled from '../../../components/Button';
-import PreviewImages from '../../../components/PreviewImages';
 import localFilesAPI from '../../../utils/api/localFilesAPI';
 import * as St from '../styles';
 import Testcase from './Testcase';
 
 const CreateBEQuestions = ({ questions, setQuestions }) => {
-    console.log(questions);
     const inputRef = useRef(null);
+    const [imageUrls, setImageUrls] = useState([]);
 
     // Functions
     const createQuestion = () => {
@@ -68,14 +67,30 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
     };
 
     const uploadImages = async (files, questionIdx) => {
-        await localFilesAPI.uploadQuestionFile(files[0]).then((res) => {
-            setQuestions((prev) => {
-                let copy = [...prev];
-                copy[questionIdx].images = files;
-                copy[questionIdx].questionImage = res.data.data[0].id;
-                return copy;
-            });
-        });
+        try {
+            const res = await localFilesAPI.uploadQuestionFile(files[0]);
+            const file = files[0];
+            const reader = new FileReader();
+
+            reader.onload = (event) => {
+                const imageUrl = event.target.result;
+                setImageUrls((prev) => {
+                    let copy = [...prev];
+                    copy[questionIdx] = imageUrl;
+                    return copy;
+                });
+
+                setQuestions((prev) => {
+                    let copy = [...prev];
+                    copy[questionIdx].questionImage = res.data.data[0].id;
+                    return copy;
+                });
+            };
+
+            reader.readAsDataURL(file);
+        } catch (error) {
+            console.log('Error: ', error);
+        }
     };
 
     // Components
@@ -104,7 +119,7 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                     onChange={(e) => uploadImages(e.target.files, questionIdx)}
                 />
                 {question.questionImage ? (
-                    <PreviewImages FileList={question.images} />
+                    <St.PreviewImage src={imageUrls[questionIdx]} alt="Image" />
                 ) : (
                     <St.UploadImage onClick={() => inputRef.current.click()}>
                         + <span>Upload your image here...</span>
