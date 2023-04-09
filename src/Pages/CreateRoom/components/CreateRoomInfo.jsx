@@ -115,28 +115,22 @@ const CreateRoomInfo = ({ roomInfo, setRoomInfo }) => {
                                     value={values[item.name]}
                                     onChange={(e) => {
                                         handleChange(e);
-                                        if (e.target.value === 'true') {
-                                            setFormList(FORM_LIST_PRIVATE_ROOM);
-                                            setRoomInfo({
-                                                ...values,
-                                                isPrivate: true,
-                                                duration: Number.parseInt(e.target.value),
-                                            });
-                                        } else if (e.target.value === 'false') {
-                                            setFormList(FORM_LIST_PUBLIC_ROOM);
-                                            setRoomInfo({
-                                                ...values,
-                                                isPrivate: false,
-                                                duration: Number.parseInt(e.target.value),
-                                            });
-                                        } else {
-                                            setRoomInfo({
-                                                ...values,
-                                                isPrivate: values.isPrivate === 'true',
-                                                duration: Number.parseInt(e.target.value),
-                                                [item.name]: e.target.value,
-                                            });
-                                        }
+                                        const isPrivate = e.target.value === 'true';
+                                        const duration =
+                                            item.name === 'duration'
+                                                ? Number.parseInt(e.target.value)
+                                                : Number.parseInt(values.duration);
+                                        setFormList(
+                                            isPrivate
+                                                ? FORM_LIST_PRIVATE_ROOM
+                                                : FORM_LIST_PUBLIC_ROOM
+                                        );
+                                        setRoomInfo({
+                                            ...values,
+                                            isPrivate,
+                                            duration,
+                                            [item.name]: e.target.value,
+                                        });
                                     }}
                                     isValid={touched[item.name] && !errors[item.name]}
                                 >

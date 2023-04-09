@@ -51,7 +51,6 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
     };
 
     const handleIncrease = (questionIdx) => {
-        console.log('hello');
         setQuestions((prev) => {
             let copy = [...prev];
             copy[questionIdx].maxSubmitTimes += 1;

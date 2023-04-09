@@ -27,7 +27,7 @@ const CreateRoom = () => {
         roomAPI
             .createOne({ ...roomInfo, questions })
             .then((res) => {
-                console.warn(res.data);
+                console.warn('Response: ', res.data);
                 if (res.data.status === 200) {
                     toastSuccess(res.data.message);
                 } else {
@@ -43,10 +43,8 @@ const CreateRoom = () => {
     // Re-render when room type change
     useEffect(() => {
         if (roomInfo.type === 'FE') {
-            console.log('FE');
             setQuestions(FEInitQuestion);
         } else if (roomInfo.type === 'BE') {
-            console.log('BE');
             setQuestions(BEInitQuestion);
         }
     }, [roomInfo.type]);

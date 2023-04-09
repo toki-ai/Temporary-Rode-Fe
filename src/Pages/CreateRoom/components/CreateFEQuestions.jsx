@@ -72,14 +72,15 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
     };
 
     const editColor = (value, questionIdx, currentColor) => {
-        setQuestions((prev) => {
-            let copy = [...prev];
-            let colors = copy[questionIdx].colors.split(',');
-            const idx = colors.indexOf(currentColor);
-            colors[idx] = value;
-            copy[questionIdx].colors = colors.join(',');
-            return copy;
-        });
+        setQuestions((prev) =>
+            prev.map((question, idx) => {
+                if (idx !== questionIdx) return question;
+                const colors = question.colors.split(',').filter(Boolean);
+                const colorIdx = colors.indexOf(currentColor);
+                colors[colorIdx] = value;
+                return { ...question, colors: colors.filter(Boolean).join(',') };
+            })
+        );
     };
 
     const addColor = (questionIdx) => {
@@ -147,17 +148,25 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                             <div>
                                 <label htmlFor="color">Color</label>
                                 <div>
-                                    {question.colors?.split(',').map((color, idx) => (
-                                        <St.ColorWrapper key={idx}>
-                                            <St.Color color={color}></St.Color>
-                                            <input
-                                                value={color}
-                                                onChange={(e) =>
-                                                    editColor(e.target.value, questionIdx, color)
-                                                }
-                                            />
-                                        </St.ColorWrapper>
-                                    ))}
+                                    {question.colors?.split(',').map((color, idx) => {
+                                        if (color) {
+                                            return (
+                                                <St.ColorWrapper key={idx}>
+                                                    <St.Color color={color}></St.Color>
+                                                    <input
+                                                        value={color}
+                                                        onChange={(e) =>
+                                                            editColor(
+                                                                e.target.value,
+                                                                questionIdx,
+                                                                color
+                                                            )
+                                                        }
+                                                    />
+                                                </St.ColorWrapper>
+                                            );
+                                        }
+                                    })}
                                 </div>
                                 <ButtonStyled
                                     buttonType="dashed"
