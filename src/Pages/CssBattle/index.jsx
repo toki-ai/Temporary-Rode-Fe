@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 
 import { useLoaderData } from 'react-router-dom';
 
+import Loading from '../../components/Loading';
 import ModalComponent from '../../components/Modal/Modal';
 import { CodeTemplateTmp } from '../../utils/Constant/Dummy';
 import roomApi from '../../utils/api/roomApi';
@@ -26,6 +27,7 @@ const ArenaCSS = () => {
         <Row className="p-3">
             {/* Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop */}
             <ModalComponent show={show} setShow={setShow} title={'ERROR'} body={'hello'} />
+
             <Col xs={12} md={3} className="px-4">
                 <RoomInfo data={roomInfo} submit={submit} />
             </Col>
