@@ -3,8 +3,10 @@ import { themes } from '../../../themes';
 const initialRoomInfo = {
     code: '',
     openTime: '',
+    closeTime: '',
     type: '',
     isPrivate: '',
+    duration: 0,
 };
 
 const BEInitQuestion = [

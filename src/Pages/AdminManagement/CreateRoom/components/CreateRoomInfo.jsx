@@ -25,7 +25,8 @@ const schema = yup.object().shape({
 });
 
 const CreateRoomInfo = ({ roomInfo, setRoomInfo }) => {
-    const [formList, setFormList] = useState(FORM_LIST_PRIVATE_ROOM);
+    console.log(roomInfo);
+    const [formList, setFormList] = useState(FORM_LIST_PUBLIC_ROOM);
 
     return (
         <Formik validationSchema={schema} initialValues={roomInfo}>
@@ -65,13 +66,18 @@ const CreateRoomInfo = ({ roomInfo, setRoomInfo }) => {
                                             item.name === 'closeTime'
                                                 ? e.target.value
                                                 : values.isPrivate;
-                                        setRoomInfo({
+                                        let newRoomInfo = {
                                             ...values,
                                             [item.name]: e.target.value,
                                             isPrivate,
-                                            duration: isPrivate ? duration : '',
+                                            duration: isPrivate ? duration : 0,
                                             closeTime: isPrivate ? closeTime : '',
-                                        });
+                                        };
+                                        if (!isPrivate) {
+                                            delete newRoomInfo['duration'];
+                                            delete newRoomInfo['closeTime'];
+                                        }
+                                        setRoomInfo(newRoomInfo);
                                     }}
                                     isValid={touched[item.name] && !errors[item.name]}
                                 >
