@@ -181,7 +181,7 @@ export const WrapperStyle = styled.div`
 `;
 export const BoxEditor = styled.div`
     width: 100%;
-    /* height: calc(100vh - 290px); */
+    /* height: calc(100vh - 290px); 
 
     color: ${(props) => props.theme.colors.light};
     /* padding: 10px 20px; */
