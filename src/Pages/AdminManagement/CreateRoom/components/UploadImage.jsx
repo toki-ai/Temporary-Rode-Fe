@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import { extractColors } from 'extract-colors';
 
-import localFilesAPI from '../../../utils/api/localFilesAPI';
+import localFilesAPI from '../../../../utils/api/localFilesAPI';
 import * as St from '../styles';
 
 const UploadImage = ({ question, questionIdx, setQuestions, setImageUrls, imageUrls }) => {

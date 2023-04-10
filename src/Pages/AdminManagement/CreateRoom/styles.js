@@ -3,19 +3,24 @@ import styled from 'styled-components';
 import { themes } from '../../../themes';
 
 export const Wrapper = styled.div`
-    max-width: 750px;
-    margin: auto;
+    border-radius: 28px;
+    padding: 20px 50px;
+    margin: auto 50px;
     font-family: 'Quicksand';
     background-color: ${themes.colors.light};
 
     .form-label {
-        font-size: 11px;
+        font-size: 16px;
         font-weight: 600;
+    }
+
+    .form-control:focus {
+        color: ${themes.colors.dark};
     }
 `;
 
 export const Title = styled.h1`
-    font-size: 23px;
+    font-size: 30px;
     color: ${themes.colors.primary};
     font-weight: 700;
     margin: 14px 0 28px 0;
@@ -27,10 +32,14 @@ export const Questions = styled.div`
     hr {
         margin-top: 50px;
     }
+
+    label {
+        font-size: 18px;
+    }
 `;
 
 export const QuestionTitle = styled.h2`
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
 `;
 
@@ -40,39 +49,41 @@ export const NumberInput = styled.div`
 
     p {
         position: relative;
-        top: -1px;
         display: inline-block;
         width: 25px;
         height: 25px;
         text-align: center;
         border: 1px solid ${themes.colors.primary};
-        top: -1px;
     }
 
-    button {
+    div {
+        display: inline-block;
         width: 25px;
         height: 25px;
         background-color: ${themes.colors.primary};
         border: 1px solid ${themes.colors.primary};
         color: ${themes.colors.light};
+        text-align: center;
+        cursor: pointer;
     }
 `;
 
 export const UploadImage = styled.label`
     border-radius: 10px;
-    width: 200px;
+    width: 250px;
     font-size: 10px;
-    height: 200px;
+    height: 250px;
     border: 1px dashed ${themes.colors.primary};
     padding: 10px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin: 10px 0;
 
     & span {
         margin-top: 5px;
+        font-size: 16px;
     }
 
     &:hover {
@@ -115,4 +126,38 @@ export const PreviewImage = styled.img`
     height: 250px;
     object-fit: cover;
     margin-bottom: 20px;
+`;
+
+export const ColorWrapper = styled.div`
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 16px 8px;
+
+    span {
+        font-weight: 600;
+    }
+
+    input {
+        border: none;
+    }
+`;
+
+export const Color = styled.div`
+    display: inline-flex;
+    background-color: ${(props) => props.color};
+    width: 28px;
+    height: 28px;
+    border-radius: 1000px;
+    margin-right: 12px;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.25);
+`;
+
+export const CodeTemplate = styled.div`
+    textarea {
+        width: min(100%, 400px);
+        height: 500px;
+        border-color: ${themes.colors.primary};
+    }
 `;

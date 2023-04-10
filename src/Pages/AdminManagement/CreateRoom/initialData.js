@@ -1,4 +1,11 @@
-import { themes } from '../../themes';
+import { themes } from '../../../themes';
+
+const initialRoomInfo = {
+    code: '',
+    openTime: '',
+    type: '',
+    isPrivate: '',
+};
 
 const BEInitQuestion = [
     {
@@ -22,4 +29,4 @@ const FEInitQuestion = [
     // May have a lot of question { maxSubmitTimes, questionImage, colors, codeTemplate }
 ];
 
-export { BEInitQuestion, FEInitQuestion };
+export { initialRoomInfo, BEInitQuestion, FEInitQuestion };
