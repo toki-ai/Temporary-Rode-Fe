@@ -1,20 +1,20 @@
-import React, { useRef, useState } from 'react';
+import { useState } from 'react';
 
-import ButtonStyled from '../../../components/Button';
-import localFilesAPI from '../../../utils/api/localFilesAPI';
+import ButtonStyled from '../../../../components/Button';
 import * as St from '../styles';
 import MaxSumbitTimes from './MaxSumbitTimes';
 import Testcase from './Testcase';
 import UploadImage from './UploadImage';
-import { addBEQuestion, addTestcase, editInputTestcase, editOutputTestcase } from './helper.js';
+import { addBEQuestion, addTestcase, editInputTestcase, editOutputTestcase } from './utils';
+
+import Accordion from 'react-bootstrap/Accordion';
 
 const CreateBEQuestions = ({ questions, setQuestions }) => {
-    const inputRef = useRef(null);
     const [imageUrls, setImageUrls] = useState([]);
 
     return (
         <>
-            {questions.map((question, questionIdx) => (
+            {questions?.map((question, questionIdx) => (
                 <St.Questions key={questionIdx}>
                     <St.QuestionTitle>Question {questionIdx + 1}</St.QuestionTitle>
 
@@ -35,17 +35,22 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                         </div>
 
                         <div className="col-md-6">
-                            {question.testcases?.map((testcase, testcaseIdx) => (
-                                <Testcase
-                                    key={testcaseIdx}
-                                    item={testcase}
-                                    testcaseIdx={testcaseIdx}
-                                    questionIdx={questionIdx}
-                                    handleInput={editInputTestcase}
-                                    handleOutput={editOutputTestcase}
-                                    setQuestions={setQuestions}
-                                />
-                            ))}
+                            <Accordion
+                                defaultActiveKey={question?.testcases?.length - 1 || 0}
+                                flush
+                            >
+                                {question.testcases?.map((testcase, testcaseIdx) => (
+                                    <Testcase
+                                        key={testcaseIdx}
+                                        item={testcase}
+                                        testcaseIdx={testcaseIdx}
+                                        questionIdx={questionIdx}
+                                        handleInput={editInputTestcase}
+                                        handleOutput={editOutputTestcase}
+                                        setQuestions={setQuestions}
+                                    />
+                                ))}
+                            </Accordion>
                             <div className="d-grid gap-2 ">
                                 <ButtonStyled
                                     buttonType="outline"

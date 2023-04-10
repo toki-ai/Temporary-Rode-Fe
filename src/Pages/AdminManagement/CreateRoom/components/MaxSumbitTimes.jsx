@@ -1,5 +1,5 @@
 import * as St from '../styles';
-import { handleIncrease, handleDecrease } from './helper.js';
+import { handleIncrease, handleDecrease } from './utils';
 
 const MaxSumbitTimes = ({ question, questionIdx, setQuestions }) => {
     return (
