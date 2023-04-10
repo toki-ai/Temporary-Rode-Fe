@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { themes } from '../../themes';
+import { themes } from '../../../themes';
 
 export const Wrapper = styled.div`
     border-radius: 28px;
@@ -12,6 +12,10 @@ export const Wrapper = styled.div`
     .form-label {
         font-size: 16px;
         font-weight: 600;
+    }
+
+    .form-control:focus {
+        color: ${themes.colors.dark};
     }
 `;
 
@@ -142,7 +146,6 @@ export const ColorWrapper = styled.div`
 
 export const Color = styled.div`
     display: inline-flex;
-
     background-color: ${(props) => props.color};
     width: 28px;
     height: 28px;
@@ -153,8 +156,8 @@ export const Color = styled.div`
 
 export const CodeTemplate = styled.div`
     textarea {
-        width: 400px;
-        height: 60px;
+        width: min(100%, 400px);
+        height: 500px;
         border-color: ${themes.colors.primary};
     }
 `;

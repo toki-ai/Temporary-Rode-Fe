@@ -15,6 +15,7 @@ const RoomInfo = ({ data, submit }) => {
     const [show, setShow] = useState(false);
 
     const handleShow = () => setShow(true);
+    console.log(data.duration);
     const LIST_INFO = [
         {
             title: 'Timers',

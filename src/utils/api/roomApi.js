@@ -60,8 +60,8 @@ const roomApi = {
         const token = localStorage.getItem('token');
         const endpoint = `/rooms/create-one`;
         return await post(endpoint, data, {}, { Authorization: 'Bearer ' + token })
-            .then((res) => console.log(res))
-            .catch((err) => console.err(err));
+            .then((res) => res)
+            .catch((err) => err);
     },
     updateRoomById: async (roomID, data) => {
         const token = localStorage.getItem('token');

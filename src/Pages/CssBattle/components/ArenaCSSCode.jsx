@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import ButtonStyled from '../../../components/Button';
+import Loading from '../../../components/Loading';
 import OffCanvasComponents from '../../../components/OffCanvas/OffCanvas';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { CodeTemplateTmp } from '../../../utils/Constant/Dummy';
@@ -11,6 +12,7 @@ import MySolution from './MySolution';
 import { htmlLanguage } from '@codemirror/lang-html';
 import { tokyoNight } from '@uiw/codemirror-theme-tokyo-night';
 import CodeMirror from '@uiw/react-codemirror';
+import Spinner from 'react-bootstrap/Spinner';
 import Stack from 'react-bootstrap/Stack';
 
 const LIST_SOLUTION = [
@@ -55,10 +57,8 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
             submitService.setSubmit(res.data.data);
             setTimeout(() => {
                 setSubmitStatus(true);
-            }, 2000);
+            }, 1000);
         }
-
-        console.log(res);
     };
 
     return (
@@ -66,6 +66,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
             <OffCanvasComponents title="My Solution" show={show} setShow={setShow}>
                 <MySolution data={LIST_SOLUTION} />
             </OffCanvasComponents>
+
             <Stack direction="horizontal" className="justify-content-between mb-3">
                 <TextStyled>EDITOR</TextStyled>
                 <TextSmall>{count} characters</TextSmall>
@@ -94,7 +95,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
                     My SOLUTION
                 </ButtonStyled>
                 <ButtonStyled buttonType="base" onClick={submitCode} disabled={!submitStatus}>
-                    SUBMIT
+                    {submitStatus ? 'SUBMIT' : <Spinner />}
                 </ButtonStyled>
             </Stack>
         </>

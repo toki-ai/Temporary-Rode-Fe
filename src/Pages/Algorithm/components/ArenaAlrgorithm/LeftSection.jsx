@@ -22,13 +22,11 @@ const LeftSection = () => {
                 </div>
                 <Timer>
                     <Title>Times:</Title>
-                    <TimeText>
+                    {/* <TimeText>
                         <CountdownTimer />
-                    </TimeText>
+                    </TimeText> */}
                 </Timer>
             </Stack>
-
-            <div> picture</div>
         </Container>
     );
 };
