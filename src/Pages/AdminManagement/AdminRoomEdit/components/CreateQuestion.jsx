@@ -37,6 +37,7 @@ const CreateQuestion = ({
     questionColors,
     codeTemp,
 }) => {
+    const colorSplit = questionColors?.length ? questionColors.split(',') : ['#000000'];
     const defaultTestCases = { input: '', output: '' };
     const [testCasesResult, setTestCaseResult] = useState([...question[i].testCases]);
     const [showQues, setShowQues] = useState(false);
@@ -49,9 +50,12 @@ const CreateQuestion = ({
     const [file, setFile] = useState(null);
     const [codeTemplate, setCodeTemplate] = useState(codeTemp);
     const [color, setColor] = useState('');
-    const [colors, setColors] = useState(questionColors.split(','));
+    const [colors, setColors] = useState(colorSplit);
     const [numOfColors, setNumOfColors] = useState(colors.length);
     console.log(questionColors.split(','));
+
+    const schema = yup.object().shape({});
+
     function increaseTestCase() {
         testCasesResult.push(defaultTestCases);
         setNumOfTestCase(numOfTestCase + 1);
@@ -71,19 +75,27 @@ const CreateQuestion = ({
         setQuestionId('');
         setFileName('');
     };
-    const handleChangeImage = (e) => {
-        const reader = new FileReader();
-        const file = e.target.files[0];
-        if (file) reader.readAsDataURL(file);
-        console.log(file);
-        reader.onload = (e) => {
-            console.log(e.target.result);
-            setQuestionId('');
-            setFileName(e.target.result);
-            console.log(fileName);
-        };
-        setFile(file);
+    const handleChangeImage = async (e) => {
+        try {
+            const reader = new FileReader();
+            const file = e.target.files[0];
+            const data = await localFileApi.postImg(file);
+            if (file) reader.readAsDataURL(file);
+            console.log(file);
+            reader.onload = (e) => {
+                const imageUrl = e.target.result;
+                console.log(e.target.result);
+                setQuestionId(data.data.data[0].id);
+                console.log(questionId);
+                setFileName(e.target.result);
+                console.log(fileName);
+            };
+            setFile(file);
+        } catch (err) {
+            console.log(err);
+        }
     };
+    console.log(questionId);
     useEffect(() => {
         let newQuestions = question.slice();
         let newQuestion = newQuestions[i];
@@ -94,12 +106,13 @@ const CreateQuestion = ({
         newQuestion.testCases = testCaseResultFinal.slice();
         console.log(colors);
         newQuestion.colors = colors.toString();
+        newQuestion.codeTemplate = codeTemplate;
+        newQuestion.questionImage = questionId;
         newQuestions[i] = newQuestion;
         setNewQues(newQuestions);
         console.log(newQuestions);
-    }, [newMaxSubmitTimes, question, testCaseResultFinal, colors, color]);
+    }, [newMaxSubmitTimes, question, testCaseResultFinal, colors, color, done]);
     useEffect(() => {
-        // localFileApi.postImg(file);
         color != '' && (colorPInvalid = true);
     }, [done, color]);
     useEffect(() => {}, [numOfColors]);
@@ -108,9 +121,8 @@ const CreateQuestion = ({
     useEffect(() => {
         const handleColorChange = (e) => {
             setColor(e.target.value);
-            colors.push(color);
         };
-    });
+    }, [colors, color]);
     const handleColorChange = (e) => {
         setColor(e.target.value);
         colors[i] = e.target.value;
@@ -168,9 +180,9 @@ const CreateQuestion = ({
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Row>
-                    <Row className="d-flex d-flex align-items-center">
+                    <Row className="d-flex d-flex flex-column justify-content-center">
                         <Form.Group
-                            className="my-3 d-flex d-flex align-items-center col-5 justify-content-between"
+                            className="my-3 d-flex d-flex align-items-center col-md-9 col-lg-8 justify-content-between"
                             controlId="color"
                         >
                             <Form.Label className="text-secondary fw-bold rfs">
@@ -188,18 +200,23 @@ const CreateQuestion = ({
                                 {colorPError}
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group className="col-7 d-flex" id="colors-value">
+                        <Form.Group className="col-7 d-flex overflow-wrap mb-3" id="colors-value">
                             {colors.map((_, i) => (
-                                <Form.Control
-                                    key={i}
-                                    type="color"
-                                    name="color"
-                                    defaultValue={colors[i]}
-                                    onChange={(e) => {
-                                        colors[i] = e.target.value;
-                                        setColor(color);
-                                    }}
-                                ></Form.Control>
+                                <div key={i} className="d-flex flex-column align-items-center">
+                                    <Form.Control
+                                        type="color"
+                                        name="color"
+                                        defaultValue={
+                                            colors[i] !== undefined ? colors[i] : colors['000000']
+                                        }
+                                        onChange={(e) => {
+                                            colors.push();
+                                            colors[i] = e.target.value;
+                                            setColor(colors[i]);
+                                        }}
+                                    ></Form.Control>
+                                    <div className="px-1">{colors[i]}</div>
+                                </div>
                             ))}
                         </Form.Group>
                     </Row>
@@ -234,13 +251,17 @@ const CreateQuestion = ({
                                     onClick={handleImageChange}
                                 />
                             )} */}
-                                {questionId != '' ? (
-                                    <img
-                                        src={localFileApi.getImg(questionImages)}
-                                        alt="Question Image"
-                                        className="rounded cover img-fluid img-thumbnail border-dashed-green preview-image"
-                                    />
-                                ) : (
+                                {/* {questionId != '' ? ( */}
+                                <img
+                                    src={
+                                        localFileApi.getImg(questionImages) != null
+                                            ? localFileApi.getImg(questionImages)
+                                            : fileName
+                                    }
+                                    alt=""
+                                    className="rounded cover img-fluid img-thumbnail border-dashed-green preview-image"
+                                />
+                                {/* ) : (
                                     fileName != null && (
                                         <img
                                             src={fileName}
@@ -248,7 +269,7 @@ const CreateQuestion = ({
                                             className="rounded cover img-fluid img-thumbnail border-dashed-green preview-image"
                                         />
                                     )
-                                )}
+                                )} */}
                             </div>
                         ) : (
                             <>

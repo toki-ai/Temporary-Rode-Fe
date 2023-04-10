@@ -15,6 +15,7 @@ const ButtonColor = ({
     const [quantity, setQuantity] = useState(numOfColors);
     const [newColor, setNewColor] = useState(color);
     const [newColors, setNewColors] = useState(colors);
+    // if (colors?.length ? setColors(colors) : setColors(['FFFFFF']));
     console.log(color);
     const increase = (e) => {
         setQuantity(quantity + 1);

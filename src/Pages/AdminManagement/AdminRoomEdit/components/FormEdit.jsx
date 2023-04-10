@@ -28,7 +28,7 @@ const schema = yup.object().shape({
     colorPicker: yup.string().required('Please enter color'),
 });
 
-const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
+const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo, setDone: setSave }) => {
     const { id } = useParams();
     const roomId = id;
     const [room, setRoom] = useState({});
@@ -93,8 +93,8 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
     }
 
     const [done, setDone] = useState(false);
-    const handleSubmit = async (roomId) => {
-        // setDone(true);
+    const handleSubmit = () => {
+        setDone(true);
         let newRoom = room;
         newRoom.openTime = openTime != '' ? openTime : room.openTime;
         newRoom.closeTime = closeTime != '' ? closeTime : room.closeTime;
@@ -104,10 +104,11 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
         console.log(newRoom.questions[0].colors.split(','));
         console.log(newRoom);
         setRoomInfo(newRoom);
+        setSave(true);
     };
     useEffect(() => {
         handleSubmit();
-    }, [newQuestions]);
+    }, [newQuestions, room, done]);
     return load ? (
         <Loading />
     ) : (
@@ -298,7 +299,7 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo }) => {
                             <ButtonCustom
                                 variant="green width"
                                 name="Save"
-                                // href="/admin/room"
+                                href="/admin/room"
                                 className="d-flex align-items-center fs-4"
                                 onClick={handleSubmit}
                             />

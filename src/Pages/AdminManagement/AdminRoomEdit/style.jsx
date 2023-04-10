@@ -129,10 +129,17 @@ export const RoomEditStyle = styled.div`
     .color-red {
         color: ${(props) => props.theme.colors.red2};
     }
+    .form-control:focus {
+        color: ${(props) => props.theme.colors.dark};
+    }
     @media (min-width: 1001px) {
         .input-num {
             width: 1em;
         }
+    }
+    .overflow-wrap {
+        max-width: min-content;
+        /* overflow: auto; */
     }
     @media (max-width: 1000px) {
         .btn-sm-sm {

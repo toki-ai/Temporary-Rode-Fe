@@ -12,6 +12,7 @@ import { RoomEditStyle } from './style';
 const AdminRoomEdit = () => {
     const { id } = useParams();
     const [roomInfo, setRoomInfo] = useState({});
+    const [save, setSave] = useState(false);
     useEffect(() => {
         console.log(roomInfo);
         roomApi.updateRoomById(id, roomInfo);
@@ -30,7 +31,7 @@ const AdminRoomEdit = () => {
                         </Link>
                         <h3 className="color-primary">Edit Room</h3>
                     </div>
-                    <FormEdit setRoom={setRoomInfo} />
+                    <FormEdit setRoom={setRoomInfo} setDone={setSave} />
                 </div>
             </RoomEditStyle>
         </div>
