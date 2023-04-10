@@ -24,7 +24,7 @@ const schema = yup.object().shape({
     isPrivate: yup.boolean().required(),
 });
 
-const CreateRoomInfo = ({ setRoomInfo }) => {
+const CreateRoomInfo = ({ roomInfo, setRoomInfo }) => {
     const [roomType, setRoomType] = useState(['FE', 'BE']);
 
     useEffect(() => {
@@ -96,17 +96,7 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
     const [formList, setFormList] = useState(FORM_LIST_PRIVATE_ROOM);
 
     return (
-        <Formik
-            validationSchema={schema}
-            initialValues={{
-                code: '',
-                openTime: '',
-                closeTime: '',
-                duration: '',
-                type: '',
-                isPrivate: '',
-            }}
-        >
+        <Formik validationSchema={schema} initialValues={roomInfo}>
             {({ values, handleChange, touched, errors }) => (
                 <Form noValidate>
                     <Row className="mb-3">
@@ -125,22 +115,25 @@ const CreateRoomInfo = ({ setRoomInfo }) => {
                                     value={values[item.name]}
                                     onChange={(e) => {
                                         handleChange(e);
-                                        if (e.target.value === 'true') {
-                                            setFormList(FORM_LIST_PRIVATE_ROOM);
-                                            setRoomInfo({
-                                                ...values,
-                                                isPrivate: e.target.value === 'true',
-                                            });
-                                        } else if (e.target.value === 'false') {
-                                            setFormList(FORM_LIST_PUBLIC_ROOM);
-                                            setRoomInfo({
-                                                ...values,
-                                                isPrivate: e.target.value === 'false',
-                                            });
-                                        }
+                                        const isPrivate =
+                                            item.name === 'isPrivate'
+                                                ? e.target.value === 'true'
+                                                : values.isPrivate === 'true';
+                                        setFormList(
+                                            isPrivate
+                                                ? FORM_LIST_PRIVATE_ROOM
+                                                : FORM_LIST_PUBLIC_ROOM
+                                        );
+                                        const duration = Number.parseInt(
+                                            item.name === 'duration'
+                                                ? e.target.value
+                                                : values.duration
+                                        );
                                         setRoomInfo({
                                             ...values,
                                             [item.name]: e.target.value,
+                                            isPrivate,
+                                            duration,
                                         });
                                     }}
                                     isValid={touched[item.name] && !errors[item.name]}

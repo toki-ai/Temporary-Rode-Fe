@@ -13,6 +13,10 @@ export const Wrapper = styled.div`
         font-size: 16px;
         font-weight: 600;
     }
+
+    .form-control:focus {
+        color: ${themes.colors.dark};
+    }
 `;
 
 export const Title = styled.h1`
@@ -142,7 +146,6 @@ export const ColorWrapper = styled.div`
 
 export const Color = styled.div`
     display: inline-flex;
-
     background-color: ${(props) => props.color};
     width: 28px;
     height: 28px;
@@ -153,8 +156,8 @@ export const Color = styled.div`
 
 export const CodeTemplate = styled.div`
     textarea {
-        width: 400px;
-        height: 60px;
+        width: min(100%, 400px);
+        height: 500px;
         border-color: ${themes.colors.primary};
     }
 `;
