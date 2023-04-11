@@ -16,7 +16,7 @@ const AdminRoomEdit = () => {
     useEffect(() => {
         console.log(roomInfo);
         roomApi.updateRoomById(id, roomInfo);
-    }, []);
+    }, [save]);
 
     return (
         <div className="w-100">

@@ -93,22 +93,26 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo, setDone: setSave }) 
     }
 
     const [done, setDone] = useState(false);
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setDone(true);
+
         let newRoom = room;
         newRoom.openTime = openTime != '' ? openTime : room.openTime;
         newRoom.closeTime = closeTime != '' ? closeTime : room.closeTime;
-        newRoom.duration = parseInt(formRef.current.values.duration);
+        let newDuration = await formRef;
+        newDuration = formRef.current.values.duration;
+        console.log(newDuration);
+        newRoom.duration = parseInt(newDuration);
+        console.log(duration);
         newRoom.questions = newQuestions.slice();
         console.log(newQuestions);
-        console.log(newRoom.questions[0].colors.split(','));
         console.log(newRoom);
         setRoomInfo(newRoom);
         setSave(true);
     };
     useEffect(() => {
         handleSubmit();
-    }, [newQuestions, room, done]);
+    }, [newQuestions, done]);
     return load ? (
         <Loading />
     ) : (
@@ -302,6 +306,7 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo, setDone: setSave }) 
                                 href="/admin/room"
                                 className="d-flex align-items-center fs-4"
                                 onClick={handleSubmit}
+                                type="submit"
                             />
                         </div>
                     </Form>
