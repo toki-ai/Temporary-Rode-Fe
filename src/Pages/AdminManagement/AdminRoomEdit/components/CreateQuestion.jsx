@@ -200,9 +200,9 @@ const CreateQuestion = ({
                                 {colorPError}
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group className="col-7 d-flex overflow-wrap mb-3" id="colors-value">
+                        <div className="d-flex flex-wrap mb-3" id="colors-value">
                             {colors.map((_, i) => (
-                                <div key={i} className="d-flex flex-column align-items-center">
+                                <div key={i} className="d-flex flex-column align-items-center w-20">
                                     <Form.Control
                                         type="color"
                                         name="color"
@@ -218,7 +218,7 @@ const CreateQuestion = ({
                                     <div className="px-1">{colors[i]}</div>
                                 </div>
                             ))}
-                        </Form.Group>
+                        </div>
                     </Row>
                     <Row>
                         <Form.Group controlId="formFile">

@@ -100,7 +100,7 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo, setDone: setSave }) 
         newRoom.openTime = openTime != '' ? openTime : room.openTime;
         newRoom.closeTime = closeTime != '' ? closeTime : room.closeTime;
         let newDuration = await formRef;
-        newDuration = formRef.current.values.duration;
+        newDuration = formRef.current ? formRef.current.values.duration : room.duration;
         console.log(newDuration);
         newRoom.duration = parseInt(newDuration);
         console.log(duration);

@@ -132,14 +132,16 @@ export const RoomEditStyle = styled.div`
     .form-control:focus {
         color: ${(props) => props.theme.colors.dark};
     }
+    .colorpick-eyedropper-input-trigger {
+        display: none;
+    }
+    .w-20 {
+        width: 20%;
+    }
     @media (min-width: 1001px) {
         .input-num {
             width: 1em;
         }
-    }
-    .overflow-wrap {
-        max-width: min-content;
-        /* overflow: auto; */
     }
     @media (max-width: 1000px) {
         .btn-sm-sm {
