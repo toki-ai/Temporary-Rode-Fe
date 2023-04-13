@@ -28,7 +28,7 @@ const schema = yup.object().shape({
     colorPicker: yup.string().required('Please enter color'),
 });
 
-const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo, setDone: setSave }) => {
+const FormEdit = ({ setRoom: setRoomInfo }) => {
     const { id } = useParams();
     const roomId = id;
     const [room, setRoom] = useState({});
@@ -38,7 +38,7 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo, setDone: setSave }) 
     const [newQuestions, setNewQuestions] = useState([]);
     const [openTime, setOpenTime] = useState('');
     const [closeTime, setCloseTime] = useState('');
-    const [duration, setDuration] = useState(0);
+    const [duration, setDuration] = useState(1);
     const formRef = useRef();
     useEffect(() => {
         roomApi.getRoomById(roomId).then((res) => {
@@ -91,35 +91,30 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo, setDone: setSave }) 
         console.log(questions.length);
         console.log(questions);
     }
-
-    const [done, setDone] = useState(false);
-    const handleSubmit = async () => {
-        setDone(true);
-
+    useEffect(() => {
         let newRoom = room;
         newRoom.openTime = openTime != '' ? openTime : room.openTime;
         newRoom.closeTime = closeTime != '' ? closeTime : room.closeTime;
-        let newDuration = await formRef;
-        newDuration = formRef.current ? formRef.current.values.duration : room.duration;
+        let newDuration = formRef;
+        newDuration = formRef.current
+            ? parseInt(formRef.current.values.duration)
+            : parseInt(room.duration);
         console.log(newDuration);
-        newRoom.duration = parseInt(newDuration);
+        room.isPrivate ? (newRoom.duration = parseInt(newDuration)) : (newRoom.duration = null);
         console.log(duration);
         newRoom.questions = newQuestions.slice();
         console.log(newQuestions);
         console.log(newRoom);
+
         setRoomInfo(newRoom);
-        setSave(true);
-    };
-    useEffect(() => {
-        handleSubmit();
-    }, [newQuestions, done]);
+    }, [formRef, openTime, closeTime, duration, newQuestions]);
+    console.log(questions);
     return load ? (
         <Loading />
     ) : (
         <RoomEditStyle>
             <Formik
                 validationSchema={schema}
-                onSubmit={handleSubmit}
                 initialValues={{
                     code: room.code,
                     type: room.type,
@@ -135,8 +130,8 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo, setDone: setSave }) 
                 }}
                 innerRef={formRef}
             >
-                {({ handleSubmit, handleChange, handleBlur, values, touched, isValid, errors }) => (
-                    <Form noValidate onSubmit={handleSubmit}>
+                {({ handleChange, values, touched, isValid, errors }) => (
+                    <Form noValidate>
                         <Row className="mb-3">
                             <Form.Group as={Col} controlId="code">
                                 <Form.Label className="fw-bold">Room Code</Form.Label>
@@ -264,7 +259,6 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo, setDone: setSave }) 
                                         }
                                         question={questions}
                                         setNewQuestions={setNewQuestions}
-                                        done={done}
                                         isValid={touched.formFile && !errors.formFile}
                                         isInvalid={!!errors.formFile}
                                         errorFile={errors.formFile}
@@ -292,23 +286,8 @@ const FormEdit = ({ setRoom: setRoomInfo, setQuestionsInfo, setDone: setSave }) 
                             name="Add question"
                             className="bi bi-plus d-flex align-items-center fs-4"
                             onClick={handleAddQuestion}
+                            type="button"
                         />
-                        <div className="d-flex justify-content-end mt-4">
-                            <ButtonCustom
-                                variant="grey mx-4 width"
-                                name="Cancel"
-                                className="d-flex align-items-center fs-4"
-                                href="/admin/room"
-                            />
-                            <ButtonCustom
-                                variant="green width"
-                                name="Save"
-                                href="/admin/room"
-                                className="d-flex align-items-center fs-4"
-                                onClick={handleSubmit}
-                                type="submit"
-                            />
-                        </div>
                     </Form>
                 )}
             </Formik>

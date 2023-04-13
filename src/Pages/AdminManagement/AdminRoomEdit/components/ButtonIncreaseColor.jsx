@@ -16,13 +16,11 @@ const ButtonColor = ({
     const [newColor, setNewColor] = useState(color);
     const [newColors, setNewColors] = useState(colors);
     // if (colors?.length ? setColors(colors) : setColors(['FFFFFF']));
-    console.log(color);
+
     const increase = (e) => {
         setQuantity(quantity + 1);
         newColors.push(newColors[quantity - 1]);
         setNewColors(newColors);
-        console.log(colors);
-        console.log(color);
     };
     const decrease = (e) => {
         if (quantity <= 0) return;
@@ -32,10 +30,8 @@ const ButtonColor = ({
     };
     useEffect(() => {
         setNumOfColors(parseInt(quantity));
-        console.log(quantity);
     }, [quantity]);
     useEffect(() => {
-        console.log(colors);
         setColors(newColors);
     }, [color, colors, numOfColors, newColor, newColors, quantity]);
     return (

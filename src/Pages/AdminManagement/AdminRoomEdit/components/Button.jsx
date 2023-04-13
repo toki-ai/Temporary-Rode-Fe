@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 const ButtonCustom = (props) => {
     var className2 = `d-flex justify-content-center align-items-center ${props.className2}`;
     return (
-        <Button variant={props.variant} href={props.href} onClick={props.onClick}>
+        <Button variant={props.variant} href={props.href} onClick={props.onClick} type={props.type}>
             <div className={className2}>
                 <i className={props.className}></i>
                 <span>{props.name}</span>

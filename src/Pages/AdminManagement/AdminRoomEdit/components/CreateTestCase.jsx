@@ -26,6 +26,7 @@ const CreateTestCase = ({
     const [value, setInputValue] = useState(input);
     const [valueOutput, setOutputValue] = useState(output);
     const handleShow = (e) => {
+        e.preventDefault();
         setShow(!show);
         show ? setNewClassName('d-none') : setNewClassName('d-flex');
     };
@@ -38,14 +39,11 @@ const CreateTestCase = ({
     useEffect(() => {
         let newTestCases = allTestCase.slice();
         let newTestCase = newTestCases[i];
-        console.log(newTestCases);
         newTestCase.input = value;
         newTestCase.output = valueOutput;
-        console.log(newTestCase);
         newTestCases[i] = newTestCase;
         setNewTestCase(newTestCases);
     }, [value, valueOutput]);
-    console.log(testCase);
     const isOutputValid = () => {
         if (valueOutput != '') return true;
         else return false;
@@ -61,7 +59,7 @@ const CreateTestCase = ({
             <div className="position-relative d-flex align-items-center">
                 <ButtonCustom
                     variant="text-secondary fw-bold outline col-lg-5 border-secondary mb-2 w-75"
-                    onClick={handleShow}
+                    onClick={(e) => handleShow(e)}
                     className="bi bi-chevron-down"
                     className2="d-flex flex-row-reverse justify-content-between"
                     name={`Test Case ${numOfTestCase}:`}

@@ -17,7 +17,6 @@ const CreateQuestion = ({
     question,
     i,
     setNewQuestions: setNewQues,
-    done,
     isValid,
     isInvalid,
     errorFile,
@@ -52,10 +51,8 @@ const CreateQuestion = ({
     const [color, setColor] = useState('');
     const [colors, setColors] = useState(colorSplit);
     const [numOfColors, setNumOfColors] = useState(colors.length);
-    console.log(questionColors.split(','));
 
     const schema = yup.object().shape({});
-
     function increaseTestCase() {
         testCasesResult.push(defaultTestCases);
         setNumOfTestCase(numOfTestCase + 1);
@@ -67,10 +64,11 @@ const CreateQuestion = ({
         setShowQues(true);
     }
     const handleShow = (e) => {
+        e.preventDefault();
         setShowQues(!showQues);
         showQues ? setNewClassName('d-none') : setNewClassName('d-flex');
     };
-    console.log(questionImages);
+
     const handleImageChange = (e) => {
         setQuestionId('');
         setFileName('');
@@ -81,43 +79,37 @@ const CreateQuestion = ({
             const file = e.target.files[0];
             const data = await localFileApi.postImg(file);
             if (file) reader.readAsDataURL(file);
-            console.log(file);
             reader.onload = (e) => {
                 const imageUrl = e.target.result;
-                console.log(e.target.result);
                 setQuestionId(data.data.data[0].id);
                 console.log(questionId);
                 setFileName(e.target.result);
-                console.log(fileName);
             };
             setFile(file);
         } catch (err) {
             console.log(err);
         }
     };
-    console.log(questionId);
+
     useEffect(() => {
         let newQuestions = question.slice();
         let newQuestion = newQuestions[i];
-        console.log(newMaxSubmitTimes);
         parseInt(newMaxSubmitTimes) != parseInt(newQuestion.maxSubmitTimes)
             ? (newQuestion.maxSubmitTimes = parseInt(newMaxSubmitTimes))
             : parseInt(newQuestion.maxSubmitTimes);
         newQuestion.testCases = testCaseResultFinal.slice();
-        console.log(colors);
         newQuestion.colors = colors.toString();
         newQuestion.codeTemplate = codeTemplate;
         newQuestion.questionImage = questionId;
+        console.log(questionId);
+        newQuestions[i].id != '' ? (newQuestion.id = newQuestions[i].id) : (newQuestion.id = i);
         newQuestions[i] = newQuestion;
         setNewQues(newQuestions);
-        console.log(newQuestions);
-    }, [newMaxSubmitTimes, question, testCaseResultFinal, colors, color, done]);
+    }, [newMaxSubmitTimes, question, testCaseResultFinal, colors, color]);
     useEffect(() => {
         color != '' && (colorPInvalid = true);
-    }, [done, color]);
+    }, [color]);
     useEffect(() => {}, [numOfColors]);
-    console.log(numOfColors);
-    console.log(colors);
     useEffect(() => {
         const handleColorChange = (e) => {
             setColor(e.target.value);
@@ -127,15 +119,13 @@ const CreateQuestion = ({
         setColor(e.target.value);
         colors[i] = e.target.value;
     };
-
-    // console.log(document.getElementById('colors-value').childNodes[0].value);
     return (
         <div>
             <Row>
                 <Col className="col-6 position-relative">
                     <ButtonCustom
                         variant="text-secondary fw-bold outline w-75 border-secondary fs-5 mb-3"
-                        onClick={handleShow}
+                        onClick={(e) => handleShow(e)}
                         className="bi bi-chevron-down"
                         className2="d-flex flex-row-reverse justify-content-between"
                         name={`Question ${i + 1}:`}
@@ -156,9 +146,8 @@ const CreateQuestion = ({
                         <Col className="col-3 col-lg-4 ">
                             <ButtonUpDown
                                 variant="green"
-                                maxSubmitTime={maxSubmitTime}
+                                maxSubmitTime={maxSubmitTime ? maxSubmitTime : 1}
                                 setNewMaxSubmitTimes={setNewMaxSubmitTimes}
-                                done={done}
                             />
                         </Col>
                     </Row>
@@ -308,6 +297,7 @@ const CreateQuestion = ({
                         name="Add test case"
                         className="bi bi-plus d-flex align-items-center fs-4"
                         onClick={increaseTestCase}
+                        type="button"
                     />
                 </Col>
                 <hr className="mt-3"></hr>

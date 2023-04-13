@@ -107,6 +107,7 @@ export const RoomEditStyle = styled.div`
     }
     .preview-image {
         height: 250px;
+        min-width: 280px;
         object-fit: fill;
     }
 
