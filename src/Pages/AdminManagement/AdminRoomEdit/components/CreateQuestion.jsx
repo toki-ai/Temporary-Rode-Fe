@@ -101,11 +101,10 @@ const CreateQuestion = ({
         newQuestion.colors = colors.toString();
         newQuestion.codeTemplate = codeTemplate;
         newQuestion.questionImage = questionId;
-        console.log(questionId);
         newQuestions[i].id != '' ? (newQuestion.id = newQuestions[i].id) : (newQuestion.id = i);
         newQuestions[i] = newQuestion;
         setNewQues(newQuestions);
-    }, [newMaxSubmitTimes, question, testCaseResultFinal, colors, color]);
+    }, [newMaxSubmitTimes, question, testCaseResultFinal, colors, color, codeTemplate]);
     useEffect(() => {
         color != '' && (colorPInvalid = true);
     }, [color]);
@@ -119,6 +118,7 @@ const CreateQuestion = ({
         setColor(e.target.value);
         colors[i] = e.target.value;
     };
+
     return (
         <div>
             <Row>
@@ -129,6 +129,7 @@ const CreateQuestion = ({
                         className="bi bi-chevron-down"
                         className2="d-flex flex-row-reverse justify-content-between"
                         name={`Question ${i + 1}:`}
+                        role="button"
                     ></ButtonCustom>
                     <ButtonCustom
                         className={`bi bi-x-circle-fill justify-content-center color-red fs-4 d-flex`}
@@ -159,7 +160,7 @@ const CreateQuestion = ({
                             <Form.Control
                                 type="text"
                                 name="codeTemplate"
-                                defaultValue={codeTemplate}
+                                defaultValue={codeTemplate == null ? '' : codeTemplate}
                                 onChange={(e) => {
                                     setCodeTemplate(e.target.value);
                                 }}
@@ -178,7 +179,7 @@ const CreateQuestion = ({
                                 Color Picker:
                             </Form.Label>
                             <ButtonColor
-                                variant="green"
+                                variant="green cursor-pointer"
                                 setNumOfColors={setNumOfColors}
                                 numOfColors={numOfColors}
                                 colors={colors}

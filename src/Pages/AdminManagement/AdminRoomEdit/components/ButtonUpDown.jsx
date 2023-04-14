@@ -17,7 +17,11 @@ const ButtonUpDown = ({ variant, maxSubmitTime, setNewMaxSubmitTimes: setNewMaxS
     }, [quantity]);
     return (
         <div className="d-flex">
-            <Button variant={variant} className="rounded-l-0 btn-sm-sm" onClick={decrease}>
+            <Button
+                variant={variant}
+                className="rounded-l-0 btn-sm-sm cursor-pointer"
+                onClick={decrease}
+            >
                 <i className="bi bi-dash"></i>
             </Button>
             <Form.Control
@@ -27,7 +31,11 @@ const ButtonUpDown = ({ variant, maxSubmitTime, setNewMaxSubmitTimes: setNewMaxS
                 value={quantity}
                 disabled
             />
-            <Button variant={variant} className="rounded-r-0 btn-sm-sm" onClick={increase}>
+            <Button
+                variant={variant}
+                className="rounded-r-0 btn-sm-sm cursor-pointer"
+                onClick={increase}
+            >
                 <i className="bi bi-plus"></i>
             </Button>
         </div>

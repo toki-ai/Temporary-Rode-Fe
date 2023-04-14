@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Col, Form, Row } from 'react-bootstrap';
+import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 
 import ButtonCustom from './Button';
 
@@ -23,8 +23,15 @@ const CreateTestCase = ({
 }) => {
     const [show, setShow] = useState(showQues);
     const [newClassName, setNewClassName] = useState('d-none');
-    const [value, setInputValue] = useState(input);
-    const [valueOutput, setOutputValue] = useState(output);
+    const [value, setInputValue] = useState(input == null ? '' : input);
+    const [valueOutput, setOutputValue] = useState(output == null ? '' : output);
+    // useEffect(() => {
+    // if (!input) setInputValue('');
+    // else setInputValue(input);
+    // if (!output) setInputValue('');
+    // else setOutputValue(output);
+    // }, [testCase, input, output, numOfTestCase, i, allTestCase]);
+
     const handleShow = (e) => {
         e.preventDefault();
         setShow(!show);
@@ -44,25 +51,17 @@ const CreateTestCase = ({
         newTestCases[i] = newTestCase;
         setNewTestCase(newTestCases);
     }, [value, valueOutput]);
-    const isOutputValid = () => {
-        if (valueOutput != '') return true;
-        else return false;
-    };
-    const isInputValid = () => {
-        if (value != '') {
-            return true;
-        } else return false;
-    };
 
     return (
         <div>
             <div className="position-relative d-flex align-items-center">
                 <ButtonCustom
-                    variant="text-secondary fw-bold outline col-lg-5 border-secondary mb-2 w-75"
+                    variant="text-secondary fw-bold outline col-lg-5 border-secondary mb-2 w-75 cursor-pointer"
                     onClick={(e) => handleShow(e)}
                     className="bi bi-chevron-down"
                     className2="d-flex flex-row-reverse justify-content-between"
                     name={`Test Case ${numOfTestCase}:`}
+                    role="button"
                 ></ButtonCustom>
                 <ButtonCustom
                     className={`bi bi-x-circle-fill justify-content-center color-red fs-4 d-flex`}
@@ -82,8 +81,6 @@ const CreateTestCase = ({
                                 cols={22}
                                 defaultValue={value}
                                 onChange={handleInput}
-                                isValid={isInputValid()}
-                                isInvalid={!isInputValid()}
                             ></Form.Control>
                             <Form.Control.Feedback type="invalid" className="mb-3">
                                 Please enter input
@@ -92,7 +89,7 @@ const CreateTestCase = ({
                     </Col>
                     <Col className="col-lg-6 col-12">
                         <Form.Group as={Col} controlId="output">
-                            <Form.Label>Output</Form.Label>
+                            <Form.Label id="label">Output</Form.Label>
                             <Form.Control
                                 as="textarea"
                                 name="output"
@@ -100,8 +97,6 @@ const CreateTestCase = ({
                                 cols={22}
                                 defaultValue={valueOutput}
                                 onChange={handleOutput}
-                                isValid={isOutputValid()}
-                                isInvalid={!isOutputValid()}
                             ></Form.Control>
                             <Form.Control.Feedback type="invalid" className="mb-3">
                                 Please enter output

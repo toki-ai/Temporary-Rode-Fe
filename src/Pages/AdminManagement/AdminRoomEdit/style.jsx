@@ -139,6 +139,12 @@ export const RoomEditStyle = styled.div`
     .w-20 {
         width: 20%;
     }
+    .btn-cursor-pointer {
+        cursor: pointer;
+    }
+    .cursor-pointer {
+        cursor: pointer;
+    }
     @media (min-width: 1001px) {
         .input-num {
             width: 1em;

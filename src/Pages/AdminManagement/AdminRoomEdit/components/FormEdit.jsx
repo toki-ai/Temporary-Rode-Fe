@@ -118,7 +118,7 @@ const FormEdit = ({ setRoom: setRoomInfo }) => {
                 initialValues={{
                     code: room.code,
                     type: room.type,
-                    duration: room.isPrivate ? room.duration : '',
+                    duration: room.duration == null ? '' : room.duration,
                     openTime: room.openTime,
                     closeTime: room.isPrivate ? room.closeTime : '',
                     visibility: checkPrivate,

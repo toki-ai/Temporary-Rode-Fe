@@ -15,7 +15,6 @@ const ButtonColor = ({
     const [quantity, setQuantity] = useState(numOfColors);
     const [newColor, setNewColor] = useState(color);
     const [newColors, setNewColors] = useState(colors);
-    // if (colors?.length ? setColors(colors) : setColors(['FFFFFF']));
 
     const increase = (e) => {
         setQuantity(quantity + 1);
@@ -36,7 +35,12 @@ const ButtonColor = ({
     }, [color, colors, numOfColors, newColor, newColors, quantity]);
     return (
         <div className="d-flex">
-            <Button variant={variant} className="rounded-l-0 btn-sm-sm" onClick={decrease}>
+            <Button
+                variant={variant}
+                className="rounded-l-0 btn-sm-sm cursor-pointer"
+                onClick={decrease}
+                role="button"
+            >
                 <i className="bi bi-dash"></i>
             </Button>
             <Form.Control
@@ -46,7 +50,12 @@ const ButtonColor = ({
                 value={quantity}
                 disabled
             />
-            <Button variant={variant} className="rounded-r-0 btn-sm-sm" onClick={increase}>
+            <Button
+                variant={variant}
+                className="rounded-r-0 btn-sm-sm cursor-pointer"
+                onClick={increase}
+                role="button"
+            >
                 <i className="bi bi-plus"></i>
             </Button>
         </div>
