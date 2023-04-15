@@ -61,6 +61,7 @@ const CreateQuestion = ({
     }
     function decreaseTestCase() {
         testCasesResult.pop(defaultTestCases);
+        testCaseResultFinal.pop(defaultTestCases);
         setNumOfTestCase(numOfTestCase - 1);
         setShowQues(true);
     }
@@ -99,7 +100,7 @@ const CreateQuestion = ({
             ? (newQuestion.maxSubmitTimes = parseInt(newMaxSubmitTimes))
             : parseInt(newQuestion.maxSubmitTimes);
         newQuestion.testCases = testCaseResultFinal.slice();
-        roomType == 'FE' && (newQuestion.colors = colors.toString());
+        newQuestion.colors = colors.toString();
         newQuestion.codeTemplate = codeTemplate;
         newQuestion.questionImage = questionId;
         newQuestions[i].id != ''
@@ -117,6 +118,7 @@ const CreateQuestion = ({
         numOfColors,
         questionId,
         numOfTestCase,
+        testCasesResult,
     ]);
 
     useEffect(() => {
@@ -132,7 +134,6 @@ const CreateQuestion = ({
         setColor(e.target.value);
         colors[i] = e.target.value;
     };
-    console.log(roomType);
     return (
         <div>
             <Row>

@@ -87,6 +87,7 @@ const FormEdit = ({ setRoom: setRoomInfo }) => {
     };
     function handleRemoveQuestion() {
         questions.pop(defaultQuestion);
+        newQuestions.pop(defaultQuestion);
         setNumOfQues(questions.length - 1);
         console.log(questions.length);
         console.log(questions);
