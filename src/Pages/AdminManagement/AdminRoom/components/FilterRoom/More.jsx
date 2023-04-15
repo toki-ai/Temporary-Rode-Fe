@@ -16,7 +16,7 @@ const More = ({ link, roomId, openTime }) => {
     const actions = [
         {
             id: 1,
-            href: `/admin/room/${link}`,
+            href: `/admin/room/${roomId}`,
             value: 'View',
         },
         {

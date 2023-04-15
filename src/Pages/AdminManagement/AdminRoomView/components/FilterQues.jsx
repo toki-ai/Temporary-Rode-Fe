@@ -17,7 +17,7 @@ const FilterQues = ({ roomId }) => {
             .getRoomById(roomId)
             .then((res) => {
                 console.log(res.data.data);
-                setNumOfQues(res.data.data.questions);
+                !res.data.data.questions ? setNumOfQues([]) : setNumOfQues(res.data.data.questions);
                 console.log(res.data.data.questions);
                 setLoading(false);
             })
