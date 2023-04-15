@@ -65,7 +65,7 @@ const CreateTestCase = ({
                     role="button"
                 ></ButtonCustom>
                 <ButtonCustom
-                    className={`bi bi-x-circle-fill justify-content-center color-red fs-4 d-flex`}
+                    className={`bi bi-trash-fill justify-content-center color-red fs-4 d-flex`}
                     variant="outline border-0 position-absolute end-0 my-2 mx-3"
                     onClick={handleTestCaseDecrease}
                 />

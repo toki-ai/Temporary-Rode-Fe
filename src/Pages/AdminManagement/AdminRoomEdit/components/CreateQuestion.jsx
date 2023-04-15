@@ -99,10 +99,12 @@ const CreateQuestion = ({
             ? (newQuestion.maxSubmitTimes = parseInt(newMaxSubmitTimes))
             : parseInt(newQuestion.maxSubmitTimes);
         newQuestion.testCases = testCaseResultFinal.slice();
-        newQuestion.colors = colors.toString();
+        roomType == 'FE' && (newQuestion.colors = colors.toString());
         newQuestion.codeTemplate = codeTemplate;
         newQuestion.questionImage = questionId;
-        newQuestions[i].id != '' ? (newQuestion.id = newQuestions[i].id) : (newQuestion.id = i);
+        newQuestions[i].id != ''
+            ? (newQuestion.id = newQuestions[i].id)
+            : (newQuestion.id = i.toString());
         newQuestions[i] = newQuestion;
         setNewQues(newQuestions);
     }, [
@@ -114,7 +116,9 @@ const CreateQuestion = ({
         codeTemplate,
         numOfColors,
         questionId,
+        numOfTestCase,
     ]);
+
     useEffect(() => {
         color != '' && (colorPInvalid = true);
     }, [color]);
@@ -142,7 +146,7 @@ const CreateQuestion = ({
                         role="button"
                     ></ButtonCustom>
                     <ButtonCustom
-                        className={`bi bi-x-circle-fill justify-content-center color-red fs-4 d-flex`}
+                        className={`bi bi-trash-fill justify-content-center color-red fs-4 d-flex`}
                         variant="outline border-0 position-absolute end-0 my-2"
                         onClick={handleRemoveQuestion}
                     />
@@ -222,7 +226,7 @@ const CreateQuestion = ({
                         )}
                     </Row>
                     {roomType == 'FE' && (
-                        <Row className="d-flex d-flex flex-column justify-content-center">
+                        <Row className="d-flex d-flex flex-column justify-content-center" as={Col}>
                             <Form.Group
                                 className="my-3 d-flex d-flex align-items-center col-md-9 col-lg-8 justify-content-between"
                                 controlId="color"
@@ -278,7 +282,7 @@ const CreateQuestion = ({
                         <Row>
                             <Form.Group controlId="codeTemplate">
                                 <Form.Label className="text-secondary fw-bold rfs">
-                                    Code Template
+                                    Code Template:
                                 </Form.Label>
                                 <Form.Control
                                     as="textarea"
