@@ -20,6 +20,7 @@ const CreateTestCase = ({
     outputInvalid,
     inputError,
     outputError,
+    roomType,
 }) => {
     const [show, setShow] = useState(showQues);
     const [newClassName, setNewClassName] = useState('d-none');

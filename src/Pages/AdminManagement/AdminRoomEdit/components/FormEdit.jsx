@@ -156,9 +156,10 @@ const FormEdit = ({ setRoom: setRoomInfo }) => {
                                     isInvalid={!!errors.type}
                                     disabled
                                 >
-                                    {roomTypes.map((item, i) => {
+                                    {/* {roomTypes.map((item, i) => {
                                         return <option key={i}>{item}</option>;
-                                    })}
+                                    })} */}
+                                    <option>{room.type}</option>
                                 </Form.Select>
                                 <Form.Control.Feedback type="invalid">
                                     {errors.type}
@@ -257,6 +258,7 @@ const FormEdit = ({ setRoom: setRoomInfo }) => {
                                         codeTemp={
                                             questions?.length ? questions[i].codeTemplate : ''
                                         }
+                                        roomType={room.type}
                                         question={questions}
                                         setNewQuestions={setNewQuestions}
                                         isValid={touched.formFile && !errors.formFile}

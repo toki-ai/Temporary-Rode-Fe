@@ -35,6 +35,7 @@ const CreateQuestion = ({
     colorPError,
     questionColors,
     codeTemp,
+    roomType,
 }) => {
     const colorSplit = questionColors?.length ? questionColors.split(',') : ['#000000'];
     const defaultTestCases = { input: '', output: '' };
@@ -104,7 +105,15 @@ const CreateQuestion = ({
         newQuestions[i].id != '' ? (newQuestion.id = newQuestions[i].id) : (newQuestion.id = i);
         newQuestions[i] = newQuestion;
         setNewQues(newQuestions);
-    }, [newMaxSubmitTimes, question, testCaseResultFinal, colors, color, codeTemplate]);
+    }, [
+        newMaxSubmitTimes,
+        question,
+        testCaseResultFinal,
+        colors,
+        color,
+        codeTemplate,
+        numOfColors,
+    ]);
     useEffect(() => {
         color != '' && (colorPInvalid = true);
     }, [color]);
@@ -118,7 +127,7 @@ const CreateQuestion = ({
         setColor(e.target.value);
         colors[i] = e.target.value;
     };
-
+    console.log(roomType);
     return (
         <div>
             <Row>
@@ -151,64 +160,6 @@ const CreateQuestion = ({
                                 setNewMaxSubmitTimes={setNewMaxSubmitTimes}
                             />
                         </Col>
-                    </Row>
-                    <Row>
-                        <Form.Group controlId="codeTemplate">
-                            <Form.Label className="text-secondary fw-bold rfs">
-                                Code Template
-                            </Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="codeTemplate"
-                                defaultValue={codeTemplate == null ? '' : codeTemplate}
-                                onChange={(e) => {
-                                    setCodeTemplate(e.target.value);
-                                }}
-                            ></Form.Control>
-                            <Form.Control.Feedback type="invalid">
-                                {codeTError}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Row>
-                    <Row className="d-flex d-flex flex-column justify-content-center">
-                        <Form.Group
-                            className="my-3 d-flex d-flex align-items-center col-md-9 col-lg-8 justify-content-between"
-                            controlId="color"
-                        >
-                            <Form.Label className="text-secondary fw-bold rfs">
-                                Color Picker:
-                            </Form.Label>
-                            <ButtonColor
-                                variant="green cursor-pointer"
-                                setNumOfColors={setNumOfColors}
-                                numOfColors={numOfColors}
-                                colors={colors}
-                                setColors={setColors}
-                                color={color}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {colorPError}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                        <div className="d-flex flex-wrap mb-3" id="colors-value">
-                            {colors.map((_, i) => (
-                                <div key={i} className="d-flex flex-column align-items-center w-20">
-                                    <Form.Control
-                                        type="color"
-                                        name="color"
-                                        defaultValue={
-                                            colors[i] !== undefined ? colors[i] : colors['000000']
-                                        }
-                                        onChange={(e) => {
-                                            colors.push();
-                                            colors[i] = e.target.value;
-                                            setColor(colors[i]);
-                                        }}
-                                    ></Form.Control>
-                                    <div className="px-1">{colors[i]}</div>
-                                </div>
-                            ))}
-                        </div>
                     </Row>
                     <Row>
                         <Form.Group controlId="formFile">
@@ -269,38 +220,116 @@ const CreateQuestion = ({
                             </>
                         )}
                     </Row>
+                    {roomType == 'FE' && (
+                        <Row className="d-flex d-flex flex-column justify-content-center">
+                            <Form.Group
+                                className="my-3 d-flex d-flex align-items-center col-md-9 col-lg-8 justify-content-between"
+                                controlId="color"
+                            >
+                                <Col className="col-6 col-lg-5">
+                                    <Form.Label className="text-secondary fw-bold rfs">
+                                        Color Picker:
+                                    </Form.Label>
+                                </Col>
+                                <Col className="col-3 col-lg-4 ">
+                                    <ButtonColor
+                                        variant="green cursor-pointer"
+                                        setNumOfColors={setNumOfColors}
+                                        numOfColors={numOfColors}
+                                        colors={colors}
+                                        setColors={setColors}
+                                        color={color}
+                                    />
+                                </Col>
+                                <Form.Control.Feedback type="invalid">
+                                    {colorPError}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                            <div className="d-flex flex-wrap mb-3" id="colors-value">
+                                {colors.map((_, i) => (
+                                    <div
+                                        key={i}
+                                        className="d-flex flex-column align-items-center w-20"
+                                    >
+                                        <Form.Control
+                                            type="color"
+                                            name="color"
+                                            defaultValue={
+                                                colors[i] !== undefined
+                                                    ? colors[i]
+                                                    : colors['000000']
+                                            }
+                                            onChange={(e) => {
+                                                colors.push();
+                                                colors[i] = e.target.value;
+                                                setColor(colors[i]);
+                                            }}
+                                        ></Form.Control>
+                                        <div className="px-1">{colors[i]}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </Row>
+                    )}
                 </Col>
-                <Col>
-                    <div className="mb-3">
-                        {testCasesResult.map((item, i) => (
-                            <CreateTestCase
-                                i={i}
-                                numOfTestCase={i + 1}
-                                input={item.input}
-                                output={item.output}
-                                show={showQues}
-                                key={item.id}
-                                testCase={testCasesResult.at(i)}
-                                handleTestCaseDecrease={decreaseTestCase}
-                                setNewTestCase={setTestCaseResultFinal}
-                                allTestCase={testCasesResult}
-                                inputValid={inputValid}
-                                inputInvalid={inputInvalid}
-                                outputValid={outputValid}
-                                outputInvalid={outputInvalid}
-                                inputError={inputError}
-                                outputError={outputError}
-                            />
-                        ))}
-                    </div>
-                    <ButtonCustom
-                        variant="light border-dashed w-100"
-                        name="Add test case"
-                        className="bi bi-plus d-flex align-items-center fs-4"
-                        onClick={increaseTestCase}
-                        type="button"
-                    />
-                </Col>
+                {roomType == 'FE' ? (
+                    <Col>
+                        <Row>
+                            <Form.Group controlId="codeTemplate">
+                                <Form.Label className="text-secondary fw-bold rfs">
+                                    Code Template
+                                </Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    type="text"
+                                    name="codeTemplate"
+                                    className="mt-3"
+                                    rows={15}
+                                    defaultValue={codeTemplate == null ? '' : codeTemplate}
+                                    onChange={(e) => {
+                                        setCodeTemplate(e.target.value);
+                                    }}
+                                ></Form.Control>
+                                <Form.Control.Feedback type="invalid">
+                                    {codeTError}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Row>
+                    </Col>
+                ) : (
+                    <Col>
+                        <div className="mb-3">
+                            {testCasesResult.map((item, i) => (
+                                <CreateTestCase
+                                    i={i}
+                                    numOfTestCase={i + 1}
+                                    input={item.input}
+                                    output={item.output}
+                                    show={showQues}
+                                    key={item.id}
+                                    testCase={testCasesResult.at(i)}
+                                    handleTestCaseDecrease={decreaseTestCase}
+                                    setNewTestCase={setTestCaseResultFinal}
+                                    allTestCase={testCasesResult}
+                                    inputValid={inputValid}
+                                    inputInvalid={inputInvalid}
+                                    outputValid={outputValid}
+                                    outputInvalid={outputInvalid}
+                                    inputError={inputError}
+                                    outputError={outputError}
+                                    roomType={roomType}
+                                />
+                            ))}
+                        </div>
+                        <ButtonCustom
+                            variant="light border-dashed w-100"
+                            name="Add test case"
+                            className="bi bi-plus d-flex align-items-center fs-4"
+                            onClick={increaseTestCase}
+                            type="button"
+                        />
+                    </Col>
+                )}
                 <hr className="mt-3"></hr>
             </Row>
         </div>
