@@ -108,7 +108,7 @@ const FormEdit = ({ setRoom: setRoomInfo }) => {
         console.log(newRoom);
 
         setRoomInfo(newRoom);
-    }, [formRef, openTime, closeTime, duration, newQuestions]);
+    }, [formRef, openTime, closeTime, duration, newQuestions, numOfQues, questions]);
     console.log(questions);
     return load ? (
         <Loading />
