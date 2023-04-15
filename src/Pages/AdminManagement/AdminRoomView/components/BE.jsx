@@ -6,6 +6,7 @@ import { Table } from 'react-bootstrap';
 
 import roomApi from '../../../../utils/api/roomApi';
 import PaginationRoom from '../../AdminRoom/components/Pagination';
+import DateFormatS from './DateFormartS';
 
 const titlesAll = [
     { id: '0', name: 'Rank' },
@@ -77,7 +78,7 @@ const BE = ({ ques, data, questions, questionId }) => {
                                     <td>{account.account.lname + ' ' + account.account.fname}</td>
                                     <td>{account.score}</td>
                                     <td>{account.space}</td>
-                                    <td>{account.submittedAt}</td>
+                                    <td>{DateFormatS(account.submittedAt)}</td>
                                 </tr>
                             );
                         })

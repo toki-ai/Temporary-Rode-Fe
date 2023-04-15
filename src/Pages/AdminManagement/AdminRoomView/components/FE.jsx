@@ -78,7 +78,7 @@ const FE = ({ ques, data, questions, questionId }) => {
                                     <td>{account.account.lname + ' ' + account.account.fname}</td>
                                     <td>{account.score}</td>
                                     <td>{account.space}</td>
-                                    <td>{account.submittedAt}</td>
+                                    <td>{DateFormatS(account.submittedAt)}</td>
                                 </tr>
                             );
                         })
