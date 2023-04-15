@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { themes } from '../../themes';
@@ -25,10 +26,11 @@ export const Container = styled.div`
     }
 `;
 
-export const Left = styled.div`
+export const Left = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 `;
 
 export const Right = styled.div`

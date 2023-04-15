@@ -2,16 +2,14 @@ import { useState, Suspense } from 'react';
 
 import { useLoaderData } from 'react-router-dom';
 
-import Loading from '../../components/Loading';
 import ModalComponent from '../../components/Modal/Modal';
 import { CodeTemplateTmp } from '../../utils/Constant/Dummy';
-import roomApi from '../../utils/api/roomApi';
+import userRoomApi from '../../utils/api/userRoomApi';
 import ArenaCSSCode from './components/ArenaCSSCode';
 import Output from './components/Output';
 import RoomInfo from './components/RoomInfo';
 
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 const ArenaCSS = () => {
@@ -19,6 +17,7 @@ const ArenaCSS = () => {
     const codeTemplate = roomInfo?.questions[0]?.codeTemplate
         ? roomInfo?.questions[0].codeTemplate
         : CodeTemplateTmp;
+
     const [code, setCode] = useState(codeTemplate);
     const [count, setCount] = useState(0);
     const [submit, setSubmit] = useState();

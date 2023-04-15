@@ -160,7 +160,9 @@ export const TextStyled = styled.div`
     text-align: center;
     letter-spacing: 0.457143px;
     text-transform: uppercase;
-
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     /* button */
 
     color: #00e7aa;

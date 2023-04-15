@@ -5,14 +5,18 @@ import Accordion from 'react-bootstrap/Accordion';
 const MySolution = ({ data }) => {
     return (
         <Accordion>
-            {data.map((solution, id) => {
-                return (
-                    <AccordionItem key={solution.id} eventKey={id}>
-                        <AccordionButton>{solution.record}</AccordionButton>
-                        <AccordionBody>{solution.code}</AccordionBody>
-                    </AccordionItem>
-                );
-            })}
+            {data.length !== 0
+                ? data.map((solution, id) => {
+                      return (
+                          <AccordionItem key={solution.id} eventKey={id}>
+                              <AccordionButton>
+                                  Score: {solution.score} {`{${solution.space}}`}
+                              </AccordionButton>
+                              <AccordionBody>{solution.submissions}</AccordionBody>
+                          </AccordionItem>
+                      );
+                  })
+                : 'Empty'}
         </Accordion>
     );
 };
