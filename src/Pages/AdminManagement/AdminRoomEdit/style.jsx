@@ -145,6 +145,17 @@ export const RoomEditStyle = styled.div`
     .cursor-pointer {
         cursor: pointer;
     }
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
     @media (min-width: 1001px) {
         .input-num {
             width: 1em;

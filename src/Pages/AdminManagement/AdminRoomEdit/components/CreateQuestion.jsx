@@ -113,6 +113,7 @@ const CreateQuestion = ({
         color,
         codeTemplate,
         numOfColors,
+        questionId,
     ]);
     useEffect(() => {
         color != '' && (colorPInvalid = true);

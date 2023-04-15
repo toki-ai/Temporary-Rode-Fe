@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 
 const ButtonUpDown = ({ variant, maxSubmitTime, setNewMaxSubmitTimes: setNewMaxSubmitTime }) => {
     const [quantity, setQuantity] = useState(maxSubmitTime);
@@ -13,6 +13,7 @@ const ButtonUpDown = ({ variant, maxSubmitTime, setNewMaxSubmitTimes: setNewMaxS
         setQuantity(quantity - 1);
     };
     useEffect(() => {
+        if (quantity == '') setQuantity(1);
         setNewMaxSubmitTime(parseInt(quantity));
     }, [quantity]);
     return (
@@ -26,10 +27,13 @@ const ButtonUpDown = ({ variant, maxSubmitTime, setNewMaxSubmitTimes: setNewMaxS
             </Button>
             <Form.Control
                 type="number"
+                min={1}
                 pattern="[0-9]*"
                 className="rounded-0 mw-fit text-center bg-light border-green color-primary input-num"
                 value={quantity}
                 onChange={(e) => setQuantity(parseInt(e.target.value))}
+                required
+                disabled
             />
             <Button
                 variant={variant}
