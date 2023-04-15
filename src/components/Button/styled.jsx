@@ -34,7 +34,9 @@ export const Wrap = styled.div`
         width: 100%;
         color: ${themes.colors.primary};
 
-        &:hover {
+        &:hover,
+        &:focus,
+        &:active {
             background-color: ${themes.colors.primary};
             color: ${themes.colors.light};
         }

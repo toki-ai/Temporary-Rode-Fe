@@ -8,6 +8,8 @@ import { Link, useParams } from 'react-router-dom';
 import ButtonStyled from '../../../components/Button';
 import roomApi from '../../../utils/api/roomApi';
 import PaginationRoom from '../AdminRoom/components/Pagination';
+import BE from './components/BE';
+import FE from './components/FE';
 import FilterQues from './components/FilterQues';
 import RoomInfo from './components/RoomInfo';
 import Table from './components/Table';
@@ -25,10 +27,9 @@ const AdminRoomView = () => {
     const { id } = useParams();
     const [room, setRoom] = useState([]);
     const [questions, setQuestions] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
+    const [quesName, setQuesName] = useState('All');
+    const [questionId, setQuestionId] = useState();
+
     useEffect(() => {
         roomApi
             .getRoomById(id)
@@ -43,6 +44,12 @@ const AdminRoomView = () => {
             });
     }, []);
     console.log(questions);
+    const handleButtonChange = (e) => {
+        console.log(e.target.value);
+        setQuesName(e.target.value);
+        console.log(questions);
+    };
+    console.log(questionId);
     return (
         <ARViewStyle>
             <div className="w-100 p-3 box-style">
@@ -60,24 +67,53 @@ const AdminRoomView = () => {
                 <div className="p-3">
                     <RoomInfo room={room} />
                     <div className="d-flex mt-2">
-                        <ButtonStyled variant="outline">All</ButtonStyled>
+                        <div className="w-105">
+                            <ButtonStyled
+                                variant="outline"
+                                value="All"
+                                onClick={(e) => {
+                                    handleButtonChange(e);
+                                    setQuestionId('All');
+                                }}
+                            >
+                                All
+                            </ButtonStyled>
+                        </div>
                         {questions.map((item, i) => {
                             return (
-                                <ButtonStyled variant="outline" className="mx-2" key={item.id}>
+                                <ButtonStyled
+                                    variant="outline"
+                                    className="mx-2"
+                                    key={item.id}
+                                    value={`Question ${i + 1}`}
+                                    onClick={(e) => {
+                                        handleButtonChange(e);
+                                        setQuestionId(item.id);
+                                    }}
+                                >
                                     Question {i + 1}
                                 </ButtonStyled>
                             );
                         })}
                     </div>
                     <div className="w-sm-75 w-md-50 w-lg-50">
-                        {/* <Table titles={titlesAll} datas={data} /> */}
+                        {room.type == 'BE' ? (
+                            <BE
+                                ques={quesName}
+                                questions={questions}
+                                questionId={questionId}
+                                roomId={id}
+                            />
+                        ) : (
+                            <FE
+                                ques={quesName}
+                                questions={questions}
+                                questionId={questionId}
+                                roomId={id}
+                            />
+                        )}
                     </div>
                 </div>
-                <PaginationRoom
-                    action={handlePageChange}
-                    totalPages="3"
-                    currentPage={currentPage}
-                />
             </div>
         </ARViewStyle>
     );

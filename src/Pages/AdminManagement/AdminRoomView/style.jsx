@@ -49,6 +49,10 @@ export const ARViewStyle = styled.div`
     .bl-none {
         border-left: none;
     }
+    .w-105 {
+        width: 105px;
+    }
+
     @media (max-width: 800px) {
         .rs {
             width: 70%;
