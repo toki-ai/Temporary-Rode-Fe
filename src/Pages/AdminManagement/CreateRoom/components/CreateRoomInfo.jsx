@@ -65,7 +65,7 @@ const CreateRoomInfo = ({ roomInfo, setRoomInfo }) => {
                                         const closeTime =
                                             item.name === 'closeTime'
                                                 ? e.target.value
-                                                : values.isPrivate;
+                                                : values.closeTime;
                                         let newRoomInfo = {
                                             ...values,
                                             [item.name]: e.target.value,
