@@ -91,11 +91,13 @@ const BE = ({ ques, data, questions, questionId }) => {
                     )}
                 </tbody>
             </Table>
-            <PaginationRoom
-                action={handlePageChange}
-                totalPages={totalPage}
-                currentPage={currentPage}
-            />
+            {parseInt(totalPage) > 1 || accounts?.length ? (
+                <PaginationRoom
+                    action={handlePageChange}
+                    totalPages={totalPage}
+                    currentPage={currentPage}
+                />
+            ) : null}
         </>
     );
 };

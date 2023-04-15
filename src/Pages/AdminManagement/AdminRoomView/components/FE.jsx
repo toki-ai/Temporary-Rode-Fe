@@ -6,6 +6,7 @@ import { Table } from 'react-bootstrap';
 
 import roomApi from '../../../../utils/api/roomApi';
 import PaginationRoom from '../../AdminRoom/components/Pagination';
+import DateFormatS from './DateFormartS';
 
 const titlesAll = [
     { id: '0', name: 'Rank' },
@@ -91,11 +92,13 @@ const FE = ({ ques, data, questions, questionId }) => {
                     )}
                 </tbody>
             </Table>
-            <PaginationRoom
-                action={handlePageChange}
-                totalPages={totalPage}
-                currentPage={currentPage}
-            />
+            {parseInt(totalPage) > 1 || accounts?.length ? (
+                <PaginationRoom
+                    action={handlePageChange}
+                    totalPages={totalPage}
+                    currentPage={currentPage}
+                />
+            ) : null}
         </>
     );
 };
