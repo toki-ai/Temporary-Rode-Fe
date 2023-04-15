@@ -44,10 +44,11 @@ const ButtonColor = ({
                 <i className="bi bi-dash"></i>
             </Button>
             <Form.Control
-                type="text"
+                type="number"
                 pattern="[0-9]*"
                 className="rounded-0 mw-fit text-center bg-light border-green color-primary input-num"
                 value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
                 disabled
             />
             <Button
