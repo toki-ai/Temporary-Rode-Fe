@@ -1,3 +1,5 @@
+import { useLoaderData } from 'react-router-dom';
+
 import ArenaAlgorithm from './components/ArenaAlrgorithm';
 import LeaderBoard from './components/LeaderBoard/LeaderBoard';
 import PaginationLeaderboard from './components/LeaderBoard/PaginationLeaderboard';

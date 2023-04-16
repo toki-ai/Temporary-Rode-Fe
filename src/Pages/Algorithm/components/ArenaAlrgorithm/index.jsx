@@ -1,13 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 
+import { useLoaderData } from 'react-router-dom';
+
 import { WrapperStyle } from '../../styled';
 import LeftSection from './LeftSection';
 import RightSection from './RightSection';
 
 const ArenaAlgorithm = () => {
+    const roomInfo = useLoaderData();
+
     const [leftWidth, setLeftWidth] = useState('50%');
     const separatorRef = useRef(null);
-
+    const [questionId, setQuestionId] = useState();
     const onMouseDown = (e) => {
         e.preventDefault();
         document.addEventListener('mousemove', onMouseMove);
@@ -29,11 +33,11 @@ const ArenaAlgorithm = () => {
         <WrapperStyle>
             <div className="app">
                 <div className="left-section" style={{ width: leftWidth }}>
-                    <LeftSection />
+                    <LeftSection roomInfo={roomInfo} action={setQuestionId} />
                 </div>
                 <div className="separator" ref={separatorRef} onMouseDown={onMouseDown} />
                 <div className="right-section">
-                    <RightSection />
+                    <RightSection roomInfo={roomInfo} questionId={questionId} />
                 </div>
             </div>
         </WrapperStyle>

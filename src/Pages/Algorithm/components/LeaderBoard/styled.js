@@ -171,7 +171,7 @@ export const Title = styled.span`
 export const ControllerArena = styled.div`
     background: #000;
     width: 100%;
-
+    display: inline-block;
     .text-green {
         color: #06c755;
     }
