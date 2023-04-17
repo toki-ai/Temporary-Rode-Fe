@@ -1,5 +1,6 @@
 import { post, get } from '../ApiCaller';
 import authHeader from './HeaderAuthorization';
+import localFileApi from './localFileApi';
 
 const roomApi = {
     userGetAllRoom: async (data) => {
@@ -61,6 +62,22 @@ const roomApi = {
         return await post(endpoint, data, {}, { Authorization: 'Bearer ' + token })
             .then((res) => res)
             .catch((err) => err);
+    },
+    updateRoomById: async (roomID, data) => {
+        const token = localStorage.getItem('token');
+        const endpoint = `/rooms/update-one-by-id/${roomID}`;
+        // eslint-disable-next-line no-return-await
+
+        return await post(endpoint, data, {}, { Authorization: 'Bearer ' + token })
+            .then((res) => {
+                // if (res.data.code !== 200) console.log(res.response);
+                console.log(res);
+                return res;
+            })
+            .catch((err) => {
+                console.log(err);
+                return err;
+            });
     },
     getAllRomType: async () => {
         const endpoint = `/rooms/get-all-room-type`;

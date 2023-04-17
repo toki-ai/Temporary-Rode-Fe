@@ -3,19 +3,40 @@ import { useState } from 'react';
 
 import { Dropdown, DropdownButton } from 'react-bootstrap/esm';
 
-import ModalComponent from '../../../../../components/Modal/Modal';
+import Loading from '../../../../../components/Loading';
+import ModalComponent from '../../../../../components/Modal';
 
-const More = ({ link, roomId }) => {
+const More = ({ link, roomId, openTime }) => {
+    const dayOpen = new Date(openTime).getTime();
+    let timeCompare = Date.now() > dayOpen;
+    const [checkTime, setCheckTime] = useState(timeCompare);
     const [show, setShow] = useState(false);
+    const [showWarning, setShowWarning] = useState(false);
+
     const actions = [
         {
             id: 1,
             href: `/admin/room/${link}`,
             value: 'View',
         },
-        { id: 2, href: `/admin/room/edit/${link}`, value: 'Edit' },
-        { id: 3, href: `/admin/attendance/${roomId}`, value: 'Attendance' },
-        { id: 4, value: 'Delete', func: () => setShow(true) },
+        {
+            id: 2,
+            href: timeCompare ? '' : `/admin/room/edit/${roomId}`,
+            value: 'Edit',
+            func: (e) => {
+                console.log(openTime);
+                console.log(Date.now());
+                console.log(new Date(openTime).getTime());
+                console.log(checkTime);
+                timeCompare ? setCheckTime(true) : setCheckTime(false);
+                console.log(checkTime);
+                if (checkTime) {
+                    e.preventDefault();
+                    setShowWarning(true);
+                }
+            },
+        },
+        { id: 3, value: 'Delete', func: () => setShow(true) },
     ];
     return (
         <>
@@ -50,6 +71,17 @@ const More = ({ link, roomId }) => {
                 className="text-danger"
                 variant1="grey"
                 variant2="red"
+            />
+            <ModalComponent
+                show={showWarning}
+                close={() => setShowWarning(false)}
+                value2="OK"
+                title="Edit Room Failed!"
+                body="This room has been already started!"
+                className="text-danger"
+                variant1="d-none"
+                variant2="green xxl"
+                showOneBtn={true}
             />
         </>
     );

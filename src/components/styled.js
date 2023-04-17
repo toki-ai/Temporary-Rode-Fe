@@ -40,6 +40,19 @@ export const BtnStyle = styled.div`
         opacity: 0.8;
         transform: scale(1.025);
     }
+    .btn-green,
+    .btn-green:hover {
+        background-color: ${(props) => props.theme.colors.primary};
+        color: ${(props) => props.theme.colors.light};
+        border: none;
+    }
+    .btn-green:hover {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
+    .btn-d-none {
+        display: none;
+    }
 `;
 
 export const AlertWidth = styled.div`

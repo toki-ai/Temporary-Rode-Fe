@@ -5,7 +5,7 @@ import authHeader from './HeaderAuthorization';
 
 const localFileApi = {
     postImg: async (data) => {
-        const endpoint = `/local-files/upload`;
+        const endpoint = `/local-files/upload-question-file`;
         const formData = new FormData();
         formData.append('files', data);
         // formData.append('files', data.cover);
