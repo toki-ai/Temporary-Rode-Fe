@@ -5,6 +5,7 @@ import { Check } from 'react-bootstrap-icons';
 import { useLocation } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 
+import { toastSuccess, toastError } from '../../../../components/Toast';
 import submitApi from '../../../../utils/api/submitApi';
 import userRoomApi from '../../../../utils/api/userRoomApi';
 import { BoxEditor, ChooseQWrapper, WrapRightSection } from '../../styled';
@@ -28,6 +29,7 @@ const RightSection = ({ questionId }) => {
     const roomInfo = useLoaderData();
     const location = useLocation();
     const [showResult, setShowResult] = useState(false);
+    const [result, setResult] = useState();
     const [select, setSelect] = useState('Choose language');
     const [code, setCode] = useState();
     const langs = [
@@ -37,11 +39,12 @@ const RightSection = ({ questionId }) => {
     const handleSelectChange = (eventKey) => {
         setSelect(eventKey);
     };
+    console.log(result);
     const submitCode = async () => {
         const formatData = {
             roomId: roomInfo?.id,
             questionId: questionId,
-            code: JSON.stringify(code),
+            code: code,
             language: select,
         };
         console.log(formatData);
@@ -49,6 +52,11 @@ const RightSection = ({ questionId }) => {
         console.log('line 53: ', res);
         if (res.data.status === 200) {
             setShowResult(true);
+            setResult(res.data);
+            toastSuccess(res.data.message);
+        } else if (res.data.status === 400) {
+            setShowResult(true);
+            toastError(res.data.err);
         }
     };
     const finish = async () => {
@@ -57,6 +65,8 @@ const RightSection = ({ questionId }) => {
         if (res.data.status === 200) {
             navigate('/', { state: { success: true } });
             toastSuccess(res.data.message);
+        } else if (res.data.status === 400) {
+            toastError(res.data.err);
         }
     };
     return (
@@ -154,7 +164,11 @@ const RightSection = ({ questionId }) => {
                                                     </Col>
                                                     <Col sm={6} className="center">
                                                         <div className="btn text-green w-230">
-                                                            Success
+                                                            {result?.status === 200 ? (
+                                                                'Success'
+                                                            ) : (
+                                                                <p className="text-danger">Error</p>
+                                                            )}
                                                         </div>
                                                     </Col>
                                                 </Row>
@@ -174,7 +188,9 @@ const RightSection = ({ questionId }) => {
                                                     </Col>
                                                     <Col sm={6} className="center">
                                                         <div className="btn text-white w-230 border-blue">
-                                                            2ms
+                                                            {result
+                                                                ? result?.data.results.execTime
+                                                                : '0'}
                                                         </div>
                                                     </Col>
                                                 </Row>
