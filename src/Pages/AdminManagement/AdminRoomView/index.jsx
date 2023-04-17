@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+import { Nav } from 'react-bootstrap';
 import { TiArrowLeft } from 'react-icons/ti';
 import { Link, useParams } from 'react-router-dom';
 
@@ -66,10 +67,11 @@ const AdminRoomView = () => {
                 <hr />
                 <div className="p-3">
                     <RoomInfo room={room} />
-                    <div className="d-flex mt-2">
-                        <div className="w-105">
-                            <ButtonStyled
-                                variant="outline"
+                    <Nav className="d-flex mt-2" variant="pills" defaultActiveKey="1">
+                        <Nav.Item className="w-105">
+                            <Nav.Link
+                                eventKey="1"
+                                bsPrefix=""
                                 value="All"
                                 onClick={(e) => {
                                     handleButtonChange(e);
@@ -77,25 +79,28 @@ const AdminRoomView = () => {
                                 }}
                             >
                                 All
-                            </ButtonStyled>
-                        </div>
+                            </Nav.Link>
+                        </Nav.Item>
                         {questions.map((item, i) => {
                             return (
-                                <ButtonStyled
-                                    variant="outline"
-                                    className="mx-2"
-                                    key={item.id}
-                                    value={`Question ${i + 1}`}
-                                    onClick={(e) => {
-                                        handleButtonChange(e);
-                                        setQuestionId(item.id);
-                                    }}
-                                >
-                                    Question {i + 1}
-                                </ButtonStyled>
+                                <Nav.Item>
+                                    <Nav.Link
+                                        eventKey={i + 2}
+                                        bsPrefix=""
+                                        className="ml-2"
+                                        key={item.id}
+                                        value={`Question ${i + 1}`}
+                                        onClick={(e) => {
+                                            handleButtonChange(e);
+                                            setQuestionId(item.id);
+                                        }}
+                                    >
+                                        Question {i + 1}
+                                    </Nav.Link>
+                                </Nav.Item>
                             );
                         })}
-                    </div>
+                    </Nav>
                     <div className="w-sm-75 w-md-50 w-lg-50">
                         {room.type == 'BE' ? (
                             <BE

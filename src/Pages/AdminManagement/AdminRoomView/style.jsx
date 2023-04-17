@@ -52,6 +52,23 @@ export const ARViewStyle = styled.div`
     .w-105 {
         width: 105px;
     }
+    .ml-2 {
+        margin-left: 0.7rem;
+    }
+
+    .nav-pills > .nav-item > a {
+        color: ${(props) => props.theme.colors.primary};
+        border: 2px solid ${(props) => props.theme.colors.primary};
+        border-radius: 0.45em;
+        padding: 0.4em 0.5em;
+        display: flex;
+        justify-content: center;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+        background-color: ${(props) => props.theme.colors.primary};
+        color: ${(props) => props.theme.colors.light};
+    }
 
     @media (max-width: 800px) {
         .rs {

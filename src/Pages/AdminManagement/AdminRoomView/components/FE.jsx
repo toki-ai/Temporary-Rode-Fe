@@ -48,6 +48,7 @@ const FE = ({ ques, data, questions, questionId }) => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
+    console.log(accounts);
     return (
         <>
             <Table striped className="mt-2 border-top">
@@ -78,6 +79,7 @@ const FE = ({ ques, data, questions, questionId }) => {
                                     <td>{i + 1}</td>
                                     <td>{account.account.lname + ' ' + account.account.fname}</td>
                                     <td>{account.score}</td>
+                                    <td>{account.space}</td>
                                     <td>{account.space}</td>
                                     <td>{DateFormatS(account.submittedAt)}</td>
                                 </tr>
