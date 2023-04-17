@@ -4,9 +4,9 @@ import DateFormat from '../../AdminRoom/components/FilterRoom/DateFormat';
 
 const RoomFormat = ({ name, value }) => {
     return (
-        <div className="inline-block w-50">
+        <div className="d-flex align-items-center w-50">
             <span className="fw-bold">{name}: </span>
-            <span>{value}</span>
+            <span className="px-2">{value}</span>
         </div>
     );
 };
