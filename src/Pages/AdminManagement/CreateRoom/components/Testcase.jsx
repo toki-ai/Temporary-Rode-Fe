@@ -9,7 +9,7 @@ import {
     deleteTestcase,
 } from './utils';
 
-const Testcase = ({ testcaseIdx, questionIdx, setQuestions }) => {
+const Testcase = ({ testcaseIdx, questionIdx, setQuestions, error }) => {
     const handleDelete = () => {
         deleteTestcase(questionIdx, testcaseIdx, setQuestions);
     };
@@ -46,6 +46,7 @@ const Testcase = ({ testcaseIdx, questionIdx, setQuestions }) => {
                     </div>
                 </St.Testcase>
             </Accordion.Body>
+            <h6 className="text-danger">{error}</h6>
         </Accordion.Item>
     );
 };

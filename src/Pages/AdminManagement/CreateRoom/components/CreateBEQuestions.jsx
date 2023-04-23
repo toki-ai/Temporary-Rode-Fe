@@ -9,8 +9,9 @@ import { addBEQuestion, addTestcase } from './utils';
 
 import Accordion from 'react-bootstrap/Accordion';
 
-const CreateBEQuestions = ({ questions, setQuestions }) => {
+const CreateBEQuestions = ({ questions, setQuestions, error }) => {
     const [imageUrls, setImageUrls] = useState([]);
+    // console.log(error[0]?.chidren?.find((e) => e.at === 'maxSubmitTimes'));
 
     return (
         <>
@@ -24,6 +25,12 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                                 question={question}
                                 questionIdx={questionIdx}
                                 setQuestions={setQuestions}
+                                error={
+                                    error &&
+                                    error[questionIdx]?.chidren?.find(
+                                        (e) => e.at === 'maxSubmitTimes'
+                                    )?.message
+                                }
                             />
                             <UploadImage
                                 question={question}
@@ -31,6 +38,12 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                                 setQuestions={setQuestions}
                                 setImageUrls={setImageUrls}
                                 imageUrls={imageUrls}
+                                error={
+                                    error &&
+                                    error[questionIdx]?.chidren?.find(
+                                        (e) => e.at === 'questionImage'
+                                    )?.message
+                                }
                             />
                         </div>
 
@@ -46,6 +59,12 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                                         testcaseIdx={testcaseIdx}
                                         questionIdx={questionIdx}
                                         setQuestions={setQuestions}
+                                        error={
+                                            error &&
+                                            error[questionIdx]?.chidren?.find(
+                                                (e) => e.at === 'testcases'
+                                            )
+                                        }
                                     />
                                 ))}
                             </Accordion>
