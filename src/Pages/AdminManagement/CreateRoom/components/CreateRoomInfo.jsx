@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -25,8 +25,16 @@ const schema = yup.object().shape({
 });
 
 const CreateRoomInfo = ({ roomInfo, setRoomInfo }) => {
-    console.log(roomInfo);
     const [formList, setFormList] = useState(FORM_LIST_PUBLIC_ROOM);
+
+    // useEffect(() => {
+    //   if (!roomInfo.closeTime && !roomInfo.code && !roomInfo.duration && !roomInfo.isPrivate && !roomInfo.openTime && !roomInfo.type ) {
+
+    //   }
+
+    // }, [roomInfo])
+
+    console.log(roomInfo);
 
     return (
         <Formik validationSchema={schema} initialValues={roomInfo}>

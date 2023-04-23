@@ -5,7 +5,7 @@ import * as St from '../styles';
 import MaxSumbitTimes from './MaxSumbitTimes';
 import Testcase from './Testcase';
 import UploadImage from './UploadImage';
-import { addBEQuestion, addTestcase, editInputTestcase, editOutputTestcase } from './utils';
+import { addBEQuestion, addTestcase } from './utils';
 
 import Accordion from 'react-bootstrap/Accordion';
 
@@ -45,8 +45,6 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                                         item={testcase}
                                         testcaseIdx={testcaseIdx}
                                         questionIdx={questionIdx}
-                                        handleInput={editInputTestcase}
-                                        handleOutput={editOutputTestcase}
                                         setQuestions={setQuestions}
                                     />
                                 ))}

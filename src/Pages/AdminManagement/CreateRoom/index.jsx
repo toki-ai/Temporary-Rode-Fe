@@ -27,8 +27,11 @@ const CreateRoom = () => {
                 console.warn('Response: ', res.data);
                 if (res.data.status === 200) {
                     toastSuccess(res.data.message);
-                    setRoomInfo(initialRoomInfo);
-                    setQuestions(roomInfo.type === 'FE' ? FEInitQuestion : BEInitQuestion);
+                    // setRoomInfo(initialRoomInfo);
+                    // setQuestions(roomInfo.type === 'FE' ? FEInitQuestion : BEInitQuestion);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
                 } else {
                     toastError(`${res.data.message}. Open tab Console for more details`);
                 }
