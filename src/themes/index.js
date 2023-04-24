@@ -27,5 +27,6 @@ export const themes = {
         sliver: '#d8dddf',
         cooper: '#EF7329',
         red2: '#DC3545',
+        green: '#01e2a6',
     },
 };
