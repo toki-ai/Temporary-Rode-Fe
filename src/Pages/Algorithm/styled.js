@@ -318,6 +318,10 @@ export const ChooseQWrapper = styled.div`
 `;
 export const WrapRightSection = styled.div`
     max-height: 100%;
+    .text-red {
+        border-color: red;
+        color: red;
+    }
 
     /* overflow-y: scroll; */
 `;

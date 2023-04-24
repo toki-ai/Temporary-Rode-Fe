@@ -43,7 +43,7 @@ const LeaderBoard = () => {
                 </HeaderLB>
                 <Row className="m-0">
                     <TableLB>
-                        <Table striped hover bordered variant="dark" className="mb-0">
+                        <Table striped hover className="mb-0">
                             <thead className="thead_table">
                                 <tr>
                                     <td>Top</td>
@@ -56,14 +56,27 @@ const LeaderBoard = () => {
                             </thead>
                             {userSubmitHistory?.map((item, index) => (
                                 <tbody key={index} className="">
-                                    <tr>
-                                        <td>{index}</td>
-                                        <td>{item.account.fname + ' ' + item.account.lname}</td>
-                                        <td>{item.account.studentId}</td>
-                                        <td>{item.score}</td>
-                                        <td>{item.language}</td>
-                                        <td>{item.time}</td>
-                                    </tr>
+                                    {index < 3 ? (
+                                        <tr className={index % 2 != 0 ? 'bg-even' : 'bg-old'}>
+                                            <td class="color-green">{index + 1}</td>
+                                            <td class="color-green">
+                                                {item.account.fname + ' ' + item.account.lname}
+                                            </td>
+                                            <td class="color-green">{item.account.studentId}</td>
+                                            <td class="color-green">{item.score}</td>
+                                            <td class="color-green">{item.language}</td>
+                                            <td class="color-green">{item.time}</td>
+                                        </tr>
+                                    ) : (
+                                        <tr className={index % 2 != 0 ? 'bg-even' : 'bg-old'}>
+                                            <td>{index + 1}</td>
+                                            <td>{item.account.fname + ' ' + item.account.lname}</td>
+                                            <td>{item.account.studentId}</td>
+                                            <td>{item.score}</td>
+                                            <td>{item.language}</td>
+                                            <td>{item.time}</td>
+                                        </tr>
+                                    )}
                                 </tbody>
                             ))}
                         </Table>

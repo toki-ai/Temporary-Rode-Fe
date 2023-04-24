@@ -23,7 +23,7 @@ const Submission = () => {
     useEffect(() => {
         const fetchData = async () => {
             submitHistoryApi.getInfoSubmission(roomInfo.id).then((res) => {
-                console.log(res);
+                // console.log(res);
                 setDataSubmission(res.data.data);
             });
         };
@@ -44,7 +44,7 @@ const Submission = () => {
                 </HeaderSubmission>
                 <Row className="m-0">
                     <TableSubmission>
-                        <Table striped hover bordered variant="dark" className="mb-0">
+                        <Table striped hover className="mb-0">
                             <thead className="thead_table">
                                 <tr>
                                     <td>Question</td>
@@ -57,20 +57,20 @@ const Submission = () => {
                             </thead>
                             {dataSubmission?.map((item, index) => (
                                 <tbody key={index} className="thanh">
-                                    <tr>
-                                        <td>??????</td>
+                                    <tr className={index % 2 != 0 ? 'bg-even' : 'bg-old'}>
+                                        <td>?</td>
                                         {item.time ? (
-                                            <td className="accepted">Accepted</td>
+                                            <td className="accepted">
+                                                <i class="bi bi-check2-circle"></i> Accepted
+                                            </td>
                                         ) : (
-                                            <td className="error">Compilation error</td>
+                                            <td className="error">
+                                                <i class="bi bi-x-circle"></i> Compilation error
+                                            </td>
                                         )}
                                         <td>{item.score}</td>
                                         <td>{item.language}</td>
-                                        {item.time ? (
-                                            <td>{item.time}</td>
-                                        ) : (
-                                            <td className="error">NULL</td>
-                                        )}
+                                        {item.time ? <td>{item.time} ms</td> : <td>__</td>}
                                         <td
                                             className="viewResult"
                                             onClick={() => handleView(item.submissions)}

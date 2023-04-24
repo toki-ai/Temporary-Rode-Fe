@@ -24,6 +24,19 @@ export const SubmissionStyled = styled.div`
     .w-100 {
         width: 100% !important;
     }
+    .bg-even {
+        background: #212529;
+    }
+    .bg-old {
+        background: transparent;
+    }
+    td {
+        color: #fff !important;
+        border-bottom: 1px solid rgb(0, 231, 170);
+    }
+    .color-green {
+        color: #00e7aa !important;
+    }
 `;
 
 export const HeaderSubmission = styled.div`
@@ -106,7 +119,6 @@ export const TableSubmitted = styled.div`
 export const AnswerSubmitted = styled.div`
     height: auto;
     width: 100%;
-    margin: 0 140px;
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;

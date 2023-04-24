@@ -34,6 +34,19 @@ export const LeaderBoardStyled = styled.div`
     .w-100 {
         width: 100% !important;
     }
+    .bg-even {
+        background: #212529;
+    }
+    .bg-old {
+        background: transparent;
+    }
+    td {
+        color: #fff !important;
+        border-bottom: 1px solid rgb(0, 231, 170);
+    }
+    .color-green {
+        color: #00e7aa !important;
+    }
 `;
 
 export const HeaderLB = styled.div`
@@ -300,9 +313,10 @@ export const WrapperResult = styled.div`
         overflow: auto;
     }
     .err-message {
-        margin: 20px 0;
         width: 100%;
         height: 80%;
+        padding: 10px;
+        margin: 20px 0;
         border: 2px solid #ea4335;
         border-radius: 10px;
     }

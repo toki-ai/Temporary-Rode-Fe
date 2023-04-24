@@ -12,8 +12,16 @@ import { Timer } from '../LeaderBoard/styled';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 
-const LeftSection = ({ action, roomInfo }) => {
-    console.log('line 15: ', roomInfo);
+const LeftSection = ({
+    action,
+    roomInfo,
+    setCurrentQuestion,
+    setShowRightSection,
+    setCode,
+    setShowResult,
+    setResInfo,
+}) => {
+    // console.log('line 15: ', roomInfo);
     const [question, setQuestion] = useState({
         current: 'Choose question',
         questionImg: roomInfo?.questions[0]?.questionImage,
@@ -24,12 +32,15 @@ const LeftSection = ({ action, roomInfo }) => {
     const handleImageError = () => {
         setImageError(true);
     };
+
     const handleQuestionChange = (eventKey, e) => {
         setQuestion({
             current: e.target.name,
             questionImg: eventKey,
         });
     };
+
+    const [showImg, setShowImg] = useState(false);
     return (
         <Container className="p-4 h-100 overflow-y-auto">
             <Stack direction="horizontal" className="justify-content-between">
@@ -52,6 +63,12 @@ const LeftSection = ({ action, roomInfo }) => {
                                             name={`Question ${id + 1}`}
                                             onClick={() => {
                                                 action(question.id);
+                                                setCurrentQuestion(id);
+                                                setShowImg(true);
+                                                setShowRightSection(true);
+                                                setCode();
+                                                setShowResult(false);
+                                                setResInfo(0);
                                             }}
                                         >
                                             Question {id + 1}
@@ -75,7 +92,11 @@ const LeftSection = ({ action, roomInfo }) => {
                 {imageError ? (
                     <div className="text-light"> Image ERROR!!!!!</div>
                 ) : (
-                    <img src={TestImg} alt="target_img" onError={handleImageError} />
+                    <>
+                        {showImg && (
+                            <img src={TestImg} alt="target_img" onError={handleImageError} />
+                        )}
+                    </>
                 )}
             </Stack>
         </Container>

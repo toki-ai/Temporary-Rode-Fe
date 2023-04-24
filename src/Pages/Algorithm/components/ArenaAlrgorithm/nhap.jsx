@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useEffect } from 'react';
 
 import { Col, Container, Nav, Row, Stack, Tab, TabPane } from 'react-bootstrap';
 import { Check } from 'react-bootstrap-icons';
@@ -7,9 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 
 import { toastSuccess, toastError } from '../../../../components/Toast';
-import authApi from '../../../../utils/api/authApi';
 import submitApi from '../../../../utils/api/submitApi';
-import submitHistoryApi from '../../../../utils/api/submitHistoryApi';
 import userRoomApi from '../../../../utils/api/userRoomApi';
 import { BoxEditor, ChooseQWrapper, WrapRightSection } from '../../styled';
 import {
@@ -28,65 +25,45 @@ import { tokyoNight } from '@uiw/codemirror-theme-tokyo-night';
 import CodeMirror from '@uiw/react-codemirror';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const RightSection = ({
-    questionId,
-    currentQuestion,
-    code,
-    setCode,
-    showResult,
-    setShowResult,
-    resInfo,
-    setResInfo,
-}) => {
+const RightSection = ({ questionId, currentQuestion }) => {
     const location = useLocation();
     const roomInfo = useLoaderData();
-    const [idUser, setIdUser] = useState('');
-    const [totalTime, setTotalTime] = useState(0);
-    const [isLanguage, setIsLanguage] = useState(false);
+    const [code, setCode] = useState();
+    const [showResult, setShowResult] = useState(false);
+
+    const [result, setResult] = useState();
     const [select, setSelect] = useState('Choose language');
-    const [score, setScore] = useState(0);
     const langs = [
         { name: 'C_CPP', id: 1 },
         { name: 'Java', id: 2 },
     ];
     const handleSelectChange = (eventKey) => {
         setSelect(eventKey);
-        setIsLanguage(true);
     };
+    // console.log(result);
+    console.log(roomInfo);
+    const [resInfo, setResInfo] = useState();
     const submitCode = async () => {
-        if (!isLanguage) {
-            toastError('Language is not defined');
-            return;
-        } else if (code == null) {
-            toastError("Can't submit Empty Code");
-            return;
-        }
-        const res = await submitApi.submit({
+        const formatData = {
             roomId: roomInfo?.id,
             questionId: questionId,
             code: code,
             language: select,
-        });
+        };
+        console.log(formatData);
+        const res = await submitApi.submit(formatData);
+        setResInfo(res);
+        console.log('res', res);
+        console.log('line 53: ', res);
         if (res.data.status === 200) {
-            setResInfo(res.data);
+            setShowResult(true);
+            setResult(res.data);
             toastSuccess(res.data.message);
         } else if (res.data.status === 400) {
+            setShowResult(true);
             toastError(res.data.err);
-            return;
         }
-        setShowResult(true);
-
-        submitHistoryApi.getSubmitHistoryByQuestion(questionId).then((res) => {
-            res.data.data.items.map((item) => {
-                if (item.account.id == idUser) {
-                    setScore(item.score);
-                    setTotalTime(item.time);
-                }
-            });
-        });
     };
-    console.log('resInfo', resInfo);
-
     const finish = async () => {
         let res = await userRoomApi.postFinish(location.state.userRoomId);
         console.log(res);
@@ -97,14 +74,8 @@ const RightSection = ({
             toastError(res.data.err);
         }
     };
-
-    useEffect(() => {
-        authApi.getUser().then((res) => {
-            setIdUser(res.data.id);
-            console.log('accountID: ', res.data.id);
-        });
-    }, []);
-
+    console.log('resInfo', resInfo);
+    console.log('result', result);
     return (
         <Container className="p-2 h-100">
             <WrapRightSection>
@@ -125,6 +96,7 @@ const RightSection = ({
                         }}
                         onChange={(e) => {
                             setCode(e);
+                            // setCount(e.length);
                         }}
                     />
                 </BoxEditor>
@@ -132,8 +104,7 @@ const RightSection = ({
                 <ControllerArena>
                     <Stack direction="horizontal" className="justify-content-between">
                         <div className="text-white btn border-blue">
-                            Submit: {resInfo ? resInfo.data.times.current : '_ '}/
-                            {roomInfo.questions[currentQuestion].maxSubmitTimes} Times
+                            Submit: 0/{roomInfo.questions[currentQuestion].maxSubmitTimes} Times
                         </div>
                         <ChooseQWrapper>
                             <Dropdown className="d-inline mx-2" onSelect={handleSelectChange}>
@@ -201,15 +172,18 @@ const RightSection = ({
                                                         </p>
                                                     </Col>
                                                     <Col sm={6} className="center">
-                                                        {resInfo?.status == 200 ? (
-                                                            <div className="btn text-green w-230">
-                                                                SUCCESS
-                                                            </div>
-                                                        ) : (
-                                                            <div className="btn text-red w-230">
-                                                                FAILED
-                                                            </div>
-                                                        )}
+                                                        <div className="btn text-green w-230">
+                                                            {result?.status === 200 ? (
+                                                                'Success'
+                                                            ) : (
+                                                                <p
+                                                                    className="text-danger"
+                                                                    style={{ margin: '0' }}
+                                                                >
+                                                                    Error
+                                                                </p>
+                                                            )}
+                                                        </div>
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ height: '33%', margin: 0 }}>
@@ -218,7 +192,7 @@ const RightSection = ({
                                                     </Col>
                                                     <Col sm={6} className="center">
                                                         <div className="btn text-white w-230 border-blue">
-                                                            {score} - Test Cases
+                                                            20/50 Test Cases
                                                         </div>
                                                     </Col>
                                                 </Row>
@@ -228,7 +202,9 @@ const RightSection = ({
                                                     </Col>
                                                     <Col sm={6} className="center">
                                                         <div className="btn text-white w-230 border-blue">
-                                                            {resInfo?.data.result.execTime} ms
+                                                            {result
+                                                                ? result?.data.results.execTime
+                                                                : '0'}
                                                         </div>
                                                     </Col>
                                                 </Row>
@@ -239,14 +215,16 @@ const RightSection = ({
                                             >
                                                 <p className="yellow-styled">Compiler Message</p>
                                                 <div className="err-message">
-                                                    {resInfo?.message}
+                                                    {resInfo.data.message}
                                                 </div>
                                             </TabPane>
                                             <TabPane
                                                 eventKey="third"
                                                 className="h-100 tabPane bg-dark"
                                             >
-                                                <p className="yellow-styled p-20"></p>
+                                                <p className="yellow-styled p-20">
+                                                    Ngươi quá non nhóc ạ !
+                                                </p>
                                             </TabPane>
                                         </Tab.Content>
                                     </WrapperResult>
