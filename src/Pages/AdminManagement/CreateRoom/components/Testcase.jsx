@@ -3,14 +3,23 @@ import React from 'react';
 import { Accordion } from 'react-bootstrap';
 
 import * as St from '../styles';
+import {
+    editInputTestcase as handleInput,
+    editOutputTestcase as handleOutput,
+    deleteTestcase,
+} from './utils';
 
-const Testcase = ({ testcaseIdx, questionIdx, handleInput, handleOutput, setQuestions }) => {
+const Testcase = ({ testcaseIdx, questionIdx, setQuestions, error }) => {
+    const handleDelete = () => {
+        deleteTestcase(questionIdx, testcaseIdx, setQuestions);
+    };
+
     return (
         <Accordion.Item eventKey={testcaseIdx}>
             <Accordion.Header>Testcase {testcaseIdx + 1}</Accordion.Header>
             <Accordion.Body>
                 <St.Testcase className="row">
-                    <h3 className="fw-semibold fs-6"></h3>
+                    {/* <button onClick={handleDelete}>Delete</button> */}
                     <div className="col-6">
                         <label htmlFor="input">Input</label>
                         <textarea
@@ -37,6 +46,7 @@ const Testcase = ({ testcaseIdx, questionIdx, handleInput, handleOutput, setQues
                     </div>
                 </St.Testcase>
             </Accordion.Body>
+            <h6 className="text-danger">{error}</h6>
         </Accordion.Item>
     );
 };

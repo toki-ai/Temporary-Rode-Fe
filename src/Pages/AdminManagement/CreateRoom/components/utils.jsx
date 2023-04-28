@@ -149,6 +149,14 @@ export const editOutputTestcase = (value, questionIdx, testcaseIdx, setQuestions
     });
 };
 
+export const deleteTestcase = (questionIdx, testcaseIdx, setQuestions) => {
+    setQuestions((prev) => {
+        let copy = [...prev];
+        copy[questionIdx].testcases.splice(testcaseIdx, 1);
+        return copy;
+    });
+};
+
 export const handleIncrease = (questionIdx, setQuestions) => {
     setQuestions((prev) => {
         let copy = [...prev];

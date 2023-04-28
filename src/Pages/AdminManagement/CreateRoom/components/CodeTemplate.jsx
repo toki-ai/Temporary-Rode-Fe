@@ -1,7 +1,7 @@
 import * as St from '../styles';
 import { addCodeTemplate } from './utils';
 
-const CodeTemplate = ({ questionIdx, setQuestions }) => {
+const CodeTemplate = ({ questionIdx, setQuestions, error }) => {
     return (
         <St.CodeTemplate>
             <label htmlFor="codeTemplate">Code</label>

@@ -1,7 +1,7 @@
 import * as St from '../styles';
 import { handleIncrease, handleDecrease } from './utils';
 
-const MaxSumbitTimes = ({ question, questionIdx, setQuestions }) => {
+const MaxSumbitTimes = ({ question, questionIdx, setQuestions, error }) => {
     return (
         <div>
             <label htmlFor="maxSubmitTimes">Maximum Submit Time:</label>
@@ -10,6 +10,7 @@ const MaxSumbitTimes = ({ question, questionIdx, setQuestions }) => {
                 <p>{question.maxSubmitTimes}</p>
                 <div onClick={() => handleIncrease(questionIdx, setQuestions)}>+</div>
             </St.NumberInput>
+            <h6 className="text-danger">{error}</h6>
         </div>
     );
 };
