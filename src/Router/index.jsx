@@ -29,7 +29,6 @@ import { loaderInfoGG, GetInfoRoomByCode } from './RouterLoader/Loader';
 
 const RouterComponent = () => {
     const { width } = useWindowDimensions();
-    console.log(width);
     if (width <= 900) {
         return <Resize />;
     }
