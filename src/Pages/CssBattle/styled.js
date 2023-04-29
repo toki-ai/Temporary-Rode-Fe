@@ -209,7 +209,8 @@ export const BoxOutput = styled.div`
     background-color: ${(props) => props.theme.colors.arenaBG};
     border: 1px solid #00e7aa;
     box-shadow: 0px 2px 15px #00c994;
-    width: 402px;
+    width: 100%;
+    max-width: 400px;
     height: 300px;
 
     /* border-radius: 10px; */
@@ -227,7 +228,7 @@ export const BoxOutput = styled.div`
     }
     .output-container {
         position: relative;
-        width: 400px;
+        width: 100%;
         height: 300px;
         background: transparent;
         z-index: 20;

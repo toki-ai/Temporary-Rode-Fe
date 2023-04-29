@@ -189,7 +189,7 @@ const RightSection = ({ questionId }) => {
                                                     <Col sm={6} className="center">
                                                         <div className="btn text-white w-230 border-blue">
                                                             {result
-                                                                ? result?.data.results.execTime
+                                                                ? result?.data.result.execTime
                                                                 : '0'}
                                                         </div>
                                                     </Col>
