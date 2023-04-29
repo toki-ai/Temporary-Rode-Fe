@@ -1,4 +1,3 @@
-import { useMediaQuery } from 'react-responsive';
 import { createBrowserRouter, Route, Router, RouterProvider } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
@@ -20,7 +19,7 @@ import TestTabs from '../Pages/Test/TestTabs';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import PublicLayout from '../components/PublicLayout/UserLayout.component';
-import Resize from '../components/Resize';
+import { Resize, useWindowDimensions } from '../components/Resize';
 import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
@@ -29,9 +28,8 @@ import PublicRoute from './PublicRoute';
 import { loaderInfoGG, GetInfoRoomByCode, GetInfoUser } from './RouterLoader/Loader';
 
 const RouterComponent = () => {
-    if (useMediaQuery({ query: `(max-width: 900px)` })) {
-        console.log('Breaking point');
-
+    const { width } = useWindowDimensions();
+    if (width <= 900) {
         return <Resize />;
     }
     const router = createBrowserRouter([

@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ResizeStyle } from './style';
 
-const Resize = () => {
+function getWindowDimensions() {
+    const { innerWidth: width } = window;
+    return {
+        width,
+    };
+}
+export function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowDimensions;
+}
+export const Resize = () => {
     return (
         <div className="w-100 vh-100">
             <ResizeStyle style={{ height: '100vh' }}>
@@ -27,5 +47,3 @@ const Resize = () => {
         </div>
     );
 };
-
-export default Resize;
