@@ -11,7 +11,7 @@ const AdminRoute = () => {
         return <Outlet />;
     }
     console.log(userRole);
-    return userRole == 'admin' ? <Outlet /> : <Navigate to="/login" replace />;
+    return userRole == 'admin' ? <Outlet /> : <Navigate to="/home" replace />;
 };
 
 export default AdminRoute;

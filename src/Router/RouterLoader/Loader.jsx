@@ -13,3 +13,15 @@ export async function GetInfoRoomByCode({ params }) {
 
     return info.data.data;
 }
+export async function GetInfoUser() {
+    const info = await authApi.getUser();
+    const formatUser = {
+        firstName: info?.data.fname,
+        lastName: info?.data.lname,
+        studentId: info?.data.studentId,
+        role: info?.data.role,
+        id: info?.data.id,
+    };
+
+    return formatUser;
+}

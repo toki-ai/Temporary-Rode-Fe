@@ -26,7 +26,7 @@ import { TitleStyled } from './styled';
 
 function Register() {
     const RouteData = useLoaderData();
-    const regex = /@fpt\.edu\.vn$/;
+    // const regex = /@fpt\.edu\.vn$/;
     const navigate = useNavigate();
     const onSubmit = async (value) => {
         console.log(value);
@@ -38,13 +38,13 @@ function Register() {
         });
     };
 
-    useEffect(() => {
-        if (!regex.test(RouteData?.email)) {
-            toastWarning('Please use mail FPT');
-            // return <Navigate to="/login" replace />;
-            navigate('/login');
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (!regex.test(RouteData?.email)) {
+    //         toastWarning('Please use mail FPT');
+    //         // return <Navigate to="/login" replace />;
+    //         navigate('/login');
+    //     }
+    // }, []);
     return (
         <div>
             <LoginStyle>
