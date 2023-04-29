@@ -29,8 +29,7 @@ function Content({ handlePostRoom, setInputCode, inputCode }) {
     const [meta, setMeta] = useState();
     const [show, setShow] = useState(false);
     const [currentPage, setCurrentPage] = useState(meta?.currentPage || 1);
-    console.log(meta?.currentPage);
-    console.log(currentPage);
+
     const handleTypeChange = (eventKey) => {
         setSelected(eventKey);
         switch (eventKey) {

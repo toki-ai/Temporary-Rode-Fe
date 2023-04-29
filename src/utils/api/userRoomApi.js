@@ -41,6 +41,18 @@ const userRoomApi = {
                 return err;
             });
     },
+    postFinish: async (userRoomId) => {
+        const endpoint = `/user-rooms/finish/${userRoomId}`;
+        console.log(userRoomId);
+        return await post(endpoint, {}, {}, authHeader())
+            .then((res) => {
+                console.log(res);
+                return res;
+            })
+            .catch((err) => {
+                return err;
+            });
+    },
 };
 
 export default userRoomApi;

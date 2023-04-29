@@ -10,7 +10,7 @@ function UserHeader() {
 
     return (
         <Container>
-            <Left>
+            <Left to="/">
                 <img src={logo} alt="Logo SVG" />
                 <Hero>R.ode battle</Hero>
             </Left>

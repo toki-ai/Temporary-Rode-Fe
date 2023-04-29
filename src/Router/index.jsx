@@ -1,4 +1,5 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import { createBrowserRouter, Route, Router, RouterProvider } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
 import ErrorPage from '../Pages/404Page';
@@ -7,10 +8,9 @@ import AdminAttendance from '../Pages/AdminManagement/AdminAttendance';
 import AdminRoom from '../Pages/AdminManagement/AdminRoom';
 import AdminRoomEdit from '../Pages/AdminManagement/AdminRoomEdit';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
-// import CreateRoom from '../Pages/AdminManagement/CreateRoom';
+import CreateRoom from '../Pages/AdminManagement/CreateRoom';
 import Algorithm from '../Pages/Algorithm';
 import TestLayout from '../Pages/Algorithm/LayoutAlgorithm';
-import CreateRoom from '../Pages/CreateRoom';
 import ArenaCSS from '../Pages/CssBattle';
 import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
@@ -20,6 +20,7 @@ import TestTabs from '../Pages/Test/TestTabs';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import PublicLayout from '../components/PublicLayout/UserLayout.component';
+import Resize from '../components/Resize';
 import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
@@ -28,6 +29,11 @@ import PublicRoute from './PublicRoute';
 import { loaderInfoGG, GetInfoRoomByCode, GetInfoUser } from './RouterLoader/Loader';
 
 const RouterComponent = () => {
+    if (useMediaQuery({ query: `(max-width: 900px)` })) {
+        console.log('Breaking point');
+
+        return <Resize />;
+    }
     const router = createBrowserRouter([
         { path: '/', element: <Navigate to="home" /> },
         // {

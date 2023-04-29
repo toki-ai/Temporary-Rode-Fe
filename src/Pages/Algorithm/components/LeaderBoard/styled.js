@@ -1,3 +1,4 @@
+import { Check } from 'react-bootstrap-icons';
 import styled from 'styled-components';
 
 import Form from 'react-bootstrap/Form';
@@ -12,6 +13,15 @@ export const LeaderBoardStyled = styled.div`
     min-height: 100vh;
     overflow: hidden;
     z-index: 0;
+    .flex {
+        display: flex;
+    }
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
     .bg-blue {
         background-color: #020d26;
     }
@@ -126,7 +136,6 @@ export const FormSelectStyled = styled(Form.Select)`
     &:focus {
         outline: none;
         border: none;
-        margin-bottom: 50px;
     }
 `;
 
@@ -158,4 +167,147 @@ export const Title = styled.span`
     color: #f9c41c;
     text-shadow: 0px 1px 3px #f9c41c;
     /* margin-bottom: 10px; */
+`;
+export const ControllerArena = styled.div`
+    background: #000;
+    width: 100%;
+    display: inline-block;
+    .text-green {
+        color: #06c755;
+    }
+    .flex-end {
+        display: flex;
+        justify-content: flex-end !important;
+        gap: 40px;
+    }
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn {
+        gap: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 9px 12px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-color: #00e7aa;
+    }
+
+    .border-blue {
+        border: 2px solid #2e7dff;
+    }
+
+    .submit-btn {
+        width: 130px;
+        height: 45px;
+        border: 2px solid #00e7aa;
+        letter-spacing: 0.457143px;
+        text-transform: uppercase;
+    }
+
+    .finish-btn {
+        width: 150px;
+        height: 45px;
+        background: linear-gradient(90deg, #00e7aa 2.05%, #00513c 100%);
+        border: 2px solid #00e7aa;
+        letter-spacing: 0.457143px;
+        text-transform: uppercase;
+    }
+`;
+export const SelectLanguage = styled(Form.Select)`
+    background: #000000;
+    border-radius: 15px;
+    color: #ffffff;
+    width: 200px;
+    border: 2px solid #2e7dff;
+    padding-left: 30px;
+    &:focus {
+        outline: none;
+        border: none;
+    }
+`;
+
+export const ControllerNav = styled(Nav)`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-item: center;
+`;
+export const ControllerNavLink = styled(Nav.Link)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #2e7dff;
+    border-radius: 8px 0 0 8px;
+    border-right-color: transparent;
+    width: 100%;
+    &:focus {
+        background: #181d20;
+    }
+`;
+
+export const WrapperResult = styled.div`
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: 2px solid #2e7dff;
+    border-radius: 0px 0px 15px 15px;
+    .bg-dark {
+        background: #181d20;
+    }
+    .p-20 {
+        padding: 20px;
+    }
+    .no-cursor {
+        cursor: default;
+    }
+    .text-green {
+        color: #06c755;
+    }
+    .w-230 {
+        width: 230px;
+        margin-right: 15px;
+    }
+    .tabContain {
+        overflow: hidden;
+        background-color: transparent;
+    }
+    .tabPane {
+        margin: 25px 0 0 25px;
+        width: 100%;
+    }
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+    .yellow-styled {
+        margin: 0;
+        font-weight: 500;
+        font-size: 15.6444px;
+        line-height: 20px;
+        letter-spacing: 0.325079px;
+        text-transform: uppercase;
+        color: #f9c41c;
+        text-shadow: 0px 0.711111px 2.13333px #f9c41c;
+    }
+    .err-wrapper {
+        overflow: auto;
+    }
+    .err-message {
+        margin: 20px 0;
+        width: 100%;
+        height: 80%;
+        border: 2px solid #ea4335;
+        border-radius: 10px;
+    }
+`;
+export const IconCheck = styled(Check)`
+    width: 20px;
+    height: 20px;
 `;

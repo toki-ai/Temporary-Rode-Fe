@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { Row } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import circle_green from '../../assets/HomeChild/circle-green.svg';
 import circle from '../../assets/HomeChild/circle.svg';
@@ -12,6 +12,7 @@ import triangle from '../../assets/HomeChild/triangle.svg';
 import wave from '../../assets/HomeChild/wave.svg';
 import x_blue from '../../assets/HomeChild/x-blue.svg';
 import x_green from '../../assets/HomeChild/x-green.svg';
+// import ModalComponent from '../../components/Modal/Modal';
 // import ModalComponent
 import { toastWarning } from '../../components/Toast';
 import roomApi from '../../utils/api/roomApi';
@@ -21,11 +22,11 @@ import ModalJoinRoom from './components/Modal';
 // import { RoomData } from './components/RoomData';
 import { Container, Hero, Icon, Input, Name, Title } from './styled';
 
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
-
 const Home = () => {
     const [inputCode, setInputCode] = useState('');
-
+    // const location = useLocation();
+    // const [show, setShow] = useState(false);
+    // console.log('Show:  ', show);
     const navigate = useNavigate();
     // Viết lại function join room - Hân
     const handlePostRoom = async (e) => {
@@ -47,9 +48,13 @@ const Home = () => {
                                 if (response.data.status == 200) {
                                     //routing area test
                                     if (res.data.data.type == 'FE') {
-                                        navigate(`/arena_css/${inputCode}`);
+                                        navigate(`/arena_css/${inputCode}`, {
+                                            state: { userRoomId: response?.data.data },
+                                        });
                                     } else {
-                                        navigate(`/algorithm/${inputCode}`);
+                                        navigate(`/algorithm/${inputCode}`, {
+                                            state: { userRoomId: response?.data.data },
+                                        });
                                     }
                                 } else if (response.data.status == 400) {
                                     // alert Modal popup error
@@ -67,10 +72,20 @@ const Home = () => {
             })
             .catch((err) => console.log(err));
     };
-    const getAllRoom = async () => {
-        await roomApi.getAllUserRoom();
-    };
-
+    // useEffect(() => {
+    //     if (location?.state?.success) {
+    //         setShow(true);
+    //     } else {
+    //         return;
+    //     }
+    // }, []);
+    //     success={true}
+    //     show={show}
+    //     setShow={setShow}
+    //     body={'mày làm tốt lắm '}
+    //     title={'Tuyệt vời'}
+    // />
+    // <ModalComponent
     return (
         <>
             <Container>

@@ -12,24 +12,6 @@ const titles = [
     { id: 4, name: 'Total Execution Time' },
     { id: 5, name: 'Finish at' },
 ];
-const data = [
-    {
-        id: 1,
-        rank: 1,
-        name: 'Lee Thành Long',
-        score: '100',
-        execution: '120ms',
-        time: '2023-03-19T13:46:36.673Z',
-    },
-    {
-        id: 2,
-        rank: 2,
-        name: 'Lee Thành Long',
-        score: '100',
-        execution: '120ms',
-        time: '2023-03-19T13:46:36.673Z',
-    },
-];
 function TableAll({ roomID }) {
     const [questions, setQuestions] = useState([]);
     useEffect(() => {

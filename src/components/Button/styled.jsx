@@ -10,16 +10,17 @@ export const Wrap = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 9px 12px;
+        padding: 9px 20px;
         gap: 10px;
         background: linear-gradient(90deg, #00e7aa 0.05%, #00513c -5%);
         color: ${(props) => props.theme.colors.light};
         border: 2px solid #00e7aa;
         border-radius: 42px;
-        width: 233px;
-
+        width: 11rem;
+        transition: all 0.4s ease-in-out;
         &:hover {
-            transition: all 0.4s ease-out;
+            background-position: 100% 0;
+            transition: all 0.4s ease-in-out;
             background: linear-gradient(90deg, ${themes.colors.primary} 2.05%, #00513c 100%);
         }
     }
@@ -34,7 +35,9 @@ export const Wrap = styled.div`
         width: 100%;
         color: ${themes.colors.primary};
 
-        &:hover {
+        &:hover,
+        &:focus,
+        &:active {
             background-color: ${themes.colors.primary};
             color: ${themes.colors.light};
         }

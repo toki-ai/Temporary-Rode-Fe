@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { Infinity } from 'react-bootstrap-icons';
+
 import { useCountdown } from '../../../hooks/useCountDown';
 import DateTimeDisplay from './DateTimeDisplay';
 
@@ -26,7 +28,7 @@ const CountdownTimer = ({ targetDate }) => {
 
     const [minute, second, countdownValue] = useCountdown(targetDate);
 
-    if (minute <= 0 && second <= 0) {
+    if (minute <= 0 && second <= 0 && targetDate != null) {
         if (expired == false) {
             setExpired(true);
         }
@@ -34,6 +36,8 @@ const CountdownTimer = ({ targetDate }) => {
         window.location = '/';
 
         return <ExpiredNotice />;
+    } else if (targetDate === null) {
+        return <Infinity />;
     } else {
         return <ShowCounter counterValue={countdownValue} minutes={minute} />;
     }

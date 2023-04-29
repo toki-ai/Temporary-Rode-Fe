@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
 
+import Loading from '../../../components/Loading';
 import roomApi from '../../../utils/api/roomApi';
 import ButtonCustom from './components/Button';
 import PaginationRoom from './components/Pagination';
@@ -20,6 +21,7 @@ const AdminRoom = () => {
     const [status, setStatus] = useState();
     const searchValue = searchParams.get('search') || '';
     const [currentPage, setCurrentPage] = useState(meta?.currentPage || 1);
+    const [loading, setLoading] = useState(true);
     const handleSearchInputChange = (event) => {
         console.log(event.target.name);
         // let params = serializeFormQuery(event.target);
@@ -43,7 +45,7 @@ const AdminRoom = () => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-    const filterRoomResult = () => {};
+
     useEffect(() => {
         const fetchRoom = async () => {
             const filter = {
@@ -63,12 +65,15 @@ const AdminRoom = () => {
                 console.log(response);
                 setListRoom([...response?.data.data.data]);
                 setMeta(response.data.data.meta);
+                setLoading(false);
             });
         };
         fetchRoom();
     }, [searchValue, filterRoom, currentPage, status]);
-    return (
-        <div className="p-3">
+    return loading ? (
+        <Loading />
+    ) : (
+        <div className="w-100 p-2">
             <RoomStyle>
                 <div className="box-style">
                     <Col className="p-3">

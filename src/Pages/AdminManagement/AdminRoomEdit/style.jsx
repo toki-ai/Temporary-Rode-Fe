@@ -49,13 +49,18 @@ export const RoomEditStyle = styled.div`
     .border-dashed {
         border: 0.5px dashed;
     }
+    .border-dashed-green {
+        border: 0.5px ${(props) => props.theme.colors.primary} dashed;
+    }
+    .border-solid-green {
+        border: 0.5px ${(props) => props.theme.colors.primary} solid;
+    }
     .btn-grey,
     .btn-grey:hover {
         background-color: ${(props) => props.theme.colors.grey2};
         color: ${(props) => props.theme.colors.light};
         border: none;
     }
-
     .btn-grey:hover {
         opacity: 0.8;
         transform: scale(1.025);
@@ -63,6 +68,19 @@ export const RoomEditStyle = styled.div`
     .width {
         width: 100px;
     }
+    .height-x {
+        width: 4px;
+        height: 2px;
+        /* height: 4px; */
+        position: absolute;
+    }
+    .height-wrap-x {
+        height: 4px;
+    }
+    .btn-height-x {
+        height: 10px;
+    }
+
     label[for='input'],
     label[for='output'] {
         position: relative;
@@ -78,7 +96,7 @@ export const RoomEditStyle = styled.div`
 
     textarea {
         position: relative;
-        top: -12px;
+        top: -18px;
         display: block;
         border: 1px solid ${(props) => props.theme.colors.primary};
         border-radius: 5px;
@@ -88,9 +106,69 @@ export const RoomEditStyle = styled.div`
         }
     }
     .preview-image {
-        width: 300px;
         height: 250px;
-        object-fit: cover;
-        margin-bottom: 20px;
+        min-width: 280px;
+        object-fit: fill;
+    }
+
+    .show {
+        min-height: 0;
+        max-height: 275px;
+    }
+    .hide {
+        max-height: 0;
+    }
+    .questions-mh {
+        min-height: 370px;
+    }
+    .test-case-mh {
+        height: 275px;
+    }
+    .overflow-y-auto {
+        overflow-y: auto;
+    }
+    .color-red {
+        color: ${(props) => props.theme.colors.red2};
+    }
+    .form-control:focus {
+        color: ${(props) => props.theme.colors.dark};
+    }
+    .colorpick-eyedropper-input-trigger {
+        display: none;
+    }
+    .w-20 {
+        width: 20%;
+    }
+    .btn-cursor-pointer {
+        cursor: pointer;
+    }
+    .cursor-pointer {
+        cursor: pointer;
+    }
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+    @media (min-width: 1001px) {
+        .input-num {
+            width: 1em;
+        }
+    }
+    @media (max-width: 1000px) {
+        .btn-sm-sm {
+            width: 2.4em;
+            height: 2.3em;
+        }
+        .input-num {
+            width: 2em;
+            height: 2.3em;
+        }
     }
 `;

@@ -9,18 +9,23 @@ import TableQuestion from './Table/TableQuestion';
 const FilterQues = ({ roomId }) => {
     const [ques, setQues] = useState('All');
     const [numOfQues, setNumOfQues] = useState([]);
+    const [loading, setLoading] = useState([]);
+    const [room, setRoom] = useState([]);
+    const [key, setKey] = useState(0);
     useEffect(() => {
         roomApi
             .getRoomById(roomId)
             .then((res) => {
                 console.log(res.data.data);
-                setNumOfQues(res.data.data.questions);
+                !res.data.data.questions ? setNumOfQues([]) : setNumOfQues(res.data.data.questions);
                 console.log(res.data.data.questions);
+                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
+
     const handleOnClick = (e) => {
         var result = e.target.value;
         setQues(result);
@@ -41,9 +46,8 @@ const FilterQues = ({ roomId }) => {
                     handleOnClick={handleOnClick}
                     className="color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-left"
                 />
-                {/*numOfQues.length-1 but error promise */}
                 {numOfQues?.length >= 2 ? (
-                    [...Array(numOfQues.length - 1)].map((_, i) => (
+                    [...Array(numOfQues.length - 1)].map((item, i) => (
                         <Btn
                             key={i}
                             name={`Question ${i + 1}`}
@@ -72,13 +76,13 @@ const FilterQues = ({ roomId }) => {
                 <Btn
                     name="All"
                     handleOnClick={handleOnClick}
-                    className="color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded-left"
+                    className="color_primary border_color_primary btn_primary col-2 miw-108 mw-180 rounded"
                 />
             </div>
             <TableQues />
         </>
     );
-    return <>{content}</>;
+    return loading ? <Loading /> : <>{content}</>;
 };
 
 export default FilterQues;

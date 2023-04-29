@@ -1,3 +1,7 @@
+import { useState } from 'react';
+
+import { useLoaderData } from 'react-router-dom';
+
 import ArenaAlgorithm from './components/ArenaAlrgorithm';
 import LeaderBoard from './components/LeaderBoard/LeaderBoard';
 import PaginationLeaderboard from './components/LeaderBoard/PaginationLeaderboard';
@@ -18,8 +22,18 @@ import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 
 function Algorithm() {
+    const [activeKey, setActiveKey] = useState('first');
+
+    const handleTabSelect = (key) => {
+        setActiveKey(key);
+    };
+
     return (
-        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+        <Tab.Container
+            id="left-tabs-example"
+            defaultActiveKey={activeKey}
+            onSelect={handleTabSelect}
+        >
             <AlgorithmWrapper>
                 <Row className="p-4 m-y-20">
                     <Col sm={1} className="p-0 m-y-20">

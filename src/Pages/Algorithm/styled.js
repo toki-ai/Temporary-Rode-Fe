@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import { themes } from '../../themes';
+import { device } from '../../utils/Breakpoints';
+
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 
@@ -181,7 +184,8 @@ export const WrapperStyle = styled.div`
 `;
 export const BoxEditor = styled.div`
     width: 100%;
-    /* height: calc(100vh - 290px); */
+    display: inline-block;
+    /* height: calc(100vh - 290px); 
 
     color: ${(props) => props.theme.colors.light};
     /* padding: 10px 20px; */
@@ -190,6 +194,8 @@ export const BoxEditor = styled.div`
     /* box-shadow: 0px 2px 15px #00c994; */
     border-radius: 10px;
     overflow: hidden;
+    max-height: ${(props) => (props.maxHeight ? `40vh` : `100%`)};
+    transition: all 0.4s ease-in;
     .ͼo {
         background-color: transparent;
         & .cm-gutters {
@@ -207,4 +213,111 @@ export const TimeText = styled.span`
     text-transform: uppercase;
 
     color: #ffffff;
+`;
+export const ChooseQWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    margin-right: 1em;
+    a {
+        color: ${themes.colors.light};
+    }
+
+    .bg {
+        background: #020d26;
+    }
+    .border {
+        border: 1px solid ${themes.colors.primary} !important;
+    }
+    /* .w-150 {
+        width: 150px;
+    } */
+    .dd-100 {
+        width: 150px;
+    }
+    .transform {
+        transform: translate3d(0px, 50px, 0px);
+    }
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        background-color: ${themes.colors.primary};
+    }
+    .button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .menu {
+        width: 100%;
+    }
+    @media ${device.laptop} {
+        div {
+            font-size: 15px;
+
+            /* identical to box height */
+
+            color: ${themes.colors.primary};
+        }
+        /* .head {
+            width: 100px;
+        } */
+        .menu {
+            width: 100px;
+        }
+
+        .transform {
+            transform: translate3d(-59px, 50px, 0px) !important;
+        }
+    }
+
+    @media ${device.laptopL} {
+        div {
+            font-size: 18px;
+
+            color: ${themes.colors.primary};
+        }
+        /* .head {
+            width: 150px;
+        } */
+        .menu {
+            width: 150px;
+        }
+        .transform {
+            transform: translate3d(0px, 50px, 0px) !important;
+        }
+    }
+
+    @media ${device.desktop} {
+        div {
+            font-size: 36px;
+
+            color: ${themes.colors.primary};
+        }
+
+        .transform {
+            transform: translate3d(0px, 60px, 0px) !important;
+        }
+
+        .head {
+            width: 300px;
+            height: 50px;
+            font-size: 28px;
+        }
+        .menu {
+            height: 150px;
+            width: 300px;
+            font-size: 28px;
+        }
+        a {
+            padding-bottom: 20px;
+        }
+    }
+`;
+export const WrapRightSection = styled.div`
+    max-height: 100%;
+
+    /* overflow-y: scroll; */
 `;
