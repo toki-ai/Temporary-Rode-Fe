@@ -123,7 +123,7 @@ const RouterComponent = () => {
             children: [
                 {
                     exact: true,
-                    path: '/home',
+                    path: 'home',
                     element: (
                         <UserHomeLayout>
                             <Home />
