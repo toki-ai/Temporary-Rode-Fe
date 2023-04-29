@@ -8,7 +8,7 @@ import MaxSumbitTimes from './MaxSumbitTimes';
 import UploadImage from './UploadImage';
 import { addFEQuestion } from './utils';
 
-const CreateBEQuestions = ({ questions, setQuestions }) => {
+const CreateBEQuestions = ({ questions, setQuestions, error }) => {
     const [imageUrls, setImageUrls] = useState([]);
 
     return (
@@ -23,6 +23,12 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                                 question={question}
                                 questionIdx={questionIdx}
                                 setQuestions={setQuestions}
+                                error={
+                                    error &&
+                                    error[questionIdx]?.chidren?.find(
+                                        (e) => e.at === 'maxSubmitTimes'
+                                    )?.message
+                                }
                             />
                             <UploadImage
                                 question={question}
@@ -30,16 +36,36 @@ const CreateBEQuestions = ({ questions, setQuestions }) => {
                                 setQuestions={setQuestions}
                                 setImageUrls={setImageUrls}
                                 imageUrls={imageUrls}
+                                error={
+                                    error &&
+                                    error[questionIdx]?.chidren?.find(
+                                        (e) => e.at === 'questionImage'
+                                    )?.message
+                                }
                             />
                             <AddColor
                                 questionIdx={questionIdx}
                                 setQuestions={setQuestions}
                                 question={question}
+                                error={
+                                    error &&
+                                    error[questionIdx]?.chidren?.find((e) => e.at === 'colors')
+                                        ?.message
+                                }
                             />
                         </div>
 
                         <div className="col-md-6">
-                            <CodeTemplate questionIdx={questionIdx} setQuestions={setQuestions} />
+                            <CodeTemplate
+                                questionIdx={questionIdx}
+                                setQuestions={setQuestions}
+                                error={
+                                    error &&
+                                    error[questionIdx]?.chidren?.find(
+                                        (e) => e.at === 'codeTemplate'
+                                    )?.message
+                                }
+                            />
                         </div>
                     </div>
                     <hr />
