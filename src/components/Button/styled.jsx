@@ -11,6 +11,8 @@ export const Wrap = styled.div`
         justify-content: center;
         align-items: center;
         padding: 9px 20px;
+        font-size: 14px;
+        max-width: 10rem;
         gap: 10px;
         background: linear-gradient(90deg, #00e7aa 0.05%, #00513c -5%);
         color: ${(props) => props.theme.colors.light};
@@ -22,6 +24,11 @@ export const Wrap = styled.div`
             background-position: 100% 0;
             transition: all 0.4s ease-in-out;
             background: linear-gradient(90deg, ${themes.colors.primary} 2.05%, #00513c 100%);
+        }
+        @media all and (max-width: 1200px) {
+            font-size: 12px;
+            width: 8rem;
+            padding: 10px;
         }
     }
 
