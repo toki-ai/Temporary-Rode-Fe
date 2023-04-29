@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, createRoutesFromElements } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
 import ErrorPage from '../Pages/404Page';
@@ -29,13 +29,116 @@ import { loaderInfoGG, GetInfoRoomByCode, GetInfoUser } from './RouterLoader/Loa
 
 const RouterComponent = () => {
     const router = createBrowserRouter([
-        // { path: '/', element: <Navigate to="home" /> },
         {
-            exact: true,
             path: '/',
-            loader: GetInfoUser,
             element: <Controller />,
+            loader: GetInfoUser,
+            children: [
+                {
+                    path: '/home',
+                    exact: true,
+                    element: <PublicRoute />,
+                    children: [
+                        {
+                            exact: true,
+                            element: (
+                                <UserHomeLayout>
+                                    <Home />
+                                </UserHomeLayout>
+                            ),
+                        },
+                        {
+                            exact: true,
+
+                            index: true,
+                            element: <UserLayoutComponent />,
+                            children: [
+                                {
+                                    exact: true,
+                                    path: 'arena_css/:id',
+                                    loader: GetInfoRoomByCode,
+                                    element: <ArenaCSS />,
+                                },
+                                {
+                                    exact: true,
+                                    path: 'algorithm/:id',
+                                    loader: GetInfoRoomByCode,
+                                    element: <Algorithm />,
+                                },
+                                {
+                                    path: 'TestLayout',
+
+                                    element: <TestLayout />,
+                                },
+                                {
+                                    exact: true,
+                                    path: 'testTabs',
+                                    loader: Loading,
+                                    element: <TestTabs />,
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    path: '/admin',
+                    exact: true,
+                    element: <AdminRoute />,
+                    children: [
+                        {
+                            exact: true,
+                            element: <AdminLayoutComponent />,
+                            children: [
+                                {
+                                    exact: true,
+                                    path: 'room',
+                                    // index: true,
+                                    loader: Loading,
+                                    element: <AdminRoom />,
+                                },
+                                {
+                                    exact: true,
+                                    path: 'room/:id',
+                                    loader: Loading,
+                                    element: <AdminRoomView />,
+                                },
+                                {
+                                    exact: true,
+                                    path: 'room/edit/:id',
+                                    loader: Loading,
+                                    element: <AdminRoomEdit />,
+                                },
+                                // {
+                                //     exact: true,
+                                //     path: 'room/create-room',
+                                //     loader: Loading,
+                                //     element: <CreateRoom />,
+                                // },
+                                {
+                                    exact: true,
+                                    path: 'contestant',
+                                    loader: Loading,
+                                    element: <AllAccounts />,
+                                },
+                                {
+                                    exact: true,
+                                    path: 'create',
+                                    loader: Loading,
+                                    element: <CreateRoom />,
+                                },
+                                {
+                                    exact: true,
+                                    path: 'attendance/:id',
+                                    loader: Loading,
+                                    element: <AdminAttendance />,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
         },
+        ,
         {
             exact: true,
             path: '/login',
@@ -55,117 +158,6 @@ const RouterComponent = () => {
                     <Register />
                 </PublicLayout>
             ),
-        },
-        {
-            path: '/home',
-            exact: true,
-            element: <PublicRoute />,
-            children: [
-                {
-                    exact: true,
-                    element: <UserHomeLayout />,
-                    children: [
-                        {
-                            exact: true,
-                            element: <Home />,
-                        },
-                    ],
-                },
-                {
-                    exact: true,
-                    path: 'user-home',
-                    index: true,
-                    element: <UserLayoutComponent />,
-                    children: [
-                        {
-                            exact: true,
-                            path: 'testMirror',
-                            loader: Loading,
-                            element: <TestCodeMirror />,
-                        },
-                        {
-                            exact: true,
-                            path: 'arena_css/:id',
-                            loader: GetInfoRoomByCode,
-                            element: <ArenaCSS />,
-                        },
-                        {
-                            exact: true,
-                            path: 'algorithm/:id',
-                            loader: GetInfoRoomByCode,
-                            element: <Algorithm />,
-                        },
-                        {
-                            path: 'TestLayout',
-
-                            element: <TestLayout />,
-                        },
-                        {
-                            exact: true,
-                            path: 'testTabs',
-                            loader: Loading,
-                            element: <TestTabs />,
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            path: '/admin',
-            exact: true,
-            element: <AdminRoute />,
-            children: [
-                {
-                    exact: true,
-                    // index: true,
-                    element: <AdminLayoutComponent />,
-                    children: [
-                        {
-                            exact: true,
-                            path: 'room',
-                            // index: true,
-                            loader: Loading,
-                            element: <AdminRoom />,
-                        },
-                        {
-                            exact: true,
-                            path: 'room/:id',
-                            loader: Loading,
-                            element: <AdminRoomView />,
-                        },
-                        {
-                            exact: true,
-                            path: 'room/edit/:id',
-                            loader: Loading,
-                            element: <AdminRoomEdit />,
-                        },
-                        // {
-                        //     exact: true,
-                        //     path: 'room/create-room',
-                        //     loader: Loading,
-                        //     element: <CreateRoom />,
-                        // },
-                        {
-                            exact: true,
-                            path: 'contestant',
-                            loader: Loading,
-                            element: <AllAccounts />,
-                        },
-                        {
-                            exact: true,
-                            path: 'create',
-                            loader: Loading,
-                            element: <CreateRoom />,
-                        },
-                        {
-                            exact: true,
-                            path: 'attendance/:id',
-                            loader: Loading,
-                            element: <AdminAttendance />,
-                        },
-                    ],
-                },
-            ],
         },
 
         { path: '*', element: <ErrorPage /> },
