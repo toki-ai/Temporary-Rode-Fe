@@ -5,7 +5,7 @@ import { extractColors } from 'extract-colors';
 import localFilesAPI from '../../../../utils/api/localFilesAPI';
 import * as St from '../styles';
 
-const UploadImage = ({ question, questionIdx, setQuestions, setImageUrls, imageUrls }) => {
+const UploadImage = ({ question, questionIdx, setQuestions, setImageUrls, imageUrls, error }) => {
     const inputRef = useRef(null);
 
     const uploadImage = async (files, questionIdx) => {
@@ -79,6 +79,7 @@ const UploadImage = ({ question, questionIdx, setQuestions, setImageUrls, imageU
                     + <span>Upload your image here...</span>
                 </St.UploadImage>
             )}
+            <h6 className="text-danger">{error}</h6>
         </div>
     );
 };

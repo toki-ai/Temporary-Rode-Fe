@@ -15,6 +15,7 @@ const CreateRoom = () => {
     // Create question
     const [roomInfo, setRoomInfo] = useState(initialRoomInfo);
     const [questions, setQuestions] = useState(BEInitQuestion);
+    const [errors, setErrors] = useState([]);
 
     // Submit
     const handleSubmit = async () => {
@@ -24,13 +25,17 @@ const CreateRoom = () => {
         await roomApi
             .createOne(payload)
             .then((res) => {
-                console.warn('Response: ', res.data);
+                console.error('Response: ', res.data);
                 if (res.data.status === 200) {
                     toastSuccess(res.data.message);
-                    setRoomInfo(initialRoomInfo);
-                    setQuestions(roomInfo.type === 'FE' ? FEInitQuestion : BEInitQuestion);
+                    // setRoomInfo(initialRoomInfo);
+                    // setQuestions(roomInfo.type === 'FE' ? FEInitQuestion : BEInitQuestion);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
                 } else {
                     toastError(`${res.data.message}. Open tab Console for more details`);
+                    setErrors(res.data.err);
                 }
             })
             .catch((err) => {
@@ -47,11 +52,19 @@ const CreateRoom = () => {
     return (
         <St.Wrapper>
             <St.Title>Create Room</St.Title>
-            <CreateRoomInfo roomInfo={roomInfo} setRoomInfo={setRoomInfo} />
+            <CreateRoomInfo roomInfo={roomInfo} setRoomInfo={setRoomInfo} errs={errors} />
             {roomInfo.type === 'FE' ? (
-                <CreateFEQuestions questions={questions} setQuestions={setQuestions} />
+                <CreateFEQuestions
+                    questions={questions}
+                    setQuestions={setQuestions}
+                    error={errors.find((err) => err.at === 'questions')?.chidren}
+                />
             ) : (
-                <CreateBEQuestions questions={questions} setQuestions={setQuestions} />
+                <CreateBEQuestions
+                    questions={questions}
+                    setQuestions={setQuestions}
+                    error={errors.find((err) => err.at === 'questions')?.chidren}
+                />
             )}
 
             <Stack direction="horizontal" gap={3} className="justify-content-end mb-4">
