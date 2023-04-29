@@ -137,13 +137,13 @@ const RouterComponent = () => {
                     children: [
                         {
                             exact: true,
-                            path: '/home/arena_css/:id',
+                            path: '/arena_css/:id',
                             loader: GetInfoRoomByCode,
                             element: <ArenaCSS />,
                         },
                         {
                             exact: true,
-                            path: '/home/algorithm/:id',
+                            path: '/algorithm/:id',
                             loader: GetInfoRoomByCode,
                             element: <Algorithm />,
                         },
