@@ -6,7 +6,7 @@ import { Check } from 'react-bootstrap-icons';
 import { useLocation } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 
-import { toastSuccess, toastError } from '../../../../components/Toast';
+import { toastSuccess, toastError, toastInfo } from '../../../../components/Toast';
 import authApi from '../../../../utils/api/authApi';
 import submitApi from '../../../../utils/api/submitApi';
 import submitHistoryApi from '../../../../utils/api/submitHistoryApi';
@@ -40,6 +40,7 @@ const RightSection = ({
 }) => {
     const location = useLocation();
     const roomInfo = useLoaderData();
+    console.log('🚀 ~ file: RightSection.jsx:43 ~ roomInfo:', roomInfo);
     const [idUser, setIdUser] = useState('');
     const [totalTime, setTotalTime] = useState(0);
     const [isLanguage, setIsLanguage] = useState(false);
@@ -67,13 +68,16 @@ const RightSection = ({
             code: code,
             language: select,
         });
+        console.log('res.data', res.data);
+        setResInfo(res.data);
+
         if (res.data.status === 200) {
             setResInfo(res.data);
             toastSuccess(res.data.message);
-        } else if (res.data.status === 400) {
-            toastError(res.data.err);
-            return;
+        } else {
+            toastError('Submit fail');
         }
+
         setShowResult(true);
 
         submitHistoryApi.getSubmitHistoryByQuestion(questionId).then((res) => {
@@ -86,7 +90,6 @@ const RightSection = ({
         });
     };
     console.log('resInfo', resInfo);
-
     const finish = async () => {
         let res = await userRoomApi.postFinish(location.state.userRoomId);
         console.log(res);
@@ -132,7 +135,7 @@ const RightSection = ({
                 <ControllerArena>
                     <Stack direction="horizontal" className="justify-content-between">
                         <div className="text-white btn border-blue">
-                            Submit: {resInfo ? resInfo.data.times.current : '_ '}/
+                            Submit: {resInfo ? resInfo?.data?.times?.current : '_ '}/
                             {roomInfo.questions[currentQuestion].maxSubmitTimes} Times
                         </div>
                         <ChooseQWrapper>
@@ -228,7 +231,10 @@ const RightSection = ({
                                                     </Col>
                                                     <Col sm={6} className="center">
                                                         <div className="btn text-white w-230 border-blue">
-                                                            {resInfo?.data.result.execTime} ms
+                                                            {resInfo
+                                                                ? resInfo?.data?.result?.execTime
+                                                                : '_ '}
+                                                            ms
                                                         </div>
                                                     </Col>
                                                 </Row>
@@ -238,9 +244,14 @@ const RightSection = ({
                                                 className="h-100 tabPane p-20 err-wrapper bg-dark"
                                             >
                                                 <p className="yellow-styled">Compiler Message</p>
-                                                <div className="err-message">
-                                                    {resInfo?.message}
-                                                </div>
+
+                                                {resInfo.err ? (
+                                                    <div className="err-message">{resInfo.err}</div>
+                                                ) : (
+                                                    <div className="success-message">
+                                                        Submit successfully !
+                                                    </div>
+                                                )}
                                             </TabPane>
                                             <TabPane
                                                 eventKey="third"

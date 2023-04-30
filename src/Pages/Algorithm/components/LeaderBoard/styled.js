@@ -312,12 +312,25 @@ export const WrapperResult = styled.div`
     .err-wrapper {
         overflow: auto;
     }
+
     .err-message {
         width: 100%;
-        height: 80%;
+        height: 40%;
         padding: 10px;
         margin: 20px 0;
         border: 2px solid #ea4335;
+        border-radius: 10px;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+    .success-message {
+        color: #9afd9a;
+        width: 100%;
+        height: 30%;
+        padding: 10px;
+        margin: 20px 0;
+        border: 2px solid blue;
         border-radius: 10px;
     }
 `;
