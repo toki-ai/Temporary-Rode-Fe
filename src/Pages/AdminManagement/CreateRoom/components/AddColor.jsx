@@ -4,7 +4,7 @@ import ButtonStyled from '../../../../components/Button';
 import * as St from '../styles';
 import { editColor, addColor } from './utils';
 
-const AddColor = ({ questionIdx, setQuestions, question }) => {
+const AddColor = ({ questionIdx, setQuestions, question, error }) => {
     return (
         <div>
             <label htmlFor="color">Color</label>
@@ -25,6 +25,7 @@ const AddColor = ({ questionIdx, setQuestions, question }) => {
                     );
                 })}
             </div>
+            <h6 className="text-danger">{error}</h6>
             <ButtonStyled buttonType="dashed" onClick={() => addColor(questionIdx, setQuestions)}>
                 Add color
             </ButtonStyled>
