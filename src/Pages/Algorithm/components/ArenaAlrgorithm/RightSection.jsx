@@ -126,8 +126,8 @@ const RightSection = ({
                             lineNumbers: 'true',
                             autoCloseBrackets: true,
                         }}
-                        onChange={(e) => {
-                            setCode(e);
+                        onChange={(event) => {
+                            setCode(event);
                         }}
                     />
                 </BoxEditor>
