@@ -1,6 +1,8 @@
 import { Check } from 'react-bootstrap-icons';
 import styled from 'styled-components';
 
+import { themes } from '../../../../themes';
+
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 
@@ -306,8 +308,8 @@ export const WrapperResult = styled.div`
         line-height: 20px;
         letter-spacing: 0.325079px;
         text-transform: uppercase;
-        color: #f9c41c;
-        text-shadow: 0px 0.711111px 2.13333px #f9c41c;
+        color: ${themes.colors.yellow};
+        text-shadow: 0px 0.711111px 2.13333px ${themes.colors.yellow};
     }
     .err-wrapper {
         overflow: auto;
@@ -315,7 +317,7 @@ export const WrapperResult = styled.div`
 
     .err-message {
         width: 100%;
-        height: 40%;
+        height: 30%;
         padding: 10px;
         margin: 20px 0;
         border: 2px solid #ea4335;
@@ -327,9 +329,9 @@ export const WrapperResult = styled.div`
     .success-message {
         color: #9afd9a;
         width: 100%;
-        height: 30%;
+        height: 20%;
         padding: 10px;
-        margin: 20px 0;
+        margin: 50px 0;
         border: 2px solid blue;
         border-radius: 10px;
     }
