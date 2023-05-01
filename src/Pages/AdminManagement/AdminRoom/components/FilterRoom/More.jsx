@@ -36,7 +36,12 @@ const More = ({ link, roomId, openTime }) => {
                 }
             },
         },
-        { id: 3, value: 'Delete', func: () => setShow(true) },
+        {
+            id: 3,
+            href: `/admin/attendance/${roomId}`,
+            value: 'Attendance',
+        },
+        { id: 4, value: 'Delete', func: () => setShow(true) },
     ];
     return (
         <>
