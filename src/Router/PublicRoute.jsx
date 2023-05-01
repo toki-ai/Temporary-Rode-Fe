@@ -11,7 +11,11 @@ const PublicRoute = () => {
         return <Outlet />;
     }
     console.log(userRole);
-    return userRole !== '' ? <Outlet /> : <Navigate to="/admin" replace />;
+    return userRole !== '' && userRole !== 'admin' ? (
+        <Outlet />
+    ) : (
+        <Navigate to="/admin/room" replace />
+    );
 };
 
 export default PublicRoute;

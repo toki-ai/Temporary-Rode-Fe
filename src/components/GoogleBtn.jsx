@@ -8,7 +8,6 @@ import authApi from '../utils/api/authApi';
 
 function GoogleSignInButton() {
     const [gapiLoaded, setGapiLoaded] = useState(false);
-    const { setCredential } = useContext(UserContext);
     const refBtn = useRef();
     const navigate = useNavigate();
     const handleCredentialResponse = async (response) => {
@@ -17,8 +16,10 @@ function GoogleSignInButton() {
         const res = await authApi.login(response.credential);
         console.log(res);
         if (res.data.status === 400) {
+            console.log('check run 400');
             navigate('/register', { state: res.credential });
-        } else {
+        } else if (res.data.status === 200) {
+            console.log('check run 200');
             Localstorage.setItem('token', res.data.data);
             navigate('/');
         }
