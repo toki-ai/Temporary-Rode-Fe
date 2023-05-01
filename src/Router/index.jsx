@@ -3,24 +3,7 @@ import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
-// import AllAccounts from '../Pages/Accounts/AllAccounts';
-// import AdminAttendance from '../Pages/AdminManagement/AdminAttendance';
-// import AdminRoom from '../Pages/AdminManagement/AdminRoom';
-// import AdminRoomEdit from '../Pages/AdminManagement/AdminRoomEdit';
-// import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
-// import CreateRoom from '../Pages/AdminManagement/CreateRoom';
-// import Algorithm from '../Pages/Algorithm';
-// import TestLayout from '../Pages/Algorithm/LayoutAlgorithm';
-// import ArenaCSS from '../Pages/CssBattle';
-// import Home from '../Pages/Home';
-// import Login from '../Pages/Login';
-// import Register from '../Pages/Register';
-// import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
-// import Loading from '../components/Loading';
-// import PublicLayout from '../components/PublicLayout/UserLayout.component';
 import { Resize, useWindowDimensions } from '../components/Resize';
-// import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
-// import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
 // import Controller from './Controller';
 import PublicRoute from './PublicRoute';
@@ -52,12 +35,6 @@ const RouterComponent = () => {
     }
     const router = createBrowserRouter([
         { path: '/', element: <Navigate to="home" /> },
-        // {
-        //     exact: true,
-        //     path: '/',
-        //     loader: GetInfoUser,
-        //     element: <Controller />,
-        // },
         {
             exact: true,
             element: <AdminRoute />,
