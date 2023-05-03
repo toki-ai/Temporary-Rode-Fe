@@ -9,6 +9,13 @@ import RightSection from './RightSection';
 const ArenaAlgorithm = () => {
     const roomInfo = useLoaderData();
 
+    const [code, setCode] = useState();
+    const [showResult, setShowResult] = useState(false); // Show small tabs
+    const [resInfo, setResInfo] = useState(0);
+
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [showRightSection, setShowRightSection] = useState(false);
+
     const [leftWidth, setLeftWidth] = useState('50%');
     const separatorRef = useRef(null);
     const [questionId, setQuestionId] = useState();
@@ -29,16 +36,38 @@ const ArenaAlgorithm = () => {
         document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('mouseup', onMouseUp);
     };
+
     return (
         <WrapperStyle>
             <div className="app">
                 <div className="left-section" style={{ width: leftWidth }}>
-                    <LeftSection roomInfo={roomInfo} action={setQuestionId} />
+                    <LeftSection
+                        roomInfo={roomInfo}
+                        action={setQuestionId}
+                        setCurrentQuestion={setCurrentQuestion}
+                        setShowRightSection={setShowRightSection}
+                        setShowResult={setShowResult}
+                        setCode={setCode}
+                        setResInfo={setResInfo}
+                    />
                 </div>
                 <div className="separator" ref={separatorRef} onMouseDown={onMouseDown} />
-                <div className="right-section">
-                    <RightSection roomInfo={roomInfo} questionId={questionId} />
-                </div>
+
+                {showRightSection && (
+                    <div className="right-section">
+                        <RightSection
+                            roomInfo={roomInfo}
+                            questionId={questionId}
+                            currentQuestion={currentQuestion}
+                            code={code}
+                            setCode={setCode}
+                            showResult={showResult}
+                            setShowResult={setShowResult}
+                            resInfo={resInfo}
+                            setResInfo={setResInfo}
+                        />
+                    </div>
+                )}
             </div>
         </WrapperStyle>
     );

@@ -75,7 +75,7 @@ const RouterComponent = () => {
                         // },
                         {
                             exact: true,
-                            path: '/admin/contestant',
+                            path: '/contestant',
                             loader: Loading,
                             element: <AllAccounts />,
                         },
