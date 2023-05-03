@@ -21,14 +21,14 @@ const LeftSection = ({
     setShowResult,
     setResInfo,
 }) => {
-    // console.log('line 15: ', roomInfo);
+    console.log('line 15: ', roomInfo);
     const [question, setQuestion] = useState({
         current: 'Choose question',
         questionImg: roomInfo?.questions[0]?.questionImage,
     });
     const TestImg = localFileApi.getImg(question.questionImg);
     const [imageError, setImageError] = useState(false);
-
+    const [showRemind, setShowRemind] = useState(true);
     const handleImageError = () => {
         setImageError(true);
     };
@@ -69,6 +69,7 @@ const LeftSection = ({
                                                 setCode();
                                                 setShowResult(false);
                                                 setResInfo(0);
+                                                setShowRemind(false);
                                             }}
                                         >
                                             Question {id + 1}
@@ -87,6 +88,12 @@ const LeftSection = ({
                         <CountdownTimer targetDate={roomInfo.duration} />
                     </TimeText>
                 </Timer>
+            </Stack>
+
+            <Stack>
+                {showRemind && (
+                    <div className="remind">Please select question before doing the tests !</div>
+                )}
             </Stack>
             <Stack className="justify-content-center align-items-center h-75 mt-3">
                 {imageError ? (

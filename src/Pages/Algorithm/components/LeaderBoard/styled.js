@@ -317,7 +317,7 @@ export const WrapperResult = styled.div`
 
     .err-message {
         width: 100%;
-        height: 30%;
+        height: 80%;
         padding: 10px;
         margin: 20px 0;
         border: 2px solid #ea4335;

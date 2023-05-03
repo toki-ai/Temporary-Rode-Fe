@@ -181,6 +181,19 @@ export const WrapperStyle = styled.div`
         /* background-color: lightgreen; */
         overflow: hidden;
     }
+    .remind {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: pink;
+        white-space: wrap;
+        text-align: center;
+        padding: 20px;
+        margin: 200px 20px;
+        font-style: italic;
+        box-shadow: 0 0 5px 2px;
+        border: 2px dashed yellow;
+    }
 `;
 export const BoxEditor = styled.div`
     width: 100%;
