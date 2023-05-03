@@ -28,5 +28,6 @@ export const themes = {
         cooper: '#EF7329',
         red2: '#DC3545',
         green: '#01e2a6',
+        yellow: '#f9c41c',
     },
 };

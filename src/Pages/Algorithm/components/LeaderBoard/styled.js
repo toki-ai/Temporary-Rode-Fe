@@ -1,6 +1,8 @@
 import { Check } from 'react-bootstrap-icons';
 import styled from 'styled-components';
 
+import { themes } from '../../../../themes';
+
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 
@@ -33,6 +35,19 @@ export const LeaderBoardStyled = styled.div`
     }
     .w-100 {
         width: 100% !important;
+    }
+    .bg-even {
+        background: #212529;
+    }
+    .bg-old {
+        background: transparent;
+    }
+    td {
+        color: #fff !important;
+        border-bottom: 1px solid rgb(0, 231, 170);
+    }
+    .color-green {
+        color: #00e7aa !important;
     }
 `;
 
@@ -293,17 +308,31 @@ export const WrapperResult = styled.div`
         line-height: 20px;
         letter-spacing: 0.325079px;
         text-transform: uppercase;
-        color: #f9c41c;
-        text-shadow: 0px 0.711111px 2.13333px #f9c41c;
+        color: ${themes.colors.yellow};
+        text-shadow: 0px 0.711111px 2.13333px ${themes.colors.yellow};
     }
     .err-wrapper {
         overflow: auto;
     }
+
     .err-message {
-        margin: 20px 0;
         width: 100%;
         height: 80%;
+        padding: 10px;
+        margin: 20px 0;
         border: 2px solid #ea4335;
+        border-radius: 10px;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+    .success-message {
+        color: #9afd9a;
+        width: 100%;
+        height: 20%;
+        padding: 10px;
+        margin: 50px 0;
+        border: 2px solid blue;
         border-radius: 10px;
     }
 `;

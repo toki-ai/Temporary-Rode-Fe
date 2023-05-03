@@ -9,9 +9,6 @@ export const SubmissionStyled = styled.div`
     padding: 20px;
     background-color: #020d26;
     height: 100%;
-    position: relative;
-    overflow: hidden;
-    z-index: 0;
     .bg-blue {
         background-color: #020d26;
     }
@@ -23,6 +20,23 @@ export const SubmissionStyled = styled.div`
     }
     .w-100 {
         width: 100% !important;
+    }
+    .bg-even {
+        background: #212529;
+    }
+    .bg-old {
+        background: transparent;
+    }
+    td {
+        color: #fff !important;
+        border-bottom: 1px solid rgb(0, 231, 170);
+    }
+    .color-green {
+        color: #00e7aa !important;
+    }
+    .submission-wrap {
+        height: 100%;
+        overflow-y: scroll;
     }
 `;
 
@@ -48,6 +62,8 @@ export const TableSubmission = styled.div`
     padding: 0;
     margin: 0;
     border: 1px solid #00e7aa;
+    position: relative;
+    height: 460px;
     .mb-0 {
         margin-bottom: 0;
     }
@@ -86,10 +102,29 @@ export const TableSubmission = styled.div`
     .viewResult:hover {
         cursor: pointer;
     }
+    .smaller-height {
+        height: 200px !important;
+    }
+    .wrap {
+        table {
+            table-layout: fixed;
+            width: 100%;
+        }
+        tr,
+        td {
+            font-size: 20px;
+            text-align: center;
+        }
+    }
+
+    .scroll-table {
+        height: 400px;
+        overflow-y: auto;
+    }
 `;
 
 export const TableSubmitted = styled.div`
-    margin: 12px;
+    margin: 40px 10px;
     height: 100%;
     width: 100%;
     border: 1px solid #2e7dff;
@@ -102,17 +137,33 @@ export const TableSubmitted = styled.div`
         text-transform: uppercase;
         color: #00e7aa;
     }
+    .heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 40px;
+        text-transform: uppercase;
+        color: rgb(0, 231, 170);
+        i {
+            cursor: pointer;
+            padding: 10px;
+        }
+    }
 `;
 export const AnswerSubmitted = styled.div`
     height: auto;
     width: 100%;
-    margin: 0 140px;
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
     text-transform: capitalize;
     .answer {
-        color: yellow !important;
+        font-weight: 300;
+        font-size: 20px;
+        width: 100%;
+        color: #fff;
     }
 `;
 export const PaginationLB = styled.div`

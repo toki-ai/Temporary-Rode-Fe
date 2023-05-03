@@ -12,7 +12,15 @@ import { Timer } from '../LeaderBoard/styled';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 
-const LeftSection = ({ action, roomInfo }) => {
+const LeftSection = ({
+    action,
+    roomInfo,
+    setCurrentQuestion,
+    setShowRightSection,
+    setCode,
+    setShowResult,
+    setResInfo,
+}) => {
     console.log('line 15: ', roomInfo);
     const [question, setQuestion] = useState({
         current: 'Choose question',
@@ -20,16 +28,19 @@ const LeftSection = ({ action, roomInfo }) => {
     });
     const TestImg = localFileApi.getImg(question.questionImg);
     const [imageError, setImageError] = useState(false);
-
+    const [showRemind, setShowRemind] = useState(true);
     const handleImageError = () => {
         setImageError(true);
     };
+
     const handleQuestionChange = (eventKey, e) => {
         setQuestion({
             current: e.target.name,
             questionImg: eventKey,
         });
     };
+
+    const [showImg, setShowImg] = useState(false);
     return (
         <Container className="p-4 h-100 overflow-y-auto">
             <Stack direction="horizontal" className="justify-content-between">
@@ -52,6 +63,13 @@ const LeftSection = ({ action, roomInfo }) => {
                                             name={`Question ${id + 1}`}
                                             onClick={() => {
                                                 action(question.id);
+                                                setCurrentQuestion(id);
+                                                setShowImg(true);
+                                                setShowRightSection(true);
+                                                setCode();
+                                                setShowResult(false);
+                                                setResInfo(0);
+                                                setShowRemind(false);
                                             }}
                                         >
                                             Question {id + 1}
@@ -71,11 +89,21 @@ const LeftSection = ({ action, roomInfo }) => {
                     </TimeText>
                 </Timer>
             </Stack>
+
+            <Stack>
+                {showRemind && (
+                    <div className="remind">Please select question before doing the tests !</div>
+                )}
+            </Stack>
             <Stack className="justify-content-center align-items-center h-75 mt-3">
                 {imageError ? (
                     <div className="text-light"> Image ERROR!!!!!</div>
                 ) : (
-                    <img src={TestImg} alt="target_img" onError={handleImageError} />
+                    <>
+                        {showImg && (
+                            <img src={TestImg} alt="target_img" onError={handleImageError} />
+                        )}
+                    </>
                 )}
             </Stack>
         </Container>

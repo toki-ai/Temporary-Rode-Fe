@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { Col, Container, Nav, Row, Stack, Tab, TabPane } from 'react-bootstrap';
 import { Check } from 'react-bootstrap-icons';
 import { useLocation } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 
-import { toastSuccess, toastError } from '../../../../components/Toast';
+import { toastSuccess, toastError, toastInfo } from '../../../../components/Toast';
+import authApi from '../../../../utils/api/authApi';
 import submitApi from '../../../../utils/api/submitApi';
+import submitHistoryApi from '../../../../utils/api/submitHistoryApi';
 import userRoomApi from '../../../../utils/api/userRoomApi';
 import { BoxEditor, ChooseQWrapper, WrapRightSection } from '../../styled';
 import {
@@ -25,40 +28,68 @@ import { tokyoNight } from '@uiw/codemirror-theme-tokyo-night';
 import CodeMirror from '@uiw/react-codemirror';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const RightSection = ({ questionId }) => {
-    const roomInfo = useLoaderData();
+const RightSection = ({
+    questionId,
+    currentQuestion,
+    code,
+    setCode,
+    showResult,
+    setShowResult,
+    resInfo,
+    setResInfo,
+}) => {
     const location = useLocation();
-    const [showResult, setShowResult] = useState(false);
-    const [result, setResult] = useState();
+    const roomInfo = useLoaderData();
+    console.log('🚀 ~ file: RightSection.jsx:43 ~ roomInfo:', roomInfo);
+    const [idUser, setIdUser] = useState('');
+    const [totalTime, setTotalTime] = useState(0);
+    const [isLanguage, setIsLanguage] = useState(false);
     const [select, setSelect] = useState('Choose language');
-    const [code, setCode] = useState();
+    const [score, setScore] = useState(0);
     const langs = [
         { name: 'C_CPP', id: 1 },
         { name: 'Java', id: 2 },
     ];
     const handleSelectChange = (eventKey) => {
         setSelect(eventKey);
+        setIsLanguage(true);
     };
-    console.log(result);
     const submitCode = async () => {
-        const formatData = {
+        if (!isLanguage) {
+            toastError('Language is not defined');
+            return;
+        } else if (code == null) {
+            toastError("Can't submit Empty Code");
+            return;
+        }
+        const res = await submitApi.submit({
             roomId: roomInfo?.id,
             questionId: questionId,
             code: code,
             language: select,
-        };
-        console.log(formatData);
-        const res = await submitApi.submit(formatData);
-        console.log('line 53: ', res);
+        });
+        console.log('res.data', res.data);
+        setResInfo(res.data);
+
         if (res.data.status === 200) {
-            setShowResult(true);
-            setResult(res.data);
+            setResInfo(res.data);
             toastSuccess(res.data.message);
-        } else if (res.data.status === 400) {
-            setShowResult(true);
-            toastError(res.data.err);
+        } else {
+            toastError('Submit fail');
         }
+
+        setShowResult(true);
+
+        submitHistoryApi.getSubmitHistoryByQuestion(questionId).then((res) => {
+            res.data.data.items.map((item) => {
+                if (item.account.id == idUser) {
+                    setScore(item.score);
+                    setTotalTime(item.time);
+                }
+            });
+        });
     };
+    console.log('resInfo', resInfo);
     const finish = async () => {
         let res = await userRoomApi.postFinish(location.state.userRoomId);
         console.log(res);
@@ -69,6 +100,14 @@ const RightSection = ({ questionId }) => {
             toastError(res.data.err);
         }
     };
+
+    useEffect(() => {
+        authApi.getUser().then((res) => {
+            setIdUser(res.data.id);
+            console.log('accountID: ', res.data.id);
+        });
+    }, []);
+
     return (
         <Container className="p-2 h-100">
             <WrapRightSection>
@@ -87,16 +126,18 @@ const RightSection = ({ questionId }) => {
                             lineNumbers: 'true',
                             autoCloseBrackets: true,
                         }}
-                        onChange={(e) => {
-                            setCode(e);
-                            // setCount(e.length);
+                        onChange={(event) => {
+                            setCode(event);
                         }}
                     />
                 </BoxEditor>
 
                 <ControllerArena>
                     <Stack direction="horizontal" className="justify-content-between">
-                        <div className="text-white btn border-blue">Submit: 3/5 Times</div>
+                        <div className="text-white btn border-blue">
+                            Submit: {resInfo ? resInfo?.data?.times?.current : '_ '}/
+                            {roomInfo.questions[currentQuestion].maxSubmitTimes} Times
+                        </div>
                         <ChooseQWrapper>
                             <Dropdown className="d-inline mx-2" onSelect={handleSelectChange}>
                                 <Dropdown.Toggle
@@ -163,13 +204,15 @@ const RightSection = ({ questionId }) => {
                                                         </p>
                                                     </Col>
                                                     <Col sm={6} className="center">
-                                                        <div className="btn text-green w-230">
-                                                            {result?.status === 200 ? (
-                                                                'Success'
-                                                            ) : (
-                                                                <p className="text-danger">Error</p>
-                                                            )}
-                                                        </div>
+                                                        {resInfo?.status == 200 ? (
+                                                            <div className="btn text-green w-230">
+                                                                SUCCESS
+                                                            </div>
+                                                        ) : (
+                                                            <div className="btn text-red w-230">
+                                                                FAILED
+                                                            </div>
+                                                        )}
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ height: '33%', margin: 0 }}>
@@ -178,7 +221,7 @@ const RightSection = ({ questionId }) => {
                                                     </Col>
                                                     <Col sm={6} className="center">
                                                         <div className="btn text-white w-230 border-blue">
-                                                            20/50 Test Cases
+                                                            {score} - Test Cases
                                                         </div>
                                                     </Col>
                                                 </Row>
@@ -188,9 +231,10 @@ const RightSection = ({ questionId }) => {
                                                     </Col>
                                                     <Col sm={6} className="center">
                                                         <div className="btn text-white w-230 border-blue">
-                                                            {result
-                                                                ? result?.data.result.execTime
-                                                                : '0'}
+                                                            {resInfo
+                                                                ? resInfo?.data?.result?.execTime
+                                                                : '_ '}
+                                                            ms
                                                         </div>
                                                     </Col>
                                                 </Row>
@@ -200,15 +244,20 @@ const RightSection = ({ questionId }) => {
                                                 className="h-100 tabPane p-20 err-wrapper bg-dark"
                                             >
                                                 <p className="yellow-styled">Compiler Message</p>
-                                                <div className="err-message"></div>
+
+                                                {resInfo.err ? (
+                                                    <div className="err-message">{resInfo.err}</div>
+                                                ) : (
+                                                    <div className="success-message">
+                                                        Submit successfully !
+                                                    </div>
+                                                )}
                                             </TabPane>
                                             <TabPane
                                                 eventKey="third"
                                                 className="h-100 tabPane bg-dark"
                                             >
-                                                <p className="yellow-styled p-20">
-                                                    Ngươi quá non nhóc ạ !
-                                                </p>
+                                                <p className="yellow-styled p-20"></p>
                                             </TabPane>
                                         </Tab.Content>
                                     </WrapperResult>
