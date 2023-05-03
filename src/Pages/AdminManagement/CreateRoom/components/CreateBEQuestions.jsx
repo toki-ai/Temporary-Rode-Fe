@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import ButtonStyled from '../../../../components/Button';
 import * as St from '../styles';
+import CodeTemplate from './CodeTemplate';
 import MaxSumbitTimes from './MaxSumbitTimes';
 import Testcase from './Testcase';
 import UploadImage from './UploadImage';
@@ -32,19 +33,34 @@ const CreateBEQuestions = ({ questions, setQuestions, error }) => {
                                     )?.message
                                 }
                             />
-                            <UploadImage
-                                question={question}
-                                questionIdx={questionIdx}
-                                setQuestions={setQuestions}
-                                setImageUrls={setImageUrls}
-                                imageUrls={imageUrls}
-                                error={
-                                    error &&
-                                    error[questionIdx]?.chidren?.find(
-                                        (e) => e.at === 'questionImage'
-                                    )?.message
-                                }
-                            />
+                            <div className="row">
+                                <UploadImage
+                                    question={question}
+                                    questionIdx={questionIdx}
+                                    setQuestions={setQuestions}
+                                    setImageUrls={setImageUrls}
+                                    imageUrls={imageUrls}
+                                    error={
+                                        error &&
+                                        error[questionIdx]?.chidren?.find(
+                                            (e) => e.at === 'questionImage'
+                                        )?.message
+                                    }
+                                />
+                            </div>
+                            <div className="row">
+                                <CodeTemplate
+                                    questionIdx={questionIdx}
+                                    setQuestions={setQuestions}
+                                    error={
+                                        error &&
+                                        error[questionIdx]?.chidren?.find(
+                                            (e) => e.at === 'codeTemplate'
+                                        )?.message
+                                    }
+                                    isBackend={true}
+                                />
+                            </div>
                         </div>
 
                         <div className="col-md-6">
