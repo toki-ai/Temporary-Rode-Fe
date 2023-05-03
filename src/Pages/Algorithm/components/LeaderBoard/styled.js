@@ -317,9 +317,9 @@ export const WrapperResult = styled.div`
 
     .err-message {
         width: 100%;
-        height: 80%;
+        max-height: 140px;
         padding: 10px;
-        margin: 20px 0;
+        margin: 20px 0 30px;
         border: 2px solid #ea4335;
         border-radius: 10px;
         overflow: scroll;
@@ -327,6 +327,8 @@ export const WrapperResult = styled.div`
     }
 
     .success-message {
+        display: flex;
+        align-items: center;
         color: #9afd9a;
         width: 100%;
         height: 20%;
@@ -336,6 +338,7 @@ export const WrapperResult = styled.div`
         border-radius: 10px;
     }
 `;
+
 export const IconCheck = styled(Check)`
     width: 20px;
     height: 20px;

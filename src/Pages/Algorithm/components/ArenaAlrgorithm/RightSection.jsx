@@ -40,7 +40,6 @@ const RightSection = ({
 }) => {
     const location = useLocation();
     const roomInfo = useLoaderData();
-    console.log('🚀 ~ file: RightSection.jsx:43 ~ roomInfo:', roomInfo);
     const [idUser, setIdUser] = useState('');
     const [totalTime, setTotalTime] = useState(0);
     const [isLanguage, setIsLanguage] = useState(false);
@@ -89,10 +88,8 @@ const RightSection = ({
             });
         });
     };
-    console.log('resInfo', resInfo);
     const finish = async () => {
         let res = await userRoomApi.postFinish(location.state.userRoomId);
-        console.log(res);
         if (res.data.status === 200) {
             navigate('/', { state: { success: true } });
             toastSuccess(res.data.message);
@@ -104,7 +101,6 @@ const RightSection = ({
     useEffect(() => {
         authApi.getUser().then((res) => {
             setIdUser(res.data.id);
-            console.log('accountID: ', res.data.id);
         });
     }, []);
 
