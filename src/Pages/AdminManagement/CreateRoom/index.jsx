@@ -30,9 +30,10 @@ const CreateRoom = () => {
                     toastSuccess(res.data.message);
                     // setRoomInfo(initialRoomInfo);
                     // setQuestions(roomInfo.type === 'FE' ? FEInitQuestion : BEInitQuestion);
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 2000);
+
+                    // setTimeout(() => {
+                    //     window.location.reload();
+                    // }, 2000);
                 } else {
                     toastError(`${res.data.message}. Open tab Console for more details`);
                     setErrors(res.data.err);
