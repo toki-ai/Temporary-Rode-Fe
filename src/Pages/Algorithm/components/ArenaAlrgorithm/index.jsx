@@ -7,8 +7,9 @@ import LeftSection from './LeftSection';
 import RightSection from './RightSection';
 
 const ArenaAlgorithm = () => {
+    const currCode = localStorage.getItem('codeBE');
     const roomInfo = useLoaderData();
-    const [code, setCode] = useState();
+    const [code, setCode] = useState(currCode ? currCode : '');
     const [showResult, setShowResult] = useState(false); // Show small tabs
     const [resInfo, setResInfo] = useState(0);
 
