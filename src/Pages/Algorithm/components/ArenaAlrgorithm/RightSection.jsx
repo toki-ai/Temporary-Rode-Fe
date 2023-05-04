@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 
 import { Col, Container, Nav, Row, Stack, Tab, TabPane } from 'react-bootstrap';
 import { Check } from 'react-bootstrap-icons';
-import { useLocation } from 'react-router-dom';
-import { useLoaderData } from 'react-router-dom';
+import { useLocation, useLoaderData, useNavigate } from 'react-router-dom';
 
 import { toastSuccess, toastError, toastInfo } from '../../../../components/Toast';
 import authApi from '../../../../utils/api/authApi';
@@ -47,6 +46,7 @@ const RightSection = ({
     const [isLanguage, setIsLanguage] = useState(language ? true : false);
     const [select, setSelect] = useState(language ? language : 'Choose language');
     const [score, setScore] = useState(0);
+    const navigate = useNavigate();
     const langs = [
         { name: 'C_CPP', id: 1 },
         { name: 'Java', id: 2 },
@@ -100,6 +100,7 @@ const RightSection = ({
             localStorage.removeItem('authenticated(do not delete)');
             localStorage.removeItem('question');
             localStorage.removeItem('language');
+            console.log('check run finished');
             navigate('/', { state: { success: true } });
             toastSuccess(res.data.message);
         } else if (res.data.status === 400) {
