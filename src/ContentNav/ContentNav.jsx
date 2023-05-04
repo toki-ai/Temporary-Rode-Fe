@@ -22,7 +22,9 @@ function ContentNav({ items, layout }) {
                     </Text>
                 ) : (
                     <Text>
-                        <Link onClick={handleOnClick}>{item.Info}</Link>
+                        <Link to={item.Action} onClick={handleOnClick}>
+                            {item.Info}
+                        </Link>
                     </Text>
                 )}
             </Item>
