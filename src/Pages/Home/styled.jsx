@@ -25,8 +25,8 @@ export const Box = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     @media ${device.tablet} {
-        width: 450px;
-        height: 350px;
+        width: 570px;
+        height: 380px;
     }
     @media ${device.laptop} {
         width: 646px;
@@ -42,6 +42,7 @@ export const Box = styled.div`
         width: 1800px;
         height: 760px;
     }
+    transition: all 0.3s ease;
 `;
 
 export const Input = styled.div`
@@ -90,7 +91,7 @@ export const Input = styled.div`
     }
     @media ${device.tablet} {
         .form {
-            top: -35%;
+            top: -30%;
             right: 0;
         }
         .inputRoomCode {
@@ -102,7 +103,7 @@ export const Input = styled.div`
             font-size: 25px;
         }
         .inputSearchRoom {
-            width: 250px;
+            width: 240px;
             padding: 2px;
             padding-left: 50px;
         }
@@ -178,7 +179,7 @@ export const Hero = styled.div`
     color: ${themes.colors.primary};
 
     @media ${device.tablet} {
-        font-size: 50px;
+        font-size: 45px;
     }
     @media ${device.laptop} {
         font-size: 45px;
@@ -209,7 +210,9 @@ export const Title = styled.div`
     -webkit-text-stroke-color: ${themes.colors.light};
     margin-left: 138px;
     @media ${device.tablet} {
-        font-size: 50px;
+        font-size: 45px;
+        line-height: 40px;
+        margin-left: 90px;
     }
     @media ${device.laptop} {
         font-size: 45px;
@@ -236,7 +239,7 @@ export const Name = styled.div`
     position: absolute;
     top: -35%;
     @media ${device.tablet} {
-        top: -35%;
+        top: -55%;
     }
     @media ${device.laptop} {
         top: -35%;
@@ -343,6 +346,12 @@ export const Text = styled.div`
     line-height: 14px;
 
     color: ${themes.colors.primary};
+    @media ${device.tablet} {
+        margin-top: 4%;
+        margin-left: 5%;
+        font-size: 26px;
+    }
+
     @media ${device.laptop} {
         margin-top: 4%;
         margin-left: 5%;
@@ -365,6 +374,11 @@ export const SearchBox = styled.div`
     display: flex;
 
     position: relative;
+    @media ${device.tablet} {
+        margin-top: 4%;
+        margin-left: 4%;
+    }
+
     @media ${device.laptop} {
         margin-top: 4%;
         margin-left: 4%;
@@ -434,6 +448,27 @@ export const Type = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    @media ${device.tablet} {
+        margin-top: -5%;
+        margin-left: 65%;
+        div {
+            font-size: 12px;
+
+            /* identical to box height */
+
+            color: ${themes.colors.primary};
+        }
+        .head {
+            width: 80px;
+        }
+        .menu {
+            width: 80px;
+        }
+
+        .transform {
+            transform: translate3d(-59px, 50px, 0px) !important;
+        }
     }
 
     @media ${device.laptop} {
@@ -527,6 +562,18 @@ export const RTable = styled(Table)`
         background-color: #f5f5f5;
         color: #333;
     }
+    @media ${device.tablet} {
+        width: 540px;
+        margin-top: 3%;
+        thead,
+        tbody,
+        tfoot,
+        tr,
+        td,
+        th {
+            padding: 0.2rem 0.5rem;
+        }
+    }
     @media ${device.laptop} {
         width: 600px;
         margin-top: 3%;
@@ -587,6 +634,10 @@ export const MyPagination = styled(Pagination)`
     li.active span {
         background-color: transparent !important;
         border: 1px solid ${themes.colors.primary}!important;
+    }
+    @media ${device.tablet} {
+        margin-top: 2%;
+        margin-left: 20%;
     }
     @media ${device.laptop} {
         margin-top: 4%;
