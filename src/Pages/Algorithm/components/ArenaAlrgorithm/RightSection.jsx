@@ -40,6 +40,7 @@ const RightSection = ({
 }) => {
     const location = useLocation();
     const roomInfo = useLoaderData();
+    console.log('🚀 ~ file: RightSection.jsx:43 ~ roomInfo:', roomInfo);
     const [idUser, setIdUser] = useState('');
     const [totalTime, setTotalTime] = useState(0);
     const [isLanguage, setIsLanguage] = useState(false);
@@ -88,8 +89,10 @@ const RightSection = ({
             });
         });
     };
+    console.log('resInfo', resInfo);
     const finish = async () => {
         let res = await userRoomApi.postFinish(location.state.userRoomId);
+        console.log(res);
         if (res.data.status === 200) {
             navigate('/', { state: { success: true } });
             toastSuccess(res.data.message);
@@ -101,6 +104,7 @@ const RightSection = ({
     useEffect(() => {
         authApi.getUser().then((res) => {
             setIdUser(res.data.id);
+            console.log('accountID: ', res.data.id);
         });
     }, []);
 
@@ -167,22 +171,14 @@ const RightSection = ({
                     </Stack>
                     {showResult && (
                         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                            <Row style={{ padding: '0 10px', height: '220px' }}>
-                                <Col sm={3} className="p-0 m-y-20">
+                            <Row style={{ padding: '0 10px' }}>
+                                <Col sm={3} className="p-0 ">
                                     <ControllerNav>
                                         <ControllerNavLink eventKey="first">
                                             <Nav.Link eventKey="first">Result</Nav.Link>
                                         </ControllerNavLink>
                                         <ControllerNavLink eventKey="second">
                                             <Nav.Link eventKey="second">Message</Nav.Link>
-                                        </ControllerNavLink>
-                                        <ControllerNavLink eventKey="third">
-                                            <Nav.Link
-                                                eventKey="third"
-                                                className="text-green center"
-                                            >
-                                                <IconCheck></IconCheck>TestCase
-                                            </Nav.Link>
                                         </ControllerNavLink>
                                     </ControllerNav>
                                 </Col>
@@ -248,12 +244,6 @@ const RightSection = ({
                                                         Submit successfully !
                                                     </div>
                                                 )}
-                                            </TabPane>
-                                            <TabPane
-                                                eventKey="third"
-                                                className="h-100 tabPane bg-dark"
-                                            >
-                                                <p className="yellow-styled p-20"></p>
                                             </TabPane>
                                         </Tab.Content>
                                     </WrapperResult>

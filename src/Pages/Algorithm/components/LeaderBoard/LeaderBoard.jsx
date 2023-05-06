@@ -6,8 +6,17 @@ import { useLoaderData } from 'react-router-dom';
 import roomApi from '../../../../utils/api/roomApi';
 import submitHistoryApi from '../../../../utils/api/submitHistoryApi';
 import PaginationLeaderboard from './PaginationLeaderboard';
-import { LeaderBoardStyled, HeaderLB, QuestionLB, TitleLB, TableLB, PaginationLB } from './styled';
+import {
+    LeaderBoardStyled,
+    HeaderLB,
+    QuestionLB,
+    TitleLB,
+    TableLB,
+    PaginationLB,
+    ChooseQWrapper,
+} from './styled';
 
+import Dropdown from 'react-bootstrap/Dropdown';
 import Table from 'react-bootstrap/Table';
 
 const LeaderBoard = () => {
@@ -23,6 +32,10 @@ const LeaderBoard = () => {
         };
         fetchDataSubmitHistory();
     }, [questionCode]);
+
+    const handleQuestionChange = (e) => {
+        setQuestionCode(e.target.name);
+    };
     return (
         <LeaderBoardStyled>
             <Row sm={12} md={12} lg={12} className="w-100">
@@ -35,12 +48,46 @@ const LeaderBoard = () => {
                         className="numQuestion"
                     >
                         {roomInfo.questions.map((question, index) => (
-                            <option key={question.id} value={question.id} className="numQuestion">
+                            <option
+                                key={question.id}
+                                value={question.id}
+                                className="numQuestion border"
+                            >
                                 Question {index + 1}
                             </option>
                         ))}
                     </QuestionLB>
                 </HeaderLB>
+                {/* <ChooseQWrapper>
+                    <TitleLB>LeaderBoard</TitleLB>
+                    <Dropdown className="d-inline mx-2" onSelect={handleQuestionChange}>
+                        <Dropdown.Toggle
+                            id="dropdown-autoclose-true"
+                            className="bg border button head"
+                        >
+                            {questionCode}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu className="bg border transform menu">
+                            {roomInfo.questions.length !== 0 ? (
+                                roomInfo.questions.map((question, id) => {
+                                    return (
+                                        <Dropdown.Item
+                                            eventKey={question.questionImage}
+                                            key={id}
+                                            name={`Question ${id + 1}`}
+                                            onClick={() => {}}
+                                        >
+                                            Question {id + 1}
+                                        </Dropdown.Item>
+                                    );
+                                })
+                            ) : (
+                                <div> ERROR</div>
+                            )}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </ChooseQWrapper> */}
                 <Row className="m-0">
                     <TableLB>
                         <Table striped hover className="mb-0">
@@ -82,9 +129,6 @@ const LeaderBoard = () => {
                         </Table>
                     </TableLB>
                 </Row>
-                {/* <PaginationLB>
-                    <PaginationLeaderboard />
-                </PaginationLB> */}
             </Row>
         </LeaderBoardStyled>
     );

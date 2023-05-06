@@ -68,17 +68,18 @@ export const TitleLB = styled.h1`
 `;
 
 export const QuestionLB = styled.select`
-    width: 335px;
+    width: 180px;
     height: 60px;
     appearance: none;
-    font-weight: 600;
-    font-size: 26px;
+    font-weight: 500;
+    font-size: 20px;
     line-height: 32px;
     background: #000000;
     border-radius: 15px;
     color: #ffffff;
     padding: 0 20px;
-    border: 2px solid #2e7dff;
+    border: 1px solid ${themes.colors.primary} !important;
+    background: #020d26;
 
     &:focus {
         outline: none;
@@ -89,6 +90,9 @@ export const QuestionLB = styled.select`
         width: 140px;
         height: 40px;
         padding: 10px 20px;
+    }
+    .border {
+        border: 1px solid ${themes.colors.primary} !important;
     }
 `;
 
@@ -322,19 +326,19 @@ export const WrapperResult = styled.div`
         margin: 20px 0 30px;
         border: 2px solid #ea4335;
         border-radius: 10px;
-        overflow: scroll;
-        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .success-message {
         display: flex;
         align-items: center;
+        justify-content: center;
         color: #9afd9a;
         width: 100%;
         height: 20%;
-        padding: 10px;
+        padding: 30px;
         margin: 50px 0;
-        border: 2px solid blue;
+        border: 2px solid #9afd9a;
         border-radius: 10px;
     }
 `;
@@ -342,4 +346,45 @@ export const WrapperResult = styled.div`
 export const IconCheck = styled(Check)`
     width: 20px;
     height: 20px;
+`;
+
+export const ChooseQWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    margin-right: 1em;
+    a {
+        color: ${themes.colors.light};
+    }
+
+    .bg {
+        background: #020d26;
+    }
+    .border {
+        border: 1px solid ${themes.colors.primary} !important;
+    }
+    /* .w-150 {
+        width: 150px;
+    } */
+    .dd-100 {
+        width: 150px;
+    }
+    .transform {
+        transform: translate3d(0px, 50px, 0px);
+    }
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        background-color: ${themes.colors.primary};
+    }
+    .button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .menu {
+        width: 100%;
+    }
 `;
