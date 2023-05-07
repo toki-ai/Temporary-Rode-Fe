@@ -62,6 +62,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
         if (res.data.status === 200) {
             submitService.setSubmit(res.data.data);
             setSubmitStatus(true);
+            localStorage.setItem('authenticated', JSON.stringify(res.data.data));
         }
     };
 
@@ -70,6 +71,8 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
         console.log(res);
         if (res.data.status === 200) {
             navigate('/', { state: { success: true } });
+            localStorage.removeItem('code');
+            localStorage.removeItem('authenticated');
             toastSuccess(res.data.message);
         }
     };
@@ -105,6 +108,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
                     options={{ lineWrapping: 'true', lineNumbers: 'true', autoCloseBrackets: true }}
                     onChange={(e) => {
                         setCode(e);
+                        localStorage.setItem('code', e);
                         setCount(e.length);
                     }}
                 />

@@ -17,8 +17,8 @@ const ArenaCSS = () => {
     const codeTemplate = roomInfo?.questions[0]?.codeTemplate
         ? roomInfo?.questions[0].codeTemplate
         : CodeTemplateTmp;
-
-    const [code, setCode] = useState(codeTemplate);
+    const currCode = localStorage.getItem('code');
+    const [code, setCode] = useState(currCode ? currCode : codeTemplate);
     const [count, setCount] = useState(0);
     const [submit, setSubmit] = useState();
     const [show, setShow] = useState(false);

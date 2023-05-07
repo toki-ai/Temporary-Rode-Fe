@@ -7,14 +7,15 @@ import LeftSection from './LeftSection';
 import RightSection from './RightSection';
 
 const ArenaAlgorithm = () => {
+    const currCode = localStorage.getItem('codeBE');
     const roomInfo = useLoaderData();
-
-    const [code, setCode] = useState();
+    const [code, setCode] = useState(currCode ? currCode : '');
     const [showResult, setShowResult] = useState(false); // Show small tabs
     const [resInfo, setResInfo] = useState(0);
 
+    const currQuestion = JSON.parse(localStorage.getItem('question'));
     const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [showRightSection, setShowRightSection] = useState(false);
+    const [showRightSection, setShowRightSection] = useState(currQuestion ? true : false);
 
     const [leftWidth, setLeftWidth] = useState('50%');
     const separatorRef = useRef(null);
@@ -44,6 +45,7 @@ const ArenaAlgorithm = () => {
                     <LeftSection
                         roomInfo={roomInfo}
                         action={setQuestionId}
+                        currQuestion={currQuestion}
                         setCurrentQuestion={setCurrentQuestion}
                         setShowRightSection={setShowRightSection}
                         setShowResult={setShowResult}

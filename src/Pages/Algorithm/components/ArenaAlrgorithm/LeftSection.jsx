@@ -15,6 +15,7 @@ import Form from 'react-bootstrap/Form';
 const LeftSection = ({
     action,
     roomInfo,
+    currQuestion,
     setCurrentQuestion,
     setShowRightSection,
     setCode,
@@ -22,13 +23,16 @@ const LeftSection = ({
     setResInfo,
 }) => {
     console.log('line 15: ', roomInfo);
+    console.log(currQuestion);
     const [question, setQuestion] = useState({
-        current: 'Choose question',
-        questionImg: roomInfo?.questions[0]?.questionImage,
+        current: currQuestion ? currQuestion.current : 'Choose question',
+        questionImg: currQuestion
+            ? currQuestion.questionImg
+            : roomInfo?.questions[0]?.questionImage,
     });
     const TestImg = localFileApi.getImg(question.questionImg);
     const [imageError, setImageError] = useState(false);
-    const [showRemind, setShowRemind] = useState(true);
+    const [showRemind, setShowRemind] = useState(currQuestion ? false : true);
     const handleImageError = () => {
         setImageError(true);
     };
@@ -38,9 +42,17 @@ const LeftSection = ({
             current: e.target.name,
             questionImg: eventKey,
         });
+        console.log(e.target.name);
+        localStorage.setItem(
+            'question',
+            JSON.stringify({
+                current: e.target.name,
+                questionImg: eventKey,
+            })
+        );
     };
 
-    const [showImg, setShowImg] = useState(false);
+    const [showImg, setShowImg] = useState(currQuestion ? true : false);
     return (
         <Container className="p-4 h-100 overflow-y-auto">
             <Stack direction="horizontal" className="justify-content-between">
