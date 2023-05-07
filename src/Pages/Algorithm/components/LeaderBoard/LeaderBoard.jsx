@@ -58,36 +58,6 @@ const LeaderBoard = () => {
                         ))}
                     </QuestionLB>
                 </HeaderLB>
-                {/* <ChooseQWrapper>
-                    <TitleLB>LeaderBoard</TitleLB>
-                    <Dropdown className="d-inline mx-2" onSelect={handleQuestionChange}>
-                        <Dropdown.Toggle
-                            id="dropdown-autoclose-true"
-                            className="bg border button head"
-                        >
-                            {questionCode}
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu className="bg border transform menu">
-                            {roomInfo.questions.length !== 0 ? (
-                                roomInfo.questions.map((question, id) => {
-                                    return (
-                                        <Dropdown.Item
-                                            eventKey={question.questionImage}
-                                            key={id}
-                                            name={`Question ${id + 1}`}
-                                            onClick={() => {}}
-                                        >
-                                            Question {id + 1}
-                                        </Dropdown.Item>
-                                    );
-                                })
-                            ) : (
-                                <div> ERROR</div>
-                            )}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </ChooseQWrapper> */}
                 <Row className="m-0">
                     <TableLB>
                         <Table striped hover className="mb-0">
