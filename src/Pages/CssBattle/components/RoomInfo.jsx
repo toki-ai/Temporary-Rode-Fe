@@ -16,6 +16,8 @@ const RoomInfo = ({ data, submit }) => {
 
     const handleShow = () => setShow(true);
     console.log(data.duration);
+
+    const submitted = JSON.parse(localStorage.getItem('authenticated'));
     const LIST_INFO = [
         {
             title: 'Timers',
@@ -27,7 +29,12 @@ const RoomInfo = ({ data, submit }) => {
         },
         {
             title: 'Scores',
-            body: <Scores submitTimes={data?.questions[0].maxSubmitTimes} submit={submit} />,
+            body: (
+                <Scores
+                    submitTimes={data?.questions[0].maxSubmitTimes}
+                    submit={submitted?.times ? submitted : submit}
+                />
+            ),
         },
     ];
 

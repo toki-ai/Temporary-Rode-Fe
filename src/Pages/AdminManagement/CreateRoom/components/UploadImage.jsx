@@ -55,7 +55,7 @@ const UploadImage = ({ question, questionIdx, setQuestions, setImageUrls, imageU
     };
 
     return (
-        <div className="my-4">
+        <div>
             <label>Image</label>
             <input
                 id="questionImage"

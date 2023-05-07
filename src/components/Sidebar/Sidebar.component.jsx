@@ -22,42 +22,42 @@ const generalItems = [
     {
         icon: <IconHouse />,
         Info: 'Dashboard',
-        Action: './dashboard',
+        Action: '/admin/room',
     },
 ];
 const infoItems = [
     {
         icon: <IconPerson />,
         Info: 'Contestant',
-        Action: './contestant',
+        Action: '/contestant',
     },
     {
         icon: <IconHouse />,
         Info: 'Room',
-        Action: './room',
+        Action: '/admin/room',
     },
-    {
-        icon: <IconBarChart />,
-        Info: 'Leaderboard',
-        Action: './leaderboard',
-    },
-    {
-        icon: <IconFile />,
-        Info: 'Content',
-        Action: './content',
-    },
+    // {
+    //     icon: <IconBarChart />,
+    //     Info: 'Leaderboard',
+    //     Action: './leaderboard',
+    // },
+    // {
+    //     icon: <IconFile />,
+    //     Info: 'Content',
+    //     Action: '/content',
+    // },
 ];
 
 const endItems = [
-    {
-        icon: <IconChat />,
-        Info: 'Feedback',
-        Action: './feedback',
-    },
+    // {
+    //     icon: <IconChat />,
+    //     Info: 'Feedback',
+    //     Action: '/feedback',
+    // },
     {
         icon: <IconLogOut />,
         Info: 'Log out',
-        Action: '/',
+        Action: '/login',
     },
 ];
 function Sidebar() {

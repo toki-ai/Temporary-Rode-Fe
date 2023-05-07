@@ -13,6 +13,7 @@ const BEInitQuestion = [
     {
         maxSubmitTimes: 0,
         questionImage: '',
+        codeTemplate: '',
         testcases: [
             { input: '', output: '' },
             // May have a lot of testcase { input, output }

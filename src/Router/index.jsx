@@ -1,4 +1,4 @@
-import { createBrowserRouter, Route, Router, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
 import ErrorPage from '../Pages/404Page';
@@ -9,13 +9,10 @@ import AdminRoomEdit from '../Pages/AdminManagement/AdminRoomEdit';
 import AdminRoomView from '../Pages/AdminManagement/AdminRoomView';
 import CreateRoom from '../Pages/AdminManagement/CreateRoom';
 import Algorithm from '../Pages/Algorithm';
-import TestLayout from '../Pages/Algorithm/LayoutAlgorithm';
 import ArenaCSS from '../Pages/CssBattle';
-import TestCodeMirror from '../Pages/CssBattle';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
-import TestTabs from '../Pages/Test/TestTabs';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import PublicLayout from '../components/PublicLayout/UserLayout.component';
@@ -23,9 +20,23 @@ import { Resize, useWindowDimensions } from '../components/Resize';
 import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
-import Controller from './Controller';
+// import Controller from './Controller';
 import PublicRoute from './PublicRoute';
 import { loaderInfoGG, GetInfoRoomByCode, GetInfoUser } from './RouterLoader/Loader';
+
+// const ErrorPage = lazy(() => import('../Pages/404Page'));
+// const Home = lazy(() => import('../Pages/Home'));
+// const Login = lazy(() => import('../Pages/Login'));
+
+// const AdminLayoutComponent = lazy(() => import('../components/Layout/AdminLayout.component'));
+
+// const Algorithm = lazy(() => import('../Pages/Algorithm'));
+// const CreateRoom = lazy(() => import('../Pages/AdminManagement/CreateRoom'));
+// const AdminRoomView = lazy(() => import('../Pages/AdminManagement/AdminRoomView'));
+// const AdminRoomEdit = lazy(() => import('../Pages/AdminManagement/AdminRoomEdit'));
+// const AdminRoom = lazy(() => import('../Pages/AdminManagement/AdminRoom'));
+// const AdminAttendance = lazy(() => import('../Pages/AdminManagement/AdminAttendance'));
+// const AllAccounts = lazy(() => import('../Pages/Accounts/AllAccounts'));
 
 const RouterComponent = () => {
     const { width } = useWindowDimensions();
@@ -76,19 +87,17 @@ const RouterComponent = () => {
                         {
                             exact: true,
                             path: '/contestant',
-                            loader: Loading,
+
                             element: <AllAccounts />,
                         },
                         {
                             exact: true,
                             path: '/admin/create',
-                            loader: Loading,
                             element: <CreateRoom />,
                         },
                         {
                             exact: true,
                             path: '/admin/attendance/:id',
-                            loader: Loading,
                             element: <AdminAttendance />,
                         },
                     ],

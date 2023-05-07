@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 
 import { Col, Container, Nav, Row, Stack, Tab, TabPane } from 'react-bootstrap';
 import { Check } from 'react-bootstrap-icons';
-import { useLocation } from 'react-router-dom';
-import { useLoaderData } from 'react-router-dom';
+import { useLocation, useLoaderData, useNavigate } from 'react-router-dom';
 
 import { toastSuccess, toastError, toastInfo } from '../../../../components/Toast';
 import authApi from '../../../../utils/api/authApi';
@@ -38,20 +37,23 @@ const RightSection = ({
     resInfo,
     setResInfo,
 }) => {
+    const language = localStorage.getItem('language');
     const location = useLocation();
     const roomInfo = useLoaderData();
     console.log('🚀 ~ file: RightSection.jsx:43 ~ roomInfo:', roomInfo);
     const [idUser, setIdUser] = useState('');
     const [totalTime, setTotalTime] = useState(0);
-    const [isLanguage, setIsLanguage] = useState(false);
-    const [select, setSelect] = useState('Choose language');
+    const [isLanguage, setIsLanguage] = useState(language ? true : false);
+    const [select, setSelect] = useState(language ? language : 'Choose language');
     const [score, setScore] = useState(0);
+    const navigate = useNavigate();
     const langs = [
         { name: 'C_CPP', id: 1 },
         { name: 'Java', id: 2 },
     ];
     const handleSelectChange = (eventKey) => {
         setSelect(eventKey);
+        localStorage.setItem('language', eventKey);
         setIsLanguage(true);
     };
     const submitCode = async () => {
@@ -73,6 +75,7 @@ const RightSection = ({
 
         if (res.data.status === 200) {
             setResInfo(res.data);
+            localStorage.setItem('authenticated(do not delete)', JSON.stringify(res.data.data));
             toastSuccess(res.data.message);
         } else {
             toastError('Submit fail');
@@ -94,6 +97,10 @@ const RightSection = ({
         let res = await userRoomApi.postFinish(location.state.userRoomId);
         console.log(res);
         if (res.data.status === 200) {
+            localStorage.removeItem('authenticated(do not delete)');
+            localStorage.removeItem('question');
+            localStorage.removeItem('language');
+            console.log('check run finished');
             navigate('/', { state: { success: true } });
             toastSuccess(res.data.message);
         } else if (res.data.status === 400) {
@@ -108,6 +115,8 @@ const RightSection = ({
         });
     }, []);
 
+    const submitted = JSON.parse(localStorage.getItem('authenticated(do not delete)'));
+    console.log(submitted);
     return (
         <Container className="p-2 h-100">
             <WrapRightSection>
@@ -128,6 +137,7 @@ const RightSection = ({
                         }}
                         onChange={(event) => {
                             setCode(event);
+                            localStorage.setItem('codeBE', event);
                         }}
                     />
                 </BoxEditor>
@@ -135,8 +145,15 @@ const RightSection = ({
                 <ControllerArena>
                     <Stack direction="horizontal" className="justify-content-between">
                         <div className="text-white btn border-blue">
-                            Submit: {resInfo ? resInfo?.data?.times?.current : '_ '}/
-                            {roomInfo.questions[currentQuestion].maxSubmitTimes} Times
+                            {/* {/* Submit: {resInfo ? resInfo?.data?.times?.current : '_ '}/
+                            {roomInfo.questions[currentQuestion].maxSubmitTimes} Times */}
+                            Submit:{' '}
+                            {submitted
+                                ? submitted.times?.current
+                                : resInfo
+                                ? resInfo?.data?.times?.current
+                                : '0'}
+                            /{roomInfo.questions[currentQuestion].maxSubmitTimes} Times
                         </div>
                         <ChooseQWrapper>
                             <Dropdown className="d-inline mx-2" onSelect={handleSelectChange}>

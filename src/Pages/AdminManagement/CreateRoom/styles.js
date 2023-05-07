@@ -17,6 +17,17 @@ export const Wrapper = styled.div`
     .form-control:focus {
         color: ${themes.colors.dark};
     }
+
+    textarea {
+        background-color: ${themes.colors.light};
+        padding: 10px;
+        border: 1px solid ${themes.colors.primary};
+        border-radius: 5px;
+
+        &:focus-visible {
+            outline-color: ${themes.colors.primary};
+        }
+    }
 `;
 
 export const Title = styled.h1`
@@ -111,13 +122,6 @@ export const Testcase = styled.div`
         position: relative;
         top: -12px;
         display: block;
-        border: 1px solid ${themes.colors.primary};
-        border-radius: 5px;
-        padding: 10px 0;
-
-        &:focus-visible {
-            outline-color: ${themes.colors.primary};
-        }
     }
 `;
 
@@ -159,5 +163,6 @@ export const CodeTemplate = styled.div`
         width: min(100%, 400px);
         height: 500px;
         border-color: ${themes.colors.primary};
+        margin-top: 10px;
     }
 `;
