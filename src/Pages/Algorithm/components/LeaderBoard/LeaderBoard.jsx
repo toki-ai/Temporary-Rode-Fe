@@ -33,30 +33,48 @@ const LeaderBoard = () => {
         fetchDataSubmitHistory();
     }, [questionCode]);
 
-    const handleQuestionChange = (e) => {
-        setQuestionCode(e.target.name);
+    const handleQuestionChange = (eventKey, e) => {
+        setQuestion({
+            current: e.target.name,
+            questionImg: eventKey,
+        });
     };
+    const [question, setQuestion] = useState({
+        current: 'Question 1',
+    });
     return (
         <LeaderBoardStyled>
             <Row sm={12} md={12} lg={12} className="w-100">
                 <HeaderLB>
                     <TitleLB>LeaderBoard</TitleLB>
-
-                    <QuestionLB
-                        aria-label=""
-                        onChange={(e) => setQuestionCode(e.currentTarget.value)}
-                        className="numQuestion"
-                    >
-                        {roomInfo.questions.map((question, index) => (
-                            <option
-                                key={question.id}
-                                value={question.id}
-                                className="numQuestion border"
+                    <ChooseQWrapper>
+                        <Dropdown className="d-inline mx-2" onSelect={handleQuestionChange}>
+                            <Dropdown.Toggle
+                                id="dropdown-autoclose-true"
+                                className="bg border button head"
                             >
-                                Question {index + 1}
-                            </option>
-                        ))}
-                    </QuestionLB>
+                                {question.current}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu className="bg border transform menu">
+                                {roomInfo.questions.length !== 0 ? (
+                                    roomInfo.questions.map((question, id) => {
+                                        return (
+                                            <Dropdown.Item
+                                                key={id}
+                                                name={`Question ${id + 1}`}
+                                                onClick={() => setQuestionCode(question.id)}
+                                            >
+                                                Question {id + 1}
+                                            </Dropdown.Item>
+                                        );
+                                    })
+                                ) : (
+                                    <div className="white-text">No Information</div>
+                                )}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </ChooseQWrapper>
                 </HeaderLB>
                 <Row className="m-0">
                     <TableLB>

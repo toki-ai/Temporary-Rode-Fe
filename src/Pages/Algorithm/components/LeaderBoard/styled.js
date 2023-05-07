@@ -80,7 +80,7 @@ export const QuestionLB = styled.select`
     padding: 0 20px;
     border: 1px solid ${themes.colors.primary} !important;
     background: #020d26;
-
+    cursor: pointer;
     &:focus {
         outline: none;
         margin-bottom: 50px;
@@ -102,6 +102,7 @@ export const TableLB = styled.div`
     padding: 0;
     margin: 0;
     border: 1px solid #00e7aa;
+    overflow-y: auto;
     .mb-0 {
         margin-bottom: 0;
     }
@@ -355,7 +356,6 @@ export const ChooseQWrapper = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 20px;
-    margin-right: 1em;
     a {
         color: ${themes.colors.light};
     }
