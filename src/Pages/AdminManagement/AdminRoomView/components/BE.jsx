@@ -24,7 +24,7 @@ const titlesQues = [
 ];
 const BE = ({ ques, roomId, questions, questionId }) => {
     const [question, setQuestion] = useState([]);
-    const [questionID, setQuestionID] = useState('');
+    const [questionID, setQuestionID] = useState('All');
     const [accounts, setAccounts] = useState([]);
     const [accountsAll, setAccountsAll] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -33,7 +33,6 @@ const BE = ({ ques, roomId, questions, questionId }) => {
     const [totalPageAll, setTotalPageAll] = useState(1);
     useEffect(() => {
         setQuestion(questions);
-        console.log(question);
         setQuestionID(questionId);
     }, [questions, questionId]);
     useEffect(() => {
@@ -41,22 +40,15 @@ const BE = ({ ques, roomId, questions, questionId }) => {
             setAccounts(res.data.data.items);
             setCurrentPage(res.data.data.meta.currentPage);
             setTotalPage(res.data.data.meta.totalPages);
-            console.log(res.data.data);
         });
     }, [questionId, questions]);
-    console.log(roomId);
     useEffect(() => {
         roomApi.getSubmitHistoryByRoom(roomId).then((res) => {
-            console.log(res.data.data);
             setAccountsAll(res.data.data.items);
             setCurrentPageAll(res.data.data.meta.currentPage);
             setTotalPageAll(res.data.data.meta.totalPages);
         });
-    }, [roomId, questions, question]);
-    console.log(question);
-    console.log(questionID);
-    console.log(accounts);
-    console.log(accountsAll);
+    }, [roomId, questions, question, questionID]);
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
@@ -65,7 +57,7 @@ const BE = ({ ques, roomId, questions, questionId }) => {
             <Table striped className="mt-2 border-top">
                 <thead>
                     <tr>
-                        {questionID == 'All'
+                        {questionId == 'All'
                             ? titlesAll.map((item) => {
                                   return (
                                       <th className="fw-bold" key={item.id}>
@@ -83,7 +75,7 @@ const BE = ({ ques, roomId, questions, questionId }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {questionID == 'All' ? (
+                    {questionId == 'All' ? (
                         accountsAll?.length ? (
                             accountsAll.map((account, i) => {
                                 return (
@@ -125,7 +117,7 @@ const BE = ({ ques, roomId, questions, questionId }) => {
                 </tbody>
             </Table>
 
-            {questionID == 'All' ? (
+            {questionId == 'All' ? (
                 parseInt(totalPageAll) > 1 || accountsAll?.length ? (
                     <PaginationRoom
                         action={handlePageChange}

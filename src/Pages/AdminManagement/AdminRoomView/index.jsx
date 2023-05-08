@@ -6,14 +6,10 @@ import { Nav } from 'react-bootstrap';
 import { TiArrowLeft } from 'react-icons/ti';
 import { Link, useParams } from 'react-router-dom';
 
-import ButtonStyled from '../../../components/Button';
 import roomApi from '../../../utils/api/roomApi';
-import PaginationRoom from '../AdminRoom/components/Pagination';
 import BE from './components/BE';
 import FE from './components/FE';
-import FilterQues from './components/FilterQues';
 import RoomInfo from './components/RoomInfo';
-import Table from './components/Table';
 import { ARViewStyle } from './style';
 
 const titlesAll = [
@@ -29,28 +25,22 @@ const AdminRoomView = () => {
     const [room, setRoom] = useState([]);
     const [questions, setQuestions] = useState([]);
     const [quesName, setQuesName] = useState('All');
-    const [questionId, setQuestionId] = useState();
+    const [questionId, setQuestionId] = useState('All');
 
     useEffect(() => {
         roomApi
             .getRoomById(id)
             .then((res) => {
                 setRoom(res.data.data);
-                console.log(res.data.data);
                 !res.data.data.questions ? setQuestions([]) : setQuestions(res.data.data.questions);
-                console.log(res.data.data.questions);
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
-    console.log(questions);
     const handleButtonChange = (e) => {
-        console.log(e.target.value);
         setQuesName(e.target.value);
-        console.log(questions);
     };
-    console.log(questionId);
     return (
         <ARViewStyle>
             <div className="w-100 p-3 box-style">
