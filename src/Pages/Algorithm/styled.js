@@ -224,7 +224,8 @@ export const TimeText = styled.span`
     line-height: 28px;
     letter-spacing: 0.457143px;
     text-transform: uppercase;
-
+    display: flex;
+    align-items: center;
     color: #ffffff;
 `;
 export const ChooseQWrapper = styled.div`
