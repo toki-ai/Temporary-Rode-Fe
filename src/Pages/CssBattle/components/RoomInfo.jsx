@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ButtonStyled from '../../../components/Button';
 import OffCanvasComponents from '../../../components/OffCanvas/OffCanvas';
+import roomApi from '../../../utils/api/roomApi';
 import { Box, TextStyled, StyledWrap } from '../styled';
 import Colors from './Colors';
 import CountdownTimer from './CountDown';
@@ -13,9 +14,9 @@ import Stack from 'react-bootstrap/Stack';
 
 const RoomInfo = ({ data, submit }) => {
     const [show, setShow] = useState(false);
-
+    const [rank, setRank] = useState([]);
     const handleShow = () => setShow(true);
-    console.log(data.duration);
+    console.log(data);
 
     const submitted = JSON.parse(localStorage.getItem('authenticated'));
     const LIST_INFO = [
@@ -37,11 +38,22 @@ const RoomInfo = ({ data, submit }) => {
             ),
         },
     ];
-
+    useEffect(() => {
+        roomApi
+            .getSubmitHistoryByRoom(data.id)
+            .then((res) => {
+                if (res.data.status === 200) {
+                    setRank([...res.data.data.items]);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
     return (
         <StyledWrap>
             <OffCanvasComponents title={'LEADERBOARD'} show={show} setShow={setShow}>
-                <Rank />
+                <Rank rank={rank} />
             </OffCanvasComponents>
             <Stack direction="horizontal" className="justify-content-between mb-3">
                 <TextStyled>ROOM {data.code}</TextStyled>
