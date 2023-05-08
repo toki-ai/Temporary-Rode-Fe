@@ -16,6 +16,9 @@ import {
 import Table from 'react-bootstrap/Table';
 
 const Submission = () => {
+    const [dataSubmission, setDataSubmission] = useState([]);
+    const [viewResult, setViewResult] = useState(false);
+    const [answer, setAnswer] = useState('');
     const numQues = [];
     const roomInfo = useLoaderData();
     const arrQuestion = roomInfo.questions.map((item, index) => {
@@ -25,9 +28,6 @@ const Submission = () => {
         };
     });
 
-    const [dataSubmission, setDataSubmission] = useState([]);
-    const [viewResult, setViewResult] = useState(false);
-    const [answer, setAnswer] = useState('');
     useEffect(() => {
         const fetchData = async () => {
             const res = {
@@ -60,63 +60,69 @@ const Submission = () => {
                     <TitleSubmission>Submission</TitleSubmission>
                 </HeaderSubmission>
                 <Row className="m-0">
-                    <TableSubmission className="tableSubmit">
-                        <Table striped hover className="mb-0">
-                            <div className="wrap">
-                                <table className="head">
-                                    <tbody>
-                                        <tr>
-                                            <td>Question</td>
-                                            <td>Result</td>
-                                            <td>Score</td>
-                                            <td>Language</td>
-                                            <td>Time</td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div className="scroll-table">
-                                    <table>
-                                        {dataSubmission?.map((item, index) => (
-                                            <tbody key={index} className="">
-                                                <tr
-                                                    className={
-                                                        index % 2 != 0 ? 'bg-even' : 'bg-old'
-                                                    }
-                                                >
-                                                    <td>{numQues[index]}</td>
-                                                    {item.time ? (
-                                                        <td className="accepted">
-                                                            <i class="bi bi-check2-circle"></i>{' '}
-                                                            Accepted
-                                                        </td>
-                                                    ) : (
-                                                        <td className="error">
-                                                            <i class="bi bi-x-circle"></i>{' '}
-                                                            Compilation error
-                                                        </td>
-                                                    )}
-                                                    <td>{item.score}</td>
-                                                    <td>{item.language}</td>
-                                                    {item.time ? (
-                                                        <td>{item.time} ms</td>
-                                                    ) : (
-                                                        <td>__</td>
-                                                    )}
-                                                    <td
-                                                        className="viewResult"
-                                                        onClick={() => handleView(item.submissions)}
-                                                    >
-                                                        <a>View Results</a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        ))}
+                    {dataSubmission ? (
+                        <TableSubmission className="tableSubmit">
+                            <Table striped hover className="mb-0">
+                                <div className="wrap">
+                                    <table className="head">
+                                        <tbody>
+                                            <tr>
+                                                <td>Question</td>
+                                                <td className="width-200">Result</td>
+                                                <td>Score</td>
+                                                <td>Language</td>
+                                                <td>Time</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
                                     </table>
+                                    <div className="scroll-table">
+                                        <table>
+                                            {dataSubmission?.map((item, index) => (
+                                                <tbody key={index} className="">
+                                                    <tr
+                                                        className={
+                                                            index % 2 != 0 ? 'bg-even' : 'bg-old'
+                                                        }
+                                                    >
+                                                        <td>{numQues[index]}</td>
+                                                        {item.time ? (
+                                                            <td className="accepted">
+                                                                <i class="bi bi-check2-circle"></i>{' '}
+                                                                Accepted
+                                                            </td>
+                                                        ) : (
+                                                            <td className="error">
+                                                                <i class="bi bi-x-circle"></i>{' '}
+                                                                Compilation error
+                                                            </td>
+                                                        )}
+                                                        <td>{item.score}</td>
+                                                        <td>{item.language}</td>
+                                                        {item.time ? (
+                                                            <td>{item.time} ms</td>
+                                                        ) : (
+                                                            <td>__</td>
+                                                        )}
+                                                        <td
+                                                            className="viewResult"
+                                                            onClick={() =>
+                                                                handleView(item.submissions)
+                                                            }
+                                                        >
+                                                            <a>View Results</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            ))}
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                        </Table>
-                    </TableSubmission>
+                            </Table>
+                        </TableSubmission>
+                    ) : (
+                        <h1 className="no-data">Sorry ! No information ...</h1>
+                    )}
                 </Row>
                 <Row>
                     {viewResult && (
@@ -135,9 +141,6 @@ const Submission = () => {
                         </TableSubmitted>
                     )}
                 </Row>
-                {/* <PaginationLB>
-            <PaginationLeaderboard />
-        </PaginationLB> */}
             </Row>
         </SubmissionStyled>
     );

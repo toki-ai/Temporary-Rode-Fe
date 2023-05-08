@@ -5,34 +5,31 @@ import CooperAward from '../../../assets/AwardIcon/vector3.png';
 import GoldAward from '../../../assets/AwardIcon/vector.png';
 import { RankBox } from '../styled';
 
-const LIST_RANK = [
-    { name: 'Lê Thành Long', studentID: 'SE170022', char: '23' },
-    { name: 'Trần Hải Đăng', studentID: 'SE172233', char: '454' },
-    { name: 'Võ Minh Tiến', studentID: 'SE171213', char: '323' },
-    { name: 'Trần Văn Thọ', studentID: 'SE171412', char: '323' },
-];
-const Rank = () => {
+const Rank = ({ rank }) => {
     return (
         <>
-            {LIST_RANK.map((item, id) => {
-                return (
-                    <RankBox id={id}>
-                        <Stack direction="horizontal" className="justify-content-between">
-                            <div>
-                                <div className="textAward">
-                                    {' '}
-                                    {item.name} - {item.studentID}
+            {rank.length !== 0 ? (
+                rank.map((item, id) => {
+                    return (
+                        <RankBox id={id}>
+                            <Stack direction="horizontal" className="justify-content-between">
+                                <div>
+                                    <div className="textAward">
+                                        {item?.account.fullname} - {item?.account.studentId}
+                                    </div>
+                                    <span className="textAward">{item?.totalSpace + ' '}char</span>
                                 </div>
-                                <span className="textAward">{item.char + ' '}char</span>
-                            </div>
 
-                            {id == 0 && <img src={GoldAward} alt="gold_award" />}
-                            {id == 1 && <img src={SliverAward} alt="gold_award" />}
-                            {id == 2 && <img src={CooperAward} alt="gold_award" />}
-                        </Stack>
-                    </RankBox>
-                );
-            })}
+                                {id == 0 && <img src={GoldAward} alt="gold_award" />}
+                                {id == 1 && <img src={SliverAward} alt="silver_award" />}
+                                {id == 2 && <img src={CooperAward} alt="cooper_award" />}
+                            </Stack>
+                        </RankBox>
+                    );
+                })
+            ) : (
+                <div className="text-danger">Rank is empty</div>
+            )}
         </>
     );
 };

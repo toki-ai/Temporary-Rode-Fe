@@ -35,8 +35,17 @@ export const SubmissionStyled = styled.div`
         color: #00e7aa !important;
     }
     .submission-wrap {
+        margin: 0;
         height: 100%;
-        overflow-y: scroll;
+        overflow-y: auto;
+    }
+    .submission-wrap::-webkit-scrollbar {
+        width: 4px;
+    }
+    .no-data {
+        color: red;
+        text-align: center;
+        text-shadow: 1px 1px 1px yellow;
     }
 `;
 
@@ -90,10 +99,19 @@ export const TableSubmission = styled.div`
         color: #ffffff;
         transform: translate(30px, 20px);
     }
+    .width-200 {
+        width: 200px;
+    }
     .error {
+        width: 200px;
+        margin: 0 30px;
+        white-space: nowrap;
         color: #ea4335 !important;
     }
     .accepted {
+        width: 200px;
+        margin: 0 30px;
+        white-space: nowrap;
         color: #06c755 !important;
     }
     .viewResult {
@@ -120,6 +138,9 @@ export const TableSubmission = styled.div`
     .scroll-table {
         height: 400px;
         overflow-y: auto;
+    }
+    .scroll-table::-webkit-scrollbar {
+        width: 2px;
     }
 `;
 
