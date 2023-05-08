@@ -11,11 +11,18 @@ const ButtonColor = ({
     setColors: setColors,
     colors,
     color,
+    file,
 }) => {
     const [quantity, setQuantity] = useState(numOfColors);
     const [newColor, setNewColor] = useState(color);
     const [newColors, setNewColors] = useState(colors);
-
+    useEffect(() => {
+        setQuantity(numOfColors);
+    }, [numOfColors, colors]);
+    useEffect(() => {
+        setNewColors(colors);
+    }, [colors, numOfColors]);
+    console.log(quantity);
     const increase = (e) => {
         setQuantity(quantity + 1);
         newColors.push(newColors[quantity - 1]);
@@ -28,11 +35,18 @@ const ButtonColor = ({
         setNewColors(newColors);
     };
     useEffect(() => {
+        setNumOfColors(numOfColors);
+    }, [file]);
+
+    useEffect(() => {
+        setColors(colors);
+    }, [file]);
+    useEffect(() => {
         setNumOfColors(parseInt(quantity));
     }, [quantity]);
     useEffect(() => {
         setColors(newColors);
-    }, [color, colors, numOfColors, newColor, newColors, quantity]);
+    }, [color, colors, numOfColors, newColor, newColors, quantity, file]);
     return (
         <div className="d-flex">
             <Button

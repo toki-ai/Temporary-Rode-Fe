@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 
+import { extractColors } from 'extract-colors';
 import { Col, Form, Row } from 'react-bootstrap';
 import * as yup from 'yup';
 
@@ -51,8 +52,9 @@ const CreateQuestion = ({
     const [codeTemplate, setCodeTemplate] = useState(codeTemp);
     const [color, setColor] = useState('');
     const [colors, setColors] = useState(colorSplit);
+    const [nColors, setNColors] = useState([]);
     const [numOfColors, setNumOfColors] = useState(colors.length);
-
+    const [newNumOfColors, setNewNumOfColors] = useState(colors.length);
     const schema = yup.object().shape({});
     function increaseTestCase() {
         testCasesResult.push(defaultTestCases);
@@ -86,13 +88,26 @@ const CreateQuestion = ({
                 setQuestionId(data.data.data[0].id);
                 console.log(questionId);
                 setFileName(e.target.result);
+
+                extractColors(imageUrl)
+                    .then((newColors) => {
+                        setNumOfColors(newColors.length);
+                        setNewNumOfColors(newColors.length);
+                        setNColors(newColors.map((color) => color.hex));
+                        setColors(newColors.map((color) => color.hex));
+
+                        console.warn(newColors);
+                        console.log(nColors);
+                        console.warn(colors);
+                    })
+                    .catch(console.error);
             };
             setFile(file);
         } catch (err) {
             console.log(err);
         }
     };
-
+    console.log(colors);
     useEffect(() => {
         let newQuestions = question.slice();
         let newQuestion = newQuestions[i];
@@ -134,6 +149,16 @@ const CreateQuestion = ({
         setColor(e.target.value);
         colors[i] = e.target.value;
     };
+    useEffect(() => {
+        setNewNumOfColors(colors.length);
+        setNColors(colors);
+        console.log(nColors);
+        console.log(newNumOfColors);
+    }, [file]);
+    // useEffect(() => {
+    //     setNumOfColors(newNumOfColors);
+    //     setColors(nColors);
+    // }, [newNumOfColors, nColors]);
     return (
         <div>
             <Row>
@@ -226,7 +251,7 @@ const CreateQuestion = ({
                             </>
                         )}
                     </Row>
-                    {roomType == 'FE' && (
+                    {roomType == 'FE' ? (
                         <Row className="d-flex d-flex flex-column justify-content-center" as={Col}>
                             <Form.Group
                                 className="my-3 d-flex d-flex align-items-center col-md-9 col-lg-8 justify-content-between"
@@ -240,10 +265,11 @@ const CreateQuestion = ({
                                 <Col className="col-3 col-lg-4 ">
                                     <ButtonColor
                                         variant="green cursor-pointer"
-                                        setNumOfColors={setNumOfColors}
+                                        setNumOfColors={setNewNumOfColors}
                                         numOfColors={numOfColors}
                                         colors={colors}
-                                        setColors={setColors}
+                                        setColors={setNColors}
+                                        file={file}
                                         color={color}
                                     />
                                 </Col>
@@ -252,7 +278,7 @@ const CreateQuestion = ({
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <div className="d-flex flex-wrap mb-3" id="colors-value">
-                                {colors.map((_, i) => (
+                                {nColors.map((_, i) => (
                                     <div
                                         key={i}
                                         className="d-flex flex-column align-items-center w-20"
@@ -260,22 +286,48 @@ const CreateQuestion = ({
                                         <Form.Control
                                             type="color"
                                             name="color"
-                                            defaultValue={
-                                                colors[i] !== undefined
-                                                    ? colors[i]
-                                                    : colors['000000']
+                                            value={
+                                                nColors[i] !== undefined
+                                                    ? nColors[i]
+                                                    : nColors['ffffff']
                                             }
                                             onChange={(e) => {
-                                                colors.push();
-                                                colors[i] = e.target.value;
-                                                setColor(colors[i]);
+                                                nColors.push();
+                                                nColors[i] = e.target.value;
+                                                setColor(nColors[i]);
                                             }}
                                         ></Form.Control>
-                                        <div className="px-1">{colors[i]}</div>
+                                        <div className="px-1">
+                                            {nColors[i]?.length ? nColors[i] : '#ffffff'}
+                                        </div>
                                     </div>
                                 ))}
                             </div>
                         </Row>
+                    ) : (
+                        <Col>
+                            <Row className="mt-4">
+                                <Form.Group controlId="codeTemplate">
+                                    <Form.Label className="text-secondary fw-bold rfs">
+                                        Code Template:
+                                    </Form.Label>
+                                    <Form.Control
+                                        as="textarea"
+                                        type="text"
+                                        name="codeTemplate"
+                                        className="mt-3"
+                                        rows={15}
+                                        defaultValue={codeTemplate == null ? '' : codeTemplate}
+                                        onChange={(e) => {
+                                            setCodeTemplate(e.target.value);
+                                        }}
+                                    ></Form.Control>
+                                    <Form.Control.Feedback type="invalid">
+                                        {codeTError}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Row>
+                        </Col>
                     )}
                 </Col>
                 {roomType == 'FE' ? (
