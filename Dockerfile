@@ -1,6 +1,7 @@
 FROM node:16 as builder
 WORKDIR /app
 COPY . .
+COPY .env.deploy .env
 RUN npm i -f
 RUN npm run build
 
