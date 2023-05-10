@@ -1,22 +1,28 @@
 import { useState, useEffect, useRef, useContext } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
+import { UserContext } from '../Context/User.context';
 import Localstorage from '../utils/Localstorage';
 import authApi from '../utils/api/authApi';
 
-import { useNavigate } from 'react-router-dom';
 function GoogleSignInButton() {
     const [gapiLoaded, setGapiLoaded] = useState(false);
     const refBtn = useRef();
     const navigate = useNavigate();
-    const handleCredentialResponse = (response) => {
+    const handleCredentialResponse = async (response) => {
         console.log(`Encoded JWT ID token: ${response.credential}`);
-        authApi.login(response.credential).then((response) => {
-            console.log(response);
-            Localstorage.setItem('token', response.data.data);
+        Localstorage.setItem('credential', response.credential);
+        const res = await authApi.login(response.credential);
+        console.log(res);
+        if (res.data.status === 400) {
+            console.log('check run 400');
+            navigate('/register', { state: res.credential });
+        } else if (res.data.status === 200) {
+            console.log('check run 200');
+            Localstorage.setItem('token', res.data.data);
             navigate('/');
-        });
-        authApi.register(response.credential).then((response) => {
-            console.log(response);
-        });
+        }
     };
 
     useEffect(() => {
@@ -33,7 +39,7 @@ function GoogleSignInButton() {
             });
             google.accounts.id.renderButton(
                 refBtn.current,
-                { theme: 'outline', size: 'large' } // customization attributes
+                { theme: 'outline', size: 'large', width: '190' } // customization attributes
             );
             google.accounts.id.prompt();
             // google.accounts.id.disableAutoSelect();
