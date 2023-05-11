@@ -78,7 +78,7 @@ const LeftSection = ({
                                                 setCurrentQuestion(id);
                                                 setShowImg(true);
                                                 setShowRightSection(true);
-                                                setCode();
+                                                // setCode();
                                                 setShowResult(false);
                                                 setResInfo(0);
                                                 setShowRemind(false);

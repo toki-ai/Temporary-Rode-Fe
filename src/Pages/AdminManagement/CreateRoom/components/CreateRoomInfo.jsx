@@ -27,13 +27,6 @@ const schema = yup.object().shape({
 const CreateRoomInfo = ({ roomInfo, setRoomInfo, errs }) => {
     const [formList, setFormList] = useState(FORM_LIST_PUBLIC_ROOM);
 
-    // useEffect(() => {
-    //   if (!roomInfo.closeTime && !roomInfo.code && !roomInfo.duration && !roomInfo.isPrivate && !roomInfo.openTime && !roomInfo.type ) {
-
-    //   }
-
-    // }, [roomInfo])
-
     return (
         <Formik validationSchema={schema} initialValues={roomInfo}>
             {({ values, handleChange, touched, errors }) => (

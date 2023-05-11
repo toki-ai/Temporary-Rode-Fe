@@ -23,7 +23,7 @@ export const Wrapper = styled.div`
         padding: 10px;
         border: 1px solid ${themes.colors.primary};
         border-radius: 5px;
-
+        color: #000;
         &:focus-visible {
             outline-color: ${themes.colors.primary};
         }

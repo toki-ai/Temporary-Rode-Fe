@@ -8,13 +8,15 @@ import RightSection from './RightSection';
 
 const ArenaAlgorithm = () => {
     const currCode = localStorage.getItem('codeBE');
+    const currQuestion = JSON.parse(localStorage.getItem('question'));
     const roomInfo = useLoaderData();
-    const [code, setCode] = useState(currCode ? currCode : '');
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const codeTemplate = roomInfo?.questions[currentQuestion]?.codeTemplate;
+
+    const [code, setCode] = useState(currCode ? currCode : codeTemplate);
     const [showResult, setShowResult] = useState(false); // Show small tabs
     const [resInfo, setResInfo] = useState(0);
 
-    const currQuestion = JSON.parse(localStorage.getItem('question'));
-    const [currentQuestion, setCurrentQuestion] = useState(0);
     const [showRightSection, setShowRightSection] = useState(currQuestion ? true : false);
 
     const [leftWidth, setLeftWidth] = useState('50%');

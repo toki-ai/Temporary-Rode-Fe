@@ -40,7 +40,7 @@ const RightSection = ({
     const language = localStorage.getItem('language');
     const location = useLocation();
     const roomInfo = useLoaderData();
-    console.log('🚀 ~ file: RightSection.jsx:43 ~ roomInfo:', roomInfo);
+
     const [idUser, setIdUser] = useState('');
     const [totalTime, setTotalTime] = useState(0);
     const [isLanguage, setIsLanguage] = useState(language ? true : false);
@@ -100,7 +100,8 @@ const RightSection = ({
             localStorage.removeItem('authenticated(do not delete)');
             localStorage.removeItem('question');
             localStorage.removeItem('language');
-            console.log('check run finished');
+            localStorage.removeItem('codeBE');
+
             navigate('/', { state: { success: true } });
             toastSuccess(res.data.message);
         } else if (res.data.status === 400) {
