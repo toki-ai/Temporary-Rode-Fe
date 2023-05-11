@@ -22,7 +22,6 @@ const LeftSection = ({
     setShowResult,
     setResInfo,
 }) => {
-    console.log('line 15: ', roomInfo);
     console.log(currQuestion);
     const [question, setQuestion] = useState({
         current: currQuestion ? currQuestion.current : 'Choose question',
@@ -42,7 +41,7 @@ const LeftSection = ({
             current: e.target.name,
             questionImg: eventKey,
         });
-        console.log(e.target.name);
+
         localStorage.setItem(
             'question',
             JSON.stringify({

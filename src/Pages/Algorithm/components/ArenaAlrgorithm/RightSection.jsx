@@ -101,7 +101,7 @@ const RightSection = ({
             localStorage.removeItem('question');
             localStorage.removeItem('language');
             localStorage.removeItem('codeBE');
-
+            localStorage.removeItem('countdownFuture');
             navigate('/', { state: { success: true } });
             toastSuccess(res.data.message);
         } else if (res.data.status === 400) {

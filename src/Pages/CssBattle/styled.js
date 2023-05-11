@@ -224,6 +224,7 @@ export const BoxOutput = styled.div`
             object-fit: cover;
             width: 405px;
             height: 300px;
+            overflow: hidden;
         }
     }
     .output-container {

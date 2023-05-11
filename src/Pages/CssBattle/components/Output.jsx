@@ -59,6 +59,7 @@ const Output = ({ code, data }) => {
                                 width="400px"
                                 height="300px"
                                 title="output"
+                                scrolling="no"
                                 style={{ mixBlendMode: diffChecked ? 'difference' : 'normal' }}
                                 ref={iframeRef}
                                 srcDoc={code}

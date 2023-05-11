@@ -93,8 +93,8 @@ const LeaderBoard = () => {
                                 <tbody key={index} className="">
                                     {index < 3 ? (
                                         <tr className={index % 2 != 0 ? 'bg-even' : 'bg-old'}>
-                                            <td class="color-green">{index + 1}</td>
-                                            <td class="color-green">
+                                            <td className="color-green">{index + 1}</td>
+                                            <td className="color-green">
                                                 {item.account.fname + ' ' + item.account.lname}
                                             </td>
                                             <td class="color-green">{item.account.studentId}</td>

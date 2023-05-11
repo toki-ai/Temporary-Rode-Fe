@@ -51,6 +51,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
             navigate('/', { state: { success: true } });
             localStorage.removeItem('code');
             localStorage.removeItem('authenticated');
+            localStorage.removeItem('countdownFuture');
             toastSuccess(res.data.message);
         }
     };
