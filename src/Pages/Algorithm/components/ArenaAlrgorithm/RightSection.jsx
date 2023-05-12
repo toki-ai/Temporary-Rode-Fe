@@ -40,7 +40,7 @@ const RightSection = ({
     const language = localStorage.getItem('language');
     const location = useLocation();
     const roomInfo = useLoaderData();
-
+    console.log('line 43: ', code);
     const [idUser, setIdUser] = useState('');
     const [totalTime, setTotalTime] = useState(0);
     const [isLanguage, setIsLanguage] = useState(language ? true : false);
@@ -92,7 +92,7 @@ const RightSection = ({
             });
         });
     };
-    console.log('resInfo', resInfo);
+
     const finish = async () => {
         let res = await userRoomApi.postFinish(location.state.userRoomId);
         console.log(res);
@@ -117,7 +117,7 @@ const RightSection = ({
     }, []);
 
     const submitted = JSON.parse(localStorage.getItem('authenticated(do not delete)'));
-    console.log(submitted);
+
     return (
         <Container className="p-2 h-100">
             <WrapRightSection>

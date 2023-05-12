@@ -22,13 +22,13 @@ const LeftSection = ({
     setShowResult,
     setResInfo,
 }) => {
-    console.log(currQuestion);
     const [question, setQuestion] = useState({
         current: currQuestion ? currQuestion.current : 'Choose question',
         questionImg: currQuestion
             ? currQuestion.questionImg
             : roomInfo?.questions[0]?.questionImage,
     });
+
     const TestImg = localFileApi.getImg(question.questionImg);
     const [imageError, setImageError] = useState(false);
     const [showRemind, setShowRemind] = useState(currQuestion ? false : true);
@@ -73,11 +73,13 @@ const LeftSection = ({
                                             key={id}
                                             name={`Question ${id + 1}`}
                                             onClick={() => {
+                                                const codeTemplate =
+                                                    roomInfo?.questions[id]?.codeTemplate;
                                                 action(question.id);
                                                 setCurrentQuestion(id);
                                                 setShowImg(true);
                                                 setShowRightSection(true);
-                                                // setCode();
+                                                setCode(codeTemplate);
                                                 setShowResult(false);
                                                 setResInfo(0);
                                                 setShowRemind(false);
