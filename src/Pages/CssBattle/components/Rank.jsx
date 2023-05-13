@@ -1,8 +1,8 @@
 import { Stack } from 'react-bootstrap';
 
-import SliverAward from '../../../assets/AwardIcon/vector2.png';
-import CooperAward from '../../../assets/AwardIcon/vector3.png';
-import GoldAward from '../../../assets/AwardIcon/vector.png';
+import SliverAward from '../../../assets/AwardIcon/Vector2.png';
+import CooperAward from '../../../assets/AwardIcon/Vector3.png';
+import GoldAward from '../../../assets/AwardIcon/Vector.png';
 import { RankBox } from '../styled';
 
 const Rank = ({ rank }) => {
