@@ -20,23 +20,9 @@ import { Resize, useWindowDimensions } from '../components/Resize';
 import UserHomeLayout from '../components/UserHomeLayout/UserHomeLayout.component';
 import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
-// import Controller from './Controller';
 import PublicRoute from './PublicRoute';
 import { loaderInfoGG, GetInfoRoomByCode, GetInfoUser } from './RouterLoader/Loader';
 
-// const ErrorPage = lazy(() => import('../Pages/404Page'));
-// const Home = lazy(() => import('../Pages/Home'));
-// const Login = lazy(() => import('../Pages/Login'));
-
-// const AdminLayoutComponent = lazy(() => import('../components/Layout/AdminLayout.component'));
-
-// const Algorithm = lazy(() => import('../Pages/Algorithm'));
-// const CreateRoom = lazy(() => import('../Pages/AdminManagement/CreateRoom'));
-// const AdminRoomView = lazy(() => import('../Pages/AdminManagement/AdminRoomView'));
-// const AdminRoomEdit = lazy(() => import('../Pages/AdminManagement/AdminRoomEdit'));
-// const AdminRoom = lazy(() => import('../Pages/AdminManagement/AdminRoom'));
-// const AdminAttendance = lazy(() => import('../Pages/AdminManagement/AdminAttendance'));
-// const AllAccounts = lazy(() => import('../Pages/Accounts/AllAccounts'));
 
 const RouterComponent = () => {
     const { width } = useWindowDimensions();
