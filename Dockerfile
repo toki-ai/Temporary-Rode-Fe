@@ -1,8 +1,11 @@
 FROM node:16 as builder
 WORKDIR /app
 COPY . .
-RUN npm install
+COPY .env.deploy .env
+RUN cat .env
+RUN npm i -f
 RUN npm run build
 
-FROM httpd:latest
-COPY --from=builder /app/dist /usr/local/apache2/htdocs/
+FROM nginx as runner
+COPY --from=builder /app/dist /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]

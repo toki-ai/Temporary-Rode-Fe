@@ -14,7 +14,7 @@ function GoogleSignInButton() {
         console.log(`Encoded JWT ID token: ${response.credential}`);
         Localstorage.setItem('credential', response.credential);
         const res = await authApi.login(response.credential);
-        console.log(res);
+
         if (res.data.status === 400) {
             console.log('check run 400');
             navigate('/register', { state: res.credential });

@@ -5,10 +5,19 @@ import { WrapperInput } from './styled';
 
 import Form from 'react-bootstrap/Form';
 
-export const BootstrapInput = ({ label, type, placeholder, controlId, message, name, ...rest }) => {
+export const BootstrapInput = ({
+    label,
+    type,
+    placeholder,
+    controlId,
+    message,
+    name,
+    grid,
+    ...rest
+}) => {
     return (
-        <div>
-            <Form.Group className="mb-3" controlId={controlId}>
+        <div className={`${grid}`}>
+            <Form.Group className={`mb-3`} controlId={controlId}>
                 {label && <Form.Label>{label}</Form.Label>}
 
                 <Form.Control

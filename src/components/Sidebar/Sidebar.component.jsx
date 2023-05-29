@@ -36,24 +36,24 @@ const infoItems = [
         Info: 'Room',
         Action: '/admin/room',
     },
-    // {
-    //     icon: <IconBarChart />,
-    //     Info: 'Leaderboard',
-    //     Action: './leaderboard',
-    // },
-    // {
-    //     icon: <IconFile />,
-    //     Info: 'Content',
-    //     Action: '/content',
-    // },
+    {
+        icon: <IconBarChart />,
+        Info: 'Leaderboard',
+        Action: './leaderboard',
+    },
+    {
+        icon: <IconFile />,
+        Info: 'Content',
+        Action: '/content',
+    },
 ];
 
 const endItems = [
-    // {
-    //     icon: <IconChat />,
-    //     Info: 'Feedback',
-    //     Action: '/feedback',
-    // },
+    {
+        icon: <IconChat />,
+        Info: 'Feedback',
+        Action: '/feedback',
+    },
     {
         icon: <IconLogOut />,
         Info: 'Log out',

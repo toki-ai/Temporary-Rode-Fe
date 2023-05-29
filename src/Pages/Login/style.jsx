@@ -1,7 +1,61 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
+const moveInCircle = keyframes`
+  0% {
+    transform: translateX(0) translateY(-200px);
+  }
+  25% {
+    transform: translateX(120px) translateY(0);
+  }
+  50% {
+    transform: translateX(0) translateY(40px);
+  }
+  75% {
+    transform: translateX(-100px) translateY(-40px);
+  }
+  100% {
+    transform: translateX(0) translateY(-200px);
+  }
+`;
+const Rotate = keyframes`
+   0% {
+     transform:rotate(-55deg);
+   }
+   50% {
+     transform:  rotate(55deg);
+   }
+   100% {
+     transform:  rotate(-55deg);
+   }
+`;
+const Floating = keyframes`
+0% {
+    transform: translate(0%,50%) rotate(-55deg);
+  }
+  50% {
+    transform: translate(100%, 200%) rotate(55deg);
+  }
+  100% {
+    transform: translate(0%, 50%) rotate(-55deg);
+  }
+`;
+
+const BgScrolling = keyframes`
+
+  0% {
+    background-position: 50px 50px;
+  }
+`;
+const BgScrollingReverse = keyframes`
+
+  0% {
+    background-position: 50px 50px;
+  }
+`;
 export const LoginStyle = styled.div`
-    * {
+    min-height: 90vh;
+    display: flex;
+    padding: 1rem;
         font-family: 'Quicksand', sans-serif;
     }
     .bg-dark-secondary {
@@ -85,12 +139,18 @@ export const LoginStyle = styled.div`
         top: 18%;
     }
     .top-25 {
+        animation: ${Floating} 10s linear infinite;
+
         top: 25%;
     }
     .top-28 {
+        animation: ${moveInCircle} 20s linear infinite;
+
         top: 28%;
     }
     .top-30 {
+        animation: ${Floating} 3s linear infinite;
+
         top: 30%;
     }
     .bottom-23 {
@@ -130,6 +190,7 @@ export const LoginStyle = styled.div`
         transform: matrix(0.93, 0.36, -0.36, 0.93, 0, 0);
     }
     .rotate-1 {
+        animation: ${Rotate} 3s linear infinite;
         transform: matrix(0.91, -0.42, 0.42, 0.91, 0, 0);
     }
     .rotate-3 {
