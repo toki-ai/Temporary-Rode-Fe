@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { themes } from '../../themes';
 import { device } from '../../utils/Breakpoints/index.jsx';
 
-export const Container = styled.div`
+export const Container = styled.nav`
     border: 0.711111px solid ${themes.colors.primary};
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     @media ${device.tablet} {
         height: 50px;
     }

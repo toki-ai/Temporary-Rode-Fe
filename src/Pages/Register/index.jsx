@@ -28,10 +28,14 @@ function Register() {
     const RouteData = useLoaderData();
     // const regex = /@fpt\.edu\.vn$/;
     const navigate = useNavigate();
-    const onSubmit = async (value) => {
+    const onSubmit = async (value, { setFieldError }) => {
         console.log(value);
         await authApi.register(value).then((res) => {
-            console.log(res);
+            if (res.data.status === 400) {
+                res.data.err.map((el) => {
+                    setFieldError(el.at, el.message);
+                });
+            }
             if (res.data.status == 200) {
                 navigate('/');
             }
@@ -48,7 +52,7 @@ function Register() {
     return (
         <div>
             <LoginStyle>
-                <Container className="d-flex justify-content-center">
+                <Container className="d-flex justify-content-center align-items-center">
                     <Row
                         lg={10}
                         className="w-80 bg-dark-secondary rounded-3 box-shadow-primary border border-2 border-dark"
@@ -136,21 +140,20 @@ function Register() {
                                                         }
                                                         message={errors.studentId}
                                                     />
-                                                    <Stack>
-                                                        {/* Dob */}
-                                                        <FormControl
-                                                            control="input"
-                                                            type="date"
-                                                            placeholder="dd-mm-yyyy"
-                                                            label="Date of Birth"
-                                                            controlId="phone"
-                                                            name="dob"
-                                                            value={values.dob}
-                                                            onChange={handleChange}
-                                                            isInvalid={touched.dob && errors.dob}
-                                                            message={errors.dob}
-                                                        />{' '}
-                                                    </Stack>
+
+                                                    {/* Dob */}
+                                                    <FormControl
+                                                        control="input"
+                                                        type="date"
+                                                        placeholder="dd-mm-yyyy"
+                                                        label="Date of Birth"
+                                                        controlId="phone"
+                                                        name="dob"
+                                                        value={values.dob}
+                                                        onChange={handleChange}
+                                                        isInvalid={touched.dob && errors.dob}
+                                                        message={errors.dob}
+                                                    />
                                                 </Stack>
                                                 {/* email */}
                                                 <FormControl
@@ -196,7 +199,7 @@ function Register() {
                             sm={0}
                             md={0}
                             lg={6}
-                            className="text-light d-flex flex-column justify-content-center align-items-center position-relative d-none d-lg-flex "
+                            className=" overflow-hidden text-light d-flex flex-column justify-content-center align-items-center position-relative d-none d-lg-flex "
                         >
                             <div>
                                 <img className="img-fluid" src={grid_img} alt="grid" />

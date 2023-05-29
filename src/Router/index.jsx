@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, createHashRouter } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
 import ErrorPage from '../Pages/404Page';
@@ -23,13 +23,12 @@ import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
 import { loaderInfoGG, GetInfoRoomByCode, GetInfoUser } from './RouterLoader/Loader';
 
-
 const RouterComponent = () => {
     const { width } = useWindowDimensions();
     if (width <= 900) {
         return <Resize />;
     }
-    const router = createBrowserRouter([
+    const router = createHashRouter([
         { path: '/', element: <Navigate to="home" /> },
         // {
         //     exact: true,
