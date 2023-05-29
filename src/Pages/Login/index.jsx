@@ -21,7 +21,7 @@ import { LoginStyle } from './style';
 const Login = () => {
     return (
         <LoginStyle>
-            <Container className="d-flex justify-content-center align-items-center ">
+            <Container className="d-flex justify-content-center align-items-center">
                 <Row
                     lg={10}
                     className="w-80 bg-dark-secondary rounded-3 box-shadow-primary border border-2 border-dark"

@@ -55,8 +55,7 @@ const BgScrollingReverse = keyframes`
 export const LoginStyle = styled.div`
     min-height: 90vh;
     display: flex;
-
-    * {
+    padding: 1rem;
         font-family: 'Quicksand', sans-serif;
     }
     .bg-dark-secondary {

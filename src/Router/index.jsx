@@ -92,21 +92,13 @@ const RouterComponent = () => {
         {
             exact: true,
             path: '/login',
-            element: (
-                <PublicLayout>
-                    <Login />
-                </PublicLayout>
-            ),
+            element: <Login />,
         },
         {
             exact: true,
             path: '/register',
             loader: loaderInfoGG,
-            element: (
-                <PublicLayout>
-                    <Register />
-                </PublicLayout>
-            ),
+            element: <Register />,
         },
         {
             exact: true,

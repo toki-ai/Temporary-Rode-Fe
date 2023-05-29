@@ -59,12 +59,12 @@ function Register() {
                     >
                         <Col
                             xs={12}
-                            md={8}
+                            md={12}
                             lg={6}
-                            className="text-light d-flex flex-column justify-content-center align-items-center rounded-3 bc-primary"
+                            className=" text-light d-flex flex-column justify-content-center align-items-center rounded-3 bc-primary"
                         >
-                            <Stack className="justify-content-center align-items-start p-4" gap={3}>
-                                <TitleStyled> Sign Up</TitleStyled>
+                            <TitleStyled className="">Sign Up</TitleStyled>
+                            <div className="justify-content-center align-items-start p-2" gap={3}>
                                 <Formik
                                     validationSchema={SchemaRegister}
                                     onSubmit={onSubmit}
@@ -86,11 +86,15 @@ function Register() {
                                         errors,
                                     }) => {
                                         return (
-                                            <Form noValidate onSubmit={handleSubmit}>
-                                                <Stack
+                                            <Form
+                                                noValidate
+                                                onSubmit={handleSubmit}
+                                                className="container"
+                                            >
+                                                <div
                                                     direction="horizontal"
                                                     gap={5}
-                                                    className="justify-content-center align-items-center"
+                                                    className="row justify-content-center align-items-center"
                                                 >
                                                     {/* First Name */}
                                                     <FormControl
@@ -104,6 +108,7 @@ function Register() {
                                                         onChange={handleChange}
                                                         isInvalid={touched.fname && errors.fname}
                                                         message={errors.fname}
+                                                        grid="col-6"
                                                     />
 
                                                     {/* Last Name */}
@@ -118,12 +123,13 @@ function Register() {
                                                         onChange={handleChange}
                                                         isInvalid={touched.lname && errors.lname}
                                                         message={errors.lname}
+                                                        grid="col-6"
                                                     />
-                                                </Stack>
-                                                <Stack
+                                                </div>
+                                                <div
                                                     direction="horizontal"
                                                     gap={5}
-                                                    className="justify-content-between align-items-center"
+                                                    className="row justify-content-between align-items-center"
                                                 >
                                                     {/* Student ID */}
                                                     <FormControl
@@ -139,6 +145,7 @@ function Register() {
                                                             touched.studentId && errors.studentId
                                                         }
                                                         message={errors.studentId}
+                                                        grid="col-6"
                                                     />
 
                                                     {/* Dob */}
@@ -153,8 +160,9 @@ function Register() {
                                                         onChange={handleChange}
                                                         isInvalid={touched.dob && errors.dob}
                                                         message={errors.dob}
+                                                        grid="col-6"
                                                     />
-                                                </Stack>
+                                                </div>
                                                 {/* email */}
                                                 <FormControl
                                                     control="input"
@@ -193,13 +201,13 @@ function Register() {
                                         );
                                     }}
                                 </Formik>
-                            </Stack>
+                            </div>
                         </Col>
                         <Col
                             sm={0}
                             md={0}
                             lg={6}
-                            className=" overflow-hidden text-light d-flex flex-column justify-content-center align-items-center position-relative d-none d-lg-flex "
+                            className="overflow-hidden text-light d-flex flex-column justify-content-center align-items-center position-relative d-none d-lg-flex "
                         >
                             <div>
                                 <img className="img-fluid" src={grid_img} alt="grid" />
