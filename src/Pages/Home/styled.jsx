@@ -12,10 +12,13 @@ export const Container = styled.div`
     position: relative;
 `;
 export const Box = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     /* Background */
     background: #01091d;
-    /* button */
 
+    /* button */
     border: 2px solid #00e7aa;
     box-shadow: 0px 0px 13px #00c994;
     border-radius: 19.699px;
@@ -622,6 +625,9 @@ export const MyTable = styled.div`
 
 export const MyPagination = styled(Pagination)`
     border: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* background-color: ${themes.colors.primary5} !important; */
     a {
         background-color: transparent !important;
@@ -637,21 +643,21 @@ export const MyPagination = styled(Pagination)`
     }
     @media ${device.tablet} {
         margin-top: 2%;
-        margin-left: 20%;
+        /* margin-left: 20%; */
     }
     @media ${device.laptop} {
         margin-top: 4%;
-        margin-left: 30%;
+        /* margin-left: 30%; */
     }
 
     @media ${device.laptopL} {
         margin-top: 2%;
-        margin-left: 38%;
+        /* margin-left: 38%; */
     }
 
     @media ${device.desktop} {
         margin-top: 0%;
-        margin-left: 40%;
+        /* margin-left: 40%; */
         a {
             font-size: 30px;
         }

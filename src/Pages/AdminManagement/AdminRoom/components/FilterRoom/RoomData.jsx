@@ -8,7 +8,6 @@ import More from './More';
 export function functionCheckFilter({ state }) {
     if (state == 'Private') return true;
     else if (state == 'Public') return false;
-    console.log(state);
 }
 
 export function RoomData({ state, listRoom }) {

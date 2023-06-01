@@ -22,7 +22,7 @@ function PaginationRoom({ currentPage, totalPages, handlePageChange }) {
             {/* <Pagination className="position-absolute bottom-0 left-0 bg-color pagination"> */}
             <Pagination.First onClick={() => handlePageChange(1)} />
             <Pagination.Prev onClick={() => handlePageChange(currentPage - 1)} />
-            {console.log(totalPages)}
+
             {items}
             <Pagination.Next onClick={() => handlePageChange(currentPage + 1)} />
             <Pagination.Last onClick={() => handlePageChange(items.length)} />

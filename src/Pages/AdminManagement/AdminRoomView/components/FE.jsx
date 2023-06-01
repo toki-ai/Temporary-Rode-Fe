@@ -31,24 +31,21 @@ const FE = ({ ques, data, questions, questionId }) => {
     const [totalPage, setTotalPage] = useState(1);
     useEffect(() => {
         setQuestion(questions);
-        console.log(question);
+
         setQuestionID(questionId);
     }, [questions, questionId]);
     useEffect(() => {
         roomApi.getSubmitHistoryByQuestion(questionId).then((res) => {
-            console.log(res.data.data);
             setAccounts(res.data.data.items);
             setCurrentPage(res.data.data.meta.currentPage);
             setTotalPage(res.data.data.meta.totalPages);
         });
     }, [questionId, questions]);
-    console.log(question);
-    console.log(questionID);
-    console.log(accounts);
+
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-    console.log(accounts);
+
     return (
         <>
             <Table striped className="mt-2 border-top">

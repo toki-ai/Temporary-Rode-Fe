@@ -19,7 +19,6 @@ const SubmitEx = () => {
             language: 'C_CPP',
         };
         await submitApi.testScore(formData).then((res) => {
-            console.log(res);
             if (res.data.status === 400) {
                 setErr(res.data.err);
             }

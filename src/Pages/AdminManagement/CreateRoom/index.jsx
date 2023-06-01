@@ -20,7 +20,6 @@ const CreateRoom = () => {
     // Submit
     const handleSubmit = async () => {
         const payload = { ...roomInfo, questions };
-        console.log('Payload', payload);
 
         await roomApi
             .createOne(payload)

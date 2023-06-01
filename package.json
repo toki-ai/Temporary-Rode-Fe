@@ -27,6 +27,7 @@
         "dayjs": "^1.11.7",
         "extract-colors": "^2.0.6",
         "formik": "^2.2.9",
+        "framer-motion": "^10.12.16",
         "install": "^0.13.0",
         "jwt-decode": "^3.1.2",
         "moment": "^2.29.4",

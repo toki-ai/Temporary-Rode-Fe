@@ -51,10 +51,9 @@ function Content({ handlePostRoom, setInputCode, inputCode }) {
     };
 
     const handlePageChange = (pageNumber) => {
-        console.log(pageNumber);
         if (pageNumber > 0) setCurrentPage(pageNumber);
     };
-    console.log(type);
+
     useEffect(() => {
         let req = {
             limit: 5,
@@ -62,7 +61,7 @@ function Content({ handlePostRoom, setInputCode, inputCode }) {
             page: currentPage,
         };
         if (type != '') req['filter.type'] = type;
-        console.log(req);
+
         setUpdate(false);
         roomApi
             .userGetAllRoom(req)
@@ -75,7 +74,6 @@ function Content({ handlePostRoom, setInputCode, inputCode }) {
                 console.log(err);
             });
     }, [searchValue, type, currentPage]);
-    console.log(meta);
 
     const handleOnClickRow = (e) => {
         const value = e.currentTarget.firstChild.textContent;

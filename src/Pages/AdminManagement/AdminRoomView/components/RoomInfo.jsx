@@ -11,7 +11,6 @@ const RoomFormat = ({ name, value }) => {
     );
 };
 function RoomInfo({ room }) {
-    console.log(room);
     const result = (
         <div>
             <div className="d-flex">

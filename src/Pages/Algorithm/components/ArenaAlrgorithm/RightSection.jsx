@@ -40,7 +40,7 @@ const RightSection = ({
     const language = localStorage.getItem('language');
     const location = useLocation();
     const roomInfo = useLoaderData();
-    console.log('line 43: ', code);
+
     const [idUser, setIdUser] = useState('');
     const [totalTime, setTotalTime] = useState(0);
     const [isLanguage, setIsLanguage] = useState(language ? true : false);
@@ -70,7 +70,7 @@ const RightSection = ({
             code: code,
             language: select,
         });
-        console.log('res.data', res.data);
+
         setResInfo(res.data);
 
         if (res.data.status === 200) {
@@ -95,7 +95,7 @@ const RightSection = ({
 
     const finish = async () => {
         let res = await userRoomApi.postFinish(location.state.userRoomId);
-        console.log(res);
+
         if (res.data.status === 200) {
             localStorage.removeItem('authenticated(do not delete)');
             localStorage.removeItem('question');
@@ -112,7 +112,6 @@ const RightSection = ({
     useEffect(() => {
         authApi.getUser().then((res) => {
             setIdUser(res.data.id);
-            console.log('accountID: ', res.data.id);
         });
     }, []);
 

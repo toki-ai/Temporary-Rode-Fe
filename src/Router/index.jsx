@@ -30,12 +30,7 @@ const RouterComponent = () => {
     }
     const router = createHashRouter([
         { path: '/', element: <Navigate to="home" /> },
-        // {
-        //     exact: true,
-        //     path: '/',
-        //     loader: GetInfoUser,
-        //     element: <Controller />,
-        // },
+
         {
             exact: true,
             element: <AdminRoute />,

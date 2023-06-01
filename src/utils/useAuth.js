@@ -52,7 +52,6 @@ const useAuth = () => {
         }
 
         try {
-            console.log('checking token');
             setIsLoading(true);
             setCredential(crea);
             // authApi.getInfoFromGG(credential).then((response) => {

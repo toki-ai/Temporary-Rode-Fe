@@ -16,7 +16,6 @@ const RoomInfo = ({ data, submit }) => {
     const [show, setShow] = useState(false);
     const [rank, setRank] = useState([]);
     const handleShow = () => setShow(true);
-    console.log(data);
 
     const submitted = JSON.parse(localStorage.getItem('authenticated'));
     const LIST_INFO = [

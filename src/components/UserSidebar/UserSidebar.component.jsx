@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 
+import { Stack } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 import ContentNav from '../../ContentNav/ContentNav.jsx';
-import { UserEndBar } from '../../ContentNav/UserContentNav.styled.jsx';
+import { UserEndBar, UserText, UserIcon } from '../../ContentNav/UserContentNav.styled.jsx';
 import { UserContext } from '../../Context/User.context.jsx';
 import { formatUserName } from '../../utils/helper.js';
 import {
@@ -47,7 +50,9 @@ function UserSidebar() {
     ];
 
     const { currentUser } = useContext(UserContext);
-
+    const handleOnClick = () => {
+        localStorage.clear();
+    };
     return (
         <>
             <Container>
@@ -74,7 +79,16 @@ function UserSidebar() {
                                 <ContentNav items={infoItems} layout={2} />
                             </nav>
                             <nav>
-                                <ContentNav items={endItems} layout={2} />
+                                <div className="t2">
+                                    <UserIcon>
+                                        <IconLogOut />
+                                    </UserIcon>
+                                    <UserText>
+                                        <Link to={'/login'} onClick={handleOnClick}>
+                                            Log Out
+                                        </Link>
+                                    </UserText>
+                                </div>
                             </nav>
                         </UserEndBar>
                     </ContestInfo>

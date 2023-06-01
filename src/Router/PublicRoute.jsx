@@ -10,7 +10,7 @@ const PublicRoute = () => {
     } else if (userRole === null) {
         return <Outlet />;
     }
-    console.log(userRole);
+
     return userRole !== '' && userRole !== 'admin' ? (
         <Outlet />
     ) : (

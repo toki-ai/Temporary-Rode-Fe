@@ -12,14 +12,11 @@ import triangle from '../../assets/HomeChild/triangle.svg';
 import wave from '../../assets/HomeChild/wave.svg';
 import x_blue from '../../assets/HomeChild/x-blue.svg';
 import x_green from '../../assets/HomeChild/x-green.svg';
-// import ModalComponent from '../../components/Modal/Modal';
-// import ModalComponent
 import { toastWarning } from '../../components/Toast';
 import roomApi from '../../utils/api/roomApi';
 import userRoomApi from '../../utils/api/userRoomApi';
 import Content from './components/Content';
 import ModalJoinRoom from './components/Modal';
-// import { RoomData } from './components/RoomData';
 import { Container, Hero, Icon, Input, Name, Title } from './styled';
 
 const Home = () => {

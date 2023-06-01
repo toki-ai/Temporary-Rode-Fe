@@ -84,7 +84,7 @@ const CreateQuestion = ({
             reader.onload = (e) => {
                 const imageUrl = e.target.result;
                 setQuestionId(data.data.data[0].id);
-                console.log(questionId);
+
                 setFileName(e.target.result);
             };
             setFile(file);

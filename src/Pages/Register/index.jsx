@@ -29,7 +29,6 @@ function Register() {
     // const regex = /@fpt\.edu\.vn$/;
     const navigate = useNavigate();
     const onSubmit = async (value, { setFieldError }) => {
-        console.log(value);
         await authApi.register(value).then((res) => {
             if (res.data.status === 400) {
                 res.data.err.map((el) => {

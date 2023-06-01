@@ -6,7 +6,7 @@ const roomApi = {
     userGetAllRoom: async (data) => {
         const endpoint = `/rooms/user-get-all`;
         // eslint-disable-next-line no-return-await
-        console.log(data);
+
         return await get(endpoint, data, authHeader())
             .then((res) => {
                 // if (res.data.code !== 200) console.log(res.response);
@@ -28,7 +28,6 @@ const roomApi = {
                 return res;
             })
             .catch((err) => {
-                console.log('🚀 ~ file: roomApi.js:17 ~ getAll: ~ err:', err);
                 return err;
             });
     },
@@ -39,7 +38,6 @@ const roomApi = {
                 return res;
             })
             .catch((err) => {
-                console.log('🚀 ~ file: roomApi.js:17 ~ getAll: ~ err:', err);
                 return err;
             });
     },
@@ -71,11 +69,10 @@ const roomApi = {
         return await post(endpoint, data, {}, { Authorization: 'Bearer ' + token })
             .then((res) => {
                 // if (res.data.code !== 200) console.log(res.response);
-                console.log(res);
+
                 return res;
             })
             .catch((err) => {
-                console.log(err);
                 return err;
             });
     },
@@ -112,7 +109,7 @@ const roomApi = {
         return await get(endpoint, {}, authHeader())
             .then((res) => {
                 // if (res.data.code !== 200) console.log(res.response);
-                console.log(res);
+
                 return res;
             })
             .catch((err) => {

@@ -34,6 +34,10 @@ export const UserText = styled.div`
     color: ${themes.colors.light};
     cursor: pointer;
     transition: 0.3s;
+    /* &:hover {
+        transition: ease-in all 0.2s;
+        color: ${themes.colors.primary1};
+    } */
 `;
 
 export const UserIcon = styled.section`
@@ -55,21 +59,37 @@ export const UserEndBar = styled.div`
         row-gap: 14px;
         cursor: pointer;
     }
+    .t2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        & > section:hover {
+            transition: ease-in all 0.2s;
+            color: ${themes.colors.primary1};
+        }
 
+        & > div:hover {
+            a {
+                transition: ease-in all 0.2s;
+                color: ${themes.colors.primary1};
+            }
+        }
+    }
     nav:last-child {
         color: red;
-        a {
+        /* a {
             color: red;
         }
         div:first-child {
             a {
                 color: ${themes.colors.light};
             }
-        }
+        } */
         div:hover {
-            a {
+            /* a {
+                transition: ease-in all 0.2s;
                 color: ${themes.colors.primary1};
-            }
+            } */
         }
     }
 `;

@@ -16,9 +16,8 @@ const FilterQues = ({ roomId }) => {
         roomApi
             .getRoomById(roomId)
             .then((res) => {
-                console.log(res.data.data);
                 !res.data.data.questions ? setNumOfQues([]) : setNumOfQues(res.data.data.questions);
-                console.log(res.data.data.questions);
+
                 setLoading(false);
             })
             .catch((err) => {
@@ -33,7 +32,6 @@ const FilterQues = ({ roomId }) => {
     const TableQues = () => {
         if (ques == 'All') return <TableAll roomID={roomId} />;
         for (let i = 1; i <= numOfQues.length; i++) {
-            console.log(i);
             if (ques == `Question ${i}`) return <TableQuestion quesId={numOfQues[i - 1].id} />;
         }
     };

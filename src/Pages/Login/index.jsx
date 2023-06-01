@@ -48,11 +48,10 @@ const Login = () => {
                         sm={0}
                         md={0}
                         lg={6}
-                        className=" text-light d-flex flex-column justify-content-center align-items-center position-relative d-none d-lg-flex "
+                        className="text-light d-flex flex-column justify-content-center align-items-center position-relative d-none d-lg-flex"
+                        style={{ minHeight: '65vh' }}
                     >
-                        <div>
-                            <img className="img-fluid" src={grid_img} alt="grid" />
-                        </div>
+                        <div className="BgScrolling"></div>
                         <Row className=" position-absolute top-0 end-0">
                             <img className="img-fluid" src={header} alt="header" />
                         </Row>
@@ -88,7 +87,8 @@ const Login = () => {
                         <Row className="position-absolute top-25 ">
                             <img className="img-fluid si-4" src={x_green} alt="x" />
                         </Row>
-                        <Row className=" d-flex align-items-center justify-content-between position-absolute">
+
+                        <Row className="d-flex align-items-center justify-content-between position-absolute">
                             <Col xs={2} lg={1} className="d-flex justify-content-center">
                                 <img src={arrow_login} alt="arrow" className="si-1 mt-3" />
                             </Col>
@@ -99,12 +99,16 @@ const Login = () => {
                                 className="d-flex flex-column justify-content-center align-items-center"
                             >
                                 <div className="w-100 d-flex align-items-center justify-content-around">
-                                    <Row className="fw-bold fs-0 color-primary ls-1">R.ODE</Row>
-                                    <img className="img-fluid si-3" src={x_blue} alt="hexagonal" />
+                                    <Row className="fw-bold fs-0 color-primary ls-1 text-effect">
+                                        R.ODE
+                                    </Row>
                                 </div>
-                                <Row className="ls-2 fw-bolder fs-0 text-stroke-1">BATTLE</Row>
+                                <Row className="ls-2 fw-bolder fs-0 text-stroke-1 text-effect">
+                                    BATTLE
+                                </Row>
                             </Col>
                         </Row>
+
                         <Row className="position-absolute left-2 bottom-23 rotate-1">
                             <div className="color-primary fs-1 fw-bold">2</div>
                         </Row>

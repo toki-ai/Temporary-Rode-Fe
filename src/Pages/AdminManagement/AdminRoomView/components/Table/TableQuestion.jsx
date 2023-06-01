@@ -19,7 +19,6 @@ function TableQues({ quesId }) {
         roomApi
             .getSubmitHistoryByQuestion(quesId)
             .then((res) => {
-                console.log(res.data.data);
                 setAccounts(res.data.data);
             })
             .catch((err) => {

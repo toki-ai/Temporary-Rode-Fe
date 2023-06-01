@@ -9,8 +9,6 @@ function DropdownType({ handleTypeChange, selected }) {
         { name: 'CSS Battle', id: 3 },
     ];
 
-    console.log(selected);
-
     return (
         <Dropdown className="d-inline mx-2" onSelect={handleTypeChange}>
             <Dropdown.Toggle id="dropdown-autoclose-true" className="bg border button head">

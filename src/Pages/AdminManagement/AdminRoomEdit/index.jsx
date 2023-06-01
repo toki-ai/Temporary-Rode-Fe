@@ -16,7 +16,7 @@ const AdminRoomEdit = () => {
     const [roomInfo, setRoomInfo] = useState({});
     const handleSubmit = async () => {
         const payload = { ...roomInfo };
-        console.log('Payload', payload);
+
         await roomApi
             .updateRoomById(id, payload)
             .then((res) => {

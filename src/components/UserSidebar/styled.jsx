@@ -143,6 +143,10 @@ export const IconChat = styled(ChatDots)`
 export const IconLogOut = styled(Power)`
     width: 20px;
     height: 16px;
+    &:hover {
+        color: ${themes.colors.primary1};
+        transition: ease-in all 0.2s;
+    }
 `;
 
 export const BoldText = styled.section`

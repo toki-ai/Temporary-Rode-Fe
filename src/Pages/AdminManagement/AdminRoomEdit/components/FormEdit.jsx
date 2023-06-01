@@ -43,16 +43,15 @@ const FormEdit = ({ setRoom: setRoomInfo }) => {
     useEffect(() => {
         roomApi.getRoomById(roomId).then((res) => {
             setRoom(res.data.data);
-            console.log(res.data.data);
+
             setQuestions(res.data.data.questions);
-            console.log(res.data.data.questions);
+
             setLoad(false);
         });
 
         roomApi
             .getAllRomType()
             .then((res) => {
-                console.log(res.data.data);
                 setRoomTypes(res.data.data);
                 setLoad(false);
             })
@@ -79,18 +78,15 @@ const FormEdit = ({ setRoom: setRoomInfo }) => {
             },
         ],
     };
-    console.log(questions.length);
+
     const handleAddQuestion = (e) => {
         questions.push(defaultQuestion);
         setNumOfQues(questions.length + 1);
-        console.log(questions.length);
     };
     function handleRemoveQuestion() {
         questions.pop(defaultQuestion);
         newQuestions.pop(defaultQuestion);
         setNumOfQues(questions.length - 1);
-        console.log(questions.length);
-        console.log(questions);
     }
     useEffect(() => {
         let newRoom = room;
@@ -100,16 +96,14 @@ const FormEdit = ({ setRoom: setRoomInfo }) => {
         newDuration = formRef.current
             ? parseInt(formRef.current.values.duration)
             : parseInt(room.duration);
-        console.log(newDuration);
+
         room.isPrivate ? (newRoom.duration = parseInt(newDuration)) : (newRoom.duration = null);
-        console.log(duration);
+
         newRoom.questions = newQuestions.slice();
-        console.log(newQuestions);
-        console.log(newRoom);
 
         setRoomInfo(newRoom);
     }, [formRef, openTime, closeTime, duration, newQuestions, numOfQues, questions]);
-    console.log(questions);
+
     return load ? (
         <Loading />
     ) : (

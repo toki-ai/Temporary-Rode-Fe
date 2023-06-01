@@ -1,62 +1,23 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-const moveInCircle = keyframes`
-  0% {
-    transform: translateX(0) translateY(-200px);
-  }
-  25% {
-    transform: translateX(120px) translateY(0);
-  }
-  50% {
-    transform: translateX(0) translateY(40px);
-  }
-  75% {
-    transform: translateX(-100px) translateY(-40px);
-  }
-  100% {
-    transform: translateX(0) translateY(-200px);
-  }
-`;
-const Rotate = keyframes`
-   0% {
-     transform:rotate(-55deg);
-   }
-   50% {
-     transform:  rotate(55deg);
-   }
-   100% {
-     transform:  rotate(-55deg);
-   }
-`;
-const Floating = keyframes`
-0% {
-    transform: translate(0%,50%) rotate(-55deg);
-  }
-  50% {
-    transform: translate(100%, 200%) rotate(55deg);
-  }
-  100% {
-    transform: translate(0%, 50%) rotate(-55deg);
-  }
-`;
+import BgAnimate from '../../assets/Login/BgAnimate.png';
+import { moveInCircle, Rotate, Floating, BgScrolling, TextEffect } from '../../constant/keyframes';
 
-const BgScrolling = keyframes`
-
-  0% {
-    background-position: 50px 50px;
-  }
-`;
-const BgScrollingReverse = keyframes`
-
-  0% {
-    background-position: 50px 50px;
-  }
-`;
 export const LoginStyle = styled.div`
     min-height: 90vh;
     display: flex;
     padding: 1rem;
-        font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    .BgScrolling {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        /* border: 12px solid #fff; */
+        background-image: ${`url(${BgAnimate})`};
+        background-size: 120%;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        animation: ${BgScrolling} 12s alternate-reverse infinite both;
     }
     .bg-dark-secondary {
         background: #01091d;
@@ -145,11 +106,10 @@ export const LoginStyle = styled.div`
     }
     .top-28 {
         animation: ${moveInCircle} 20s linear infinite;
-
         top: 28%;
     }
     .top-30 {
-        animation: ${Floating} 3s linear infinite;
+        animation: ${Floating} 13s linear infinite;
 
         top: 30%;
     }
@@ -187,16 +147,24 @@ export const LoginStyle = styled.div`
         right: 35%;
     }
     .rotate-2 {
+        animation: ${Rotate} 4s linear infinite;
         transform: matrix(0.93, 0.36, -0.36, 0.93, 0, 0);
     }
     .rotate-1 {
-        animation: ${Rotate} 3s linear infinite;
+        animation: ${Rotate} 10s linear infinite;
         transform: matrix(0.91, -0.42, 0.42, 0.91, 0, 0);
     }
     .rotate-3 {
+        animation: ${Rotate} 6s linear infinite;
         transform: matrix(0.92, 0.39, -0.38, 0.92, 0, 0);
     }
     .rotate-4 {
+        animation: ${Rotate} 7s linear infinite;
         transform: matrix(0.96, -0.28, 0.27, 0.96, 0, 0);
+    }
+
+    /* Text Effect */
+    .text-effect {
+        animation: ${TextEffect} 1s cubic-bezier(0.215, 0.61, 0.355, 1) 0.2s both;
     }
 `;

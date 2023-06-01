@@ -9,7 +9,6 @@ const submitHistoryApi = {
                 return res;
             })
             .catch((err) => {
-                console.log('🚀 ~ file: roomApi.js:17 ~ getAll: ~ err:', err);
                 return err;
             });
     },
@@ -20,7 +19,6 @@ const submitHistoryApi = {
                 return res;
             })
             .catch((err) => {
-                console.log('🚀 ~ file: roomApi.js:17 ~ getAll: ~ err:', err);
                 return err;
             });
     },

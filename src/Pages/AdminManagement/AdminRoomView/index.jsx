@@ -36,21 +36,18 @@ const AdminRoomView = () => {
             .getRoomById(id)
             .then((res) => {
                 setRoom(res.data.data);
-                console.log(res.data.data);
+
                 !res.data.data.questions ? setQuestions([]) : setQuestions(res.data.data.questions);
-                console.log(res.data.data.questions);
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
-    console.log(questions);
+
     const handleButtonChange = (e) => {
-        console.log(e.target.value);
         setQuesName(e.target.value);
-        console.log(questions);
     };
-    console.log(questionId);
+
     return (
         <ARViewStyle>
             <div className="w-100 p-3 box-style">

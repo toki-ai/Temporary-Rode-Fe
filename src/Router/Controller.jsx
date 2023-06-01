@@ -11,7 +11,7 @@ const Controller = () => {
     // } else if (userRole === null) {
     //     return <Outlet />;
     // }
-    console.log('line 14: ', infoUser);
+
     return infoUser.role == 'user' ? (
         <Navigate to="/home" />
     ) : infoUser?.role == 'admin' ? (

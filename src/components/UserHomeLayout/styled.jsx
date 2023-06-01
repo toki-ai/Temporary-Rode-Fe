@@ -11,6 +11,7 @@ export const Container = styled.div`
 export const Body = styled.div`
     display: flex;
     align-items: flex-end;
+    justify-content: center;
     @media ${device.tablet} {
         height: calc(100vh - 50px - 1rem);
     }

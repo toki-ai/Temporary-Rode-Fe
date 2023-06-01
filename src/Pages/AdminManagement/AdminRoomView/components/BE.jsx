@@ -30,7 +30,7 @@ const BE = ({ ques, data, questions, questionId }) => {
     const [totalPage, setTotalPage] = useState(1);
     useEffect(() => {
         setQuestion(questions);
-        console.log(question);
+
         setQuestionID(questionId);
     }, [questions, questionId]);
     useEffect(() => {
@@ -38,12 +38,9 @@ const BE = ({ ques, data, questions, questionId }) => {
             setAccounts(res.data.data.items);
             setCurrentPage(res.data.data.meta.currentPage);
             setTotalPage(res.data.data.meta.totalPages);
-            console.log(res.data.data);
         });
     }, [questionId, questions]);
-    console.log(question);
-    console.log(questionID);
-    console.log(accounts);
+
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
