@@ -9,7 +9,6 @@ const More = ({ id, setAccounts }) => {
         accountsApi.postActive(id).then((response) => {
             if (response.data.status == 200) {
                 accountsApi.getAll().then((res) => {
-                    console.log(res);
                     setAccounts(res.data.data.data);
                 });
             }

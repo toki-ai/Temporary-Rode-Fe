@@ -9,13 +9,11 @@ const CheckAttend = ({ idUserRoom, setAccounts }) => {
     const { id } = useParams();
     const handleActive = (idUserRoom) => {
         userRoomApi.postCheckAttend(idUserRoom).then((res) => {
-            console.log('line 10: ', res);
             if (res.data.status == 200) {
                 let req = {
                     roomId: id,
                 };
                 userRoomApi.getAllUserInRoom(req).then((response) => {
-                    console.log(response);
                     setAccounts([...response?.data.data.data]);
                 });
             }

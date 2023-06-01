@@ -3,7 +3,6 @@ import React from 'react';
 import { Button, InputGroup } from 'react-bootstrap';
 
 const Search = ({ action, value }) => {
-    console.log(value);
     return (
         <div>
             <div>

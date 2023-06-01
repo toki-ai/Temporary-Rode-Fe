@@ -23,7 +23,6 @@ const AdminRoom = () => {
     const [currentPage, setCurrentPage] = useState(meta?.currentPage || 1);
     const [loading, setLoading] = useState(true);
     const handleSearchInputChange = (event) => {
-        console.log(event.target.name);
         // let params = serializeFormQuery(event.target);
         setSearchParams((prevSearchParams) => {
             const newSearchParams = new URLSearchParams(prevSearchParams);
@@ -60,9 +59,8 @@ const AdminRoom = () => {
                 [filter.isPrivate]: status === '' ? null : status,
                 [filter.room]: filterRoom,
             };
-            console.log(req);
+
             roomApi.adminGetAll(req).then((response) => {
-                console.log(response);
                 setListRoom([...response?.data.data.data]);
                 setMeta(response.data.data.meta);
                 setLoading(false);

@@ -24,12 +24,8 @@ const More = ({ link, roomId, openTime }) => {
             href: timeCompare ? '' : `/admin/room/edit/${roomId}`,
             value: 'Edit',
             func: (e) => {
-                console.log(openTime);
-                console.log(Date.now());
-                console.log(new Date(openTime).getTime());
-                console.log(checkTime);
                 timeCompare ? setCheckTime(true) : setCheckTime(false);
-                console.log(checkTime);
+
                 if (checkTime) {
                     e.preventDefault();
                     setShowWarning(true);

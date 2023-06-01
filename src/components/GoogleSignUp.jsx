@@ -10,9 +10,7 @@ function GoogleSignUpButton() {
     const refBtn = useRef();
     const navigate = useNavigate();
     const handleCredentialResponse = (response) => {
-        console.log(`Encoded JWT ID token: ${response.credential}`);
         authApi.login(response.credential).then((res) => {
-            console.log(res);
             if (res.status == 200) {
                 navigate('/register');
             }

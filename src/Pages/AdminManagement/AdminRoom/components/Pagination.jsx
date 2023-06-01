@@ -15,7 +15,7 @@ const PaginationRoom = ({ totalPages, currentPage, action }) => {
             </Pagination.Item>
         );
     }
-    console.log(currentPage);
+
     var leftHidden =
         currentPage == 1 ? (
             <Pagination.Prev disabled />

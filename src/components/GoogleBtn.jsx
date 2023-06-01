@@ -11,15 +11,12 @@ function GoogleSignInButton() {
     const refBtn = useRef();
     const navigate = useNavigate();
     const handleCredentialResponse = async (response) => {
-        console.log(`Encoded JWT ID token: ${response.credential}`);
         Localstorage.setItem('credential', response.credential);
         const res = await authApi.login(response.credential);
 
         if (res.data.status === 400) {
-            console.log('check run 400');
             navigate('/register', { state: res.credential });
         } else if (res.data.status === 200) {
-            console.log('check run 200');
             Localstorage.setItem('token', res.data.data);
             navigate('/');
         }

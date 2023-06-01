@@ -30,7 +30,6 @@ const AdminAttendance = () => {
     //pagination and current page
     const [currentPage, setCurrentPage] = useState(meta?.currentPage || 1);
     const handleSearchInputChange = (event) => {
-        console.log(event.target.name);
         // let params = serializeFormQuery(event.target);
         setSearchParams((prevSearchParams) => {
             const newSearchParams = new URLSearchParams(prevSearchParams);

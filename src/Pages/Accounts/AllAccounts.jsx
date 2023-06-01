@@ -31,7 +31,6 @@ const AllAccounts = () => {
     //pagination and current page
     const [currentPage, setCurrentPage] = useState(meta?.currentPage || 1);
     const handleSearchInputChange = (event) => {
-        console.log(event.target.name);
         // let params = serializeFormQuery(event.target);
         setSearchParams((prevSearchParams) => {
             const newSearchParams = new URLSearchParams(prevSearchParams);
@@ -56,7 +55,7 @@ const AllAccounts = () => {
     };
     const [accounts, setAccounts] = useState([]);
     const [status, setStatus] = useState('');
-    console.log('🚀 ~ file: AllAccounts.jsx:7 ~ AllAccounts ~ accounts:', accounts);
+
     useEffect(() => {
         const fetchDataFilter = async () => {
             const filter = {
@@ -72,9 +71,8 @@ const AllAccounts = () => {
                 [filter.isActive]: status === '' ? null : status,
                 [filter.room]: filterRoom,
             };
-            console.log('req', req);
+
             accountsApi.getAll(req).then((response) => {
-                console.log('getAll', response);
                 setAccounts(response.data.data.data);
             });
         };
