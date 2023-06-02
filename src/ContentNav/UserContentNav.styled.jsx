@@ -34,10 +34,6 @@ export const UserText = styled.div`
     color: ${themes.colors.light};
     cursor: pointer;
     transition: 0.3s;
-    /* &:hover {
-        transition: ease-in all 0.2s;
-        color: ${themes.colors.primary1};
-    } */
 `;
 
 export const UserIcon = styled.section`

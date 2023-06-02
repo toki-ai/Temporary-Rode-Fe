@@ -23,7 +23,7 @@ const Home = () => {
     const [inputCode, setInputCode] = useState('');
     // const location = useLocation();
     // const [show, setShow] = useState(false);
-    // console.log('Show:  ', show);
+
     const navigate = useNavigate();
     // Viết lại function join room - Hân
     const handlePostRoom = async (e) => {
