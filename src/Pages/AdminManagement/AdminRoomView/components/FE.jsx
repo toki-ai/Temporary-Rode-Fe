@@ -26,13 +26,16 @@ const titlesQues = [
     { id: '5', name: 'Submission' },
     { id: '6', name: 'Finish at' },
 ];
-const FE = ({ ques, data, questions, questionId }) => {
+const FE = ({ ques, roomId, questions, questionId }) => {
     const tableRef = useRef(null);
     const [question, setQuestion] = useState([]);
-    const [questionID, setQuestionID] = useState('');
+    const [questionID, setQuestionID] = useState('All');
     const [accounts, setAccounts] = useState([]);
+    const [accountsAll, setAccountsAll] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
+    const [currentPageAll, setCurrentPageAll] = useState(1);
+    const [totalPageAll, setTotalPageAll] = useState(1);
     useEffect(() => {
         setQuestion(questions);
 
@@ -45,6 +48,13 @@ const FE = ({ ques, data, questions, questionId }) => {
             setTotalPage(res.data.data?.meta.totalPages);
         });
     }, [questionId, questions]);
+    useEffect(() => {
+        roomApi.getSubmitHistoryByRoom(roomId).then((res) => {
+            setAccountsAll(res.data.data.items);
+            setCurrentPageAll(res.data.data.meta.currentPage);
+            setTotalPageAll(res.data.data.meta.totalPages);
+        });
+    }, [roomId, questions, question, questionID]);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -53,7 +63,7 @@ const FE = ({ ques, data, questions, questionId }) => {
     return (
         <>
             <DownloadTableExcel
-                filename="[F-Code] Bảng CSS "
+                filename="[F-Code] Bảng CSS"
                 sheet="CSS_BATTLE"
                 currentTableRef={tableRef.current}
             >
@@ -63,17 +73,17 @@ const FE = ({ ques, data, questions, questionId }) => {
             <Table striped className="mt-2 border-top" ref={tableRef}>
                 <thead>
                     <tr>
-                        {ques == 'All'
-                            ? titlesAll.map((item) => {
+                        {questionId == 'All'
+                            ? titlesAll.map((item, i) => {
                                   return (
-                                      <th className="fw-bold" key={item.id}>
+                                      <th className="fw-bold" key={i}>
                                           {item.name}
                                       </th>
                                   );
                               })
-                            : titlesQues.map((item) => {
+                            : titlesQues.map((item, i) => {
                                   return (
-                                      <th className="fw-bold" key={item.id}>
+                                      <th className="fw-bold" key={i}>
                                           {item.name}
                                       </th>
                                   );
@@ -81,10 +91,33 @@ const FE = ({ ques, data, questions, questionId }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {accounts?.length ? (
+                    {questionId == 'All' ? (
+                        accountsAll?.length ? (
+                            accountsAll.map((account, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <td>{i + 1}</td>
+                                        <td>{account.account.fullname}</td>
+                                        <td>{account.totalScore}</td>
+                                        <td>{account.totalSpace}</td>
+                                        <td className="text-truncate" style={{ maxWidth: '300px' }}>
+                                            {account.submissions}
+                                        </td>
+                                        <td>{DateFormatS(account.finishTime)}</td>
+                                    </tr>
+                                );
+                            })
+                        ) : (
+                            <tr>
+                                <td className="text-center" colSpan={1000}>
+                                    No data available in table
+                                </td>
+                            </tr>
+                        )
+                    ) : accounts?.length ? (
                         accounts.map((account, i) => {
                             return (
-                                <tr key={account.id}>
+                                <tr key={i}>
                                     <td>{i + 1}</td>
                                     <td>{account.account.lname + ' ' + account.account.fname}</td>
                                     <td>{account.score}</td>
@@ -106,7 +139,15 @@ const FE = ({ ques, data, questions, questionId }) => {
                     )}
                 </tbody>
             </Table>
-            {parseInt(totalPage) > 1 || accounts?.length ? (
+            {questionId == 'All' ? (
+                parseInt(totalPageAll) > 1 || accountsAll?.length ? (
+                    <PaginationRoom
+                        action={handlePageChange}
+                        totalPages={totalPageAll}
+                        currentPage={currentPageAll}
+                    />
+                ) : null
+            ) : parseInt(totalPage) > 1 || accounts?.length ? (
                 <PaginationRoom
                     action={handlePageChange}
                     totalPages={totalPage}

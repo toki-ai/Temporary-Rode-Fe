@@ -25,12 +25,15 @@ const titlesQues = [
     { id: '4', name: 'Submission' },
     { id: '5', name: 'Finish at' },
 ];
-const BE = ({ ques, data, questions, questionId }) => {
+const BE = ({ ques, roomId, questions, questionId }) => {
     const [question, setQuestion] = useState([]);
-    const [questionID, setQuestionID] = useState('');
+    const [questionID, setQuestionID] = useState('All');
     const [accounts, setAccounts] = useState([]);
+    const [accountsAll, setAccountsAll] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
+    const [currentPageAll, setCurrentPageAll] = useState(1);
+    const [totalPageAll, setTotalPageAll] = useState(1);
     useEffect(() => {
         setQuestion(questions);
 
@@ -43,7 +46,13 @@ const BE = ({ ques, data, questions, questionId }) => {
             setTotalPage(res.data.data.meta.totalPages);
         });
     }, [questionId, questions]);
-
+    useEffect(() => {
+        roomApi.getSubmitHistoryByRoom(roomId).then((res) => {
+            setAccountsAll(res.data.data.items);
+            setCurrentPageAll(res.data.data.meta.currentPage);
+            setTotalPageAll(res.data.data.meta.totalPages);
+        });
+    }, [roomId, questions, question, questionID]);
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
@@ -52,7 +61,7 @@ const BE = ({ ques, data, questions, questionId }) => {
             <Table striped className="mt-2 border-top">
                 <thead>
                     <tr>
-                        {ques == 'All'
+                        {questionId == 'All'
                             ? titlesAll.map((item) => {
                                   return (
                                       <th className="fw-bold" key={item.id}>
@@ -70,7 +79,27 @@ const BE = ({ ques, data, questions, questionId }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {accounts?.length ? (
+                    {questionId == 'All' ? (
+                        accountsAll?.length ? (
+                            accountsAll.map((account, i) => {
+                                return (
+                                    <tr key={account.id}>
+                                        <td>{i + 1}</td>
+                                        <td>{account.account.fullname}</td>
+                                        <td>{account.totalScore}</td>
+                                        <td>{account.totalSpace}</td>
+                                        <td>{DateFormatS(account.finishTime)}</td>
+                                    </tr>
+                                );
+                            })
+                        ) : (
+                            <tr>
+                                <td className="text-center" colSpan={1000}>
+                                    No data available in table
+                                </td>
+                            </tr>
+                        )
+                    ) : accounts?.length ? (
                         accounts.map((account, i) => {
                             return (
                                 <tr key={account.id}>
@@ -94,7 +123,16 @@ const BE = ({ ques, data, questions, questionId }) => {
                     )}
                 </tbody>
             </Table>
-            {parseInt(totalPage) > 1 || accounts?.length ? (
+
+            {questionId == 'All' ? (
+                parseInt(totalPageAll) > 1 || accountsAll?.length ? (
+                    <PaginationRoom
+                        action={handlePageChange}
+                        totalPages={totalPageAll}
+                        currentPage={currentPageAll}
+                    />
+                ) : null
+            ) : parseInt(totalPage) > 1 || accounts?.length ? (
                 <PaginationRoom
                     action={handlePageChange}
                     totalPages={totalPage}
