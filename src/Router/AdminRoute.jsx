@@ -10,7 +10,7 @@ const AdminRoute = () => {
     } else if (userRole === null) {
         return <Outlet />;
     }
-    console.log(userRole);
+
     return userRole == 'admin' ? <Outlet /> : <Navigate to="/home" replace />;
 };
 

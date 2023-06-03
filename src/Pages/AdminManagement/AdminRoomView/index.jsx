@@ -80,7 +80,7 @@ const AdminRoomView = () => {
                         </Nav.Item>
                         {questions.map((item, i) => {
                             return (
-                                <Nav.Item>
+                                <Nav.Item key={i}>
                                     <Nav.Link
                                         eventKey={i + 2}
                                         bsPrefix=""

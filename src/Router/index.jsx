@@ -28,7 +28,7 @@ const RouterComponent = () => {
     if (width <= 900) {
         return <Resize />;
     }
-    const router = createHashRouter([
+    const router = createBrowserRouter([
         { path: '/', element: <Navigate to="home" /> },
 
         {

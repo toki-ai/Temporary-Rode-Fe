@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 import { Table } from 'react-bootstrap';
+import { DownloadTableExcel } from 'react-export-table-to-excel';
 
 import roomApi from '../../../../utils/api/roomApi';
 import PaginationRoom from '../../AdminRoom/components/Pagination';
@@ -13,14 +14,16 @@ const titlesAll = [
     { id: '1', name: 'Name' },
     { id: '2', name: 'Total Score' },
     { id: '3', name: 'Total Execution Time' },
-    { id: '4', name: 'Finish at' },
+    { id: '4', name: 'Submission' },
+    { id: '5', name: 'Finish at' },
 ];
 const titlesQues = [
     { id: '0', name: 'Rank' },
     { id: '1', name: 'Name' },
     { id: '2', name: 'Score' },
     { id: '3', name: 'Execution Time' },
-    { id: '4', name: 'Finish at' },
+    { id: '4', name: 'Submission' },
+    { id: '5', name: 'Finish at' },
 ];
 const BE = ({ ques, data, questions, questionId }) => {
     const [question, setQuestion] = useState([]);
@@ -35,7 +38,7 @@ const BE = ({ ques, data, questions, questionId }) => {
     }, [questions, questionId]);
     useEffect(() => {
         roomApi.getSubmitHistoryByQuestion(questionId).then((res) => {
-            setAccounts(res.data.data.items);
+            setAccounts(res.data.data?.items);
             setCurrentPage(res.data.data.meta.currentPage);
             setTotalPage(res.data.data.meta.totalPages);
         });
@@ -75,6 +78,9 @@ const BE = ({ ques, data, questions, questionId }) => {
                                     <td>{account.account.lname + ' ' + account.account.fname}</td>
                                     <td>{account.score}</td>
                                     <td>{account.space}</td>
+                                    <td className="text-truncate" style={{ maxWidth: '300px' }}>
+                                        {account.submissions}
+                                    </td>
                                     <td>{DateFormatS(account.submittedAt)}</td>
                                 </tr>
                             );

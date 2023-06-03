@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 
 import { Dropdown, DropdownButton } from 'react-bootstrap/esm';
+import { Link } from 'react-router-dom';
 
 import Loading from '../../../../../components/Loading';
 import ModalComponent from '../../../../../components/Modal';
@@ -51,6 +52,7 @@ const More = ({ link, roomId, openTime }) => {
                 {actions.map((item) => {
                     return (
                         <Dropdown.Item
+                            // as={<Link />}
                             key={item.id}
                             eventKey={item.id}
                             href={item.href}

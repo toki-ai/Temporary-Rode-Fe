@@ -68,6 +68,7 @@ const AdminRoom = () => {
         };
         fetchRoom();
     }, [searchValue, filterRoom, currentPage, status]);
+    console.log(listRoom);
     return loading ? (
         <Loading />
     ) : (

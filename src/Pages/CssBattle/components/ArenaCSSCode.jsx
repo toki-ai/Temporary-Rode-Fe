@@ -32,11 +32,11 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
         const formatData = {
             roomId: data?.id,
             questionId: data?.questions[0].id,
-            code: `<div></div><style>body{background:#0B2429;}div {width: 120px;height: 120px;background: #F3AC3C;border-radius: 25rem 0 25rem 25rem;position:absolute;bottom:30px;left:80px;box-shadow: 60px -60px #998235;}div:after{content:"";position:absolute;background:#F3AC3C;width:120px;height:120px;border-radius:25rem 25rem 25rem 0;transform:translate(100%,-100%);z-index:-1`,
+            code: code,
         };
 
         const res = await submitApi.submit(formatData);
-
+        console.log(res);
         if (res.data.status === 200) {
             submitService.setSubmit(res.data.data);
             setSubmitStatus(true);
