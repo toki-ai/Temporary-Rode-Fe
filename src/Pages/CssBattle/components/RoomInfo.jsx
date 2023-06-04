@@ -48,7 +48,7 @@ const RoomInfo = ({ data, submit }) => {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [show]);
     return (
         <StyledWrap>
             <OffCanvasComponents title={'LEADERBOARD'} show={show} setShow={setShow}>

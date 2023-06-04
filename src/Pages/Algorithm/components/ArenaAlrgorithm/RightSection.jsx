@@ -78,7 +78,7 @@ const RightSection = ({
             localStorage.setItem('authenticated(do not delete)', JSON.stringify(res.data.data));
             toastSuccess(res.data.message);
         } else {
-            toastError('Submit fail');
+            toastError(res.data.err);
         }
 
         setShowResult(true);

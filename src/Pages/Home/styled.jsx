@@ -3,6 +3,14 @@ import { Button, Modal } from 'react-bootstrap';
 import { Search } from 'react-bootstrap-icons';
 import styled from 'styled-components';
 
+import {
+    moveInCircle,
+    Rotate,
+    Floating,
+    BgScrolling,
+    TextEffect,
+    Floating01,
+} from '../../constant/keyframes';
 import { themes } from '../../themes';
 import { device } from '../../utils/Breakpoints/index.jsx';
 
@@ -241,6 +249,9 @@ export const Name = styled.div`
     flex-direction: column;
     position: absolute;
     top: -35%;
+    .textEffect {
+        animation: ${TextEffect} 1s cubic-bezier(0.215, 0.61, 0.355, 1) 0.2s both;
+    }
     @media ${device.tablet} {
         top: -55%;
     }
@@ -261,6 +272,16 @@ export const Icon = styled.div`
     .position-absolute {
         position: absolute;
     }
+    /* css animation */
+
+    .effect-1 {
+        animation: ${Floating01} 10s alternate infinite;
+    }
+    .effect-2 {
+        animation: ${Floating} 30s alternate-reverse infinite;
+    }
+
+    /* css animation */
     .right-50 {
         right: 50%;
     }

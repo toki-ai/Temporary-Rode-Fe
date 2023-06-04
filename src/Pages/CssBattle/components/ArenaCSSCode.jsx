@@ -3,11 +3,10 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import ButtonStyled from '../../../components/Button';
-// import Loading from '../../../components/Loading';
+import ModalComponent from '../../../components/Modal';
 import OffCanvasComponents from '../../../components/OffCanvas/OffCanvas';
-import { toastSuccess } from '../../../components/Toast';
-// import { useDebounce } from '../../../hooks/useDebounce';
-// import { CodeTemplateTmp } from '../../../utils/Constant/Dummy';
+import { toastSuccess, toastError } from '../../../components/Toast';
+import Localstorage from '../../../utils/Localstorage';
 import submitApi from '../../../utils/api/submitApi';
 import submitHistoryApi from '../../../utils/api/submitHistoryApi';
 import userRoomApi from '../../../utils/api/userRoomApi';
@@ -27,6 +26,8 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
     const [submitStatus, setSubmitStatus] = useState(true);
     const location = useLocation();
     const navigate = useNavigate();
+    const questionResult = JSON.parse(localStorage.getItem('authenticated(do not delete)'));
+    console.log(questionResult);
     const submitCode = async () => {
         setSubmitStatus(false);
         const formatData = {
@@ -41,6 +42,9 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
             submitService.setSubmit(res.data.data);
             setSubmitStatus(true);
             localStorage.setItem('authenticated', JSON.stringify(res.data.data));
+        } else if (res.data.status === 400) {
+            setSubmitStatus(true);
+            toastError(res.data.err);
         }
     };
 
@@ -65,7 +69,8 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
                 setUserSubmit([...res.data.data]);
             }
         });
-    }, [submitStatus]);
+    }, [show]);
+    // questionResult.times.current === data?.questions[0].maxSubmitTimes;
     return (
         <>
             <OffCanvasComponents title="My Solution" show={show} setShow={setShow}>

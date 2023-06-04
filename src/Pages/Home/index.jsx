@@ -69,27 +69,14 @@ const Home = () => {
             })
             .catch((err) => console.log(err));
     };
-    // useEffect(() => {
-    //     if (location?.state?.success) {
-    //         setShow(true);
-    //     } else {
-    //         return;
-    //     }
-    // }, []);
-    //     success={true}
-    //     show={show}
-    //     setShow={setShow}
-    //     body={'mày làm tốt lắm '}
-    //     title={'Tuyệt vời'}
-    // />
-    // <ModalComponent
+
     return (
         <>
             <Container>
                 <Input>
                     {/** GIỮ lại phần input code này  */}
                     <form action="" onSubmit={(e) => handlePostRoom(e)} className="form">
-                        <label for="exampleInputEmail1" className=" text-yellow label">
+                        <label htmlFor="exampleInputEmail1" className=" text-yellow label">
                             ROOM
                         </label>
                         <input
@@ -104,56 +91,56 @@ const Home = () => {
                     {/** GIỮ lại phần input code này  */}
                 </Input>
                 <Name>
-                    <Hero>R.ODE</Hero>
-                    <Title>BATTLE</Title>
+                    <Hero className="textEffect">R.ODE</Hero>
+                    <Title className="textEffect">BATTLE</Title>
                 </Name>
                 <Icon>
-                    <Row className="position-absolute w-3em right-50 bottom-100">
+                    <Row className="position-absolute w-3em right-50 bottom-100 effect-1">
                         <img src={x_blue} alt="X blue SVG" />
                     </Row>
-                    <Row className="position-absolute w-3em right-2 bottom-105">
+                    <Row className="position-absolute w-3em right-2 bottom-105 effect-2">
                         <img src={x_blue} alt="X blue SVG" />
                     </Row>
-                    <Row className="position-absolute w-3em right-102 bottom-100">
+                    <Row className="position-absolute w-3em right-102 bottom-100 effect-3">
                         <img src={x_green} alt="X green SVG" />
                     </Row>
-                    <Row className="position-absolute w-3em right-9 bottom-124">
+                    <Row className="position-absolute w-3em right-9 bottom-124 effect-4">
                         <img src={circle} alt="circle blue SVG" />
                     </Row>
-                    <Row className="position-absolute w-4em right-0 bottom-142">
+                    <Row className="position-absolute w-4em right-0 bottom-142 effect-5">
                         <img src={hexagonal} alt="hexagonal SVG" />
                     </Row>
-                    <Row className="position-absolute w-3em right-50 bottom-134">
+                    <Row className="position-absolute w-3em right-50 bottom-134 effect-6">
                         <img src={triangle} alt="triangle SVG" />
                     </Row>
-                    <Row className="position-absolute w-9em right-90 bottom-100">
+                    <Row className="position-absolute w-9em right-90 bottom-100 effect-7">
                         <img src={wave} alt="wave SVG" />
                     </Row>
-                    <Row className="position-absolute rotate-1 w-9em right-14 bottom-120">
+                    <Row className="position-absolute rotate-1 w-9em right-14 bottom-120 effect-8">
                         <img src={wave} alt="wave SVG" />
                     </Row>
-                    <Row className="position-absolute w-3em right-102 bottom-134">
+                    <Row className="position-absolute w-3em right-102 bottom-134 effect-9">
                         <img src={point_blue} alt="point blue SVG" />
                     </Row>
-                    <Row className="position-absolute w-22em right-78 bottom-100">
+                    <Row className="position-absolute w-22em right-78 bottom-100 effect-10">
                         <img src={point_blue} alt="point blue SVG" />
                     </Row>
-                    <Row className="position-absolute w-22em right-2 bottom-80">
+                    <Row className="position-absolute w-22em right-2 bottom-80 effect-11">
                         <img src={point_blue} alt="point blue SVG" />
                     </Row>
-                    <Row className="position-absolute w-22em right-102 bottom-80">
+                    <Row className="position-absolute w-22em right-102 bottom-80 effect-12">
                         <img src={point_green} alt="point green SVG" />
                     </Row>
-                    <Row className="position-absolute w-22em right-60 bottom-128">
+                    <Row className="position-absolute w-22em right-60 bottom-128 effect-13">
                         <img src={point_green} alt="point green SVG" />
                     </Row>
-                    <Row className="position-absolute w-22em right-32 bottom-134">
+                    <Row className="position-absolute w-22em right-32 bottom-134 effect-14">
                         <img src={point_green} alt="point green SVG" />
                     </Row>
-                    <Row className="position-absolute w-22em right-18 bottom-100">
+                    <Row className="position-absolute w-22em right-18 bottom-100 effect-15">
                         <img src={point_green} alt="point green SVG" />
                     </Row>
-                    <Row className="position-absolute w-4em right-65 bottom-134">
+                    <Row className="position-absolute w-4em right-65 bottom-134 effect-16">
                         <img src={circle_green} alt="circle green SVG" />
                     </Row>
                 </Icon>
