@@ -11,7 +11,7 @@ export const ContainerLayout = styled.div`
 export const Body = styled.div`
     display: flex;
     width: 100%;
-    column-gap: 10px;
+    column-gap: 30px;
     position: relative;
 `;
 export const BackgroundGray = styled.div`

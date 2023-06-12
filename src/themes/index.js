@@ -3,7 +3,7 @@ export const themes = {
         arenaBG: '#020D26',
         neonLine: '#00e7aa',
         light: '#FFFFFF',
-        dark: '#000000',
+        dark: '#00071E',
         primary: '#00E7AA',
         neutral5: '#D9D9D9',
         primary1: '#2E7DFF',

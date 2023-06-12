@@ -114,16 +114,16 @@ export const addBEQuestion = (setQuestions) => {
         {
             maxSubmitTimes: 0,
             questionImage: '',
-            testcases: [{ input: '', output: '' }],
+            testCases: [{ input: '', output: '' }],
         },
     ]);
 };
 
 export const addTestcase = (questionIdx, setQuestions) => {
     setQuestions((prev) => {
-        const { testcases, ...rest } = prev[questionIdx]; // destructure testcases array and the rest of the question object
-        const newTestcases = [...testcases, { input: '', output: '' }]; // add a new testcase to the testcases array
-        const updatedQuestion = { ...rest, testcases: newTestcases }; // create a new object with updated testcases array
+        const { testCases, ...rest } = prev[questionIdx]; // destructure testcases array and the rest of the question object
+        const newTestcases = [...testCases, { input: '', output: '' }]; // add a new testcase to the testcases array
+        const updatedQuestion = { ...rest, testCases: newTestcases }; // create a new object with updated testcases array
         const updatedQuestions = [
             ...prev.slice(0, questionIdx),
             updatedQuestion,
@@ -136,7 +136,7 @@ export const addTestcase = (questionIdx, setQuestions) => {
 export const editInputTestcase = (value, questionIdx, testcaseIdx, setQuestions) => {
     setQuestions((prev) => {
         let copy = [...prev];
-        copy[questionIdx].testcases[testcaseIdx].input = value;
+        copy[questionIdx].testCases[testcaseIdx].input = value;
         return copy;
     });
 };
@@ -144,7 +144,7 @@ export const editInputTestcase = (value, questionIdx, testcaseIdx, setQuestions)
 export const editOutputTestcase = (value, questionIdx, testcaseIdx, setQuestions) => {
     setQuestions((prev) => {
         let copy = [...prev];
-        copy[questionIdx].testcases[testcaseIdx].output = value;
+        copy[questionIdx].testCases[testcaseIdx].output = value;
         return copy;
     });
 };
@@ -152,7 +152,7 @@ export const editOutputTestcase = (value, questionIdx, testcaseIdx, setQuestions
 export const deleteTestcase = (questionIdx, testcaseIdx, setQuestions) => {
     setQuestions((prev) => {
         let copy = [...prev];
-        copy[questionIdx].testcases.splice(testcaseIdx, 1);
+        copy[questionIdx].testCases.splice(testcaseIdx, 1);
         return copy;
     });
 };

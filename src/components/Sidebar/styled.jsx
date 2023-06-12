@@ -8,12 +8,16 @@ import {
     PersonFill,
     Power,
 } from 'react-bootstrap-icons';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.aside`
     width: 20%;
     min-height: 87vh;
+
+    /* height: 100vh; */
     background: #ffffff;
+    padding: 32px;
     box-shadow: 6px 35px 24px rgba(0, 0, 0, 0.25);
     border-radius: 20px 20px 0 0;
     z-index: 1;
@@ -25,7 +29,8 @@ export const Container = styled.div`
 
 export const User = styled.div`
     width: 100%;
-    height: 28%;
+    /* height: 28%; */
+    padding: 2rem 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,10 +53,15 @@ export const User = styled.div`
 `;
 
 export const Pagination = styled.div`
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    margin-left: 20px;
-    height: calc(100% - 28%);
+    align-items: center;
+    justify-content: center; */
+
+    & .active {
+        color: #ffffff !important;
+        background-color: #00e7aa;
+    }
 `;
 export const IconUser = styled(PersonCircle)`
     width: 35%;
@@ -103,14 +113,14 @@ export const Icon = styled.section`
 `;
 export const ContestInfo = styled.div`
     width: 100%;
-    height: calc(100% - 28%);
-    margin-bottom: 35px;
+    /* height: calc(100% - 28%); */
+    /* margin-bottom: px; */
     display: flex;
     flex-direction: column;
     row-gap: 14px;
 
     div {
-        width: 95%;
+        /* width: 95%; */
         display: flex;
         justify-content: space-between;
         margin-left: 10px;
@@ -147,14 +157,14 @@ export const IconBarChart = styled(BarChartFill)`
     height: 16px;
 `;
 
-export const BoldText = styled.section`
+export const BoldText = styled.span`
     font-family: 'Quicksand';
     font-style: normal;
-    font-weight: 700;
-    font-size: 1.3vw;
-    line-height: 21px;
-    color: #111111;
-    margin-bottom: 11px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #b0b0b0;
+    margin-bottom: 5px;
 `;
 
 export const EndBar = styled.div`
@@ -190,7 +200,53 @@ export const EndBar = styled.div`
         }
     }
 `;
+export const AdminBtn = styled(NavLink)`
+    display: flex;
+    padding: 0.75rem;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Quicksand';
+    width: 100%;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.2vw;
+    line-height: 21px;
+    color: ${({ active }) => (active ? '#ffffff' : '#515151')} !important;
+    background-color: ${({ active }) => (active ? '#00E7AA' : 'transparent')};
+    cursor: pointer;
+    transition: 0.5s all;
+    border-radius: 4px;
 
+    &:hover {
+        background-color: #e0fff7;
+        color: #515151 !important;
+        border-radius: 4px;
+    }
+`;
+
+export const LogOutBtn = styled(NavLink)`
+    display: flex;
+    padding: 0.75rem;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Quicksand';
+    width: 100%;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.2vw;
+    line-height: 21px;
+    color: ${({ active }) => (active ? '#ffffff' : '#515151')} !important;
+    background-color: ${({ active }) => (active ? '#00E7AA' : 'transparent')};
+    cursor: pointer;
+    transition: 0.5s all;
+    border-radius: 4px;
+
+    &:hover {
+        background-color: #dc3545;
+        color: #fff !important;
+        border-radius: 4px;
+    }
+`;
 // export const NavTop = styled.div`
 //     display: flex;
 //     flex-direction: column;

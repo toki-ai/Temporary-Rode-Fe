@@ -8,13 +8,13 @@ import { Body, Container } from './styled';
 function UserHomeLayout({ children }) {
     return (
         <Container>
-            <UserHeader></UserHeader>
+            <UserHeader />
             <Body>
-                <UserSidebar></UserSidebar>
                 <ContentComponent layout={2}>{children}</ContentComponent>
             </Body>
         </Container>
     );
 }
+// <UserSidebar></UserSidebar>
 
 export default UserHomeLayout;

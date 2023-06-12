@@ -58,7 +58,7 @@ function UserSidebar() {
             <Container>
                 <User>
                     <IconUser></IconUser>
-                    <div className=" text-truncate" style={{ maxWidth: '300px' }}>
+                    <div className=" text-truncate" style={{ maxWidth: '150px' }}>
                         {currentUser != null
                             ? formatUserName(currentUser.firstName, currentUser.lastName)
                             : ''}

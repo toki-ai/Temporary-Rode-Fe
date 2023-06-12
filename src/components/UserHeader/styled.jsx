@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { themes } from '../../themes';
 import { device } from '../../utils/Breakpoints/index.jsx';
 
 export const Container = styled.nav`
-    border: 0.711111px solid ${themes.colors.primary};
+    border-bottom: 0.711111px solid ${themes.colors.primary};
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,14 +27,27 @@ export const Container = styled.nav`
 `;
 
 export const Left = styled(Link)`
+    padding: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 20px;
     cursor: pointer;
 `;
 
 export const Right = styled.div`
     margin-right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    & .biStyled {
+        color: ${themes.colors.neonLine};
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            color: ${themes.colors.red2};
+        }
+    }
 `;
 
 export const Hero = styled.div`
@@ -62,5 +75,35 @@ export const Hero = styled.div`
     }
     @media ${device.desktop} {
         font-size: 24px;
+    }
+`;
+export const Center = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+`;
+export const NavStyled = styled(NavLink)`
+    color: ${themes.colors.light};
+
+    transition: all 0.4s ease;
+
+    &:hover {
+        color: ${themes.colors.neonLine};
+        &.active::after {
+            border-bottom: 3px solid ${themes.colors.neonLine};
+        }
+    }
+    &.active::after {
+        content: '';
+        /* width: 100px;
+        height: auto; */
+        /* max-height: 10px; */
+        position: relative;
+        right: 4rem;
+        padding: 3px 24px;
+        transition: all 0.4s ease;
+        border-bottom: 3px solid ${themes.colors.light};
     }
 `;

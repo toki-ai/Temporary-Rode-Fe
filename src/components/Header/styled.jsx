@@ -10,7 +10,7 @@ export const Title = styled.div`
     font-weight: 900;
     font-size: 3vw;
     color: #00e7aa;
-    margin: 1% 0 2% 4%;
+    margin: 1% 4%;
     /* margin-left: 4%;
     margin-bottom: 2%; */
 `;

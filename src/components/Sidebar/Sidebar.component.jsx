@@ -16,15 +16,10 @@ import {
     IconLogOut,
     ContestInfo,
     IconBarChart,
+    AdminBtn,
+    LogOutBtn,
 } from './styled';
 
-const generalItems = [
-    {
-        icon: <IconHouse />,
-        Info: 'Dashboard',
-        Action: '/admin/room',
-    },
-];
 const infoItems = [
     {
         icon: <IconPerson />,
@@ -32,19 +27,19 @@ const infoItems = [
         Action: '/contestant',
     },
     {
-        icon: <IconHouse />,
+        icon: <i class="bi bi-door-open"></i>,
         Info: 'Room',
         Action: '/admin/room',
     },
     {
         icon: <IconBarChart />,
         Info: 'Leaderboard',
-        Action: './leaderboard',
+        Action: '/admin/leaderboard',
     },
     {
         icon: <IconFile />,
         Info: 'Content',
-        Action: '/content',
+        Action: '/admin/content',
     },
 ];
 
@@ -52,38 +47,68 @@ const endItems = [
     {
         icon: <IconChat />,
         Info: 'Feedback',
-        Action: '/feedback',
+        Action: '/admin/feedback',
     },
     {
-        icon: <IconLogOut />,
-        Info: 'Log out',
-        Action: '/login',
+        icon: <i class="bi bi-gear"></i>,
+        Info: 'Settings',
+        Action: '/admin/settings',
     },
 ];
+//   {
+//         icon: <IconLogOut />,
+//         Info: 'Log out',
+//         Action: '/login',
+//     },
 function Sidebar() {
     return (
         <>
             <Container>
                 <User>
                     <IconUser></IconUser>
-                    <div className="mb-1">Lê Thành Long</div>
+
                     <p>Administrator</p>
                 </User>
                 <Pagination>
                     <General>
                         <BoldText>General</BoldText>
-                        <div>
-                            <ContentNav items={generalItems} layout={1} />
-                        </div>
+                        <nav>
+                            <AdminBtn to="/admin/dashboard">
+                                <IconHouse />
+                                Dashboard
+                            </AdminBtn>
+                        </nav>
                     </General>
                     <ContestInfo>
                         <BoldText>Contest Information</BoldText>
                         <AdminEndBar>
                             <nav>
-                                <ContentNav items={infoItems} layout={1} />
+                                {infoItems.map((el) => {
+                                    return (
+                                        <AdminBtn to={el.Action} key={el.Info}>
+                                            {el.icon}
+                                            {el.Info}
+                                        </AdminBtn>
+                                    );
+                                })}
                             </nav>
+                        </AdminEndBar>
+                    </ContestInfo>
+                    <ContestInfo>
+                        <BoldText>Others</BoldText>
+                        <AdminEndBar>
                             <nav>
-                                <ContentNav items={endItems} layout={1} />
+                                {endItems.map((el) => {
+                                    return (
+                                        <AdminBtn to={el.Action} key={el.Info}>
+                                            {el.icon}
+                                            {el.Info}
+                                        </AdminBtn>
+                                    );
+                                })}
+                                <LogOutBtn to={'/login'} onClick={() => localStorage.clear()}>
+                                    <IconLogOut /> Log out
+                                </LogOutBtn>
                             </nav>
                         </AdminEndBar>
                     </ContestInfo>

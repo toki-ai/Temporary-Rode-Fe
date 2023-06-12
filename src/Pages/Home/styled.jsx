@@ -10,6 +10,7 @@ import {
     BgScrolling,
     TextEffect,
     Floating01,
+    Floating02,
 } from '../../constant/keyframes';
 import { themes } from '../../themes';
 import { device } from '../../utils/Breakpoints/index.jsx';
@@ -268,19 +269,108 @@ export const Name = styled.div`
     }
 `;
 
-export const Icon = styled.div`
+export const Icon = styled.canvas`
     .position-absolute {
         position: absolute;
     }
     /* css animation */
+    .object1 {
+        bottom: 10%;
+        left: -30%;
+    }
+    .object2 {
+        bottom: 125%;
+        left: -40%;
+    }
+    .object3 {
+        bottom: 80%;
+        left: -20%;
+    }
+    .object4 {
+        bottom: 60%;
+        left: -10%;
+    }
 
+    .object5 {
+        right: -30%;
+        top: 60%;
+    }
+    .object6 {
+        right: -10%;
+        top: 55%;
+    }
+    .object7 {
+        right: -18%;
+        top: 33%;
+    }
+
+    .object7 {
+        left: -10%;
+        bottom: 84%;
+    }
+    .object8 {
+        left: -33%;
+        bottom: 74%;
+    }
+    .object9 {
+        left: -23%;
+        bottom: 63%;
+    }
+    .object10 {
+        left: -41%;
+        bottom: 3%;
+        animation: ${moveInCircle} 20s alternate-reverse infinite;
+    }
+    .object11 {
+        right: -37%;
+        top: 24%;
+        animation: ${Floating01} 2s alternate-reverse infinite;
+    }
+    .object12 {
+        right: -23%;
+        top: -10%;
+    }
+    .object13 {
+        right: -31%;
+        top: 0%;
+    }
+    .object14 {
+        right: -17%;
+        top: 12%;
+    }
+    .object15 {
+        right: -39%;
+        top: 77%;
+    }
+    .object16 {
+        left: -23%;
+        bottom: 108%;
+    }
+    .object17 {
+        left: -19%;
+        bottom: 39%;
+    }
+    .object18 {
+        left: -37%;
+        bottom: 29%;
+    }
+    .object19 {
+        left: -10%;
+        bottom: 18%;
+    }
+    .object20 {
+        left: -27%;
+        bottom: 34%;
+    }
     .effect-1 {
         animation: ${Floating01} 10s alternate infinite;
     }
     .effect-2 {
         animation: ${Floating} 30s alternate-reverse infinite;
     }
-
+    .effect-3 {
+        animation: ${Floating02} 02s alternate-reverse infinite;
+    }
     /* css animation */
     .right-50 {
         right: 50%;

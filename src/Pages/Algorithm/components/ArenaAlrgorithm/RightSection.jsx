@@ -49,7 +49,7 @@ const RightSection = ({
     const navigate = useNavigate();
     const langs = [
         { name: 'C_CPP', id: 1 },
-        { name: 'Java', id: 2 },
+        { name: 'JAVA', id: 2 },
     ];
     const handleSelectChange = (eventKey) => {
         setSelect(eventKey);

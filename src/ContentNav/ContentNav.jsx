@@ -9,9 +9,7 @@ function ContentNav({ items, layout }) {
     const Item = layout == 1 ? AdminItem : UserItem;
     const Icon = layout == 1 ? AdminIcon : UserIcon;
     const Text = layout == 1 ? AdminText : UserText;
-    const handleOnClick = () => {
-        localStorage.clear();
-    };
+
     return items.map((item, index) => {
         return (
             <Item key={index}>
@@ -22,9 +20,7 @@ function ContentNav({ items, layout }) {
                     </Text>
                 ) : (
                     <Text>
-                        <Link to={item.Action} onClick={handleOnClick}>
-                            {item.Info}
-                        </Link>
+                        <Link to={item.Action}>{item.Info}</Link>
                     </Text>
                 )}
             </Item>

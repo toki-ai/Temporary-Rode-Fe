@@ -13,6 +13,7 @@ import ArenaCSS from '../Pages/CssBattle';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import Upcoming from '../Pages/Upcoming';
 import AdminLayoutComponent from '../components/Layout/AdminLayout.component';
 import Loading from '../components/Loading';
 import PublicLayout from '../components/PublicLayout/UserLayout.component';
@@ -39,6 +40,11 @@ const RouterComponent = () => {
                     exact: true,
                     element: <AdminLayoutComponent />,
                     children: [
+                        {
+                            exact: true,
+                            path: '/admin/*',
+                            element: <Upcoming />,
+                        },
                         {
                             exact: true,
                             path: '/admin/room',

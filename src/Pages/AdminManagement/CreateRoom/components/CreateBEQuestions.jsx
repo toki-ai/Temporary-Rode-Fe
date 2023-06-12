@@ -65,10 +65,10 @@ const CreateBEQuestions = ({ questions, setQuestions, error }) => {
 
                         <div className="col-md-6">
                             <Accordion
-                                defaultActiveKey={question?.testcases?.length - 1 || 0}
+                                defaultActiveKey={question?.testCases?.length - 1 || 0}
                                 flush
                             >
-                                {question.testcases?.map((testcase, testcaseIdx) => (
+                                {question.testCases?.map((testcase, testcaseIdx) => (
                                     <Testcase
                                         key={testcaseIdx}
                                         item={testcase}
@@ -78,7 +78,7 @@ const CreateBEQuestions = ({ questions, setQuestions, error }) => {
                                         error={
                                             error &&
                                             error[questionIdx]?.chidren?.find(
-                                                (e) => e.at === 'testcases'
+                                                (e) => e.at === 'testCases'
                                             )
                                         }
                                     />

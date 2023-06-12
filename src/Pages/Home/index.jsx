@@ -101,7 +101,22 @@ const Home = () => {
                     <Row className="position-absolute w-3em right-2 bottom-105 effect-2">
                         <img src={x_blue} alt="X blue SVG" />
                     </Row>
-                    <Row className="position-absolute w-3em right-102 bottom-100 effect-3">
+                    <Row className="position-absolute w-3em right-102 bottom-100 ">
+                        <img src={x_green} alt="X green SVG" />
+                    </Row>
+                    <Row className="position-absolute w-3em object18 ">
+                        <img src={x_green} alt="X green SVG" />
+                    </Row>
+                    <Row className="position-absolute w-3em object14 ">
+                        <img src={x_green} alt="X green SVG" />
+                    </Row>
+                    <Row className="position-absolute w-3em object6 ">
+                        <img src={x_green} alt="X green SVG" />
+                    </Row>
+                    <Row className="position-absolute w-3em object4">
+                        <img src={x_green} alt="X green SVG" />
+                    </Row>
+                    <Row className="position-absolute w-3em object1">
                         <img src={x_green} alt="X green SVG" />
                     </Row>
                     <Row className="position-absolute w-3em right-9 bottom-124 effect-4">
@@ -110,13 +125,37 @@ const Home = () => {
                     <Row className="position-absolute w-4em right-0 bottom-142 effect-5">
                         <img src={hexagonal} alt="hexagonal SVG" />
                     </Row>
+                    <Row className="position-absolute w-4em object8 effect-5">
+                        <img src={hexagonal} alt="hexagonal SVG" />
+                    </Row>
+                    <Row className="position-absolute w-4em object16 effect-5">
+                        <img src={hexagonal} alt="hexagonal SVG" />
+                    </Row>
+                    <Row className="position-absolute w-4em object5 effect-5">
+                        <img src={hexagonal} alt="hexagonal SVG" />
+                    </Row>
                     <Row className="position-absolute w-3em right-50 bottom-134 effect-6">
+                        <img src={triangle} alt="triangle SVG" />
+                    </Row>
+                    <Row className="position-absolute w-3em object2 effect-6">
+                        <img src={triangle} alt="triangle SVG" />
+                    </Row>
+                    <Row className="position-absolute w-3em object20 effect-6">
                         <img src={triangle} alt="triangle SVG" />
                     </Row>
                     <Row className="position-absolute w-9em right-90 bottom-100 effect-7">
                         <img src={wave} alt="wave SVG" />
                     </Row>
+                    <Row className="position-absolute w-9em object5 effect-7">
+                        <img src={wave} alt="wave SVG" />
+                    </Row>
+                    <Row className="position-absolute w-9em object8 effect-7">
+                        <img src={wave} alt="wave SVG" />
+                    </Row>
                     <Row className="position-absolute rotate-1 w-9em right-14 bottom-120 effect-8">
+                        <img src={wave} alt="wave SVG" />
+                    </Row>
+                    <Row className="position-absolute rotate-1 w-9em object19 effect-8">
                         <img src={wave} alt="wave SVG" />
                     </Row>
                     <Row className="position-absolute w-3em right-102 bottom-134 effect-9">
@@ -128,7 +167,16 @@ const Home = () => {
                     <Row className="position-absolute w-22em right-2 bottom-80 effect-11">
                         <img src={point_blue} alt="point blue SVG" />
                     </Row>
+                    <Row className="position-absolute w-22em object5 effect-11">
+                        <img src={point_blue} alt="point blue SVG" />
+                    </Row>
+                    <Row className="position-absolute w-22em object17 effect-11">
+                        <img src={point_blue} alt="point blue SVG" />
+                    </Row>
                     <Row className="position-absolute w-22em right-102 bottom-80 effect-12">
+                        <img src={point_green} alt="point green SVG" />
+                    </Row>
+                    <Row className="position-absolute w-22em object12 effect-12">
                         <img src={point_green} alt="point green SVG" />
                     </Row>
                     <Row className="position-absolute w-22em right-60 bottom-128 effect-13">
@@ -140,7 +188,19 @@ const Home = () => {
                     <Row className="position-absolute w-22em right-18 bottom-100 effect-15">
                         <img src={point_green} alt="point green SVG" />
                     </Row>
+                    <Row className="position-absolute w-22em object9 effect-15">
+                        <img src={point_green} alt="point green SVG" />
+                    </Row>
                     <Row className="position-absolute w-4em right-65 bottom-134 effect-16">
+                        <img src={circle_green} alt="circle green SVG" />
+                    </Row>
+                    <Row className="position-absolute w-4em object11 effect-16">
+                        <img src={circle_green} alt="circle green SVG" />
+                    </Row>
+                    <Row className="position-absolute w-4em object15 effect-16">
+                        <img src={circle_green} alt="circle green SVG" />
+                    </Row>
+                    <Row className="position-absolute w-4em object10 effect-16">
                         <img src={circle_green} alt="circle green SVG" />
                     </Row>
                 </Icon>
