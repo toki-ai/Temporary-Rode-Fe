@@ -27,7 +27,6 @@
         "dayjs": "^1.11.7",
         "extract-colors": "^2.0.6",
         "formik": "^2.2.9",
-        "framer-motion": "^10.12.16",
         "install": "^0.13.0",
         "jwt-decode": "^3.1.2",
         "moment": "^2.29.4",
@@ -40,11 +39,14 @@
         "react-export-table-to-excel": "^1.0.6",
         "react-icons": "^4.8.0",
         "react-jwt": "^1.1.8",
+        "react-particles": "^2.10.1",
         "react-router-dom": "^6.8.1",
         "react-toastify": "^9.1.1",
         "socket.io": "^4.6.1",
         "socket.io-client": "^4.6.1",
         "styled-components": "^5.3.6",
+        "tsparticles": "^2.10.1",
+        "tsparticles-engine": "^2.10.1",
         "yup": "^1.0.2"
     },
     "devDependencies": {
