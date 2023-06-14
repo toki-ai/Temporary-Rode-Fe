@@ -1,3 +1,4 @@
+import { Row } from 'react-bootstrap';
 import styled from 'styled-components';
 
 import Accordion from 'react-bootstrap/Accordion';
@@ -344,4 +345,8 @@ export const AccordionButton = styled(Accordion.Button)`
     color: white;
     border: 1px solid #00e7aa;
     border-radius: 7px; */
+`;
+
+export const PaddingRow = styled(Row)`
+    padding: 5.5rem 1rem 0.5rem 1rem;
 `;

@@ -4,11 +4,17 @@ import styled from 'styled-components';
 import { themes } from '../../themes';
 import { device } from '../../utils/Breakpoints/index.jsx';
 
-export const Container = styled.nav`
+export const Container = styled.header`
     border-bottom: 0.711111px solid ${themes.colors.primary};
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
     /* margin-bottom: 1rem; */
     @media ${device.tablet} {
         height: 50px;

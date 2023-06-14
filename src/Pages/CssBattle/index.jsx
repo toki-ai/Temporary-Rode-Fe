@@ -8,6 +8,7 @@ import userRoomApi from '../../utils/api/userRoomApi';
 import ArenaCSSCode from './components/ArenaCSSCode';
 import Output from './components/Output';
 import RoomInfo from './components/RoomInfo';
+import { PaddingRow } from './styled';
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -23,7 +24,7 @@ const ArenaCSS = () => {
     const [submit, setSubmit] = useState();
     const [show, setShow] = useState(false);
     return (
-        <Row className="p-3">
+        <PaddingRow>
             {/* Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop */}
             <ModalComponent show={show} setShow={setShow} title={'ERROR'} body={'hello'} />
 
@@ -43,7 +44,7 @@ const ArenaCSS = () => {
             <Col xs={12} md={4} className="px-4">
                 <Output code={code} data={roomInfo} />
             </Col>
-        </Row>
+        </PaddingRow>
     );
 };
 

@@ -98,6 +98,14 @@ class LocalStorageUtils {
         localStorage.removeItem(LOCAL_STORAGE_TOKEN);
     }
 
+    deleteAllLocal() {
+        localStorage.removeItem('countdownFuture');
+        localStorage.removeItem('authenticated(do not delete)');
+        localStorage.removeItem('question');
+        localStorage.removeItem('codeBE');
+        localStorage.removeItem('language');
+    }
+
     deleteCredential() {
         localStorage.removeItem('credential');
     }

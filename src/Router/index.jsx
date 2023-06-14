@@ -109,11 +109,7 @@ const RouterComponent = () => {
                 {
                     exact: true,
                     path: 'home',
-                    element: (
-                        <UserHomeLayout>
-                            <Home />
-                        </UserHomeLayout>
-                    ),
+                    element: <Home />,
                 },
                 {
                     exact: true,

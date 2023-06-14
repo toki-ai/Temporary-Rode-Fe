@@ -33,6 +33,7 @@ const CountdownTimer = ({ targetDate }) => {
             setExpired(true);
         }
         localStorage.removeItem('countdownFuture');
+        //xóa token
         window.location = '/';
 
         return <ExpiredNotice />;

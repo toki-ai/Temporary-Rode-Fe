@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { CookiesProvider } from 'react-cookie';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 
@@ -11,9 +12,11 @@ import { themes } from './themes';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={themes}>
-        <UserProvider>
-            <App />
-            <Toast />
-        </UserProvider>
+        <CookiesProvider>
+            <UserProvider>
+                <App />
+                <Toast />
+            </UserProvider>
+        </CookiesProvider>
     </ThemeProvider>
 );

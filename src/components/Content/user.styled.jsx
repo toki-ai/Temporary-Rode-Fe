@@ -15,6 +15,7 @@ export const UserContainer = styled.div`
     @media ${device.tablet} {
         width: calc(100% - 300px);
         padding: 3rem 0.5rem;
+        height: 60%;
     }
     @media ${device.laptop} {
         width: calc(100% - 300px);

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
+import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import ButtonStyled from '../../../components/Button';
-import ModalComponent from '../../../components/Modal';
 import OffCanvasComponents from '../../../components/OffCanvas/OffCanvas';
 import { toastSuccess, toastError } from '../../../components/Toast';
-import Localstorage from '../../../utils/Localstorage';
+import { USER_ROOM_ID } from '../../../config';
 import submitApi from '../../../utils/api/submitApi';
 import submitHistoryApi from '../../../utils/api/submitHistoryApi';
 import userRoomApi from '../../../utils/api/userRoomApi';
@@ -27,7 +27,8 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
     const location = useLocation();
     const navigate = useNavigate();
     const questionResult = JSON.parse(localStorage.getItem('authenticated(do not delete)'));
-    console.log(questionResult);
+    const [cookies, setCookie] = useCookies([USER_ROOM_ID]);
+
     const submitCode = async () => {
         setSubmitStatus(false);
         const formatData = {
@@ -47,15 +48,19 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
             toastError(res.data.err);
         }
     };
-
+    function deleteCookies(name) {
+        cookies.remove(name, { path: '/' });
+    }
     const finish = async () => {
-        let res = await userRoomApi.postFinish(location.state.userRoomId);
+        let res = await userRoomApi.postFinish(cookies.userroomid);
 
         if (res.data.status === 200) {
             navigate('/', { state: { success: true } });
             localStorage.removeItem('code');
             localStorage.removeItem('authenticated');
             localStorage.removeItem('countdownFuture');
+            cookies.remove(USER_ROOM_ID, { path: '/' });
+            deleteCookies(USER_ROOM_ID);
             toastSuccess(res.data.message);
         }
     };

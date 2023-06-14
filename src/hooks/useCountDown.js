@@ -9,6 +9,7 @@ const useCountdown = (minutes) => {
 
     useEffect(() => {
         let future = localStorage.getItem('countdownFuture');
+
         if (future) {
             future = moment(future);
         } else {

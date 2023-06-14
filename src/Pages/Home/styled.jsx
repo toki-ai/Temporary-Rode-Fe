@@ -43,6 +43,8 @@ export const Box = styled.div`
     @media ${device.laptop} {
         width: 646px;
         height: 410px;
+
+        /* height:800px; */
     }
 
     @media ${device.laptopL} {
@@ -103,7 +105,7 @@ export const Input = styled.div`
     }
     @media ${device.tablet} {
         .form {
-            top: -30%;
+            top: -25%;
             right: 0;
         }
         .inputRoomCode {
@@ -122,7 +124,7 @@ export const Input = styled.div`
     }
     @media ${device.laptop} {
         .form {
-            top: -30%;
+            top: -25%;
             right: 0;
         }
         .inputRoomCode {
@@ -254,10 +256,10 @@ export const Name = styled.div`
         animation: ${TextEffect} 1s cubic-bezier(0.215, 0.61, 0.355, 1) 0.2s both;
     }
     @media ${device.tablet} {
-        top: -55%;
+        top: -40%;
     }
     @media ${device.laptop} {
-        top: -35%;
+        top: -30%;
     }
 
     @media ${device.laptopL} {
