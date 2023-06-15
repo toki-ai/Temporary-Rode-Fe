@@ -134,7 +134,7 @@ export const ScoreText = styled.span`
 export const BoxEditor = styled.div`
     width: 100%;
     /* height: calc(100vh - 290px); */
-
+    position: relative;
     color: ${(props) => props.theme.colors.light};
     /* padding: 10px 20px; */
     background-color: ${(props) => props.theme.colors.arenaBG};
@@ -210,51 +210,49 @@ export const BoxOutput = styled.div`
     background-color: ${(props) => props.theme.colors.arenaBG};
     border: 1px solid #00e7aa;
     box-shadow: 0px 2px 15px #00c994;
-    width: 100%;
+    /* width: 100%; */
     max-width: 400px;
     height: 300px;
 
     /* border-radius: 10px; */
-    .img-layer {
-        position: absolute;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        /* height: 300px; */
-        & > img {
-            object-fit: cover;
-            width: 405px;
-            height: 300px;
-            overflow: hidden;
-        }
-    }
+
+    overflow: hidden;
+    /* height: 300px; */
+
     .output-container {
         position: relative;
-        width: 100%;
+        width: 400px;
         height: 300px;
-        background: transparent;
-        z-index: 20;
+        /* background: transparent; */
+        /* z-index: 20; */
+        aspect-ratio: 4/3;
         overflow: hidden;
+        cursor: col-resize;
+        & > img {
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            max-height: 300px;
+            overflow: hidden;
+        }
     }
     .iframe-output {
         border: none;
         background: white;
-        position: absolute;
-        /* top: 0; */
-        /* left: 0; */
-        z-index: 10;
-        overflow: hidden;
-    }
-    .output-layer {
-        border: none;
+        outline: none;
         width: 400px;
         height: 300px;
-        background: transparent;
-        position: absolute;
-        /* top: 0; */
-        /* left: 0; */
-        z-index: 20;
+    }
+    .output-layer {
+        position: relative;
         overflow: hidden;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        mix-blend-mode: normal;
+        pointer-events: initial;
     }
 `;
 

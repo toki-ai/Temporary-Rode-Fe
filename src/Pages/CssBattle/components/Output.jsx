@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import UnknownBG from '../../../assets/Unknown/UnknownBG.png';
 import localFileApi from '../../../utils/api/localFileApi';
@@ -21,26 +21,25 @@ const Output = ({ code, data }) => {
     const changeDiffCheckBoxValue = () => {
         setDiffChecked((state) => !state);
     };
+
     const TestImg = localFileApi.getImg(data?.questions[0]?.questionImage);
     function imageCompareSlider(e) {
         if (slideChecked) {
-            userOutPutRef.current.style.cursor = 'col-resize';
-            iframeRef.current.style['z-index'] = '16';
-            iframeRef.current.style['border-right'] = '2px solid red';
-            iframeRef.current.style['border-left'] = 'none';
-            iframeRef.current.style.width =
-                e.clientX - outputContainerRef.current.offsetLeft + 'px';
+            let t = e.nativeEvent;
+            let n = t.offsetX;
+
+            userOutPutRef.current.style.width = (100 * n) / 400 + '%';
+            userOutPutRef.current.style['box-shadow'] = 'red 2px 0px 0px';
+            userOutPutRef.current.style['pointer-events'] = 'none';
         }
     }
     function resetWidth() {
         if (slideChecked) {
-            userOutPutRef.current.style.cursor = 'unset';
-            iframeRef.current.style['border-right'] = 'none';
-            iframeRef.current.style['z-index'] = '10';
-            imgRef.current.style['z-index'] = '9';
-            iframeRef.current.style.width = '400px';
+            userOutPutRef.current.style.width = '100%';
+            userOutPutRef.current.style['pointer-events'] = 'none';
         }
     }
+
     return (
         <Stack>
             <OutPutHeader
@@ -51,28 +50,32 @@ const Output = ({ code, data }) => {
             />
             <Stack gap={3}>
                 <Stack className="align-items-center justify-content-center">
-                    <BoxOutput>
-                        <div className="output-container" ref={outputContainerRef}>
-                            <iframe
-                                id="source"
-                                className="iframe-output"
-                                width="400px"
-                                height="300px"
-                                title="output"
-                                scrolling="no"
-                                style={{ mixBlendMode: diffChecked ? 'difference' : 'normal' }}
-                                ref={iframeRef}
-                                srcDoc={code}
-                            ></iframe>
+                    <BoxOutput diff={diffChecked}>
+                        <div
+                            className="output-container"
+                            ref={outputContainerRef}
+                            onMouseMove={imageCompareSlider}
+                            onMouseLeave={resetWidth}
+                            style={{ pointerEvents: slideChecked ? 'initial' : 'none' }}
+                        >
                             <div
                                 ref={userOutPutRef}
                                 className="output-layer"
-                                onMouseMove={imageCompareSlider}
-                                onMouseLeave={resetWidth}
-                            ></div>
-                            <div id="img-layer" className="img-layer" ref={imgRef}>
-                                <img src={TestImg ? TestImg : UnknownBG} alt="level1" />
+                                style={{ mixBlendMode: diffChecked ? 'difference' : 'normal' }}
+                            >
+                                <iframe
+                                    id="source"
+                                    className="iframe-output"
+                                    width="400px"
+                                    height="300px"
+                                    title="output"
+                                    sandbox="allow-same-origin"
+                                    scrolling="no"
+                                    ref={iframeRef}
+                                    srcDoc={code}
+                                ></iframe>
                             </div>
+                            <img src={TestImg ? TestImg : UnknownBG} alt="level1" />
                         </div>
                     </BoxOutput>
                 </Stack>
@@ -97,3 +100,4 @@ const Output = ({ code, data }) => {
 };
 
 export default Output;
+// <div id="img-layer" className="img-layer" ref={imgRef}></div>;

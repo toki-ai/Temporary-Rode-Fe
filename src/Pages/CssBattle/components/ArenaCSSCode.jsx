@@ -14,6 +14,7 @@ import { BoxEditor, TextStyled, TextSmall } from '../styled';
 import MySolution from './MySolution';
 
 import { htmlLanguage } from '@codemirror/lang-html';
+import { EditorView } from '@codemirror/view';
 import { tokyoNight } from '@uiw/codemirror-theme-tokyo-night';
 import CodeMirror from '@uiw/react-codemirror';
 import Spinner from 'react-bootstrap/Spinner';
@@ -93,8 +94,13 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
                     width="100%"
                     theme={tokyoNight}
                     height="calc(100vh - 200px);"
-                    extensions={[htmlLanguage]}
-                    options={{ lineWrapping: 'true', lineNumbers: 'true', autoCloseBrackets: true }}
+                    extensions={[htmlLanguage, EditorView.lineWrapping]}
+                    basicSetup={{
+                        foldGutter: false,
+                        dropCursor: false,
+                        allowMultipleSelections: false,
+                        indentOnInput: false,
+                    }}
                     onChange={(e) => {
                         setCode(e);
                         localStorage.setItem('code', e);
