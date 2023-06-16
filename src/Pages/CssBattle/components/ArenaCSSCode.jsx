@@ -113,14 +113,14 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
                 className="align-items-center mt-3 justify-content-center"
                 gap={3}
             >
-                <ButtonStyled buttonType="base" onClick={handleShow}>
-                    My SOLUTION
+                <ButtonStyled buttonType="outline" onClick={handleShow}>
+                    MY SOLUTION
                 </ButtonStyled>
-                <ButtonStyled buttonType="base" onClick={submitCode} disabled={!submitStatus}>
+                <ButtonStyled buttonType="outline2" onClick={submitCode} disabled={!submitStatus}>
                     {submitStatus ? 'SUBMIT' : <Spinner />}
                 </ButtonStyled>
-                <ButtonStyled buttonType="base" onClick={finish}>
-                    Finish
+                <ButtonStyled buttonType="outline" onClick={finish}>
+                    FINISH
                 </ButtonStyled>
             </Stack>
         </>

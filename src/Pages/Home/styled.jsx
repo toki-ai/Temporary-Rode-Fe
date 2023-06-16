@@ -657,6 +657,79 @@ export const Type = styled.div`
     }
 `;
 
+export const TypeV2 = styled(Type)`
+    width: 100%;
+    flex-direction: column;
+    .head {
+        width: 100% !important;
+    }
+    @media ${device.tablet} {
+        /* margin-top: -5%;
+        margin-left: 65%; */
+        margin: 0;
+
+        div {
+            font-size: 12px;
+
+            /* identical to box height */
+
+            color: ${themes.colors.primary};
+        }
+        .head {
+            width: 80px;
+        }
+        .menu {
+            width: 80px;
+        }
+
+        .transform {
+            transform: translate3d(-59px, 50px, 0px) !important;
+        }
+    }
+
+    @media ${device.laptop} {
+        margin: 0;
+        div {
+            font-size: 15px;
+
+            /* identical to box height */
+
+            color: ${themes.colors.primary};
+        }
+        .head {
+            width: 100px;
+        }
+        .menu {
+            width: 100px;
+        }
+
+        .transform {
+            transform: translate3d(-59px, 50px, 0px) !important;
+        }
+    }
+
+    @media ${device.laptopL} {
+        /* margin-top: -3%;
+        margin-left: 65%; */
+        margin: 0;
+
+        div {
+            font-size: 18px;
+
+            color: ${themes.colors.primary};
+        }
+        .head {
+            width: 150px;
+        }
+        .menu {
+            width: 150px;
+        }
+        .transform {
+            transform: translate3d(0px, 50px, 0px) !important;
+        }
+    }
+`;
+
 export const RTable = styled(Table)`
     width: 925px;
     color: white;

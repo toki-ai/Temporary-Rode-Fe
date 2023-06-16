@@ -2,9 +2,12 @@ import { useRef, useState, useEffect } from 'react';
 
 import UnknownBG from '../../../assets/Unknown/UnknownBG.png';
 import localFileApi from '../../../utils/api/localFileApi';
+import DropdownType from '../../Home/components/DropdownType';
+import { TypeV2 } from '../../Home/styled';
 import { BoxOutput, Target, TextStyled, TextSmall } from '../styled';
 import OutPutHeader from './OutPutHeader';
 
+import Dropdown from 'react-bootstrap/Dropdown';
 import Stack from 'react-bootstrap/Stack';
 
 const Output = ({ code, data }) => {
@@ -14,7 +17,11 @@ const Output = ({ code, data }) => {
     const iframeRef = useRef();
     const [slideChecked, setSlideChecked] = useState(false);
     const [diffChecked, setDiffChecked] = useState(false);
-
+    const types = [
+        { name: 'All', id: 1 },
+        { name: 'Algorithm', id: 2 },
+        { name: 'CSS Battle', id: 3 },
+    ];
     const changeSlideCheckBoxValue = () => {
         setSlideChecked((state) => !state);
     };
@@ -101,3 +108,4 @@ const Output = ({ code, data }) => {
 
 export default Output;
 // <div id="img-layer" className="img-layer" ref={imgRef}></div>;
+// onSelect={handleTypeChange}

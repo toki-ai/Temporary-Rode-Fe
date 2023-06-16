@@ -31,7 +31,16 @@ export const Wrap = styled.div`
             padding: 10px;
         }
     }
-
+    .btn-news {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 9px 12px;
+        gap: 10px;
+        border: 2px solid #00e7aa;
+        border-radius: 10px;
+    }
     .btn-solid {
         display: inline-flex;
         background-color: ${themes.colors.primary};
@@ -49,7 +58,18 @@ export const Wrap = styled.div`
             color: ${themes.colors.light};
         }
     }
-
+    .btn-outline2 {
+        border: 2px solid ${themes.colors.primary};
+        width: 100%;
+        color: ${themes.colors.light};
+        background: rgba(0, 231, 170, 0.75);
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: ${themes.colors.primary};
+            color: ${themes.colors.light};
+        }
+    }
     .btn-dashed {
         border: 2px dashed ${themes.colors.primary};
         width: 100%;

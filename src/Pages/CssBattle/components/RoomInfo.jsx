@@ -7,18 +7,30 @@ import { Box, TextStyled, StyledWrap } from '../styled';
 import Colors from './Colors';
 import CountdownTimer from './CountDown';
 import InfoItem from './InfoItem';
+import Questions from './Questions';
 import Rank from './Rank';
 import Scores from './Score';
 
 import Stack from 'react-bootstrap/Stack';
 
-const RoomInfo = ({ data, submit }) => {
+const RoomInfo = ({ data, submit, question, action, setCurrentQuestion, QuestionChange }) => {
     const [show, setShow] = useState(false);
     const [rank, setRank] = useState([]);
     const handleShow = () => setShow(true);
-
+    const handleQuestionChange = () => {};
     const submitted = JSON.parse(localStorage.getItem('authenticated'));
     const LIST_INFO = [
+        {
+            title: 'Questions',
+            body: (
+                <Questions
+                    handleQuestionChange={QuestionChange}
+                    question={question}
+                    action={action}
+                    setCurrentQuestion={setCurrentQuestion}
+                />
+            ),
+        },
         {
             title: 'Timers',
             body: <CountdownTimer targetDate={data.duration} />,

@@ -64,7 +64,7 @@ const RightSection = ({
             toastError("Can't submit Empty Code");
             return;
         }
-        const res = await submitApi.submit({
+        const res = await submitApi.submitV2({
             roomId: roomInfo?.id,
             questionId: questionId,
             code: code,
@@ -130,11 +130,6 @@ const RightSection = ({
                         height="calc(100vh - 30vh);"
                         maxHeight={showResult ? '40vh' : 'calc(100vh - 30vh)'}
                         extensions={[cppLanguage, javaLanguage]}
-                        options={{
-                            lineWrapping: 'true',
-                            lineNumbers: 'true',
-                            autoCloseBrackets: true,
-                        }}
                         onChange={(event) => {
                             setCode(event);
                             localStorage.setItem('codeBE', event);

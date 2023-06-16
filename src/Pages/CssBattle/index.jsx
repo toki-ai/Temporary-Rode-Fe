@@ -11,6 +11,7 @@ import RoomInfo from './components/RoomInfo';
 import { PaddingRow } from './styled';
 
 import Col from 'react-bootstrap/Col';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Row from 'react-bootstrap/Row';
 
 const ArenaCSS = () => {
@@ -20,6 +21,31 @@ const ArenaCSS = () => {
         : CodeTemplateTmp;
     const currCode = localStorage.getItem('code');
     const [code, setCode] = useState(currCode ? currCode : codeTemplate);
+    const currQuestion = JSON.parse(localStorage.getItem('question'));
+    const [questionId, setQuestionId] = useState();
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [question, setQuestion] = useState({
+        current: currQuestion ? currQuestion.current : 'Choose question',
+        questionImg: currQuestion
+            ? currQuestion.questionImg
+            : roomInfo?.questions[0]?.questionImage,
+    });
+    const handleQuestionChange = (eventKey, e) => {
+        setQuestion({
+            current: e.target.name,
+            questionImg: eventKey,
+        });
+
+        localStorage.setItem(
+            'question',
+            JSON.stringify({
+                current: e.target.name,
+                questionImg: eventKey,
+            })
+        );
+    };
+    console.log(currentQuestion);
+    console.log(questionId);
     const [count, setCount] = useState(0);
     const [submit, setSubmit] = useState();
     const [show, setShow] = useState(false);
@@ -29,9 +55,16 @@ const ArenaCSS = () => {
             <ModalComponent show={show} setShow={setShow} title={'ERROR'} body={'hello'} />
 
             <Col xs={12} md={3} className="px-4">
-                <RoomInfo data={roomInfo} submit={submit} />
+                <RoomInfo
+                    data={roomInfo}
+                    submit={submit}
+                    question={question}
+                    setCurrentQuestion={setCurrentQuestion}
+                    action={setQuestionId}
+                    QuestionChange={handleQuestionChange}
+                />
             </Col>
-            <Col xs={12} md={5} className="px-4">
+            <Col xs={12} md={6} className="px-4">
                 <ArenaCSSCode
                     submitService={{ submit, setSubmit }}
                     setCode={setCode}
@@ -41,7 +74,7 @@ const ArenaCSS = () => {
                     data={roomInfo}
                 />
             </Col>
-            <Col xs={12} md={4} className="px-4">
+            <Col xs={12} md={3} className="px-4">
                 <Output code={code} data={roomInfo} />
             </Col>
         </PaddingRow>
