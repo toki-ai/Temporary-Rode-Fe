@@ -10,18 +10,14 @@ import OutPutHeader from './OutPutHeader';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Stack from 'react-bootstrap/Stack';
 
-const Output = ({ code, data }) => {
+const Output = ({ code, data, currentQuestion }) => {
     const userOutPutRef = useRef();
     const imgRef = useRef();
     const outputContainerRef = useRef();
     const iframeRef = useRef();
     const [slideChecked, setSlideChecked] = useState(false);
     const [diffChecked, setDiffChecked] = useState(false);
-    const types = [
-        { name: 'All', id: 1 },
-        { name: 'Algorithm', id: 2 },
-        { name: 'CSS Battle', id: 3 },
-    ];
+
     const changeSlideCheckBoxValue = () => {
         setSlideChecked((state) => !state);
     };
@@ -29,12 +25,11 @@ const Output = ({ code, data }) => {
         setDiffChecked((state) => !state);
     };
 
-    const TestImg = localFileApi.getImg(data?.questions[0]?.questionImage);
+    const TestImg = localFileApi.getImg(data?.questions[currentQuestion]?.questionImage);
     function imageCompareSlider(e) {
         if (slideChecked) {
             let t = e.nativeEvent;
             let n = t.offsetX;
-
             userOutPutRef.current.style.width = (100 * n) / 400 + '%';
             userOutPutRef.current.style['box-shadow'] = 'red 2px 0px 0px';
             userOutPutRef.current.style['pointer-events'] = 'none';

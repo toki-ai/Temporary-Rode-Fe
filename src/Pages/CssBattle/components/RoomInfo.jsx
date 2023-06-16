@@ -13,7 +13,15 @@ import Scores from './Score';
 
 import Stack from 'react-bootstrap/Stack';
 
-const RoomInfo = ({ data, submit, question, action, setCurrentQuestion, QuestionChange }) => {
+const RoomInfo = ({
+    data,
+    submit,
+    question,
+    action,
+    setCurrentQuestion,
+    currentQuestion,
+    QuestionChange,
+}) => {
     const [show, setShow] = useState(false);
     const [rank, setRank] = useState([]);
     const handleShow = () => setShow(true);
@@ -37,13 +45,13 @@ const RoomInfo = ({ data, submit, question, action, setCurrentQuestion, Question
         },
         {
             title: 'Colors to use',
-            body: <Colors colors={data?.questions[0].colors} />,
+            body: <Colors colors={data?.questions[currentQuestion].colors} />,
         },
         {
             title: 'Scores',
             body: (
                 <Scores
-                    submitTimes={data?.questions[0].maxSubmitTimes}
+                    submitTimes={data?.questions[currentQuestion].maxSubmitTimes}
                     submit={submitted?.times ? submitted : submit}
                 />
             ),

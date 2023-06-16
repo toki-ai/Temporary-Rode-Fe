@@ -27,7 +27,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
     const [submitStatus, setSubmitStatus] = useState(true);
     const location = useLocation();
     const navigate = useNavigate();
-    const questionResult = JSON.parse(localStorage.getItem('authenticated(do not delete)'));
+    // const questionResult = JSON.parse(localStorage.getItem('authenticated(do not delete)'));
     const [cookies, setCookie] = useCookies([USER_ROOM_ID]);
 
     const submitCode = async () => {
@@ -39,7 +39,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
         };
 
         const res = await submitApi.submit(formatData);
-        console.log(res);
+
         if (res.data.status === 200) {
             submitService.setSubmit(res.data.data);
             setSubmitStatus(true);

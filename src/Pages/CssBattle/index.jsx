@@ -16,19 +16,20 @@ import Row from 'react-bootstrap/Row';
 
 const ArenaCSS = () => {
     const roomInfo = useLoaderData();
-    const codeTemplate = roomInfo?.questions[0]?.codeTemplate
-        ? roomInfo?.questions[0].codeTemplate
-        : CodeTemplateTmp;
+
     const currCode = localStorage.getItem('code');
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const codeTemplate = roomInfo?.questions[currentQuestion]?.codeTemplate
+        ? roomInfo?.questions[currentQuestion].codeTemplate
+        : CodeTemplateTmp;
     const [code, setCode] = useState(currCode ? currCode : codeTemplate);
     const currQuestion = JSON.parse(localStorage.getItem('question'));
     const [questionId, setQuestionId] = useState();
-    const [currentQuestion, setCurrentQuestion] = useState(0);
     const [question, setQuestion] = useState({
         current: currQuestion ? currQuestion.current : 'Choose question',
         questionImg: currQuestion
             ? currQuestion.questionImg
-            : roomInfo?.questions[0]?.questionImage,
+            : roomInfo?.questions[currentQuestion]?.questionImage,
     });
     const handleQuestionChange = (eventKey, e) => {
         setQuestion({
@@ -44,7 +45,7 @@ const ArenaCSS = () => {
             })
         );
     };
-    console.log(currentQuestion);
+
     console.log(questionId);
     const [count, setCount] = useState(0);
     const [submit, setSubmit] = useState();
@@ -59,6 +60,7 @@ const ArenaCSS = () => {
                     data={roomInfo}
                     submit={submit}
                     question={question}
+                    currentQuestion={currentQuestion}
                     setCurrentQuestion={setCurrentQuestion}
                     action={setQuestionId}
                     QuestionChange={handleQuestionChange}
@@ -75,7 +77,7 @@ const ArenaCSS = () => {
                 />
             </Col>
             <Col xs={12} md={3} className="px-4">
-                <Output code={code} data={roomInfo} />
+                <Output code={code} data={roomInfo} currentQuestion={currentQuestion} />
             </Col>
         </PaddingRow>
     );
