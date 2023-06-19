@@ -1,13 +1,16 @@
 import { useContext } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import { UserContext } from '../../Context/User.context';
 import logo from '../../assets/Header/logo.svg';
+import Localstorage from '../../utils/Localstorage';
 import { formatUserName } from '../../utils/helper';
 import { Container, Hero, Left, Right, Center, NavStyled } from './styled';
 
 function UserHeader() {
     const { currentUser } = useContext(UserContext);
-
+    const navigate = useNavigate();
     return (
         <Container>
             <Left to="/">
@@ -31,6 +34,10 @@ function UserHeader() {
                     fill="currentColor"
                     class="bi bi-box-arrow-right biStyled"
                     viewBox="0 0 16 16"
+                    onClick={() => {
+                        Localstorage.clear();
+                        navigate('/login');
+                    }}
                 >
                     <path
                         fill-rule="evenodd"

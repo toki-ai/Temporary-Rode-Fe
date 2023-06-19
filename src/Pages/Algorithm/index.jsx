@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { Container } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
 
 import ArenaAlgorithm from './components/ArenaAlrgorithm';
@@ -15,7 +16,6 @@ import {
     AlgorithmContent,
 } from './styled';
 
-// import { NavStyled, NavItemStyled, TextStyled } from './styled';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
@@ -29,50 +29,17 @@ function Algorithm() {
     };
 
     return (
-        <Tab.Container
-            id="left-tabs-example"
-            defaultActiveKey={activeKey}
-            onSelect={handleTabSelect}
-        >
+        <>
             <AlgorithmWrapper>
-                <Row className="p-4 m-y-20">
-                    <Col sm={1} className="p-0 m-y-20">
-                        <AlgorithmNav>
-                            <AlgorithmNavItem eventKey="first">
-                                <Nav.Link eventKey="first" className="algorithm-nav-title">
-                                    Problem
-                                </Nav.Link>
-                            </AlgorithmNavItem>
-                            <AlgorithmNavItem eventKey="second" className="border-tran">
-                                <Nav.Link eventKey="second" className="algorithm-nav-title">
-                                    Submission
-                                </Nav.Link>
-                            </AlgorithmNavItem>
-                            <AlgorithmNavItem eventKey="third" className=" ">
-                                <Nav.Link eventKey="third" className="algorithm-nav-title">
-                                    LeaderBoard
-                                </Nav.Link>
-                            </AlgorithmNavItem>
-                        </AlgorithmNav>
-                    </Col>
-                    <Col sm={11} className="p-0">
+                <Row className="p-5">
+                    <Col sm={12} className="p-0">
                         <AlgorithmContent>
-                            <Tab.Content className="h-100">
-                                <TabPane eventKey="first" className="h-100">
-                                    <ArenaAlgorithm />
-                                </TabPane>
-                                <TabPane eventKey="second" className="h-100">
-                                    <Submission />
-                                </TabPane>
-                                <TabPane eventKey="third" className="h-100">
-                                    <LeaderBoard />
-                                </TabPane>
-                            </Tab.Content>
+                            <ArenaAlgorithm />
                         </AlgorithmContent>
                     </Col>
                 </Row>
             </AlgorithmWrapper>
-        </Tab.Container>
+        </>
     );
 }
 

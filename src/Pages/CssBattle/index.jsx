@@ -46,7 +46,6 @@ const ArenaCSS = () => {
         );
     };
 
-    console.log(questionId);
     const [count, setCount] = useState(0);
     const [submit, setSubmit] = useState();
     const [show, setShow] = useState(false);

@@ -7,14 +7,15 @@ import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 
 export const AlgorithmWrapper = styled.div`
-    padding-bottom: 20px;
-    height: 100%;
+    padding: 7.3rem 3rem 0rem 3rem;
+
+    height: 60%;
     .p-0 {
         padding: 0px;
     }
 
     .h-100 {
-        height: 100%;
+        height: 70%;
     }
     .m-y-20 {
         margin: 20px 0;
@@ -60,6 +61,7 @@ export const AlgorithmContent = styled.div`
     border-radius: 10px;
     border: 1px solid #00e7aa;
     /* padding: 0; */
+    /* margin-top: 100px; */
     overflow: hidden;
 `;
 

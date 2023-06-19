@@ -98,7 +98,7 @@ export const Wrap = styled.div`
         /* shadow */
 
         filter: drop-shadow(0px 2px 15px #00c994);
-        border-radius: 21px;
+        border-radius: 10px;
         &:hover {
             transition: all 0.4s ease-out;
             color: ${(props) => props.theme.colors.neonLine};

@@ -3,6 +3,7 @@ import { AccordionItem, AccordionBody, AccordionButton } from '../styled';
 import Accordion from 'react-bootstrap/Accordion';
 
 const MySolution = ({ data }) => {
+    console.log('line 9 : ', data);
     return (
         <Accordion>
             {data.length !== 0 ? (

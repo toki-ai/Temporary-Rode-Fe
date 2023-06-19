@@ -294,6 +294,7 @@ export const OffcanvasTitle = styled(Offcanvas.Title)`
 `;
 
 export const RankBox = styled.div`
+    width: 100%;
     padding: 0.25rem 0.75rem;
     margin-bottom: 1rem;
     font-weight: 700;
@@ -305,9 +306,12 @@ export const RankBox = styled.div`
                 ? props.theme.colors.silver
                 : props.id == 2
                 ? props.theme.colors.cooper
-                : 'transparent'};
+                : '#fff'};
     border-radius: 7px;
     .textAward {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
         font-family: 'Quicksand';
         font-style: normal;
         font-weight: 600;
@@ -318,6 +322,88 @@ export const RankBox = styled.div`
         text-transform: capitalize;
 
         color: #ffffff;
+    }
+    .nameRank {
+        max-width: 9rem;
+        text-overflow: ellipsis;
+        /**
+   * Required properties to achieve text-overflow
+   */
+        color: #ffffff;
+
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .rankNumber {
+        font-family: 'Quicksand';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 40px;
+        /* identical to box height */
+        color: #ffffff;
+
+        text-transform: capitalize;
+        padding: 0.5rem 1rem;
+    }
+`;
+export const YourRankBox = styled.div`
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    width: 100%;
+    color: #000;
+    background-color: ${(props) => props.theme.colors.light};
+    border: 2px solid ${(props) => props.theme.colors.light};
+    border-radius: 7px;
+    .textAward {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-family: 'Quicksand';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 25 px;
+        /* identical to box height */
+        text-transform: capitalize;
+        color: #000;
+    }
+    .nameRank {
+        max-width: 9rem;
+        text-overflow: ellipsis;
+        /**
+   * Required properties to achieve text-overflow
+   */
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .rankNumber {
+        font-family: 'Quicksand';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 40px;
+        /* identical to box height */
+
+        text-transform: capitalize;
+        padding: 0.5rem 1rem;
+    }
+`;
+export const RankContainer = styled.div`
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 2rem;
+    .rankHead {
+        font-family: 'Quicksand';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        color: #fff;
+        margin-bottom: 1rem;
     }
 `;
 

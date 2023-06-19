@@ -27,11 +27,11 @@ const ParticleAnimation = () => {
                 },
                 onDiv: {
                     elementId: 'repulse-div',
-                    enable: false,
+                    enable: true,
                     mode: 'repulse',
                 },
                 onHover: {
-                    enable: false,
+                    enable: true,
                     mode: 'bubble',
                     parallax: {
                         enable: false,
@@ -86,7 +86,7 @@ const ParticleAnimation = () => {
                     enable: true,
                 },
                 limit: 0,
-                value: 80,
+                value: 50,
             },
             opacity: {
                 value: 0.5,
@@ -126,7 +126,7 @@ const ParticleAnimation = () => {
         preload: [
             {
                 name: 'triangle',
-                src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAjCAYAAACD1LrRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKFSURBVHgBvZdbiE1RGMe/MSPTyOhMlIdREqWRktI8KJE8SHkRyoNL8aY8KDx5FEWR4sULE+VJKRJeCA9ukWnQpHG/zv1Sc//m/7X/a2Z15nL2Pmet+dfv4ey99vqts/vWZYuqXgQPQJ3MZiD8q0mGwBmQk9kIxcOgiwP4AfaDMokZCP6BP2AtuMlBWJ6DdRIrFP8GNfy9GbylfBRcBrUSOhT/Agu9a9XgJF+7pQUcBlUSKuisNV/s3VsGrvOfG0/ABgkRT7xgmvtlYCt4RHkfuAZWSSmh+CeYX6BdFTjA9pbv4CiolCLFbWnEXvtacAH0cwCvwTbJGjzUTnGmwkH7evCG8hFwAyzO0kE7X9s8yRg8Uw4Ocjoq+zoBKtI83FGs2OujBlzhsmtpApsKPdQJvpUi9vpaCR7rRO6BFTOJv6Z6PekHYNX/hXIrwmOTpqsmm0NQMfutBOdBNwfwGexSt/nwhonLJUI02XzueqvfbbDaiVs04jZo9QNOc9pZHtrFHhNLpKDvJeAsZ49yzdhpN3pjiNHnXHAcNFNof/AcWOoamLhZAsWKFGwH772qvmVTLb9hMDH6Wa/JycWdYl6AjVPWjybbXEliPL9Gk7V6lMJXYMeMBUvxRykieG6RJkcjd1D8D/Zqmp2O4g+SIWifA0e46ikr9pKm3FpdJ/1pxWg3B+wDnygcAA3jlZpx9CZuLNCmgkXy1KvU+6Beik0hMQunwatUK5zdWupKx9fVOMX1Ok54J7R5eUhCheJ33m+r1FOsULfi2ApULSFDsX05uGNME4V2mrgKlkuMUGBnppcUDoI7GvuzVSfOSZZnYItNG4kdTQ56Ni/3aOxP0zxxLtOKEyhj+6MNUdzXpEYAAAAASUVORK5CYII=',
+                src: 'data:image/png;base64,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',
                 width: 32,
                 height: 32,
             },
