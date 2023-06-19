@@ -1,24 +1,15 @@
 import { useState } from 'react';
-import { useEffect } from 'react';
 
-import { Col, Container, Nav, Row, Stack, Tab, TabPane } from 'react-bootstrap';
-import { Check } from 'react-bootstrap-icons';
+import { Container, Spinner } from 'react-bootstrap';
+import { useCookies } from 'react-cookie';
 import { useLocation, useLoaderData, useNavigate } from 'react-router-dom';
 
+import ButtonStyled from '../../../../components/Button';
 import { toastSuccess, toastError, toastInfo } from '../../../../components/Toast';
-import authApi from '../../../../utils/api/authApi';
+import { USER_ROOM_ID } from '../../../../config';
 import submitApi from '../../../../utils/api/submitApi';
-import submitHistoryApi from '../../../../utils/api/submitHistoryApi';
 import userRoomApi from '../../../../utils/api/userRoomApi';
 import { BoxEditor, ChooseQWrapper, WrapRightSection } from '../../styled';
-import {
-    ControllerArena,
-    ControllerNav,
-    ControllerNavLink,
-    SelectLanguage,
-    WrapperResult,
-    IconCheck,
-} from '../LeaderBoard/styled';
 
 import { cppLanguage } from '@codemirror/lang-cpp';
 import { htmlLanguage } from '@codemirror/lang-html';
@@ -34,22 +25,20 @@ const RightSection = ({
     setCode,
     showResult,
     setShowResult,
-    resInfo,
-    setResInfo,
 }) => {
+    const [cookies, setCookie] = useCookies([USER_ROOM_ID]);
     const language = localStorage.getItem('language');
     const location = useLocation();
     const roomInfo = useLoaderData();
 
-    const [idUser, setIdUser] = useState('');
-    const [totalTime, setTotalTime] = useState(0);
+    const [submitStatus, setSubmitStatus] = useState(true);
     const [isLanguage, setIsLanguage] = useState(language ? true : false);
     const [select, setSelect] = useState(language ? language : 'Choose language');
-    const [score, setScore] = useState(0);
     const navigate = useNavigate();
     const langs = [
         { name: 'C_CPP', id: 1 },
         { name: 'JAVA', id: 2 },
+        { name: 'PYTHON', id: 3 },
     ];
     const handleSelectChange = (eventKey) => {
         setSelect(eventKey);
@@ -57,6 +46,7 @@ const RightSection = ({
         setIsLanguage(true);
     };
     const submitCode = async () => {
+        setSubmitStatus(false);
         if (!isLanguage) {
             toastError('Language is not defined');
             return;
@@ -71,64 +61,70 @@ const RightSection = ({
             language: select,
         });
 
-        setResInfo(res.data);
-
         if (res.data.status === 200) {
-            setResInfo(res.data);
-            localStorage.setItem('authenticated(do not delete)', JSON.stringify(res.data.data));
+            setSubmitStatus(true);
+
+            localStorage.setItem('authenticated', JSON.stringify(res.data.data));
             toastSuccess(res.data.message);
         } else {
             toastError(res.data.err);
         }
-
-        setShowResult(true);
-
-        submitHistoryApi.getSubmitHistoryByQuestion(questionId).then((res) => {
-            res.data.data.items.map((item) => {
-                if (item.account.id == idUser) {
-                    setScore(item.score);
-                    setTotalTime(item.time);
-                }
-            });
-        });
     };
-
+    function deleteCookies(name) {
+        cookies.remove(name, { path: '/' });
+    }
     const finish = async () => {
-        let res = await userRoomApi.postFinish(location.state.userRoomId);
+        let res = await userRoomApi.postFinish(cookies.userroomid);
 
         if (res.data.status === 200) {
-            localStorage.removeItem('authenticated(do not delete)');
-            localStorage.removeItem('question');
-            localStorage.removeItem('language');
-            localStorage.removeItem('codeBE');
-            localStorage.removeItem('countdownFuture');
             navigate('/', { state: { success: true } });
+            localStorage.removeItem('code');
+            localStorage.removeItem('authenticated');
+            localStorage.removeItem('countdownFuture');
+            cookies.remove(USER_ROOM_ID, { path: '/' });
+            deleteCookies(USER_ROOM_ID);
             toastSuccess(res.data.message);
-        } else if (res.data.status === 400) {
-            toastError(res.data.err);
         }
     };
 
-    useEffect(() => {
-        authApi.getUser().then((res) => {
-            setIdUser(res.data.id);
-        });
-    }, []);
-
-    const submitted = JSON.parse(localStorage.getItem('authenticated(do not delete)'));
-
     return (
-        <Container className="p-2 h-100">
+        <Container className="p-2">
             <WrapRightSection>
+                <div className="text-light mb-4">
+                    <h4 className="text-center"> SUBMIT CODE</h4>
+                    <ChooseQWrapper>
+                        <Dropdown className="d-inline mx-2 mt-2" onSelect={handleSelectChange}>
+                            <Dropdown.Toggle
+                                id="dropdown-autoclose-true"
+                                className="bg border button head  styled"
+                            >
+                                {select}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu className="bg border transform menu">
+                                {langs.map((lang) => {
+                                    return (
+                                        <Dropdown.Item
+                                            eventKey={lang.name}
+                                            key={lang.id}
+                                            name={`${lang.name}`}
+                                        >
+                                            {lang.name}
+                                        </Dropdown.Item>
+                                    );
+                                })}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </ChooseQWrapper>
+                </div>
                 <BoxEditor maxHeight={showResult}>
                     <CodeMirror
                         className="editor"
                         value={code}
-                        // width="100%"
                         style={{ transition: `all 0.4s ease-in;` }}
                         theme={tokyoNight}
-                        height="calc(100vh - 30vh);"
-                        maxHeight={showResult ? '40vh' : 'calc(100vh - 30vh)'}
+                        height="calc(100vh - 390px);"
+                        maxHeight={showResult ? '40vh' : 'calc(100vh - 400px)'}
                         extensions={[cppLanguage, javaLanguage]}
                         onChange={(event) => {
                             setCode(event);
@@ -136,134 +132,18 @@ const RightSection = ({
                         }}
                     />
                 </BoxEditor>
-
-                <ControllerArena>
-                    <Stack direction="horizontal" className="justify-content-between">
-                        <div className="text-white btn border-blue">
-                            {/* {/* Submit: {resInfo ? resInfo?.data?.times?.current : '_ '}/
-                            {roomInfo.questions[currentQuestion].maxSubmitTimes} Times */}
-                            Submit:{' '}
-                            {submitted
-                                ? submitted.times?.current
-                                : resInfo
-                                ? resInfo?.data?.times?.current
-                                : '0'}
-                            /{roomInfo.questions[currentQuestion].maxSubmitTimes} Times
-                        </div>
-                        <ChooseQWrapper>
-                            <Dropdown className="d-inline mx-2" onSelect={handleSelectChange}>
-                                <Dropdown.Toggle
-                                    id="dropdown-autoclose-true"
-                                    className="bg border button head"
-                                >
-                                    {select}
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu className="bg border transform menu">
-                                    {langs.map((type) => {
-                                        return (
-                                            <Dropdown.Item eventKey={type.name} key={type.id}>
-                                                {type.name}
-                                            </Dropdown.Item>
-                                        );
-                                    })}
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </ChooseQWrapper>
-                    </Stack>
-                    <Stack direction="horizontal" className="flex-end">
-                        <div className="flex-end">
-                            <div className="text-white btn submit-btn" onClick={submitCode}>
-                                Submit
-                            </div>
-                            <div className="text-white btn finish-btn" onClick={finish}>
-                                Finish
-                            </div>
-                        </div>
-                    </Stack>
-                    {showResult && (
-                        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                            <Row style={{ padding: '0 10px' }}>
-                                <Col sm={3} className="p-0 ">
-                                    <ControllerNav>
-                                        <ControllerNavLink eventKey="first">
-                                            <Nav.Link eventKey="first">Result</Nav.Link>
-                                        </ControllerNavLink>
-                                        <ControllerNavLink eventKey="second">
-                                            <Nav.Link eventKey="second">Message</Nav.Link>
-                                        </ControllerNavLink>
-                                    </ControllerNav>
-                                </Col>
-                                <Col sm={9} className="p-0">
-                                    <WrapperResult>
-                                        <Tab.Content className="h-100 tabContain text-white no-cursor">
-                                            <TabPane
-                                                eventKey="first"
-                                                className="h-100 tabPane bg-dark"
-                                            >
-                                                <Row style={{ height: '33%', margin: 0 }}>
-                                                    <Col sm={6} className="center">
-                                                        <p className="yellow-styled">
-                                                            Compiler Status
-                                                        </p>
-                                                    </Col>
-                                                    <Col sm={6} className="center">
-                                                        {resInfo?.status == 200 ? (
-                                                            <div className="btn text-green w-230">
-                                                                SUCCESS
-                                                            </div>
-                                                        ) : (
-                                                            <div className="btn text-red w-230">
-                                                                FAILED
-                                                            </div>
-                                                        )}
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{ height: '33%', margin: 0 }}>
-                                                    <Col sm={6} className="center">
-                                                        <p className="yellow-styled">Your Score</p>
-                                                    </Col>
-                                                    <Col sm={6} className="center">
-                                                        <div className="btn text-white w-230 border-blue">
-                                                            {score} - Test Cases
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{ height: '33%', margin: 0 }}>
-                                                    <Col sm={6} className="center">
-                                                        <p className="yellow-styled"> Total Time</p>
-                                                    </Col>
-                                                    <Col sm={6} className="center">
-                                                        <div className="btn text-white w-230 border-blue">
-                                                            {resInfo
-                                                                ? resInfo?.data?.result?.execTime
-                                                                : '_ '}
-                                                            ms
-                                                        </div>
-                                                    </Col>
-                                                </Row>
-                                            </TabPane>
-                                            <TabPane
-                                                eventKey="second"
-                                                className="h-100 tabPane p-20 err-wrapper bg-dark"
-                                            >
-                                                <p className="yellow-styled">Compiler Message</p>
-
-                                                {resInfo.err ? (
-                                                    <div className="err-message">{resInfo.err}</div>
-                                                ) : (
-                                                    <div className="success-message">
-                                                        Submit successfully !
-                                                    </div>
-                                                )}
-                                            </TabPane>
-                                        </Tab.Content>
-                                    </WrapperResult>
-                                </Col>
-                            </Row>
-                        </Tab.Container>
-                    )}
-                </ControllerArena>
+                <div className="d-flex align-items-center justify-content-center text-light pt-2 gap-3">
+                    <ButtonStyled
+                        buttonType="outline"
+                        onClick={submitCode}
+                        disabled={!submitStatus}
+                    >
+                        {submitStatus ? 'SUBMIT' : <Spinner size="sm" />}
+                    </ButtonStyled>
+                    <ButtonStyled buttonType="outline2" onClick={finish}>
+                        FINISH
+                    </ButtonStyled>
+                </div>
             </WrapRightSection>
         </Container>
     );

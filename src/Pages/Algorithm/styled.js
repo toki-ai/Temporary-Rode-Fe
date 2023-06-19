@@ -1,3 +1,4 @@
+import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
 
 import { themes } from '../../themes';
@@ -6,8 +7,8 @@ import { device } from '../../utils/Breakpoints';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 
-export const AlgorithmWrapper = styled.div`
-    padding: 7.3rem 3rem 0rem 3rem;
+export const AlgorithmWrapper = styled(Container)`
+    /* padding: 6rem 3rem 0rem 3rem; */
 
     height: 60%;
     .p-0 {
@@ -55,9 +56,8 @@ export const AlgorithmNav = styled(Nav)`
 `;
 
 export const AlgorithmContent = styled.div`
-    height: 100%;
     background-color: transparent;
-    height: 90vh;
+    /* height: 90vh; */
     border-radius: 10px;
     border: 1px solid #00e7aa;
     /* padding: 0; */
@@ -155,27 +155,22 @@ export const TabPane = styled(Tab.Pane)`
 //DraggableLine//
 
 export const WrapperStyle = styled.div`
-    height: 100%;
+    /* height: 100%; */
     background-color: ${(props) => props.theme.colors.arenaBG};
     .app {
         display: flex;
-        height: 100%;
+        align-items: center;
+        justify-content: center;
     }
 
     .left-section,
     .right-section {
-        height: 100%;
+        /* height: 100%; */
     }
 
     .left-section {
         /* background-color: lightblue; */
-        overflow: hidden;
-    }
-
-    .separator {
-        width: 10px;
-        background-color: gray;
-        cursor: col-resize;
+        /* overflow: hidden; */
     }
 
     .right-section {
@@ -200,16 +195,16 @@ export const WrapperStyle = styled.div`
 export const BoxEditor = styled.div`
     width: 100%;
     display: inline-block;
-    /* height: calc(100vh - 290px); 
+    /* height: calc(100vh - 290px); */
 
     color: ${(props) => props.theme.colors.light};
-    /* padding: 10px 20px; */
-    /* background-color: ${(props) => props.theme.colors.arenaBG}; */
-    /* border: 1px solid #00e7aa; */
-    /* box-shadow: 0px 2px 15px #00c994; */
+    padding: 10px 20px;
+    background-color: ${(props) => props.theme.colors.arenaBG};
+    border: 1px solid #00e7aa;
+    box-shadow: 0px 2px 15px #00c994;
     border-radius: 10px;
     overflow: hidden;
-    max-height: ${(props) => (props.maxHeight ? `40vh` : `100%`)};
+    /* max-height: ${(props) => (props.maxHeight ? `40vh` : `100%`)}; */
     transition: all 0.4s ease-in;
     .ͼo {
         background-color: transparent;
@@ -230,7 +225,7 @@ export const TimeText = styled.span`
     align-items: center;
     color: #ffffff;
 `;
-export const ChooseQWrapper = styled.div`
+export const ChooseQWrapper = styled.span`
     display: flex;
     align-items: center;
     font-family: 'Quicksand';
@@ -265,6 +260,7 @@ export const ChooseQWrapper = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        min-width: 200px;
     }
     .menu {
         width: 100%;
@@ -333,7 +329,7 @@ export const ChooseQWrapper = styled.div`
     }
 `;
 export const WrapRightSection = styled.div`
-    max-height: 100%;
+    /* max-height: 100%; */
     .text-red {
         border-color: red !important;
         color: red;

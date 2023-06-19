@@ -30,9 +30,9 @@ function Algorithm() {
 
     return (
         <>
-            <AlgorithmWrapper>
-                <Row className="p-5">
-                    <Col sm={12} className="p-0">
+            <AlgorithmWrapper fluid={'lg'}>
+                <Row className="">
+                    <Col style={{ marginTop: '85px' }}>
                         <AlgorithmContent>
                             <ArenaAlgorithm />
                         </AlgorithmContent>

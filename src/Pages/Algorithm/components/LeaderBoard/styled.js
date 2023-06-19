@@ -255,7 +255,7 @@ export const ControllerNav = styled(Nav)`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-item: center;
+    align-items: center;
 `;
 export const ControllerNavLink = styled(Nav.Link)`
     display: flex;

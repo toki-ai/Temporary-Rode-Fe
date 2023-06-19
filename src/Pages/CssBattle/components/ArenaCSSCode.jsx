@@ -117,7 +117,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
                     MY SOLUTION
                 </ButtonStyled>
                 <ButtonStyled buttonType="outline2" onClick={submitCode} disabled={!submitStatus}>
-                    {submitStatus ? 'SUBMIT' : <Spinner />}
+                    {submitStatus ? 'SUBMIT' : <Spinner size="sm" />}
                 </ButtonStyled>
                 <ButtonStyled buttonType="outline" onClick={finish}>
                     FINISH
