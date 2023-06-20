@@ -211,7 +211,7 @@ export const BoxOutput = styled.div`
     border: 1px solid #00e7aa;
     box-shadow: 0px 2px 15px #00c994;
     /* width: 100%; */
-    max-width: 400px;
+    min-width: 400px;
     height: 300px;
 
     /* border-radius: 10px; */
@@ -229,7 +229,6 @@ export const BoxOutput = styled.div`
         overflow: hidden;
         cursor: col-resize;
         & > img {
-            object-fit: cover;
             position: absolute;
             top: 0;
             left: 0;

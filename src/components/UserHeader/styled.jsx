@@ -33,7 +33,7 @@ export const Container = styled.header`
 `;
 
 export const Left = styled(Link)`
-    padding: 3rem;
+    padding: 0rem 3rem;
     display: flex;
     justify-content: center;
     align-items: center;

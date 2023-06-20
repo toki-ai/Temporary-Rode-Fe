@@ -4,6 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
 
 import accountsApi from '../../utils/api/accountsApi';
+import { DateFormatS } from '../../utils/helper';
 import './AllAccounts.scss';
 import Join from './components/Join';
 import More from './components/More';
@@ -128,7 +129,7 @@ const AllAccounts = () => {
                                             <td>{account.fname + ' ' + account.lname}</td>
                                             <td>{account.email}</td>
                                             <td>{account.phone}</td>
-                                            <td>{account.dob.substring(0, 10)} </td>
+                                            <td>{DateFormatS(account.dob)} </td>
                                             <td>01/01/2022</td>
                                             <td className="d-flex" style={{ alignItems: 'center' }}>
                                                 {account.isActive ? (

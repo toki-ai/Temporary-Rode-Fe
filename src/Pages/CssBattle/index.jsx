@@ -1,8 +1,10 @@
 import { useState, Suspense } from 'react';
 
+import { Container } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
 
 import ModalComponent from '../../components/Modal/Modal';
+import OffCanvasComponents from '../../components/OffCanvas/OffCanvas';
 import { CodeTemplateTmp } from '../../utils/Constant/Dummy';
 import userRoomApi from '../../utils/api/userRoomApi';
 import ArenaCSSCode from './components/ArenaCSSCode';
@@ -11,8 +13,6 @@ import RoomInfo from './components/RoomInfo';
 import { PaddingRow } from './styled';
 
 import Col from 'react-bootstrap/Col';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Row from 'react-bootstrap/Row';
 
 const ArenaCSS = () => {
     const roomInfo = useLoaderData();
@@ -52,9 +52,19 @@ const ArenaCSS = () => {
     return (
         <PaddingRow>
             {/* Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop */}
-            <ModalComponent show={show} setShow={setShow} title={'ERROR'} body={'hello'} />
 
-            <Col xs={12} md={3} className="px-4">
+            <OffCanvasComponents title="" show={show} setShow={setShow}>
+                <RoomInfo
+                    data={roomInfo}
+                    submit={submit}
+                    question={question}
+                    currentQuestion={currentQuestion}
+                    setCurrentQuestion={setCurrentQuestion}
+                    action={setQuestionId}
+                    QuestionChange={handleQuestionChange}
+                />
+            </OffCanvasComponents>
+            <Col md={false} xl={3} className="d-none d-xl-grid px-4">
                 <RoomInfo
                     data={roomInfo}
                     submit={submit}
@@ -65,7 +75,7 @@ const ArenaCSS = () => {
                     QuestionChange={handleQuestionChange}
                 />
             </Col>
-            <Col xs={12} md={6} className="px-4">
+            <Col xs={12} md={6} xl={5} className="px-4">
                 <ArenaCSSCode
                     submitService={{ submit, setSubmit }}
                     setCode={setCode}
@@ -73,9 +83,11 @@ const ArenaCSS = () => {
                     count={count}
                     code={code}
                     data={roomInfo}
+                    showRoom={setShow}
                 />
             </Col>
-            <Col xs={12} md={3} className="px-4">
+
+            <Col xs={12} md={6} xl={4} className="px-4">
                 <Output code={code} data={roomInfo} currentQuestion={currentQuestion} />
             </Col>
         </PaddingRow>

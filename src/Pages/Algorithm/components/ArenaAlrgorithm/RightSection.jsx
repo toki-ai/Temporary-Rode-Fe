@@ -60,13 +60,19 @@ const RightSection = ({
             code: code,
             language: select,
         });
-
+        console.log({
+            roomId: roomInfo?.id,
+            questionId: questionId,
+            code: code,
+            language: select,
+        });
         if (res.data.status === 200) {
             setSubmitStatus(true);
 
             localStorage.setItem('authenticated', JSON.stringify(res.data.data));
             toastSuccess(res.data.message);
         } else {
+            setSubmitStatus(true);
             toastError(res.data.err);
         }
     };

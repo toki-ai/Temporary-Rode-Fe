@@ -20,7 +20,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import Spinner from 'react-bootstrap/Spinner';
 import Stack from 'react-bootstrap/Stack';
 
-const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) => {
+const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService, showRoom }) => {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
     const [userSubmit, setUserSubmit] = useState([]);
@@ -44,6 +44,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
             submitService.setSubmit(res.data.data);
             setSubmitStatus(true);
             localStorage.setItem('authenticated', JSON.stringify(res.data.data));
+            toastSuccess(res.data.message);
         } else if (res.data.status === 400) {
             setSubmitStatus(true);
             toastError(res.data.err);
@@ -113,6 +114,14 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService }) =
                 className="align-items-center mt-3 justify-content-center"
                 gap={3}
             >
+                <ButtonStyled
+                    className="d-xl-none"
+                    buttonType="outline"
+                    onClick={() => showRoom(true)}
+                >
+                    ROOM INFORMATION
+                </ButtonStyled>
+
                 <ButtonStyled buttonType="outline" onClick={handleShow}>
                     MY SOLUTION
                 </ButtonStyled>

@@ -79,11 +79,7 @@ const LeftSection = ({ roomInfo }) => {
                                                     setQuestionId(question.id);
                                                     setCurrentQuestion(id);
                                                     setShowImg(true);
-                                                    setShowRightSection(true);
                                                     setCode(codeTemplate);
-                                                    setShowResult(false);
-                                                    setResInfo(0);
-                                                    setShowRemind(false);
                                                 }}
                                             >
                                                 Question {id + 1}

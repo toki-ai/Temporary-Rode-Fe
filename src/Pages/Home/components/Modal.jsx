@@ -13,7 +13,7 @@ function ModalJoinRoom({ handleClose, show, inputRoom, handlePostRoom }) {
     return (
         <>
             <MyModal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>{info.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{info.body}</Modal.Body>
