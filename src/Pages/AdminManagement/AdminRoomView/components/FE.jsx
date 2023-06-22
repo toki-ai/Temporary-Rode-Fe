@@ -20,8 +20,8 @@ const titlesAll = [
 const titlesQues = [
     { id: '0', name: 'Rank' },
     { id: '1', name: 'Name' },
-    { id: '2', name: 'Match' },
-    { id: '3', name: 'Lines of Code' },
+    { id: '2', name: 'Student ID' },
+    { id: '3', name: 'Match' },
     { id: '4', name: 'Score' },
     { id: '5', name: 'Submission' },
     { id: '6', name: 'Finish at' },
@@ -120,9 +120,10 @@ const FE = ({ ques, roomId, questions, questionId }) => {
                                 <tr key={i}>
                                     <td>{i + 1}</td>
                                     <td>{account.account.lname + ' ' + account.account.fname}</td>
+                                    <td>{account.account.studentId}</td>
                                     <td>{account.score}</td>
-                                    <td>{account.space}</td>
-                                    <td>{account.space}</td>
+
+                                    <td>{account.submissions.length}</td>
                                     <td className="text-truncate" style={{ maxWidth: '300px' }}>
                                         {account.submissions}
                                     </td>

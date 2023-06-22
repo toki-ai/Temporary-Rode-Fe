@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const Body = styled.div`
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     @media ${device.tablet} {
         height: calc(100vh - 50px - 1rem);
@@ -18,7 +18,7 @@ export const Body = styled.div`
     }
     @media ${device.laptop} {
         height: calc(100vh - 60px - 1rem);
-        margin-top: 4rem;
+        /* margin-top: 4rem; */
     }
 
     @media ${device.laptopL} {

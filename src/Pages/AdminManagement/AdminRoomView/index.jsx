@@ -12,13 +12,6 @@ import FE from './components/FE';
 import RoomInfo from './components/RoomInfo';
 import { ARViewStyle } from './style';
 
-const titlesAll = [
-    { id: 1, name: 'Rank' },
-    { id: 2, name: 'Name' },
-    { id: 3, name: 'Total Score' },
-    { id: 4, name: 'Total Execution Time' },
-    { id: 5, name: 'Finish at' },
-];
 const data = [];
 const AdminRoomView = () => {
     const { id } = useParams();
@@ -61,19 +54,6 @@ const AdminRoomView = () => {
                 <div className="p-3">
                     <RoomInfo room={room} />
                     <Nav className="d-flex mt-2" variant="pills" defaultActiveKey="1">
-                        <Nav.Item className="w-105">
-                            <Nav.Link
-                                eventKey="1"
-                                bsPrefix=""
-                                value="All"
-                                onClick={(e) => {
-                                    handleButtonChange(e);
-                                    setQuestionId('All');
-                                }}
-                            >
-                                All
-                            </Nav.Link>
-                        </Nav.Item>
                         {questions.map((item, i) => {
                             return (
                                 <Nav.Item key={i}>

@@ -78,27 +78,29 @@ const Home = () => {
             <ParticleAnimation />
             <UserHomeLayout>
                 <Container>
-                    <Input>
-                        {/** GIỮ lại phần input code này  */}
-                        <form action="" onSubmit={(e) => handlePostRoom(e)} className="form">
-                            <label htmlFor="exampleInputEmail1" className=" text-yellow label">
-                                ROOM
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="Enter Room Code"
-                                value={inputCode}
-                                onChange={(e) => setInputCode(e.target.value)}
-                                autoComplete="off"
-                                className="bg-dark-secondary text-white bc-primary radius-15 inputRoomCode box-shadow-primary"
-                            />
-                        </form>
-                        {/** GIỮ lại phần input code này  */}
-                    </Input>
-                    <Name>
-                        <Hero className="textEffect">R.ODE</Hero>
-                        <Title className="textEffect">BATTLE</Title>
-                    </Name>
+                    <div className="d-flex align-items-center justify-content-between gap-3 mb-5">
+                        <Name>
+                            <Hero className="textEffect">R.ODE</Hero>
+                            <Title className="textEffect">BATTLE</Title>
+                        </Name>
+                        <Input>
+                            {/** GIỮ lại phần input code này  */}
+                            <form action="" onSubmit={(e) => handlePostRoom(e)} className="form">
+                                <label htmlFor="exampleInputEmail1" className=" text-yellow label">
+                                    ROOM
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter Room Code"
+                                    value={inputCode}
+                                    onChange={(e) => setInputCode(e.target.value)}
+                                    autoComplete="off"
+                                    className="bg-dark-secondary text-white bc-primary radius-15 inputRoomCode box-shadow-primary"
+                                />
+                            </form>
+                            {/** GIỮ lại phần input code này  */}
+                        </Input>
+                    </div>
                     <Content
                         handlePostRoom={handlePostRoom}
                         setInputCode={setInputCode}

@@ -84,7 +84,7 @@ const useAuth = () => {
             return;
         }
 
-        const intervalId = setInterval(checkTokenExpiration, 5000);
+        const intervalId = setInterval(checkTokenExpiration, 2000);
         return () => clearInterval(intervalId);
     }, [checkTokenExpiration]);
 

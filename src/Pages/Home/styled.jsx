@@ -66,7 +66,7 @@ export const Input = styled.div`
     .form {
         display: flex;
         flex-direction: column;
-        position: absolute;
+        /* position: absolute; */
         top: -35%;
         right: 0;
     }
@@ -250,7 +250,7 @@ export const Title = styled.div`
 export const Name = styled.div`
     display: flex;
     flex-direction: column;
-    position: absolute;
+    /* position: absolute; */
     top: -35%;
     .textEffect {
         animation: ${TextEffect} 1s cubic-bezier(0.215, 0.61, 0.355, 1) 0.2s both;

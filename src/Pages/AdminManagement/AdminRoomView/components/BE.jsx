@@ -1,13 +1,17 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useRef } from 'react';
 
 import { Table } from 'react-bootstrap';
 import { DownloadTableExcel } from 'react-export-table-to-excel';
 
+import ButtonStyled from '../../../../components/Button';
 import roomApi from '../../../../utils/api/roomApi';
 import PaginationRoom from '../../AdminRoom/components/Pagination';
 import DateFormatS from './DateFormartS';
+
+import { useForkRef } from '@mui/material';
 
 const titlesAll = [
     { id: '0', name: 'Rank' },
@@ -20,12 +24,13 @@ const titlesAll = [
 const titlesQues = [
     { id: '0', name: 'Rank' },
     { id: '1', name: 'Name' },
-    { id: '2', name: 'Score' },
-    { id: '3', name: 'Execution Time' },
-    { id: '4', name: 'Submission' },
-    { id: '5', name: 'Finish at' },
+    { id: '2', name: 'Student Id' },
+    { id: '3', name: 'Score' },
+    { id: '4', name: 'Link' },
+    { id: '5', name: 'Submission' },
 ];
 const BE = ({ ques, roomId, questions, questionId }) => {
+    const tableRef = useRef();
     const [question, setQuestion] = useState([]);
     const [questionID, setQuestionID] = useState('All');
     const [accounts, setAccounts] = useState([]);
@@ -58,7 +63,14 @@ const BE = ({ ques, roomId, questions, questionId }) => {
     };
     return (
         <>
-            <Table striped className="mt-2 border-top">
+            <DownloadTableExcel
+                filename="[F-Code] Algorithms"
+                sheet="CSS_BATTLE"
+                currentTableRef={tableRef.current}
+            >
+                <ButtonStyled> Export Excel</ButtonStyled>
+            </DownloadTableExcel>
+            <Table striped className="mt-2 border-top" ref={tableRef}>
                 <thead>
                     <tr>
                         {questionId == 'All'
@@ -105,12 +117,14 @@ const BE = ({ ques, roomId, questions, questionId }) => {
                                 <tr key={account.id}>
                                     <td>{i + 1}</td>
                                     <td>{account.account.lname + ' ' + account.account.fname}</td>
+                                    <td>{account.account.studentId}</td>
                                     <td>{account.score}</td>
-                                    <td>{account.space}</td>
+                                    <td>
+                                        <a href={`${account.link}`}>{account.link}</a>
+                                    </td>
                                     <td className="text-truncate" style={{ maxWidth: '300px' }}>
                                         {account.submissions}
                                     </td>
-                                    <td>{DateFormatS(account.submittedAt)}</td>
                                 </tr>
                             );
                         })
