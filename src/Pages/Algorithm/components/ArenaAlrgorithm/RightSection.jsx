@@ -32,6 +32,8 @@ const RightSection = ({
     const roomInfo = useLoaderData();
 
     const [submitStatus, setSubmitStatus] = useState(true);
+
+    const [oneTimeSubmit, setOneTimeSubmit] = useState(true);
     const [isLanguage, setIsLanguage] = useState(language ? true : false);
     const [select, setSelect] = useState(language ? language : 'Choose language');
     const navigate = useNavigate();
@@ -60,15 +62,10 @@ const RightSection = ({
             code: code,
             language: select,
         });
-        console.log({
-            roomId: roomInfo?.id,
-            questionId: questionId,
-            code: code,
-            language: select,
-        });
+
         if (res.data.status === 200) {
             setSubmitStatus(true);
-
+            setOneTimeSubmit(false);
             localStorage.setItem('authenticated', JSON.stringify(res.data.data));
             toastSuccess(res.data.message);
         } else {
@@ -140,13 +137,13 @@ const RightSection = ({
                 </BoxEditor>
                 <div className="d-flex align-items-center justify-content-center text-light pt-2 gap-3">
                     <ButtonStyled
-                        buttonType="outline"
+                        buttonType="outline2"
                         onClick={submitCode}
                         disabled={!submitStatus}
                     >
                         {submitStatus ? 'SUBMIT' : <Spinner size="sm" />}
                     </ButtonStyled>
-                    <ButtonStyled buttonType="outline2" onClick={finish}>
+                    <ButtonStyled buttonType="outline" onClick={finish} disabled={oneTimeSubmit}>
                         FINISH
                     </ButtonStyled>
                 </div>

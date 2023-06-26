@@ -157,7 +157,7 @@ export const TextStyled = styled.div`
     font-size: 24px;
     line-height: 30px;
     /* identical to box height */
-
+    max-width: 250px;
     text-align: center;
     letter-spacing: 0.457143px;
     text-transform: uppercase;

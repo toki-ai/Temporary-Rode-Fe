@@ -32,7 +32,7 @@ function Algorithm() {
         <>
             <AlgorithmWrapper fluid={'lg'}>
                 <Row className="">
-                    <Col style={{ marginTop: '85px' }}>
+                    <Col style={{ margin: '85px 0px 25px 0px' }}>
                         <AlgorithmContent>
                             <ArenaAlgorithm />
                         </AlgorithmContent>

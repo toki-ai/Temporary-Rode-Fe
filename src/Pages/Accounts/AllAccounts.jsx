@@ -23,7 +23,7 @@ const AllAccounts = () => {
     //giá trị còn fixed cứng -> cần thay đổi khúc này
     const searchValue = searchParams.get('search') || '';
     const filterRoom = searchParams.get('filter.room') || '';
-
+    const [totalPages, setTotalPages] = useState(1);
     const [listAttend, setListAttend] = useState([]);
     const [meta, setMeta] = useState();
     //search and filter
@@ -54,6 +54,7 @@ const AllAccounts = () => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
+
     const [accounts, setAccounts] = useState([]);
     const [status, setStatus] = useState('');
 
@@ -67,7 +68,7 @@ const AllAccounts = () => {
             let req = {
                 roomId: id,
                 page: currentPage,
-                limit: 10,
+                limit: 100,
                 search: searchValue,
                 [filter.isActive]: status === '' ? null : status,
                 [filter.room]: filterRoom,
@@ -75,6 +76,8 @@ const AllAccounts = () => {
 
             accountsApi.getAll(req).then((response) => {
                 setAccounts(response.data.data.data);
+                setTotalPages(response.data.data.totalItems);
+                setCurrentPage(currentPage);
             });
         };
         fetchDataFilter();
@@ -149,7 +152,11 @@ const AllAccounts = () => {
                             </Table>
                         </Row>
                     </Col>
-                    <PaginationAccounts />
+                    <PaginationAccounts
+                        action={handlePageChange}
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                    />
                 </div>
             </RoomStyle>
         </div>

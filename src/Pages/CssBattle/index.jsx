@@ -53,7 +53,7 @@ const ArenaCSS = () => {
         <PaddingRow>
             {/* Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop */}
 
-            <OffCanvasComponents title="" show={show} setShow={setShow}>
+            <OffCanvasComponents title="Room information" show={show} setShow={setShow}>
                 <RoomInfo
                     data={roomInfo}
                     submit={submit}

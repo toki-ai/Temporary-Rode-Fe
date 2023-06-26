@@ -50,7 +50,7 @@ export const Wrap = styled.div`
         border: 2px solid ${themes.colors.primary};
         width: 100%;
         color: ${themes.colors.primary};
-
+        text-wrap: nowrap;
         &:hover,
         &:focus,
         &:active {
@@ -63,6 +63,7 @@ export const Wrap = styled.div`
         width: 100%;
         color: ${themes.colors.light};
         background: rgba(0, 231, 170, 0.75);
+
         &:hover,
         &:focus,
         &:active {

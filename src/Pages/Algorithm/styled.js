@@ -161,6 +161,7 @@ export const WrapperStyle = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+        /* margin: 1rem; */
     }
 
     .left-section,

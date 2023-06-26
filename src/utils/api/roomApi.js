@@ -89,8 +89,8 @@ const roomApi = {
                 return err;
             });
     },
-    getSubmitHistoryByQuestion: async (question) => {
-        const endpoint = `/submit-history/get-by-question/${question}`;
+    getSubmitHistoryByQuestion: async (question, currentPage) => {
+        const endpoint = `/submit-history/get-by-question/${question}?page=${currentPage}&limit=1000`;
         // eslint-disable-next-line no-return-await
 
         return await get(endpoint, {}, authHeader())
@@ -102,11 +102,11 @@ const roomApi = {
                 return err;
             });
     },
-    getSubmitHistoryByRoom: async (roomID) => {
-        const endpoint = `/submit-history/get-by-room/${roomID}`;
+    getSubmitHistoryByRoom: async (data) => {
+        const endpoint = `/submit-history/get-by-room/${data.id}`;
         // eslint-disable-next-line no-return-await
 
-        return await get(endpoint, {}, authHeader())
+        return await get(endpoint, { roomId: data.id, limit: 100, page: 1 }, authHeader())
             .then((res) => {
                 // if (res.data.code !== 200) console.log(res.response);
 

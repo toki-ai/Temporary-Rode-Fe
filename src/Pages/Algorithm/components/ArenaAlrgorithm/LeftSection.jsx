@@ -54,8 +54,8 @@ const LeftSection = ({ roomInfo }) => {
     const [showImg, setShowImg] = useState(currQuestion ? true : false);
     return (
         <Container fluid={'lg'}>
-            <Row className="overflow-y-auto p-4">
-                <div className="d-flex justify-content-between align-items-center ">
+            <Row className="overflow-y-auto p-4 ">
+                <div className="d-flex justify-content-between align-items-center mb-4">
                     <ChooseQWrapper>
                         <Dropdown className="d-inline mx-2" onSelect={handleQuestionChange}>
                             <Dropdown.Toggle
@@ -105,7 +105,13 @@ const LeftSection = ({ roomInfo }) => {
                     ) : (
                         <>
                             {showImg && (
-                                <img src={TestImg} alt="target_img" onError={handleImageError} />
+                                <div className={{ pointerEvents: 'none' }}>
+                                    <img
+                                        src={TestImg}
+                                        alt="target_img"
+                                        onError={handleImageError}
+                                    />
+                                </div>
                             )}
                         </>
                     )}

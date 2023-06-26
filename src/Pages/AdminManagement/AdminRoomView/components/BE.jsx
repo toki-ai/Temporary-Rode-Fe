@@ -45,15 +45,16 @@ const BE = ({ ques, roomId, questions, questionId }) => {
         setQuestionID(questionId);
     }, [questions, questionId]);
     useEffect(() => {
-        roomApi.getSubmitHistoryByQuestion(questionId).then((res) => {
+        roomApi.getSubmitHistoryByQuestion(questionId, currentPage).then((res) => {
             setAccounts(res.data.data?.items);
             setCurrentPage(res.data.data.meta.currentPage);
             setTotalPage(res.data.data.meta.totalPages);
         });
-    }, [questionId, questions]);
+    }, [questionId, questions, currentPage]);
     useEffect(() => {
         roomApi.getSubmitHistoryByRoom(roomId).then((res) => {
             setAccountsAll(res.data.data.items);
+
             setCurrentPageAll(res.data.data.meta.currentPage);
             setTotalPageAll(res.data.data.meta.totalPages);
         });

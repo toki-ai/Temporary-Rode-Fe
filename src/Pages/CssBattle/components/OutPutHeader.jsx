@@ -13,7 +13,7 @@ function OutPutHeader({
     return (
         <Stack direction="horizontal" className="justify-content-between mb-3">
             <TextStyled>output</TextStyled>
-            <Stack direction="horizontal" gap={2}>
+            <Stack direction="horizontal" gap={4}>
                 <input
                     type="checkbox"
                     id="slide-checkbox"

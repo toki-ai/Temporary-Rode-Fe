@@ -25,6 +25,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService, sho
     const handleShow = () => setShow(true);
     const [userSubmit, setUserSubmit] = useState([]);
     const [submitStatus, setSubmitStatus] = useState(true);
+    const [oneTimeSubmit, setOneTimeSubmit] = useState(true);
     const location = useLocation();
     const navigate = useNavigate();
     // const questionResult = JSON.parse(localStorage.getItem('authenticated(do not delete)'));
@@ -41,6 +42,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService, sho
         const res = await submitApi.submit(formatData);
 
         if (res.data.status === 200) {
+            setOneTimeSubmit(false);
             submitService.setSubmit(res.data.data);
             setSubmitStatus(true);
             localStorage.setItem('authenticated', JSON.stringify(res.data.data));
@@ -128,7 +130,7 @@ const ArenaCSSCode = ({ setCode, setCount, count, code, data, submitService, sho
                 <ButtonStyled buttonType="outline2" onClick={submitCode} disabled={!submitStatus}>
                     {submitStatus ? 'SUBMIT' : <Spinner size="sm" />}
                 </ButtonStyled>
-                <ButtonStyled buttonType="outline" onClick={finish}>
+                <ButtonStyled buttonType="outline" onClick={finish} disabled={oneTimeSubmit}>
                     FINISH
                 </ButtonStyled>
             </Stack>
