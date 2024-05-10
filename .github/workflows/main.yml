@@ -1,17 +1,37 @@
+name: Build RODE FE and build Docker img
+#When this Action will be ran
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+#Set Docker related entries here
+env:
+  DOCKER_IMAGE_NAME: fcode-rode-fe
+  DOCKER_TAG: latest
 
 jobs:
   build:
-    name: Build source code to Docker image
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, fcode-japao-runner]
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: docker/login-action@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to local docker registry
+        run: echo "${{ secrets.F_CODE_DOCKER_PASS }}" | docker login ${{ secrets.F_CODE_DOCKER_REGISTRY_URL}} -u ${{ secrets.F_CODE_DOCKER_USER }} --password-stdin
+
+      - name: Build and push the image to local registry
+        uses: docker/build-push-action@v3
         with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASS }}
-      - uses: docker/build-push-action@v4
-        with:
+          context: .
           push: true
-          tags: longthanhle1122/rode-fe:latest
+          tags: ${{ secrets.F_CODE_DOCKER_REGISTRY_URL}}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_TAG }}
+          build-args: |
+            ENV_FILE=.env.deploy
+
