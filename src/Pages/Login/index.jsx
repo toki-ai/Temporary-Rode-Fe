@@ -19,7 +19,7 @@ import { toast } from 'react-toastify';
 import { FaRegUserCircle } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { RxPaperPlane } from "react-icons/rx";
-import authApi from '../../utils/api/authApi';
+import authApi2 from '../../utils/api/auth2';
 import './Login.scss';
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -33,6 +33,11 @@ const Login = () => {
     const handleSubmit = async(event) => {
         event.preventDefault();
         setIsValidInput(defaultValid);
+        if(!username && !password){
+            setIsValidInput({isValidUsername: false, isValidPassword: false});
+            toast.error("Please enter your username and password complete.");
+            return;
+        }
         if(!username){
             setIsValidInput({...defaultValid, isValidUsername: false});
             toast.error("Please enter your username.");
@@ -43,14 +48,14 @@ const Login = () => {
             toast.error("Please enter your password.");
             return;
         }
-        // const res = await authApi.login(response.credential);
-
-        // if (res.data.status === 400) {
-        //     navigate('/register', { state: res.credential });
-        // } else if (res.data.status === 200) {
-        //     Localstorage.setItem('token', res.data.data);
-        //     navigate('/');
-        // }
+        await authApi2.login(username, password).then((res)=>{
+            if (res.data.status === 400) {
+                toast.error("Your account does not exist.")
+            } else if (res.data.status === 200) {
+                Localstorage.setItem('token', res.data.data);
+                navigate('/');
+            }
+        })
     }
 
     return (
