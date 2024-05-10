@@ -24,17 +24,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Decode and decrypt GPG key
-        run: |
-            echo "${{ secrets.F_CODE_GPG_PRIVATEKEY }}" | base64 -d > private.key.gpg
-            echo "${{ secrets.F_CODE_GPG_PASSPHRASE }}" | gpg --batch --yes --passphrase-fd 0 private.key.gpg
-            gpg --batch --import private.key
-        shell: bash
-
-      - name: Initialize pass
-        run: pass init ${{ secrets.F_CODE_GPG_PASSKEY }}
-        shell: bash
-
       - name: Log in to local docker registry
         run: echo "${{ secrets.F_CODE_DOCKER_PASS }}" | docker login ${{ secrets.F_CODE_DOCKER_REGISTRY_URL}} -u ${{ secrets.F_CODE_DOCKER_USER }} --password-stdin
 
