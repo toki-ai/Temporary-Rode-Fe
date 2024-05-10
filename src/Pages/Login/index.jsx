@@ -14,11 +14,45 @@ import x_green from '../../assets/Login/x-green.svg';
 import GoogleSignInButton from '../../components/GoogleBtn';
 import GoogleSignUpButton from '../../components/GoogleSignUp';
 import { LoginStyle } from './style';
-
-// <div className="mb-5">
-// <GoogleSignUpButton />
-// </div>
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { FaRegUserCircle } from "react-icons/fa";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { RxPaperPlane } from "react-icons/rx";
+import authApi from '../../utils/api/authApi';
+import './Login.scss';
 const Login = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const defaultValid = {
+        isValidUsername : true,
+        isValidPassword : true,
+    }
+    const [isValidInput, setIsValidInput] = useState(defaultValid)
+
+    const handleSubmit = async(event) => {
+        event.preventDefault();
+        setIsValidInput(defaultValid);
+        if(!username){
+            setIsValidInput({...defaultValid, isValidUsername: false});
+            toast.error("Please enter your username.");
+            return;
+        }
+        if(!password){
+            setIsValidInput({...defaultValid, isValidPassword: false});
+            toast.error("Please enter your password.");
+            return;
+        }
+        // const res = await authApi.login(response.credential);
+
+        // if (res.data.status === 400) {
+        //     navigate('/register', { state: res.credential });
+        // } else if (res.data.status === 200) {
+        //     Localstorage.setItem('token', res.data.data);
+        //     navigate('/');
+        // }
+    }
+
     return (
         <LoginStyle>
             <Container className="d-flex justify-content-center align-items-center">
@@ -36,14 +70,29 @@ const Login = () => {
                             <img className="img-fluid" src={logo} alt="logo" />
                         </Row>
                         <Row className="text-center justify-content-center ">
-                            <p className="text-center fs-1 mb-4 fw-bold ls-2 text-break w-75">
+                            <p className="mt-4 text-center fs-1 mb-4 fw-bold text-break w-75 ls-2">
                                 WELCOME BACK
                             </p>
                         </Row>
+                        {/* em style đoạn này ha  */}
                         <div className="">
-                            <GoogleSignInButton />
+                            <form onSubmit={handleSubmit}>
+                                <FaRegUserCircle className={isValidInput.isValidUsername ? '' : 'unValid'}/>
+                                <input placeholder='Username' type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+                                <br />
+                                <RiLockPasswordFill className={isValidInput.isValidPassword ? '' : 'unValid'}/>
+                                <input placeholder='Password' type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                                <br />
+                                    <button type="submit">
+                                <RxPaperPlane />
+                                </button>
+                            </form>
+                            {/* {error && <div style={{ color: 'ed' }}>{error}</div>} */}
+                            {/* <GoogleSignInButton /> */}
                         </div>
+                        {/*-------------------------------------------------*/}
                     </Col>
+                    
                     <Col
                         sm={0}
                         md={0}
@@ -119,7 +168,7 @@ const Login = () => {
                             <div className="color-secondary fs-1 fw-bold">2</div>
                         </Row>
                         <Row className="position-absolute end-5 bottom-15 rotate-4">
-                            <div className="color-third fs-1 fw-bold">3</div>
+                            <div className="color-third fs-1 fw-bold">4</div>
                         </Row>
                         <Row className="position-absolute bottom-0 start-0">
                             <img className="img-fluid" src={footer_left} alt="footer-left" />

@@ -99,6 +99,9 @@ export const LoginStyle = styled.div`
     .top-18 {
         top: 18%;
     }
+    .unValid{
+        color: red;
+    }
     .top-25 {
         animation: ${Floating} 10s linear infinite;
 
