@@ -17,7 +17,7 @@ import { LoginStyle } from './style';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { FaRegUserCircle } from "react-icons/fa";
-import { RiLockPasswordFill } from "react-icons/ri";
+import { RiLockPasswordFill, RiSpam2Fill } from "react-icons/ri";
 import { RxPaperPlane } from "react-icons/rx";
 import authApi2 from '../../utils/api/auth2';
 import './Login.scss';
@@ -71,31 +71,37 @@ const Login = () => {
                         lg={6}
                         className="text-light d-flex flex-column justify-content-center align-items-center flex-grow-1 rounded-3 bc-primary"
                     >
-                        <Row className="">
+                        <Row className="logoLogin">
                             <img className="img-fluid" src={logo} alt="logo" />
                         </Row>
                         <Row className="text-center justify-content-center ">
-                            <p className="mt-4 text-center fs-1 mb-4 fw-bold text-break w-75 ls-2">
-                                WELCOME BACK
+                            <p className="loginTitle">
+                                <span>Login</span>
+                                <br/>
+                                Sign in to your account
                             </p>
                         </Row>
-                        {/* em style đoạn này ha  */}
-                        <div className="">
+                        <div>
                             <form onSubmit={handleSubmit}>
-                                <FaRegUserCircle className={isValidInput.isValidUsername ? '' : 'unValid'}/>
-                                <input placeholder='Username' type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+                               <div className={`inputWithIcon ${isValidInput.isValidUsername ? '' : 'unValid'}`}>
+                                  <FaRegUserCircle className="inputIcon"/>
+                                  <input placeholder='Username' type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+                                </div>
+                                <br/>
+
+                                <div className={`inputWithIcon ${isValidInput.isValidPassword ? '' : 'unValid'}`}>
+                                  <RiLockPasswordFill className="inputIcon"/>
+                                  <input placeholder='Password' type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                                </div>
                                 <br />
-                                <RiLockPasswordFill className={isValidInput.isValidPassword ? '' : 'unValid'}/>
-                                <input placeholder='Password' type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
-                                <br />
-                                    <button type="submit">
-                                <RxPaperPlane />
-                                </button>
-                            </form>
-                            {/* {error && <div style={{ color: 'ed' }}>{error}</div>} */}
-                            {/* <GoogleSignInButton /> */}
+                                <div className="justify-content-center align-items-center text-center"> 
+                                   <button className="loginSubmit" type="submit">
+                                       <RxPaperPlane className="iconSubmit" />
+                                   </button>
+                                </div>
+                               
+                            </form>                          
                         </div>
-                        {/*-------------------------------------------------*/}
                     </Col>
                     
                     <Col
