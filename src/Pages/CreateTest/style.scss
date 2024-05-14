@@ -1,0 +1,16 @@
+@import './variable';
+
+.newQuestion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputBoard{
+    letter-spacing: 10px;
+}
+
+.test_container{
+    background-color: $bgr-primary-color;
+}
+
