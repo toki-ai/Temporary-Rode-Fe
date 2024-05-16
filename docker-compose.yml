@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  rode-battle-socket:
+    container_name: rode-battle-fe
+    image: rode-battle-fe
+    ports:
+      - 5000:3000

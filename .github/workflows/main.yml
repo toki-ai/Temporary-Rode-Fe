@@ -1,5 +1,4 @@
-name: Build RODE FE and build Docker img
-#When this Action will be ran
+name: Build and Deploy RODE FE
 on:
   push:
     branches:
@@ -8,13 +7,14 @@ on:
     branches:
       - main
   workflow_dispatch:
-#Set Docker related entries here
+
+    
 env:
-  DOCKER_IMAGE_NAME: fcode-rode-fe
+  DOCKER_IMAGE_NAME: rode-battle-fe
   DOCKER_TAG: latest
 
 jobs:
-  build:
+  fe-build:
     runs-on: [self-hosted, Linux, X64, fcode-japao-runner]
 
     steps:
@@ -24,15 +24,27 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Log in to local docker registry
+      - name: Log in to F-Code Registry
         run: echo "${{ secrets.F_CODE_DOCKER_PASS }}" | docker login ${{ secrets.F_CODE_DOCKER_REGISTRY_URL}} -u ${{ secrets.F_CODE_DOCKER_USER }} --password-stdin
 
-      - name: Build and push the image to local registry
+      - name: Build and push the image to F-Code Registry
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
           tags: ${{ secrets.F_CODE_DOCKER_REGISTRY_URL}}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_TAG }}
-          build-args: |
-            ENV_FILE=.env.deploy
+
+  staging-deploy:
+    name: Deploy FE to F-Code Server
+    runs-on: fcode-japao-runner
+    needs: fe-build
+    steps:
+    - name: Checkout Develop
+      uses: actions/checkout@v3
+    - name: DockerHub Login
+      run: echo ${{ secrets.F_CODE_DOCKER_PASS }} | docker login -u ${{ secrets.F_CODE_DOCKER_USER }} --password-stdin ${{secrets.F_CODE_DOCKER_REGISTRY_URL}}
+    - name: Clean Container, Image And Prepare For Deploy
+      run: docker compose -f docker-compose.yaml -p rode-battle-fe:latest down --rmi all -v
+    - name: Deploy FE
+      run: docker compose -f docker-compose.yaml -p rode-battle-fe:latest up -d
 
