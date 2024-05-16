@@ -44,7 +44,7 @@ jobs:
     - name: DockerHub Login
       run: echo ${{ secrets.F_CODE_DOCKER_PASS }} | docker login -u ${{ secrets.F_CODE_DOCKER_USER }} --password-stdin ${{secrets.F_CODE_DOCKER_REGISTRY_URL}}
     - name: Clean Container, Image And Prepare For Deploy
-      run: docker compose -f docker-compose.yaml -p rode-battle-fe down --rmi all -v
+      run: docker compose -f docker-compose.yml -p rode-battle-fe down --rmi all -v
     - name: Deploy FE
-      run: docker compose -f docker-compose.yaml -p rode-battle-fe up -d
+      run: docker compose -f docker-compose.yml -p rode-battle-fe up -d
 
