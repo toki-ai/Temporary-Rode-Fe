@@ -2,6 +2,6 @@ version: '3.8'
 services:
   rode-battle-fe:
     container_name: rode-battle-fe
-    image: rode-battle-fe:latest
+    image: ${DOCKER_HUB_URL}/rode-battle-fe:latest
     ports:
       - 5000:3000
