@@ -42,6 +42,8 @@ jobs:
     name: Deploy FE to F-Code Server
     runs-on: fcode-japao-runner
     needs: fe-build
+    env:
+      DOCKER_HUB_URL: ${{ secrets.F_CODE_DOCKER_REGISTRY_URL }}
     steps:
       - name: Checkout Develop
         uses: actions/checkout@v3
