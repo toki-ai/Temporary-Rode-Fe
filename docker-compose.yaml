@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  rode-battle-socket:
+  rode-battle-fe:
     container_name: rode-battle-fe
     image: rode-battle-fe:latest
     ports:
