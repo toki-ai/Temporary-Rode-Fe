@@ -1,0 +1,16 @@
+FE ques{
+        submitTime; 
+        img; 
+    }
+
+BE ques{
+        submitTime; 
+        img; 
+        testcase: [
+            {
+                input;
+                output;
+                isHiden; //true or false 
+            }
+        ]
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-const QuestionFE = ({ question, index, onSubmitTimeChange, onImageChange}) => {
+const QuestionFE = ({question, index, onSubmitTimeChange, onImageChange}) => {
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];

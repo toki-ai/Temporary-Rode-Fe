@@ -2,26 +2,6 @@ import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import QuestionForm from './components/QuestionForm';
 
-// const Question_Class1 = ({questions, addQuestion, onQuestionChange, onTestcaseChange, onAddTestcase }) => {
-//   return (
-//      <div>
-//       <h2>Questions for Class 1</h2>
-//       {questions.map((q, index) => (
-//         <QuestionForm
-//           key={index}
-//           index={index}
-//           question={q.question}
-//           testcases={q.testcases}
-//           onQuestionChange={onQuestionChange}
-//           onTestcaseChange={onTestcaseChange}
-//           onAddTestcase={onAddTestcase}
-//         />
-//       ))}
-//       <button onClick={addQuestion}>Add New Question</button>
-//     </div>
-//   );
-// };
-
 const YourComponent = () => {
 //   const [savedClass1Questions, setSavedClass1Questions] = useState([]);
 //   const [savedClass2Questions, setSavedClass2Questions] = useState([]);
@@ -272,7 +252,6 @@ const handleComponentSwitch = (component) => {
               key={index}
               index={index}
               question={q}
-              testcases={q.testcases}
               onQuestionChange={handleQuestionChange}
               onTestcaseChange={handleTestcaseChange}
               onAddTestcase={addNewTestcase}

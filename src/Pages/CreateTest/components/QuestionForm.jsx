@@ -1,6 +1,7 @@
 import React from 'react';
 
-const QuestionForm = ({ question, testcases, onQuestionChange, onTestcaseChange, onAddTestcase, onImageChange, onSubmitTimeChange, index }) => {
+const QuestionForm = ({ question, testcases, index, 
+                        onQuestionChange, onTestcaseChange, onAddTestcase, onImageChange, onSubmitTimeChange}) => {
   const handleTestcaseChange = (testcaseIndex, field, value) => {
     onTestcaseChange(index, testcaseIndex, field, value);
   };

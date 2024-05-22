@@ -49,7 +49,7 @@ const RouterComponent = () => {
                         {
                             exact: true,
                             path: '/admin/create_test',
-                            element: <UnitTest />,
+                            element: <CreateRoom/>,
                         },
                         {
                             exact: true,
