@@ -23,7 +23,6 @@ import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
 import { loaderInfoGG, GetInfoRoomByCode, GetInfoUser } from './RouterLoader/Loader';
-import UnitTest from '../Pages/CreateTest';
 
 const RouterComponent = () => {
     const { width } = useWindowDimensions();
@@ -45,11 +44,6 @@ const RouterComponent = () => {
                             exact: true,
                             path: '/admin/*',
                             element: <Upcoming />,
-                        },
-                        {
-                            exact: true,
-                            path: '/admin/create_test',
-                            element: <CreateRoom/>,
                         },
                         {
                             exact: true,
