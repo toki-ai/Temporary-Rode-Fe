@@ -51,13 +51,12 @@ const Login = () => {
 
         const credentials = { email, password };
         const res = await authApi.login(credentials).then((res)=>{
-
-        if (res.data.status === 400) {
-            navigate('/register', { state: res.data });
-        } else if (res.data.status === 200) {
-            Localstorage.setItem('token', res.data.data);
-            navigate('/');
-        }
+            if (res.data.status === 400) {
+                navigate('/login', { state: res.data });
+            } else if (res.data.status === 200) {
+                Localstorage.setItem('token', res.data.data);
+                navigate('/');
+            }
         });
     }
 
