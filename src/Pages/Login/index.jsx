@@ -1,5 +1,4 @@
 import { Col, Container, Row } from 'react-bootstrap';
-
 import grid_img from '../../assets/Login/Gird.svg';
 import logo from '../../assets/Login/Logo.svg';
 import arrow_login from '../../assets/Login/arrow.svg';
@@ -19,13 +18,14 @@ import { toast } from 'react-toastify';
 import { FaRegUserCircle } from "react-icons/fa";
 import { RiLockPasswordFill, RiSpam2Fill } from "react-icons/ri";
 import { RxPaperPlane } from "react-icons/rx";
-import authApi2 from '../../utils/api/auth2';
+import authApi from '../../utils/api/authApi';
 import './Login.scss';
+
 const Login = () => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const defaultValid = {
-        isValidUsername : true,
+        isValidemail : true,
         isValidPassword : true,
     }
     const [isValidInput, setIsValidInput] = useState(defaultValid)
@@ -33,14 +33,14 @@ const Login = () => {
     const handleSubmit = async(event) => {
         event.preventDefault();
         setIsValidInput(defaultValid);
-        if(!username && !password){
-            setIsValidInput({isValidUsername: false, isValidPassword: false});
-            toast.error("Please enter your username and password complete.");
+        if(!email && !password){
+            setIsValidInput({isValidemail: false, isValidPassword: false});
+            toast.error("Please enter your email and password complete.");
             return;
         }
-        if(!username){
-            setIsValidInput({...defaultValid, isValidUsername: false});
-            toast.error("Please enter your username.");
+        if(!email){
+            setIsValidInput({...defaultValid, isValidemail: false});
+            toast.error("Please enter your email.");
             return;
         }
         if(!password){
@@ -48,14 +48,17 @@ const Login = () => {
             toast.error("Please enter your password.");
             return;
         }
-        await authApi2.login(username, password).then((res)=>{
-            if (res.data.status === 400) {
-                toast.error("Your account does not exist.")
-            } else if (res.data.status === 200) {
-                Localstorage.setItem('token', res.data.data);
-                navigate('/');
-            }
-        })
+
+        const credentials = { email, password };
+        const res = await authApi.login(credentials).then((res)=>{
+
+        if (res.data.status === 400) {
+            navigate('/register', { state: res.data });
+        } else if (res.data.status === 200) {
+            Localstorage.setItem('token', res.data.data);
+            navigate('/');
+        }
+        });
     }
 
     return (
@@ -83,9 +86,9 @@ const Login = () => {
                         </Row>
                         <div>
                             <form onSubmit={handleSubmit}>
-                               <div className={isValidInput.isValidUsername ? "inputWithIcon" : "inputUnValid inputWithIcon"}>
-                                  <FaRegUserCircle className={isValidInput.isValidUsername ? 'inputIcon' : 'unValid'}/>
-                                  <input placeholder='Username' type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+                               <div className={isValidInput.isValidemail ? "inputWithIcon" : "inputUnValid inputWithIcon"}>
+                                  <FaRegUserCircle className={isValidInput.isValidemail ? 'inputIcon' : 'unValid'}/>
+                                  <input placeholder='email' type="text" value={email} onChange={(event) => setEmail(event.target.value)} />
                                 </div>
                                 <br/>
 
@@ -103,6 +106,7 @@ const Login = () => {
                             </form>                          
                         </div>
                     </Col>
+                    
                     
                     <Col
                         sm={0}
@@ -202,4 +206,4 @@ const Login = () => {
     );
 };
 
-export default Login
+export default Login;

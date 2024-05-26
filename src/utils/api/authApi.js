@@ -4,12 +4,14 @@ import authHeader from './HeaderAuthorization';
 
 const authApi = {
     login: async (credential) => {
-        const endpoint = `/auth/login/${credential}`;
+        const endpoint = `/auth/login`;
         // eslint-disable-next-line no-return-await
+        const params = new URLSearchParams();
+        params.append('email', credential.email);
+        params.append('password', credential.password);
 
-        return await get(endpoint, {}, {})
+        return await post(endpoint, params, {})
             .then((res) => {
-                // if (res.data.code !== 200) console.log(res.response);
                 return res;
             })
             .catch((err) => {
