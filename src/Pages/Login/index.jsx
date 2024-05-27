@@ -50,7 +50,7 @@ const Login = () => {
         }
         
         const dangerousCharacters = /['"<>`]/;
-        if (dangerousCharacters.test(email)) {
+        if (dangerousCharacters.test(email) && dangerousCharacters.test(password)) {
             toast.error('Invalid input: Input contains dangerous characters');
         }else{
             setEmail(email.trim());
