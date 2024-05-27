@@ -48,16 +48,23 @@ const Login = () => {
             toast.error("Please enter your password.");
             return;
         }
-
-        const credentials = { email, password };
-        const res = await authApi.login(credentials).then((res)=>{
-            if (res.data.status === 400) {
-                navigate('/login', { state: res.data });
-            } else if (res.data.status === 200) {
-                Localstorage.setItem('token', res.data.data);
-                navigate('/');
-            }
-        });
+        
+        const dangerousCharacters = /['"<>`]/;
+        if (dangerousCharacters.test(email)) {
+            toast.error('Invalid input: Input contains dangerous characters');
+        }else{
+            setEmail(email.trim());
+            setPassword(password.trim());
+            const credentials = { email, password };
+            const res = await authApi.login(credentials).then((res)=>{
+                if (res.data.status === 400) {
+                    navigate('/login', { state: res.data });
+                } else if (res.data.status === 200) {
+                    Localstorage.setItem('token', res.data.data);
+                    navigate('/');
+                }
+            });
+        }
     }
 
     return (
