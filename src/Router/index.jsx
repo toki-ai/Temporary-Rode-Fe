@@ -23,6 +23,7 @@ import UserLayoutComponent from '../components/UserLayout/UserLayout.component';
 import AdminRoute from './AdminRoute';
 import PublicRoute from './PublicRoute';
 import { loaderInfoGG, GetInfoRoomByCode, GetInfoUser } from './RouterLoader/Loader';
+import CreateTestCase from '../Pages/AdminManagement/CreateTestCase';
 
 const RouterComponent = () => {
     const { width } = useWindowDimensions();
@@ -64,12 +65,12 @@ const RouterComponent = () => {
                             loader: Loading,
                             element: <AdminRoomEdit />,
                         },
-                        // {
-                        //     exact: true,
-                        //     path: 'room/create-room',
-                        //     loader: Loading,
-                        //     element: <CreateRoom />,
-                        // },
+                        {
+                            exact: true,
+                            path: '/admin/create-test',
+                            loader: Loading,
+                            element: <CreateTestCase />,
+                        },
                         {
                             exact: true,
                             path: '/contestant',
