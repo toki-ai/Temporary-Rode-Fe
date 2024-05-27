@@ -10,8 +10,8 @@ import hexagonal from '../../assets/Login/hexagonal.svg';
 import signal from '../../assets/Login/signal.svg';
 import x_blue from '../../assets/Login/x-blue.svg';
 import x_green from '../../assets/Login/x-green.svg';
-import GoogleSignInButton from '../../components/GoogleBtn';
-import GoogleSignUpButton from '../../components/GoogleSignUp';
+// import GoogleSignInButton from '../../components/GoogleBtn';
+// import GoogleSignUpButton from '../../components/GoogleSignUp';
 import { LoginStyle } from './style';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -50,7 +50,7 @@ const Login = () => {
         }
         
         const dangerousCharacters = /['"<>`]/;
-        if (dangerousCharacters.test(email)) {
+        if (dangerousCharacters.test(email) && dangerousCharacters.test(password)) {
             toast.error('Invalid input: Input contains dangerous characters');
         }else{
             setEmail(email.trim());
