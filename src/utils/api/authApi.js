@@ -1,3 +1,5 @@
+// email: 'test2.f-code.test@email.com',
+//                 password: 'test1234'
 import { post, get } from '../ApiCaller';
 import Localstorage from '../Localstorage';
 import authHeader from './HeaderAuthorization';
@@ -5,18 +7,20 @@ import authHeader from './HeaderAuthorization';
 const authApi = {
     login: async (credential) => {
         const endpoint = `/auth/login`;
-        // eslint-disable-next-line no-return-await
-        const params = new URLSearchParams();
-        params.append('email', credential.email);
-        params.append('password', credential.password);
+        // const param = {
+        //     email: 'test2.f-code.test@email.com',
+        //     password: 'test1234'
+        // }
+        // const params = JSON.stringify(param)
 
-        return await post(endpoint, params, {})
-            .then((res) => {
-                return res;
-            })
-            .catch((err) => {
-                return err;
-            });
+        return post(endpoint, {
+            email: 'test2.f-code.test@email.com',
+            password: 'test1234'
+        }, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
     },
     getUser: async () => {
         const endpoint = `/auth/self`;
