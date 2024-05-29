@@ -7,6 +7,7 @@ import MaxSumbitTimes from './MaxSumbitTimes';
 import Testcase from './Testcase';
 import UploadImage from './UploadImage';
 import { addBEQuestion, addTestcase } from './utils';
+import { FaPlus } from "react-icons/fa";
 
 import Accordion from 'react-bootstrap/Accordion';
 
@@ -18,7 +19,7 @@ const CreateBEQuestions = ({ questions, setQuestions, error }) => {
         <>
             {questions?.map((question, questionIdx) => (
                 <St.Questions key={questionIdx}>
-                    <St.QuestionTitle>Question {questionIdx + 1}</St.QuestionTitle>
+                    <St.QuestionTitle className='question-title'>Question {questionIdx + 1}:</St.QuestionTitle>
 
                     <div className="row">
                         <div className="col-md-6">
@@ -84,14 +85,18 @@ const CreateBEQuestions = ({ questions, setQuestions, error }) => {
                                     />
                                 ))}
                             </Accordion>
-                            <div className="d-grid gap-2 ">
-                                <ButtonStyled
-                                    buttonType="outline"
+                            <div className='line'></div>
+                            <div className="d-grid gap-2">
+                                <ButtonStyled 
+                                    buttonType='dashed' 
+                                    id='template-button'
                                     onClick={() => addTestcase(questionIdx, setQuestions)}
                                 >
-                                    + Add testcase
+                                    <FaPlus className='button-icon' /> 
+                                    <span className='question-type3'>Add testcase</span>
                                 </ButtonStyled>
                             </div>
+
                         </div>
                     </div>
                     <hr />
@@ -99,8 +104,9 @@ const CreateBEQuestions = ({ questions, setQuestions, error }) => {
             ))}
 
             <div className="d-grid gap-2 my-2">
-                <ButtonStyled buttonType="dashed" onClick={() => addBEQuestion(setQuestions)}>
-                    + Add questions
+                <ButtonStyled buttonType='dashed' onClick={() => addBEQuestion(setQuestions)} id='template-button'>
+                    <FaPlus className='button-icon' />
+                    <span className='question-type2'>Add questions</span>
                 </ButtonStyled>
             </div>
         </>

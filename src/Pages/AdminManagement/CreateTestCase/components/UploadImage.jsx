@@ -4,6 +4,7 @@ import { extractColors } from 'extract-colors';
 
 import localFilesAPI from '../../../../utils/api/localFilesAPI';
 import * as St from '../styles';
+import { MdImageSearch } from "react-icons/md";
 
 const UploadImage = ({ question, questionIdx, setQuestions, setImageUrls, imageUrls, error }) => {
     const inputRef = useRef(null);
@@ -56,7 +57,7 @@ const UploadImage = ({ question, questionIdx, setQuestions, setImageUrls, imageU
 
     return (
         <div>
-            <label>Image</label>
+            <label id='question-type3'>Image</label>
             <input
                 id="questionImage"
                 type="file"
@@ -75,8 +76,9 @@ const UploadImage = ({ question, questionIdx, setQuestions, setImageUrls, imageU
                     </button>
                 </div>
             ) : (
-                <St.UploadImage onClick={() => inputRef.current.click()}>
-                    + <span>Upload your image here...</span>
+                <St.UploadImage id='img-upload' onClick={() => inputRef.current.click()}>
+                    <MdImageSearch id='img-icon'/>
+                    <span id='question-type4'>Upload your image here...</span>
                 </St.UploadImage>
             )}
             <h6 className="text-danger">{error}</h6>

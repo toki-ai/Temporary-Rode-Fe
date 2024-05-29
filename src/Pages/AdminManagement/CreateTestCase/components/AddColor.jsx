@@ -9,9 +9,8 @@ const AddColor = ({ questionIdx, setQuestions, question, error }) => {
         <div>
             <label htmlFor="color">Color</label>
             <div>
-                {question.colors?.split(',').map((color, colorIdx) => {
+                {question.colors?.split(',').map((color, colorIdx) => { //value, index 
                     if (!color) return;
-
                     return (
                         <St.ColorWrapper key={colorIdx}>
                             <St.Color color={color}></St.Color>

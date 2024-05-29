@@ -8,7 +8,7 @@ const CodeTemplate = ({ questionIdx, setQuestions, error, isBackend = false }) =
 
     return (
         <St.CodeTemplate>
-            <label htmlFor="codeTemplate">Code Template</label>
+            <label htmlFor="codeTemplate" className='question-type3'>Code Template</label>
             <div>
                 <textarea
                     name="codeTemplate"

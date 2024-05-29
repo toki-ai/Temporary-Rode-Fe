@@ -7,6 +7,7 @@ import CodeTemplate from './CodeTemplate';
 import MaxSumbitTimes from './MaxSumbitTimes';
 import UploadImage from './UploadImage';
 import { addFEQuestion } from './utils';
+import { FaPlus } from "react-icons/fa";
 
 const CreateBEQuestions = ({ questions, setQuestions, error }) => {
     const [imageUrls, setImageUrls] = useState([]);
@@ -15,7 +16,7 @@ const CreateBEQuestions = ({ questions, setQuestions, error }) => {
         <>
             {questions.map((question, questionIdx) => (
                 <St.Questions key={questionIdx}>
-                    <St.QuestionTitle>Question {questionIdx + 1}</St.QuestionTitle>
+                    <St.QuestionTitle className='question-title'>Question {questionIdx + 1}:</St.QuestionTitle>
 
                     <div className="row">
                         <div className="col-md-6">
@@ -73,8 +74,9 @@ const CreateBEQuestions = ({ questions, setQuestions, error }) => {
             ))}
 
             <div className="d-grid gap-2 my-2">
-                <ButtonStyled buttonType="dashed" onClick={() => addFEQuestion(setQuestions)}>
-                    + Add questions
+                <ButtonStyled buttonType='dashed' onClick={() => addFEQuestion(setQuestions)} id='template-button'>
+                    <FaPlus className='button-icon' />
+                    <span className='question-type2'>Add questions</span>
                 </ButtonStyled>
             </div>
         </>

@@ -3,69 +3,69 @@ import { themes } from '../../../../themes';
 import Form from 'react-bootstrap/Form';
 
 // const ROOM_TYPES = await roomApi.getAllRoomType().then((res) => res.data.data);
-const ROOM_TYPES = ['FE', 'BE'];
+// const ROOM_TYPES = ['FE', 'BE'];
 
-export const FORM_LIST_PUBLIC_ROOM = [
-    {
-        label: 'Room Code',
-        name: 'code',
-        type: Form.Control,
-    },
-    {
-        label: 'Room Type',
-        name: 'type',
-        type: Form.Select,
-        children: (
-            <>
-                <option value="" disabled>
-                    Select room type
-                </option>
-                {ROOM_TYPES.map((item) => (
-                    <option value={item} key={item}>
-                        {item}
-                    </option>
-                ))}
-            </>
-        ),
-    },
-    {
-        label: 'Open Time',
-        name: 'openTime',
-        type: Form.Control,
-        inputType: 'datetime-local',
-    },
+// export const FORM_LIST_PUBLIC_ROOM = [
+//     {
+//         label: 'Room Code',
+//         name: 'code',
+//         type: Form.Control,
+//     },
+//     {
+//         label: 'Room Type',
+//         name: 'type',
+//         type: Form.Select,
+//         children: (
+//             <>
+//                 <option value="" disabled>
+//                     Select room type
+//                 </option>
+//                 {ROOM_TYPES.map((item) => (
+//                     <option value={item} key={item}>
+//                         {item}
+//                     </option>
+//                 ))}
+//             </>
+//         ),
+//     },
+//     {
+//         label: 'Open Time',
+//         name: 'openTime',
+//         type: Form.Control,
+//         inputType: 'datetime-local',
+//     },
 
-    {
-        label: 'Visibility',
-        name: 'isPrivate',
-        type: Form.Select,
-        children: (
-            <>
-                <option value="" disabled>
-                    Select visibility
-                </option>
-                <option value="true">Private</option>
-                <option value="false">Public</option>
-            </>
-        ),
-    },
-];
+//     {
+//         label: 'Visibility',
+//         name: 'isPrivate',
+//         type: Form.Select,
+//         children: (
+//             <>
+//                 <option value="" disabled>
+//                     Select visibility
+//                 </option>
+//                 <option value="true">Private</option>
+//                 <option value="false">Public</option>
+//             </>
+//         ),
+//     },
+// ];
 
-export const FORM_LIST_PRIVATE_ROOM = [
-    ...FORM_LIST_PUBLIC_ROOM,
-    {
-        label: 'Close Time',
-        name: 'closeTime',
-        type: Form.Control,
-        inputType: 'datetime-local',
-    },
-    {
-        label: 'Duration',
-        name: 'duration',
-        type: Form.Control,
-        inputType: 'number',
-    },
-];
+// export const FORM_LIST_PRIVATE_ROOM = [
+//     ...FORM_LIST_PUBLIC_ROOM,
+//     {
+//         label: 'Close Time',
+//         name: 'closeTime',
+//         type: Form.Control,
+//         inputType: 'datetime-local',
+//     },
+//     {
+//         label: 'Duration',
+//         name: 'duration',
+//         type: Form.Control,
+//         inputType: 'number',
+//     },
+// ];
 
 // FE: Front-end
 export const addFEQuestion = (setQuestions) => {
@@ -82,7 +82,7 @@ export const addFEQuestion = (setQuestions) => {
 
 export const editColor = (value, questionIdx, colorIdx, setQuestions) => {
     setQuestions((prev) =>
-        prev.map((question, idx) => {
+        prev.map((question, idx) => { 
             if (idx !== questionIdx) return question;
             const colors = question.colors.split(',').filter(Boolean);
             colors[colorIdx] = value;
@@ -114,7 +114,7 @@ export const addBEQuestion = (setQuestions) => {
         {
             maxSubmitTimes: 0,
             questionImage: '',
-            testCases: [{ input: '', output: '' }],
+            testCases: [{ input: '', output: '' , visible: false }],
         },
     ]);
 };
@@ -122,7 +122,7 @@ export const addBEQuestion = (setQuestions) => {
 export const addTestcase = (questionIdx, setQuestions) => {
     setQuestions((prev) => {
         const { testCases, ...rest } = prev[questionIdx]; // destructure testcases array and the rest of the question object
-        const newTestcases = [...testCases, { input: '', output: '' }]; // add a new testcase to the testcases array
+        const newTestcases = [...testCases, { input: '', output: '', visible: false }]; // add a new testcase to the testcases array
         const updatedQuestion = { ...rest, testCases: newTestcases }; // create a new object with updated testcases array
         const updatedQuestions = [
             ...prev.slice(0, questionIdx),
@@ -149,6 +149,7 @@ export const editOutputTestcase = (value, questionIdx, testcaseIdx, setQuestions
     });
 };
 
+//button delete test case 
 export const deleteTestcase = (questionIdx, testcaseIdx, setQuestions) => {
     setQuestions((prev) => {
         let copy = [...prev];
@@ -157,6 +158,7 @@ export const deleteTestcase = (questionIdx, testcaseIdx, setQuestions) => {
     });
 };
 
+//submit time 
 export const handleIncrease = (questionIdx, setQuestions) => {
     setQuestions((prev) => {
         let copy = [...prev];

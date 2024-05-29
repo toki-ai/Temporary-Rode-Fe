@@ -7,22 +7,21 @@ import { toastError, toastSuccess } from '../../../components/Toast';
 // import roomApi from '../../../utils/api/roomApi';
 import CreateBEQuestions from './components/CreateBEQuestions';
 import CreateFEQuestions from './components/CreateFEQuestions';
-// import CreateRoomInfo from './components/CreateRoomInfo';
 import Dropdown from 'react-bootstrap/Dropdown';
 import './style.scss';
 
+//sửa API submit (sửa createOne từ room về question) , API import ảnh 
+
 const CreateTest = () => { 
-    // Create question
-    const [roomInfo, setRoomInfo] = useState('FE');
+    const [roomInfo, setRoomInfo] = useState('BE');
     const [questions, setQuestions] = useState(BEInitQuestion);
     const [errors, setErrors] = useState([]);
     
-        // Submit
     // const handleSubmit = async () => {
     //     const payload = { ...roomInfo, questions };
     //     console.log('Payload: ', payload);
     //     await roomApi
-    //         .createOne(payload)
+    //         .createOne(payload)   //sửa createOne từ room về question  
     //         .then((res) => {
     //             console.error('Response: ', res.data);
     //             if (res.data.status === 200) {
@@ -44,36 +43,34 @@ const CreateTest = () => {
     //         });
     // };
 
-    //re-render when type change 
     useEffect(() => {
         setQuestions(roomInfo.type === 'FE' ? FEInitQuestion : BEInitQuestion);
     }, [roomInfo]);
 
     const handleSubmit = () => {}
 
-    // thêm nút hidden cho mí câu hỏi 
-    //check lại phần import ảnh 
-    //đọc hiểu cái phần add color 
+    const handleSelect = (eventKey) => {
+        setRoomInfo(eventKey);
+        console.log(roomInfo);
+    };
 
     return (
-        <div className="container bg-white h-100 rounded shadow mb-4">
-            <Row>
+        <div className="main container h-100 rounded shadow mb-4">
+            <Row className='main-header'>
                 <Col><h2>Create TestCase</h2></Col>
                 <Col>
-                    <Dropdown>
+                    <Dropdown onSelect={handleSelect} className='main-header-dropdown'>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Dropdown Button
+                            Choose room : {roomInfo}
                         </Dropdown.Toggle>
-
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            <Dropdown.Item eventKey="BE">BE</Dropdown.Item>
+                            <Dropdown.Item eventKey="FE">FE</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
             </Row>
-            <Row>
+            <Row className='main-content-question'>
                 {roomInfo === 'FE' 
                 ? (
                     <CreateFEQuestions
@@ -89,11 +86,11 @@ const CreateTest = () => {
                     />
                 )}
             </Row>
-            <Stack direction="horizontal" gap={3} className="justify-content-end mb-4">
-                <ButtonStyled buttonType="secondary">Cancel</ButtonStyled>
-                <ButtonStyled buttonType="solid" onClick={handleSubmit}>
+            <Stack direction="horizontal" gap={3} className="justify-content-end mb-4 main-confirm">
+                <button className='confirm-cancel'>Cancel</button>
+                <button className='confirm-create' onClick={handleSubmit}>
                     Create
-                </ButtonStyled>
+                </button>
             </Stack>
         </div>
     )

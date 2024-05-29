@@ -6,7 +6,7 @@ const BEInitQuestion = [
         questionImage: '',
         codeTemplate: '',
         testCases: [
-            { input: '', output: '' },
+            { input: '', output: '' , visible: false },
             // May have a lot of testcase { input, output }
         ],
     },
@@ -17,7 +17,7 @@ const FEInitQuestion = [
     {
         maxSubmitTimes: 0,
         questionImage: '',
-        colors: themes.colors.primary,
+        colors: themes.colors.primary, //cắt string từ , ra 
         codeTemplate: '',
     },
     // May have a lot of question { maxSubmitTimes, questionImage, colors, codeTemplate }
